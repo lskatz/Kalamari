@@ -15,6 +15,17 @@ Some sections are not filled out yet.  Contributions in the form of pull request
 
 ### Kraken with Kalamari
 
+    # assume source folder is "Kalamari"
+    VERSION=3.5 # or whichever version you are building
+    DB=Kalamari_v$VERSION
+    SRC=Kalamari
+    
+    mkdir -pv $DB/taxonomy
+    cp -rv src/taxonomy_v$VERSION/* $DB/taxonomy
+    gunzip -v $DB/taxonomy/*
+    find $SRC -name '*.fasta' -exec kraken-build --db $DB --add-to-library {} \;
+    kraken-build --db $DB --build --threads 4
+
 ### Kraken2 with Kalamari
 
 ### ColorID with Kalamari
