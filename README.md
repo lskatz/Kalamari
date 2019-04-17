@@ -5,9 +5,13 @@ A database of completed assemblies for metagenomics-related tasks
 
 ## Download instructions
 
-Some sections are not filled out yet.  Contributions in the form of pull requests are welcome for instructions.
+For usage, run `perl bin/downloadKalamari.pl --help`
+
+    perl bin/downloadKalamari.pl src/Kalamari_v3.5.tsv
 
 ## Database formatting instructions
+
+Some sections are not filled out yet.  Contributions in the form of pull requests are welcome for instructions.
 
 ### Kraken with Kalamari
 
