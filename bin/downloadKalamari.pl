@@ -48,6 +48,10 @@ sub downloadKalamari{
     chomp;
     my %F;
     @F{@header} = split /\t/;
+    if($F{nuccoreAcc} eq 'XXXXXX'){
+      next;
+    }
+
     my $fasta = downloadEntry(\%F, $settings);
     $download_counter++;
   }
@@ -57,17 +61,20 @@ sub downloadKalamari{
 }
 
 sub downloadEntry{
-  my($fields) = @_;
+  my($fields,$settings) = @_;
+  logmsg $$fields{scientificName};
   my $dir = $$fields{scientificName};
-  $dir =~ s|_+|/|g;
+  $dir =~ s| +|/|g;
+  $dir="$$settings{outdir}/$dir";
 
   make_path($dir);
 
-  die Dumper $fields;
-
-  my $acc = "$$fields{nuccoreAcc}.fasta";
+  my $acc = "$$fields{nuccoreAcc}";
   my $outfile = "$dir/$acc.fasta";
-  my $command = "esearch -db nuccore -query $acc | efetch -format fasta > $outfile";
+  # If it exists, then skip the download
+  return $outfile if(-e $outfile && -s $outfile > 0);
+
+  my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile";
   system($command);
   if($?){
     die "ERROR: could not download $acc: $!\n  Command: $command";
