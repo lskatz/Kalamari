@@ -7,7 +7,8 @@ A database of completed assemblies for metagenomics-related tasks
 
 For usage, run `perl bin/downloadKalamari.pl --help`
 
-    perl bin/downloadKalamari.pl src/Kalamari_v3.5.tsv
+    SRC=Kalamari
+    perl bin/downloadKalamari.pl -o $SRC src/Kalamari_v3.5.tsv
 
 ## Database formatting instructions
 
