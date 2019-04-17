@@ -4,6 +4,7 @@ use warnings;
 use Getopt::Long qw/GetOptions/;
 use File::Basename qw/basename/;
 use File::Path qw/make_path/;
+use File::Copy qw/mv/;
 use Data::Dumper qw/Dumper/;
 
 use threads;
@@ -74,11 +75,30 @@ sub downloadEntry{
   # If it exists, then skip the download
   return $outfile if(-e $outfile && -s $outfile > 0);
 
-  my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile";
+  my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile.tmp";
   system($command);
   if($?){
     die "ERROR: could not download $acc: $!\n  Command: $command";
   }
+
+  # Format with Kraken headers
+  open(my $fh, "$outfile.tmp") or die "ERROR: could not read $outfile.tmp: $!";
+  open(my $fhOut,">", "$outfile.tmp2") or die "ERROR: could not write to $outfile.tmp2: $!";
+  while(<$fh>){
+    if(/(>\S+)/){
+      $_ = $1 . "|kraken:taxid|$$fields{taxid}\n";
+    }
+    print $fhOut $_;
+  }
+  close $fhOut;
+  close $fh;
+
+  # Create the final file
+  mv("$outfile.tmp2",$outfile) 
+    or die "ERROR: could not move $outfile.tmp2 to $outfile: $!";
+
+  # Cleanup
+  unlink("$outfile.tmp");
 
   return $outfile;
 }
