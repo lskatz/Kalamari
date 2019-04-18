@@ -5,7 +5,7 @@ use warnings;
 use FindBin qw/$RealBin/;
 use Net::FTP ();
 
-use Test::More tests => 1;
+use Test::More tests => 2;
 
 $ENV{PATH}="$RealBin/../bin:$ENV{PATH}";
 
@@ -17,7 +17,7 @@ $ftp->get("/entrez/entrezdirect/edirect.tar.gz");
 ok(-s "edirect.tar.gz" > 0, "Downloaded edirect.tar.gz");
 
 system("tar xzf edirect.tar.gz");
-BAIL_OUT("ERROR: could not untar edirect.tar.gz") if $?;
+BAIL_OUT("ERROR: could not untar edirect.tar.gz\n".`ls -lht`) if $?;
 
 system("./edirect/setup.sh");
 BAIL_OUT("ERROR: could not set up edirect") if $?;
