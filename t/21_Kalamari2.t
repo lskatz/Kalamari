@@ -34,7 +34,7 @@ diag("Source files will be read from $src");
 diag("Reading from $tsv");
 
 mkdir $src;
-system("$RealBin/../bin/downloadKalamari.pl -o $src $tsv");
+system("perl $RealBin/../bin/downloadKalamari.pl -o $src $tsv");
 is($?, 0, "Downloaded all fasta files");
 
 mkdir $db;
