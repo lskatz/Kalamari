@@ -12,27 +12,9 @@ For usage, run `perl bin/downloadKalamari.pl --help`
 
 ## Database formatting instructions
 
-Some sections are not filled out yet.  Contributions in the form of pull requests are welcome for instructions.
+[How to format databases](docs/DATABASES.md)
 
-### Kraken with Kalamari
+## Database usage
 
-    # assume source folder is "Kalamari"
-    VERSION=3.5 # or whichever version you are building
-    DB=Kalamari_v$VERSION
-    SRC=Kalamari
-    
-    mkdir -pv $DB/taxonomy
-    cp -rv src/taxonomy_v$VERSION/* $DB/taxonomy
-    gunzip -v $DB/taxonomy/*
-    find $SRC -name '*.fasta' -exec kraken-build --db $DB --add-to-library {} \;
-    kraken-build --db $DB --build --threads 4
+After you create your Kalamari database(s), here is [how to use them](docs/USAGE.md)
 
-### Kraken2 with Kalamari
-
-### ColorID with Kalamari
-
-### Mashed Kalamari
-
-### BLASTed Kalamari
-
-### ANI Kalamari
