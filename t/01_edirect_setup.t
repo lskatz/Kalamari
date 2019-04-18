@@ -14,12 +14,15 @@ $ftp->login;
 $ftp->binary;
 $ftp->get("/entrez/entrezdirect/edirect.tar.gz");
 
-system("tar zxf edirect.tar.gz");
+ok(-s "edirect.tar.gz" > 0, "Downloaded edirect.tar.gz");
+
+system("tar xzf edirect.tar.gz");
 BAIL_OUT("ERROR: could not untar edirect.tar.gz") if $?;
-unlink("edirect.tar.gz");
 
 system("./edirect/setup.sh");
 BAIL_OUT("ERROR: could not set up edirect") if $?;
 
 pass("Installed edirect");
+
+END{unlink("edirect.tar.gz");}
 
