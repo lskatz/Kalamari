@@ -13,8 +13,11 @@ my $ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1);
 $ftp->login;
 $ftp->binary;
 $ftp->get("/entrez/entrezdirect/edirect.tar.gz");
+$ftp->quit;
 
-ok((stat("edirect.tar.gz"))[7] > 0, "Downloaded edirect.tar.gz");
+my @stat = stat("edirect.tar.gz");
+my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $size) = @F;
+ok($size > 0, "Downloaded edirect.tar.gz\n@stat\n".`ls -lht`);
 
 system("tar xzf edirect.tar.gz");
 BAIL_OUT("ERROR: could not untar edirect.tar.gz\n".`ls -lht`) if $?;
