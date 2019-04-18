@@ -33,7 +33,7 @@ note("database location will be $db");
 note("Source files will be read from $src");
 note("Reading from $tsv");
 
-system("downloadKalamari.pl -o $src $tsv");
+system("$RealBin/../bin/downloadKalamari.pl -o $src $tsv");
 is($?, 0, "Downloaded all fasta files");
 
 mkdir $db;
