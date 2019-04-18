@@ -14,7 +14,7 @@ $ftp->login;
 $ftp->binary;
 $ftp->get("/entrez/entrezdirect/edirect.tar.gz");
 
-ok(-s "edirect.tar.gz" > 0, "Downloaded edirect.tar.gz");
+ok((stat("edirect.tar.gz"))[7] > 0, "Downloaded edirect.tar.gz");
 
 system("tar xzf edirect.tar.gz");
 BAIL_OUT("ERROR: could not untar edirect.tar.gz\n".`ls -lht`) if $?;
