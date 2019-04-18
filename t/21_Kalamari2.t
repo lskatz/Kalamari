@@ -28,11 +28,12 @@ if(-x $kraken_exe){
 }
 my $kraken_dir = dirname($kraken_exe);
 
-note("Version is $version");
-note("database location will be $db");
-note("Source files will be read from $src");
-note("Reading from $tsv");
+diag("Version is $version");
+diag("database location will be $db");
+diag("Source files will be read from $src");
+diag("Reading from $tsv");
 
+mkdir $src;
 system("$RealBin/../bin/downloadKalamari.pl -o $src $tsv");
 is($?, 0, "Downloaded all fasta files");
 
