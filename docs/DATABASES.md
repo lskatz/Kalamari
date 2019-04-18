@@ -5,13 +5,14 @@ Some sections are not filled out yet.  Contributions in the form of pull request
 ## Init
 
 Start off with a few environmental variables, regardless of your target database.
+If you have not already downloaded the Kalamari fasta files, please see the main [README](../README.md) file.
 
     # assuming source folder is "Kalamari", where you downloaded all fasta files
     VERSION=3.5  # or whichever version you are building
     CPUS=4       # Define how many threads to use
     SRC=Kalamari # The folder where fasta files were downloaded
     DB=Kalamari_v$VERSION
-    
+   
 ## Different databases
 
 Please follow the Init section before continuing. These instructions assume that you have already downloaded the Kalamari fasta files.
