@@ -10,7 +10,7 @@ use FindBin qw/$RealBin/;
 
 use Test::More tests => 6;
 
-$ENV{PATH}="$RealBin/../bin:$ENV{PATH}";
+$ENV{PATH}="$RealBin/../bin:$RealBin/../edirect:$ENV{PATH}";
 
 my $src = "Kalamari2_test";
 my $version = 3.5;
