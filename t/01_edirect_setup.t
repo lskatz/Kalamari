@@ -16,7 +16,7 @@ $ftp->get("/entrez/entrezdirect/edirect.tar.gz");
 $ftp->quit;
 
 my @stat = stat("edirect.tar.gz");
-my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $size) = @F;
+my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $size) = @stat;
 ok($size > 0, "Downloaded edirect.tar.gz\n@stat\n".`ls -lht`);
 
 system("tar xzf edirect.tar.gz");
