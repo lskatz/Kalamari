@@ -7,8 +7,6 @@ use File::Path qw/make_path/;
 use File::Copy qw/mv/;
 use Data::Dumper qw/Dumper/;
 
-use threads;
-
 local $0 = basename $0;
 sub logmsg{ print STDERR "$0: @_\n";}
 
@@ -79,6 +77,11 @@ sub downloadEntry{
   system($command);
   if($?){
     die "ERROR: could not download $acc: $!\n  Command: $command";
+  }
+  if(-s "$outfile.tmp" == 0){
+    #unlink("$outfile");
+    #unlink("$outfile.tmp");
+    return "";
   }
 
   # Format with Kraken headers
