@@ -13,10 +13,12 @@ diag "Downloading edirect.tar.gz";
 my $ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1);
 $ftp->login;
 $ftp->binary;
-$ftp->get("/entrez/entrezdirect/edirect.tar.gz");
+$ftp->get("/entrez/entrezdirect/edirect.tar.gz")
+  or diag("ERROR: could not get edirect.tar.gz: ".$ftp->message);
 $ftp->quit;
 
 if(!-e "edirect.tar.gz"){
+  diag "I do not see edirect.tar.gz yet. Trying with wget.";
   system("wget ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz > wget.log 2>&1");
   if($?){
     diag ("ERROR could not download edirect.tar.gz with either Net::FTP or wget: $!\n".`cat wget.log`);
