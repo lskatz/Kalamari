@@ -72,7 +72,9 @@ subtest "Add-to-library" => sub{
       return;
     }
 
-    system("perl $kraken_dir/kraken2-build --db $db --add-to-library $path");
+    diag `
+      perl $kraken_dir/kraken2-build --db $db --add-to-library $path 2>&1
+    `;
     is($?, 0, "Added $path");
   }}, $src);
 };
