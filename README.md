@@ -18,3 +18,6 @@ For usage, run `perl bin/downloadKalamari.pl --help`
 
 After you create your Kalamari database(s), here is [how to use them](docs/USAGE.md)
 
+## Citation
+
+Please refer to the ASM 2018 poster under docs
