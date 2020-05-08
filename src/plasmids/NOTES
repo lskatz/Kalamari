@@ -33,11 +33,14 @@ perl applyTaxidsToSequences.pl --discarded discard.fasta accession2taxid.sqlite 
 # => blastclust (tab delimited) format file with each entry
 # in the format of nucleotide_acc|kraken:taxid|taxid
 bash plasmidBinning.sh plasmid.taxid.fixed 97 > clusters.tsv
+grep -h . fastani.9DRcEI/cluster/* > clusters.tsv
 # plasmid.taxid.fixed/*.fasta => clusters.tsv
 
 # Create huge (3G) plasmids file with redundant nucleotide
 # accessions with differing taxids.
-TODO
+perl makeSpuriousTaxidsSequences.pl clusters.tsv tmp/library/plasmid/nr.fna > clusters.fasta
 
 # Cleanup the temporary kraken db
+cd ..
+mv tmp/clusters.fasta . && rm -rf tmp
 

@@ -57,7 +57,8 @@ qsub -q edlb.q -N fastani -o $TMP/log -e $TMP/log -pe smp 1 -V -cwd -t 1-$numseq
 
     # If we have a cluster, include this plasmid
     if (( $(echo "$ANI >= $aniThreshold" | bc -l) )); then
-      deflineJ=$(cut -f 2 <<< $line);
+      queryFile=$(echo "$line" | cut -f 1);
+      deflineJ=$(grep -m 1 ">" $queryFile | sed 's/^>//')
       cluster="$cluster\t$deflineJ"
     fi
   done < $aniFile
