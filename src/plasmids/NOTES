@@ -38,7 +38,7 @@ grep -h . fastani.9DRcEI/cluster/* > clusters.tsv
 
 # Create a Kalamari-formatted spreadsheet for github
 # "scientific names" are accessions. This is a quick step.
-cat clusters.tsv | perl -lane 'my $ref = shift(@F); my($acc,undef,$refTaxid) = split(/\|/, $ref); $acc//="UNKNOWNPLASMID"; my %taxid = ($refTaxid=>1); for(@F){my(undef, undef, $taxid) = split /\|/; $taxid{$taxid}=1; } my @taxid = sort{$a<=>$b} keys(%taxid); print join("\t","$acc",@taxid);' > ../development-plasmids.tsv
+cat clusters.tsv | perl -lane 'my $ref = shift(@F); my($acc,undef,$refTaxid) = split(/\|/, $ref); $acc//="UNKNOWNPLASMID"; my %taxid = ($refTaxid=>1); for(@F){my(undef, undef, $taxid) = split /\|/; $taxid{$taxid}=1; } my @taxid = sort{$a<=>$b} keys(%taxid); print join("\t","$acc",@taxid);' > development-plasmids.tsv
 
 # Create huge (3G) plasmids file with redundant nucleotide
 # accessions with differing taxids.
@@ -46,5 +46,5 @@ perl makeSpuriousTaxidsSequences.pl clusters.tsv tmp/library/plasmid/nr.fna > cl
 
 # Cleanup the temporary kraken db
 cd ..
-mv tmp/clusters.fasta . && rm -rf tmp
+mv tmp/clusters.fasta tmp/clusters.tsv tmp/development-plasmids.tsv . && rm -rf tmp
 
