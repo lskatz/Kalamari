@@ -12,7 +12,7 @@ Amycolatopsis mediterranei	NC_014318	33910
 Aquifex aeolicus	NC_000918	63363
 Architeuthis dux	NC_011581	256136  
 Arcobacter bivalviorum	CP031217	663364
-Arcobacter cibarius	XXXXXX	255507
+Arcobacter cibarius	CP043857	255507
 Arcobacter cloacae	XXXXXX	1054034
 Arcobacter cryaerophilus	XXXXXX	28198
 Arcobacter ellisii	CP032097	913109
@@ -25,6 +25,7 @@ Arcobacter thereius	XXXXXX	544718
 Arcobacter trophiarum	CP031367	708186
 Arcobacter venerupis	XXXXXX	1054033
 Arripis trutta	AP006810	270544  
+Atlantibacter hermannii	CP042941	565
 Bacillus cereus	NC_016771	1396
 Bacillus subtilis	NC_000964	1423
 Bacillus thuringiensis	NC_005957	1428
@@ -45,7 +46,7 @@ Burkholderia pseudomallei	NC_006350	28450
 Burkholderia pseudomallei	NC_006351	28450
 Campylobacter avium	CP022347	522484
 Campylobacter canadensis	XXXXXX	449520
-Campylobacter coli	XXXXXX	195  
+Campylobacter coli	CP028187	195  
 Campylobacter concisus	CP012541	199  
 Campylobacter cuniculorum	CP020867	374106
 Campylobacter fetus	CP006833	196  
@@ -121,12 +122,11 @@ Dictyoglomus turgidum	NC_011661	513050
 Enterobacter cloacae	NC_014121	550
 Enterococcus faecalis	NC_004668	1351
 Enterococcus faecium	NC_017960	1352
-Escherichia albertii	XXXXXX	208962
-Escherichia coli	XXXXXX	83334
-Escherichia fergusonii	XXXXXX	564
-Escherichia hermanii	XXXXXX	565
+Escherichia albertii	CP024282	208961
+Escherichia coli	CP027582	562
+Escherichia fergusonii	CP042945	564
 Escherichia vulneris	XXXXXX	566  
-Exiguobacterium antarcticum	XXXXXX	132920
+Exiguobacterium antarcticum	CP003063	132920
 Finegoldia magna	AP008971	1260
 Flavobacterium psychrophilum	NC_009613	96345
 Francisella philomiragia	CP000937	28110
@@ -136,8 +136,8 @@ Gallus gallus	HQ857211	9031
 Gardnerella vaginalis	NC_014644	2702
 Geobacter sulfurreducens	NC_002939	35554
 Gloeobacter violaceus	NC_005125	33072
-Grimontia hollisae	XXXXXX	673
-Grimontia hollisae	XXXXXX	673
+Grimontia hollisae	CP035690	673
+Grimontia hollisae	CP035691	673
 Haemophilus influenzae	NC_000907	727
 Haemophilus somnus	CP000947	228400
 Halobacterium salinarum	AM774415	478009
@@ -159,16 +159,16 @@ Leptospira biflexa	CP000777	355278
 Leptospira interrogans	NC_004342	173
 Leptothrix cholodnii	CP001013	34029
 Leuconostoc citreum	DQ489736	349519
-Listeria grayi	XXXXXX	1641
-Listeria innocua	XXXXXX	1642
+Listeria grayi	LR134483	1641
+Listeria innocua	CP045743	1642
 Listeria ivanovii	FR687253	1638
 Listeria marthii	CM001047	529731  
 Listeria monocytogenes I	XXXXXX	9000000
 Listeria monocytogenes II	XXXXXX	9000001
 Listeria monocytogenes III	CP001175	9000002  
 Listeria monocytogenes IV	XXXXXX	9000003
-Listeria seeligeri	XXXXXX	1640
-Listeria welshimeri	XXXXXX	1643
+Listeria seeligeri	FN557490	1640
+Listeria welshimeri	LT906444	1643
 Lysinibacillus sphaericus	CP000817	444177
 Mesoplasma florum	NC_006055	2151
 Mesorhizobium ciceri	NC_014923	39645
@@ -190,8 +190,8 @@ Ochrobactrum anthropi	CP000758	529
 Ochrobactrum anthropi	CP000759	529
 Pantoea ananatis	CP001875	553
 Parabacteroides distasonis	CP000140	823
-Photobacterium damselae	XXXXXX	38293
-Photobacterium damselae	XXXXXX	38293
+Photobacterium damselae	CP046752	38293
+Photobacterium damselae	CP046751	38293
 Pollachius virens	FR751399	8060  
 Polynucleobacter necessarius	CP001010	576610
 Prochlorococcus marinus	NC_005042	1219
@@ -253,14 +253,14 @@ Vibrio alginolyticus	CP035699	663
 Vibrio alginolyticus	CP035700	663
 Vibrio cholerae_O1	CP038178	127906
 Vibrio cholerae_O1	CP038179	127906
-Vibrio cidicii	XXXXXX	1763883
-Vibrio cidicii	XXXXXX	1763883
-Vibrio cincinnatiensis	XXXXXX	675
-Vibrio cincinnatiensis	XXXXXX	675
-Vibrio fluvialis	XXXXXX	676
-Vibrio fluvialis	XXXXXX	676
-Vibrio furnissii	XXXXXX	29494
-Vibrio furnissii	XXXXXX	29494
+Vibrio cidicii	CP046804	1763883
+Vibrio cidicii	CP046803	1763883
+Vibrio cincinnatiensis	CP035697	675
+Vibrio cincinnatiensis	CP035698	675
+Vibrio fluvialis	CP051126	676
+Vibrio fluvialis	CP051127	676
+Vibrio furnissii	CP046797	29494
+Vibrio furnissii	CP046798	29494
 Vibrio harveyi	CP035692	669
 Vibrio harveyi	CP035693	669
 Vibrio metoecus	XXXXXX	1481663
