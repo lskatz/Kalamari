@@ -125,7 +125,6 @@ Enterococcus faecium	NC_017960	1352
 Escherichia albertii	CP024282	208961
 Escherichia coli	CP027582	562
 Escherichia fergusonii	CP042945	564
-Escherichia vulneris	XXXXXX	566  
 Exiguobacterium antarcticum	CP003063	132920
 Finegoldia magna	AP008971	1260
 Flavobacterium psychrophilum	NC_009613	96345
@@ -208,17 +207,17 @@ Ruminococcus sp.	CP039381	1263
 Rickettsia prowazekii	NC_000963	782
 Salinibacter ruber	NC_007677	146919
 Salmonella bongori	FR877557	54736  
-Salmonella enterica_IIa	XXXXXX	9000010
-Salmonella enterica_IIb	XXXXXX	9000011  
-Salmonella enterica_IIIa	XXXXXX	9000014  
-Salmonella enterica_IIIb	XXXXXX	9000015  
-Salmonella enterica_I	AE006468	59201
-Salmonella enterica_IV	XXXXXX	59205
-Salmonella enterica_IX	XXXXXX	9000016  
-Salmonella enterica_VII	XXXXXX	59208
-Salmonella enterica_VIII	XXXXXX	9000009  
-Salmonella enterica_VI	XXXXXX	59207  
-Salmonella enterica_X	XXXXXX	9000017  
+Salmonella enterica IIa	CP053411	9000010
+Salmonella enterica IIb	LR134141	9000011  
+Salmonella enterica IIIa	UGXG01000002	9000014  
+Salmonella enterica IIIb	CP053583	9000015  
+Salmonella enterica I	AE006468	59201
+Salmonella enterica IV	CP053576	59205
+Salmonella enterica IX	XXXXXX	9000016  
+Salmonella enterica VII	CP053582	59208
+Salmonella enterica VIII	CP053317	9000009  
+Salmonella enterica VI	CP053406	59207  
+Salmonella enterica X	CP053581	9000017  
 Serratia liquefaciens	CP006252	614
 Shewanella halifaxensis	CP000931	271098
 Shewanella oneidensis	NC_004347	70863
