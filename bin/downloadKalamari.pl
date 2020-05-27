@@ -15,8 +15,10 @@ exit main();
 sub main{
   my $settings={};
   GetOptions($settings,qw(numcpus=i outdir=s help)) or die $!;
+  die usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
   $$settings{numcpus}||= 1;
+  logmsg "Outdir will be $$settings{outdir}";
 
   # Check for prerequisites
   for my $exe(qw(esearch efetch)){
@@ -46,10 +48,13 @@ sub downloadKalamari{
   while(<$fh>){
     chomp;
     my %F;
-    @F{@header} = split /\t/;
+    my @F = split /\t/;
+    @F{@header} = splice(@F,0,2);
     if($F{nuccoreAcc} eq 'XXXXXX'){
+      logmsg "Skipping $F{scientificName}: has accession $F{nuccoreAcc}";
       next;
     }
+    $F{taxid} = \@F;
 
     my $fasta = downloadEntry(\%F, $settings);
     $download_counter++;
@@ -61,7 +66,7 @@ sub downloadKalamari{
 
 sub downloadEntry{
   my($fields,$settings) = @_;
-  logmsg $$fields{scientificName};
+  logmsg "Downloading $$fields{scientificName}:$$fields{nuccoreAcc}";
   my $dir = $$fields{scientificName};
   $dir =~ s| +|/|g;
   $dir="$$settings{outdir}/$dir";
@@ -71,7 +76,10 @@ sub downloadEntry{
   my $acc = "$$fields{nuccoreAcc}";
   my $outfile = "$dir/$acc.fasta";
   # If it exists, then skip the download
-  return $outfile if(-e $outfile && -s $outfile > 0);
+  if(-e $outfile && -s $outfile > 0){
+    logmsg "  SKIP: found $outfile already";
+    return $outfile;
+  }
 
   my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile.tmp";
   system($command);
@@ -85,16 +93,27 @@ sub downloadEntry{
   }
 
   # Format with Kraken headers
+  # Open the fasta file from NCBI
+  # and make a string for sprintf with a placeholder for taxid.
+  my $stringf="";
   open(my $fh, "$outfile.tmp") or die "ERROR: could not read $outfile.tmp: $!";
-  open(my $fhOut,">", "$outfile.tmp2") or die "ERROR: could not write to $outfile.tmp2: $!";
-  while(<$fh>){
-    if(/(>\S+)/){
-      $_ = $1 . "|kraken:taxid|$$fields{taxid}\n";
+    while(<$fh>){
+      if(/(>\S+)/){
+        $_ = $1 . "|kraken:taxid|%s\n";
+      }
+      $stringf.=$_;
     }
-    print $fhOut $_;
+  close $fh;
+
+  # Write to a new fasta file that will nave new headers
+  open(my $fhOut,">", "$outfile.tmp2") or die "ERROR: could not write to $outfile.tmp2: $!";
+
+  # For every taxid, write a new entry with the same sequence
+  my $taxids = $$fields{taxid} || [];
+  for my $taxid (@$taxids){
+    print $fhOut sprintf($stringf, $taxid);
   }
   close $fhOut;
-  close $fh;
 
   # Create the final file
   mv("$outfile.tmp2",$outfile) 
