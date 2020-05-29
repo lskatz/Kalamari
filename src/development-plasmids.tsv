@@ -1,13 +1,13 @@
-scientificName	accession	taxid
-Shigella boydii	CP026732	621
-Shigella boydii CP026733	621
-Shigella dysenteriae	CP024467	622
-Shigella dysenteriae	CP024468	622
-Shigella dysenteriae	CP024469	622
-Shigella flexneri	CP034932	623
-Shigella flexneri	CP034933	623
-Shigella sonnei	CP022460	624
-Shigella sonnei	CP022461	624
+scientificName	nuccoreAcc	taxid
+Shigella boydii	NZ_CP026732	621
+Shigella boydii NZ_CP026733	621
+Shigella dysenteriae	NZ_CP024467	622
+Shigella dysenteriae	NZ_CP024468	622
+Shigella dysenteriae	NZ_CP024469	622
+Shigella flexneri	NZ_CP034932	623
+Shigella flexneri	NZ_CP034933	623
+Shigella sonnei	NZ_CP022460	624
+Shigella sonnei	NZ_CP022461	624
 Escherichia albertii	NZ_CP024283	208962
 Escherichia albertii	NZ_CP024284	208962
 Escherichia albertii	NZ_CP024285	208962
@@ -35,7 +35,7 @@ Leptospira biflexa	NC_010846	355278
 Listeria_innocua	NZ_CP045744	1642
 Listeria monocytogenes II XXXXXX	9000001
 Salmonella enterica IIIa	UGXG01000001	9000014
-Salmonella enterica I	AE006471	59201
+Salmonella enterica I	NC_003277	59201
 Salmonella enterica IX	XXXXXX	XXXXXX
 Salmonella enterica IX	XXXXXX	XXXXXX
 Salmonella enterica IX	XXXXXX	XXXXXX
