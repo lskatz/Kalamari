@@ -84,7 +84,16 @@ sub downloadEntry{
   my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile.tmp";
   system($command);
   if($?){
-    die "ERROR: could not download $acc: $!\n  Command: $command";
+    # If there was an error, wait 3 seconds to help with any backlog in the API
+    my $msgF = "%s: could not download $acc: %s\n  Command: $command";
+    logmsg sprintf($msgF, "WARNING", $!);
+    sleep 3;
+    # after waiting 3 seconds, run again
+    system($command);
+    # If there is still an error, die
+    if($?){
+      die sprintf($msgF, "ERROR", $!);
+    }
   }
   if(-s "$outfile.tmp" == 0){
     #unlink("$outfile");
