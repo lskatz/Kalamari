@@ -16,6 +16,12 @@ sqlite3 accession2taxid.sqlite
 create index accession ON accession2taxid(accession); /* long step */
 # => accession2taxid.sqlite, about 16G
 
+# TODO get plasmids file with headers "scientificName accession taxid"
+# TODO get clustering from plasmids file
+
+(set -e; echo -e "scientificName\taccession\ttaxid"; tail -n +2 ../development-plasmids-cluster.tsv | while read -r plasmid acc therest; do echo -ne "plasmid\t"; sqlite3 -separator $'\t' accession2taxid.sqlite "SELECT accession,taxid FROM accession2taxid WHERE accession='$acc';"; done) > ../development-plasmids.tsv
+# => plasmids file with headers "scientificName accession taxid"
+
 # Remove entries with redundant sequences
 # Assumes that exactly identical sequences will not have
 # different taxids between different nucleotide accessions.
@@ -38,7 +44,7 @@ grep -h . fastani.9DRcEI/cluster/* > clusters.tsv
 
 # Create a Kalamari-formatted spreadsheet for github
 # "scientific names" are accessions. This is a quick step.
-cat clusters.tsv | perl -lane 'BEGIN{print join("\t", qw(scientificName nuccoreAcc taxid));} my $ref = shift(@F); my($acc,undef,$refTaxid) = split(/\|/, $ref); $acc//="UNKNOWNPLASMID"; my %taxid = ($refTaxid=>1); for(@F){my(undef, undef, $taxid) = split /\|/; $taxid{$taxid}=1; } my @taxid = sort{$a<=>$b} keys(%taxid); print join("\t","plasmid","$acc",@taxid);' > development-plasmids.tsv
+cat clusters.tsv | perl -lane 'BEGIN{print join("\t", qw(scientificName nuccoreAcc taxid));} my $ref = shift(@F); my($acc,undef,$refTaxid) = split(/\|/, $ref); $acc//="UNKNOWNPLASMID"; my %taxid = ($refTaxid=>1); for(@F){my(undef, undef, $taxid) = split /\|/; $taxid{$taxid}=1; } my @taxid = sort{$a<=>$b} keys(%taxid); print join("\t","plasmid","$acc",@taxid);' > development-plasmids-cluster.tsv
 
 # Create huge (3G) plasmids file with redundant nucleotide
 # accessions with differing taxids.
@@ -46,5 +52,5 @@ perl makeSpuriousTaxidsSequences.pl clusters.tsv tmp/library/plasmid/nr.fna > cl
 
 # Cleanup the temporary kraken db
 cd ..
-mv tmp/clusters.fasta tmp/clusters.tsv tmp/development-plasmids.tsv . && rm -rf tmp
+mv tmp/clusters.fasta tmp/clusters.tsv tmp/development-plasmids.tsv tmp/development-plasmids.tsv . && rm -rf tmp
 
