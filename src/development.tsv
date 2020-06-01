@@ -10,7 +10,7 @@ Aliivibrio fischeri	NC_006841	668
 Aliivibrio fischeri	NC_006840	668
 Amycolatopsis mediterranei	NC_014318	33910
 Aquifex aeolicus	NC_000918	63363
-Architeuthis dux	NC_011581	256136  
+Architeuthis dux	NC_011581	256136
 Arcobacter bivalviorum	CP031217	663364
 Arcobacter cibarius	CP043857	255507
 Arcobacter cloacae	XXXXXX	1054034
@@ -24,7 +24,7 @@ Arcobacter suis	CP032100	1278212
 Arcobacter thereius	CP035926	544718
 Arcobacter trophiarum	CP031367	708186
 Arcobacter venerupis	XXXXXX	1054033
-Arripis trutta	AP006810	270544  
+Arripis trutta	AP006810	270544
 Atlantibacter hermannii	CP042941	565
 Bacillus cereus	NC_016771	1396
 Bacillus subtilis	NC_000964	1423
@@ -37,43 +37,43 @@ Bifidobacterium bifidum	NC_014638	1681
 Bifidobacterium longum	NC_004307	216816
 Bordetella bronchiseptica	NC_019382	518
 Borreliella burgdorferi	NC_001318	139
-Bos taurus	KC153975	9913  
+Bos taurus	KC153975	9913
 Brachybacterium faecium	NC_013172	43669
 Bradyrhizobium diazoefficiens	NC_004463	1355477
-Brassica oleracea	NC_016118	3712  
+Brassica oleracea	NC_016118	3712
 Buchnera aphidicola	NC_002528	9
 Burkholderia pseudomallei	NC_006350	28450
 Burkholderia pseudomallei	NC_006351	28450
 Campylobacter avium	CP022347	522484
 Campylobacter canadensis	XXXXXX	449520
-Campylobacter coli	CP028187	195  
-Campylobacter concisus	CP012541	199  
+Campylobacter coli	CP028187	195
+Campylobacter concisus	CP012541	199
 Campylobacter cuniculorum	CP020867	374106
-Campylobacter fetus	CP006833	196  
-Campylobacter gracilis	CP012196	824  
+Campylobacter fetus	CP006833	196
+Campylobacter gracilis	CP012196	824
 Campylobacter helveticus	NZ_CP020478	28898
 Campylobacter hyointestinalis hyointestinalis	CP015575	91352
 Campylobacter hyointestinalis lawsonii	CP015575	91353
-Campylobacter insulaenigrae	CP007770	260714  
+Campylobacter insulaenigrae	CP007770	260714
 Campylobacter jejuni	NC_002163	197
-Campylobacter lanienae	CP015578	75658  
-Campylobacter lari	CP000932	201  
+Campylobacter lanienae	CP015578	75658
+Campylobacter lari	CP000932	201
 Campylobacter mucosalis	XXXXXX	202
-Campylobacter peloridis	CP007766	488546  
+Campylobacter peloridis	CP007766	488546
 Campylobacter rectus	XXXXXX	203
 Campylobacter showae	XXXXXX	204
-Campylobacter sputorum	CP019683	202  
-Campylobacter subantarcticus	CP007772	497724  
+Campylobacter sputorum	CP019683	202
+Campylobacter subantarcticus	CP007772	497724
 Campylobacter upsaliensis	LR134372	28080
 Campylobacter ureolyticus	CP012195	827
-Campylobacter volucris	CP007774	1031542  
+Campylobacter volucris	CP007774	1031542
 Candidatus Desulforudis audaxviator	CP000860	471827
 Candidatus Korarchaeum cryptofilum	CP000968	374847
 Caulobacter	CP000927	366602
 Caulobacter vibrioides	NC_011916	155892
 Chlamydia pneumoniae	NC_000922	83558
 Chlamydia trachomatis	NC_000117	813
-Chlamydomonas reinhardtii	AF008237	3055  
+Chlamydomonas reinhardtii	AF008237	3055
 Chlorobaculum tepidum	NC_002932	1097
 Chloroflexus aurantiacus	NC_010175	1108
 Citrobacter freundii	CP007557	1333848
@@ -133,7 +133,7 @@ Flavobacterium psychrophilum	NC_009613	96345
 Francisella philomiragia	CP000937	28110
 Francisella tularensis	NC_006570	263
 Fusobacterium nucleatum	NC_003454	851
-Gallus gallus	HQ857211	9031  
+Gallus gallus	HQ857211	9031
 Gardnerella vaginalis	NC_014644	2702
 Geobacter sulfurreducens	NC_002939	35554
 Gloeobacter violaceus	NC_005125	33072
@@ -142,10 +142,10 @@ Grimontia hollisae	CP035691	673
 Haemophilus influenzae	NC_000907	727
 Haemophilus somnus	CP000947	228400
 Halobacterium salinarum	AM774415	478009
-Helianthus annuus	MG770607	4232  
+Helianthus annuus	MG770607	4232
 Helicobacter pylori	NC_000915	210
 Heliobacterium modesticaldum	CP000930	35701
-Homo sapiens	NC_012920	9606  
+Homo sapiens	NC_012920	9606
 Ketogulonicigenium vulgare	NC_017384	92945
 Klebsiella aerogenes	NC_015663	548
 Klebsiella pneumoniae	NC_016845	573
@@ -163,11 +163,11 @@ Leuconostoc citreum	DQ489736	349519
 Listeria grayi	LR134483	1641
 Listeria innocua	CP045743	1642
 Listeria ivanovii	FR687253	1638
-Listeria marthii	CM001047	529731  
-Listeria monocytogenes I	XXXXXX	9000000
-Listeria monocytogenes II	XXXXXX	9000001
-Listeria monocytogenes III	CP001175	9000002  
-Listeria monocytogenes IV	XXXXXX	9000003
+Listeria marthii	CM001047	529731
+Listeria monocytogenes I	CP054040	9000000
+Listeria monocytogenes II	CP054042	9000001
+Listeria monocytogenes III	CP054039	9000002
+Listeria monocytogenes IV	CP054041	9000003
 Listeria seeligeri	FN557490	1640
 Listeria welshimeri	LT906444	1643
 Lysinibacillus sphaericus	CP000817	444177
@@ -186,14 +186,14 @@ Mycoplasma mycoides	NC_005364	2102
 Mycoplasma pneumoniae	NC_000912	2104
 Neisseria gonorrhoeae	NC_002946	485
 Neisseria meningitidis	NC_003112	487
-Neomysis japonica	KR006340	1676841  
+Neomysis japonica	KR006340	1676841
 Ochrobactrum anthropi	CP000758	529
 Ochrobactrum anthropi	CP000759	529
 Pantoea ananatis	CP001875	553
 Parabacteroides distasonis	CP000140	823
 Photobacterium damselae	CP046752	38293
 Photobacterium damselae	CP046751	38293
-Pollachius virens	FR751399	8060  
+Pollachius virens	FR751399	8060
 Polynucleobacter necessarius	CP001010	576610
 Prochlorococcus marinus	NC_005042	1219
 Proteus mirabilis	NC_022000	584
@@ -208,18 +208,18 @@ Rhodospirillum rubrum	NC_007643	1085
 Ruminococcus sp.	CP039381	1263
 Rickettsia prowazekii	NC_000963	782
 Salinibacter ruber	NC_007677	146919
-Salmonella bongori	FR877557	54736  
+Salmonella bongori	FR877557	54736
 Salmonella enterica IIa	CP053411	9000010
-Salmonella enterica IIb	LR134141	9000011  
-Salmonella enterica IIIa	UGXG01000002	9000014  
-Salmonella enterica IIIb	CP053583	9000015  
+Salmonella enterica IIb	LR134141	9000011
+Salmonella enterica IIIa	UGXG01000002	9000014
+Salmonella enterica IIIb	CP053583	9000015
 Salmonella enterica I	AE006468	59201
 Salmonella enterica IV	CP053576	59205
-Salmonella enterica IX	XXXXXX	9000016  
+Salmonella enterica IX	XXXXXX	9000016
 Salmonella enterica VII	CP053582	59208
-Salmonella enterica VIII	CP053317	9000009  
-Salmonella enterica VI	CP053406	59207  
-Salmonella enterica X	CP053581	9000017  
+Salmonella enterica VIII	CP053317	9000009
+Salmonella enterica VI	CP053406	59207
+Salmonella enterica X	CP053581	9000017
 Serratia liquefaciens	CP006252	614
 Shewanella halifaxensis	CP000931	271098
 Shewanella oneidensis	NC_004347	70863
@@ -228,7 +228,7 @@ Shimwellia blattae	CP001560	563
 Sinorhizobium fredii	NC_012587	380
 Sinorhizobium medicae	NC_009636	110321
 Sinorhizobium meliloti	NC_003047	382
-Solanum lycopersicum	NC_035963	4081  
+Solanum lycopersicum	NC_035963	4081
 Staphylococcus aureus	NZ_CP009554	46170
 Staphylococcus epidermidis	NC_004461	1282
 Streptococcus agalactiae	NC_004116	1311
@@ -239,7 +239,7 @@ Streptococcus pyogenes	NC_002737	1314
 Streptococcus sanguinis	NC_009009	1305
 Streptococcus suis	NC_012926	1307
 Streptomyces coelicolor	NC_003888	1902
-Sus scrofa	FJ236999	9823  
+Sus scrofa	FJ236999	9823
 Synechococcus	CP000951	32049
 Thermanaerovibrio acidaminovorans	NC_013522	81462
 Thermoanaerobacter pseudethanolicus	CP000924	496866
@@ -247,7 +247,7 @@ Thermodesulfovibrio yellowstonii	NC_011296	28262
 Thermosynechococcus elongatus	NC_004113	146786
 Thermotoga maritima	NC_000853	2336
 Thermus thermophilus	NC_006461	274
-Thunnus alalunga	AB101291	8235  
+Thunnus alalunga	AB101291	8235
 Treponema denticola	NC_002967	158
 Ureaplasma parvum	CP000942	134821
 Vibrio alginolyticus	CP035699	663
@@ -276,16 +276,18 @@ Vibrio parahaemolyticus	CP046828	670
 Vibrio parahaemolyticus	CP046827	670
 Vibrio vulnificus	CP046832	672
 Vibrio vulnificus	CP046833	672
-Vicia faba	KC189947	3906  
+Vicia faba	KC189947	3906
 Xanthomonas campestris	NC_003902	339
 Xylella fastidiosa	CP000941	405440
 Yersinia aldovae	CP009781	29483
-Yersinia bercovieri	XXXXXX	634
-Yersinia enterocolitica	NC_015224	630  
+Yersinia bercovieri	CP054044-CP054045	634
+Yersinia enterocolitica	NC_015224	630
 Yersinia enterocolitica	NC_008800	630
 Yersinia frederiksenii	CP023962	29484
-Yersinia intermedia	CP009801	631  
-Yersinia mollaretii	XXXXXX	33060
+Yersinia intermedia	CP009801	631
+Yersinia kristensenii	CP054049	631
+Yersinia massiliensis	CP054046-CP054048	33060
+Yersinia mollaretii	CP054043	33060
 Yersinia pseudotuberculosis	CP000950	502800
-Yersinia pseudotuberculosis	NC_010465.1	502800  
+Yersinia pseudotuberculosis	NC_010465	502800
 Yersinia rohdei	CP009787	29485
