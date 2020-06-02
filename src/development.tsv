@@ -12,6 +12,7 @@ Amycolatopsis mediterranei	NC_014318	33910
 Aquifex aeolicus	NC_000918	63363
 Architeuthis dux	NC_011581	256136
 Arcobacter bivalviorum	CP031217	663364
+Arcobacter butzleri	XXXXXX	28197
 Arcobacter cibarius	CP043857	255507
 Arcobacter cloacae	XXXXXX	1054034
 Arcobacter cryaerophilus	XXXXXX	28198
@@ -19,6 +20,7 @@ Arcobacter ellisii	CP032097	913109
 Arcobacter halophilus	CP031218	197482
 Arcobacter molluscorum	CP032098	1032072
 Arcobacter mytili	CP031219	603050
+Arcobacter nitrofigilis	XXXXXX	28199
 Arcobacter skirrowii	CP032099	28200
 Arcobacter suis	CP032100	1278212
 Arcobacter thereius	CP035926	544718
@@ -48,14 +50,18 @@ Campylobacter avium	CP022347	522484
 Campylobacter canadensis	XXXXXX	449520
 Campylobacter coli	CP028187	195
 Campylobacter concisus	CP012541	199
+Campylobacter corcagiensis	XXXXXX	1448857
 Campylobacter cuniculorum	CP020867	374106
+Campylobacter curvus	XXXXXX	200
 Campylobacter fetus	CP006833	196
 Campylobacter gracilis	CP012196	824
 Campylobacter helveticus	NZ_CP020478	28898
 Campylobacter hyointestinalis hyointestinalis	CP015575	91352
 Campylobacter hyointestinalis lawsonii	CP015575	91353
+Campylobacter iguaniorum	XXXXXX	1244531
 Campylobacter insulaenigrae	CP007770	260714
-Campylobacter jejuni	NC_002163	197
+Campylobacter jejuni doylei	XXXXXX	32021
+Campylobacter jejuni jejuni	NC_002163	32022
 Campylobacter lanienae	CP015578	75658
 Campylobacter lari	CP000932	201
 Campylobacter mucosalis	XXXXXX	202
@@ -143,7 +149,12 @@ Haemophilus influenzae	NC_000907	727
 Haemophilus somnus	CP000947	228400
 Halobacterium salinarum	AM774415	478009
 Helianthus annuus	MG770607	4232
+Helicobacter bilis	XXXXXX	37372
+Helicobacter cinaedi	XXXXXX	213
 Helicobacter pylori	NC_000915	210
+Helicobacter pullorum	XXXXXX	35818
+Helicobacter winghamensis	XXXXXX	157268
+Helicobacter valdiviensis	XXXXXX	1458358
 Heliobacterium modesticaldum	CP000930	35701
 Homo sapiens	NC_012920	9606
 Ketogulonicigenium vulgare	NC_017384	92945
