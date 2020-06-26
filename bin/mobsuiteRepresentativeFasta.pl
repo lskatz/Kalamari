@@ -15,7 +15,8 @@ exit(main());
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(help debug seqs=s clusters=s convergence=s outdir=s numcpus=i tempdir=s)) or die $!;
+  die usage() if(!@ARGV);
+  GetOptions($settings,qw(help debug seqs=s namesdmp=s accessions2taxid=s clusters=s convergence=s outdir=s numcpus=i tempdir=s)) or die $!;
   die usage() if($$settings{help} );
   $$settings{tempdir} //= tempdir("$0.XXXXXX", TMPDIR=>1, CLEANUP=>1);
   $$settings{numcpus} ||= 1;
@@ -23,6 +24,8 @@ sub main{
   $$settings{seqs}    ||= die "ERROR: need --seqs";
   $$settings{convergence} ||= die "ERROR: need --convergence";
   $$settings{clusters}||= die "ERROR: need --clusters";
+  $$settings{accessions2taxid} ||= die "ERROR: need --accessions2taxid";
+  $$settings{namesdmp} ||= die "ERROR: need --namesdmp";
 
   logmsg "Output directory is $$settings{outdir}";
 
@@ -30,32 +33,57 @@ sub main{
   #die Dumper $$clusters{AA842};
   #die Dumper $$samples{FR821778};
 
-  my $seqs = readSeqs("ncbi_plasmid_full_seqs.fas", $settings);
+  my $seqs = readSeqs($$settings{seqs}, $settings);
   
-  my $taxa = readSpreadsheet("TableS5.tsv", $settings);
+  my $taxa = readSpreadsheet($$settings{convergence}, $settings);
 
-  my $namesInfo = namesToTaxids("../../taxonomy-development/names.dmp", $settings);
+  my $namesInfo = namesToTaxids($$settings{namesdmp}, $settings);
 
   # Sort each cluster's samples by "Best" so that the zeroth would be the best 
   # representative of each cluster
   # Choose one representative per cluster
   my $clustersReps = clustersReps($samples, $clusters, $seqs, $taxa, $namesInfo, $$settings{outdir}, $settings);
+  my @clusterName = sort keys(%$clusters);
+  if($$settings{debug}){
+    @clusterName = splice(@clusterName, 0, 200);
+    logmsg "DEBUG: Just looking at ".scalar(@clusterName)." clusters";
+  }
+  my $numClusters = @clusterName;
 
   # write remaining singleton clusters
-  while(my($clusterName,$seqName) = each(%$clustersReps)){
+  for(my $i=0; $i<$numClusters; $i++){
+  #while(my($clusterName,$seqName) = each(%$clustersReps)){
+    my $clusterName = $clusterName[$i];
+    next if(@{$$clusters{$clusterName}} > 1); # ie, look at singletons only
+    my $seqName = $$clusters{$clusterName[$i]}[0];
+
     my $outfile = "$$settings{outdir}/$clusterName.fasta";
+
+    # Skip if it exists (likely, a singleton cluster)
     if(-e $outfile){
+      logmsg "SKIP: Found singleton $outfile ($i / $numClusters)";
       next;
     }
     my $taxon = (defined($$taxa{$seqName})) ? $$taxa{$seqName}{mobcluster_convergence_taxon} : "";
-    my $taxid = (defined($$namesInfo{$taxon})) ? $$namesInfo{$taxon} : -1;
+    my $taxid = 0;
+    if(defined($$namesInfo{$taxon})){
+      $taxid = $$namesInfo{$taxon};
+    } else {
+      $taxid = accession2Taxid($seqName, $$settings{accessions2taxid}, $settings);
+    }
+    if(!$taxid){
+      die "ERROR: could not find the taxid for $seqName";
+    }
+
 
     open(my $fh, '>', $outfile."tmp") or die "ERROR writing to $outfile.tmp: $!";
-    print $fh ">$seqName|kraken:taxid|$taxid\n$$seqs{$seqName} $clusterName singleton\n";
+    my $sequence = $$seqs{$seqName} || die "ERROR: could not find sequence for $seqName in $$settings{seqs}";
+    $sequence =~ s/(.{1,60})/$1\n/g;
+    print $fh ">$seqName|kraken:taxid|$taxid cluster=$clusterName singleton=1 taxon=$taxon\n$sequence\n";
     close $fh;
     mv($outfile."tmp",$outfile) or die $!;
 
-    logmsg "Wrote $outfile";
+    logmsg "Wrote $outfile ($i / $numClusters)";
   }
 
   return 0;
@@ -63,6 +91,7 @@ sub main{
 }
 
 # map names to taxids
+# and taxids to names
 sub namesToTaxids{
   my($dmp, $settings) = @_;
 
@@ -75,7 +104,10 @@ sub namesToTaxids{
   while(<$fh>){
     chomp;
     my($taxid, $name, undef, $type) = split(/\t\|\t/, $_);
+    next if($type ne 'scientific name');
+
     $map{$name} = $taxid;
+    $map{$taxid}= $name; # reciprocal hash!
 
     if($rowsCounter > 10000){
       logmsg "DEBUG: only getting $rowsCounter rows from $dmp";
@@ -85,49 +117,6 @@ sub namesToTaxids{
 
   return \%map;
 }
-
-=cut
-# Read a taxonomy dmp file
-sub readDmp{
-  my($dmp, $settings) = @_;
-
-  my %info;
-
-  my $rowsCounter = 0;
-
-  local $/ = "\t|\n";
-  open(my $fh, $dmp) or die "ERROR reading $dmp: $!";
-  while(<$fh>){
-    $rowsCounter++;
-    chomp;
-    my @F = split /\t\|\t/;
-    my $id = shift(@F);
-
-    # If the second field has letters, then it is names.dmp
-    if($F[0] =~ /\w/){
-      if($F[2] ne 'scientific name'){
-        next;
-      }
-    }
-    # If the second field has numbers, then it is nodes.dmp
-    #else{
-      #if($F[2] eq 'no rank'){
-      #  next;
-      #}
-    #}
-
-    $info{$id} = \@F;
-
-    if($$settings{debug} && $rowsCounter > 10000){
-      logmsg "DEBUG: only took $rowsCounter rows from $dmp";
-      last;
-    }
-  }
-  close $fh;
-
-  return \%info;
-}
-=cut
 
 # Read all sequences in a fasta file into a hash
 # with values just being sequence and not Seq object.
@@ -140,10 +129,10 @@ sub readSeqs{
     $seq{$seq->id}=$seq->seq;
     $numSeqs++;
 
-    if($$settings{debug} && $numSeqs > 100){
-      logmsg "DEBUG: only reading $numSeqs seqs";
-      last;
-    }
+    #if($$settings{debug} && $numSeqs > 200){
+    #  logmsg "DEBUG: only reading $numSeqs seqs";
+    #  last;
+    #}
   };
   return \%seq;
 }
@@ -178,6 +167,9 @@ sub readClusters{
   my %cluster;
   my %sample;
 
+  my $clusterField = "secondary_cluster_id"; # primary_cluster_id or secondary_cluster_id
+  logmsg "Clustering by $clusterField";
+
   open(my $fh, "clusters.txt") or die $!;
   my $header = <$fh>;
   chomp($header);
@@ -190,8 +182,7 @@ sub readClusters{
 
     $sample{$F{sample_id}} = \%F;
 
-    #push(@{$cluster{$F{primary_cluster_id}}}, $F{sample_id});
-    push(@{$cluster{$F{secondary_cluster_id}}}, $F{sample_id});
+    push(@{$cluster{$F{$clusterField}}}, $F{sample_id});
   }
   return (\%sample, \%cluster);
 }
@@ -203,9 +194,14 @@ sub clustersReps{
 
   # get a listing of cluster names
   my @clusterName = sort keys(%$clusters);
+  if($$settings{debug}){
+    @clusterName = splice(@clusterName, 0, 200);
+    logmsg "DEBUG: Just looking at ".scalar(@clusterName)." clusters";
+  }
+  my $numClusters = @clusterName;
 
   # Loop through the clusters
-  for(my $i=0;$i<@clusterName;$i++){
+  for(my $i=0;$i<$numClusters;$i++){
     my $clusterName = $clusterName[$i];
     my $numSeqs = @{$$clusters{$clusterName}};
     my $clusterRepFile = "$outdir/$clusterName.fasta";
@@ -214,7 +210,7 @@ sub clustersReps{
       # If the sequence is more than 1kb then ok I assume it's a complete plasmid
       my $firstSeq = Bio::SeqIO->new(-file=>$clusterRepFile)->next_seq;
       if($firstSeq->length > 1000){
-        logmsg "SKIP: Found $clusterRepFile";
+        logmsg "SKIP: Found $clusterRepFile ($i / $numClusters)";
         next;
       }
       # If it's not more than 1kb then let's redo the thing
@@ -267,16 +263,28 @@ sub clustersReps{
       die Dumper \@sortedSeqs, $seqName;
     }
     my $taxon = (defined($$taxa{$seqName})) ? $$taxa{$seqName}{mobcluster_convergence_taxon} : "";
-    my $taxid = (defined($$namesInfo{$taxon})) ? $$namesInfo{$taxon} : -1;
+    #my $taxid = (defined($$namesInfo{$taxon})) ? $$namesInfo{$taxon} : -1;
+    
+    my $taxid = 0;
+    if(defined($$namesInfo{$taxon})){
+      $taxid = $$namesInfo{$taxon};
+    } else {
+      $taxid = accession2Taxid($seqName, $$settings{accessions2taxid}, $settings);
+    }
+    if(!$taxid){
+      die "ERROR: could not find the taxid for $seqName";
+    }
 
     # Write sequence to a single file.
     # First to a tmp file and then to the real file
     # to help with resuming where you left off.
+    my $sequence = $$seqs{$seqName};
+    $sequence =~ s/(.{1,60})/$1\n/g;
     open(my $fh, '>', $clusterRepFile.".tmp") or die "ERROR: could not write to $clusterRepFile.tmp: $!";
-    print $fh ">$seqName|kraken:taxid|$taxid $clusterName\n$$seqs{$seqName}\n";
+    print $fh ">$seqName|kraken:taxid|$taxid cluster=$clusterName singleton=0 taxon=$taxon\n$sequence\n";
     close $fh;
     mv($clusterRepFile.".tmp", $clusterRepFile) or die $!;
-    logmsg "Wrote $clusterRepFile";
+    logmsg "Wrote $clusterRepFile ($i / $numClusters)";
   }
 
   return \%representative;
@@ -329,16 +337,28 @@ sub ani{
   return \%ANI;
 }
 
+sub accession2Taxid{
+  my($accession, $db, $settings) = @_;
+  my $taxid = `sqlite3 $db 'SELECT taxid FROM accession2taxid WHERE accession = "$accession"'`;
+  chomp($taxid);
+  logmsg "Found taxon from $accession ($taxid) using $db";
+  return $taxid;
+}
+
 sub usage{
   "$0: create representative fasta file for Kraken, from mobsuite
   Usage: $0 [OPTIONS] > out.fasta
 
   OPTIONS
-  --seqs     fasta file of all sequences with correct seqnames
+  --seqs     fasta file of all sequences with correct seqnames (ncbi_plasmid_full_seqs.fas)
   --clusters clusters tsv file from mobsuite
   --convergence  Table of convergence information for each cluster (mobsuite TableS5)
   --outdir   output directory
+  --accessions2taxid  Database of accessions and taxids, in sqlite3 format
+  --namesdmp   names.dmp file
+  --debug
   --help     This useful help menu
   --numcpus  Number of cpus to use at least with ANI
   "
 }
+
