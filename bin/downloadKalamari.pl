@@ -69,6 +69,7 @@ sub downloadEntry{
   logmsg "Downloading $$fields{scientificName}:$$fields{nuccoreAcc}";
   my $dir = $$fields{scientificName};
   $dir =~ s| +|/|g;
+  $dir =~ s/[\.\-'"\(\)]+/_/g;
   $dir="$$settings{outdir}/$dir";
 
   make_path($dir);
