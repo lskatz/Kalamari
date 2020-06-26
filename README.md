@@ -14,6 +14,11 @@ FDA-ARGOS.
 Most genomes are from species that are either studied or are common contaminants
 in the Enteric Diseases Laboratory Branch (EDLB) at CDC.
 
+Kalamari also comes with a custom taxonomy database such as defining
+_Shigella_ as a subspecies of _Escherichia coli_
+or defining the four lineages of _Listeria monocytogenes_.
+These changes have been backed by trusted SMEs in EDLB.
+
 ## Download instructions
 
 For usage, run `perl bin/downloadKalamari.pl --help`
