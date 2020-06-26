@@ -16,7 +16,9 @@ sqlite3 accession2taxid.sqlite
 create index accession ON accession2taxid(accession); /* long step */
 # => accession2taxid.sqlite, about 16G
 
-# TODO get plasmids file with headers "scientificName accession taxid"
+# TODO find all plasmids from assemblies
+
+
 # TODO get clustering from plasmids file
 
 (set -e; echo -e "scientificName\taccession\ttaxid"; tail -n +2 ../development-plasmids-cluster.tsv | while read -r plasmid acc therest; do echo -ne "plasmid\t"; sqlite3 -separator $'\t' accession2taxid.sqlite "SELECT accession,taxid FROM accession2taxid WHERE accession='$acc';"; done) > ../development-plasmids.tsv
