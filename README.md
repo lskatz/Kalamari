@@ -3,17 +3,28 @@ A database of completed assemblies for metagenomics-related tasks
 
 [![Creative Commons License v4](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](LICENSE.md)
 
+## Synopsis
+
+Kalamari is a database of completed and public assemblies, backed by trusted institutions.
+Completed assemblies means that you do not have to worry about the database itself being contaminated with "rogue" contigs.
+Additionally, most assemblies were obtained by subject matter experts (SMEs) at
+Centers for Disease Control and Prevention (CDC).
+Those not from CDC come from other trusted institutions or projects such as
+FDA-ARGOS.
+Most genomes are from species that are either studied or are common contaminants
+in the Enteric Diseases Laboratory Branch (EDLB) at CDC.
+
 ## Download instructions
 
 For usage, run `perl bin/downloadKalamari.pl --help`
 
     SRC=Kalamari
-    perl bin/downloadKalamari.pl -o $SRC src/Kalamari_v3.5.tsv
+    perl bin/downloadKalamari.pl -o $SRC src/chromosomes.tsv
 
 ### ...with plasmids
 
     SRC=Kalamari
-    perl bin/downloadKalamari.pl -o $SRC src/Kalamari_v3.5.tsv src/development-plasmids.tsv
+    perl bin/downloadKalamari.pl -o $SRC src/chromosomes.tsv src/plasmids.tsv
 
 ### taxonomy
 
