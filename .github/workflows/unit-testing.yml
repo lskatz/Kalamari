@@ -28,7 +28,7 @@ jobs:
           gunzip -cv edirect.tar.gz | tar xf -
           rm -v edirect.tar.gz
           export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
-          ./edirect/setup.sh
+          yes Y | ./edirect/setup.sh
           tree edirect
       - name: check-env
         run:  echo "$PATH"
