@@ -22,7 +22,7 @@ jobs:
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir kalamari.out
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir kalamari.out src/chromosomes.tsv
       - name: check-results
         run:  tree kalamari.out
 
