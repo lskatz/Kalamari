@@ -36,7 +36,7 @@ jobs:
       - name: check-env
         run:  echo "$PATH"
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir kalamari.out src/chromosomes.tsv
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir kalamari.out Kalamari/src/chromosomes.tsv
       - name: check-results
         run:  tree kalamari.out
 
