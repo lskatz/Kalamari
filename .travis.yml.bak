@@ -8,3 +8,5 @@ perl:
 env: PERL_CPANM_OPT="--notest --force --skip-satisfied"
 before_install: 
   - export PATH=$PATH:$(pwd)/kraken2-2.0.7-beta/target
+  - sudo apt-get instal ca-certificates
+
