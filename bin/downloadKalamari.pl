@@ -14,10 +14,11 @@ exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i and=s@ outdir=s help)) or die $!;
   die usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
   $$settings{numcpus}||= 1;
+  $$settings{and}    //= [];
   logmsg "Outdir will be $$settings{outdir}";
 
   # Check for prerequisites
@@ -75,24 +76,35 @@ sub downloadEntry{
   make_path($dir);
 
   my $acc = "$$fields{nuccoreAcc}";
+
+  # Get the esearch xml in place for at least one downstream query
+  my $esearchXml = "$dir/$acc.esearch.xml";
+  if(! -e $esearchXml){
+    system("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
+    if($?){
+      die "ERROR running esearch: $!";
+    }
+    mv("$esearchXml.tmp", $esearchXml);
+  }
+
+  # Download the accessory files
+  for my $and (@{ $$settings{and} }){
+    logmsg "Downloading $and for $acc";
+    downloadCds("$dir/$acc", $and, $settings);
+  }
+  # If the genes nucleotide file exists, define gene coordinates too
+  if(-e "$dir/$acc.ffn"){
+    logmsg "Creating genes coordinate file for $acc";
+    geneCoordinatesFile("$dir/$acc", $settings);
+  }
+
+  # Get started on the assembly file
   my $outfile = "$dir/$acc.fasta";
   # If it exists, then skip the download
   if(-e $outfile && -s $outfile > 0){
     logmsg "  SKIP: found $outfile already";
     return $outfile;
   }
-
-  # Get the esearch xml in place for at least one downstream query
-  my $esearchXml = "$dir/$acc.esearch.xml";
-  system("esearch -db nuccore -query '$acc' > $esearchXml");
-  if($?){
-    die "ERROR running esearch: $!";
-  }
-
-  # Download the accessory files
-  downloadCds("$dir/$acc", "protein", $settings);
-  downloadCds("$dir/$acc", "nucleotide", $settings);
-  geneCoordinatesFile("$dir/$acc", $settings);
 
   # Main query: efetch
   my $command = "cat $esearchXml | efetch -format fasta > $outfile.tmp";
@@ -265,5 +277,11 @@ sub usage{
 
   --outdir  ''  Output directory of Kalamari database
   --numcpus  1
+  --and         Download additional files. Multiple --and
+                flags are allowed.
+                Possible values: protein, nucleotide
+                where either protein or nucleotide will
+                return files with CDS entries.
+                E.g., $0 --and protein --and nucleotide
   ";
 }
