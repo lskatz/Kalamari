@@ -90,7 +90,7 @@ sub downloadEntry{
   }
 
   # Download the accessory files
-  downloadCds("$dir/$acc", "protien", $settings);
+  downloadCds("$dir/$acc", "protein", $settings);
   downloadCds("$dir/$acc", "nucleotide", $settings);
   geneCoordinatesFile("$dir/$acc", $settings);
 
