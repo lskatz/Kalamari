@@ -39,7 +39,8 @@ jobs:
         run:  echo "$PATH"
       - name: select for only Listeria
         run:  |
-          grep Listeria Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
+          head -n 1 Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
+          grep Listeria Kalamari/src/chromosomes.tsv >> Kalamari/src/Listeria.tsv
           echo "These are the Listeria genomes for downstream tests"
           column -ts $'\t' Kalamari/src/Listeria.tsv 
           hexdump -c Kalamari/src/Listeria.tsv
