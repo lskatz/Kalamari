@@ -1,5 +1,6 @@
 # This is a subsampling unit test to get early results
 on: [push]
+name: Listeria
 
 jobs:
   build:
@@ -41,6 +42,7 @@ jobs:
           grep Listeria Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
           echo "These are the Listeria genomes for downstream tests"
           column -ts $'\t' Kalamari/src/Listeria.tsv 
+          hexdump -c Kalamari/src/Listeria.tsv
       - name: download
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir Listeria.out Kalamari/src/Listeria.tsv
       - name: check-results
