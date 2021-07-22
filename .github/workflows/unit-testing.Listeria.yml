@@ -44,14 +44,31 @@ jobs:
       - name: select for only Listeria
         run:  |
           head -n 1 Kalamari/src/chromosomes.tsv > ${{ env.TSV }}
-          grep Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
+          grep -m 5 Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
           echo "These are the Listeria genomes for downstream tests"
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
       - name: download
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
+      - name: check-results
+        run:  tree ${{ env.OUTDIR }}
       - name: download-more
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }} --and protein --and nucleotide
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
-
+      - name: install kraken
+        run:  |
+          wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
+          tar zxvf kraken-v1.1.1.tar.gz
+          cd kraken-1.1.1 && bash install.sh $HOME/bin/kraken
+      - name: Kraken1 database
+        run:  |
+          export PATH=$PATH:$HOME/bin/kraken/bin
+          mkdir -pv kraken
+          cp -rv Kalamari/src/taxonomy/taxonomy_v3.9 kraken/taxonomy
+          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
+          kraken-build --db kraken --build
+      - name: Kraken1 view results
+        run:  |
+          tree kraken
+          ls -lhSR kraken
