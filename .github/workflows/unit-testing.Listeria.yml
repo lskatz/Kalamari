@@ -50,6 +50,8 @@ jobs:
           hexdump -c ${{ env.TSV }}
       - name: download
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
+      - name: download-more
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }} --and protein --and nucleotide
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
 
