@@ -1,0 +1,48 @@
+# This is a subsampling unit test to get early results
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-18.04' ]
+        perl: [ '5.32' ]
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          multi-thread: "true"
+      - name: checkout my repo
+        uses: actions/checkout@v2
+        with:
+          path: Kalamari
+
+      - name: apt-get install
+        run:  sudo apt-get install ca-certificates tree
+      - name: install-edirect
+        run:  |
+          sudo apt-get install ncbi-entrez-direct
+          echo "installed edirect the apt way"
+          exit
+          cd $HOME
+          perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); $ftp->login; $ftp->binary; $ftp->get("/entrez/entrezdirect/edirect.tar.gz");'
+          gunzip -cv edirect.tar.gz | tar xf -
+          rm -v edirect.tar.gz
+          export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
+          yes Y | ./edirect/setup.sh
+          tree edirect
+      - name: check-env
+        run:  echo "$PATH"
+      - name: select for only Listeria
+        run:  |
+          grep Listeria Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
+          echo "These are the Listeria genomes for downstream tests"
+          column -ts '$\t' Kalamari/src/Listeria.tsv 
+      - name: download
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir Listeria.out Kalamari/src/Listeria.tsv
+      - name: check-results
+        run:  tree kalamari.out
+
