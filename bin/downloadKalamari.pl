@@ -14,10 +14,11 @@ exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i and=s@ outdir=s help)) or die $!;
   die usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
   $$settings{numcpus}||= 1;
+  $$settings{and}    //= [];
   logmsg "Outdir will be $$settings{outdir}";
 
   # Check for prerequisites
@@ -75,6 +76,29 @@ sub downloadEntry{
   make_path($dir);
 
   my $acc = "$$fields{nuccoreAcc}";
+
+  # Get the esearch xml in place for at least one downstream query
+  my $esearchXml = "$dir/$acc.esearch.xml";
+  if(! -e $esearchXml){
+    system("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
+    if($?){
+      die "ERROR running esearch: $!";
+    }
+    mv("$esearchXml.tmp", $esearchXml);
+  }
+
+  # Download the accessory files
+  for my $and (@{ $$settings{and} }){
+    logmsg "Downloading $and for $acc";
+    downloadCds("$dir/$acc", $and, $settings);
+  }
+  # If the genes nucleotide file exists, define gene coordinates too
+  if(-e "$dir/$acc.ffn"){
+    logmsg "Creating genes coordinate file for $acc";
+    geneCoordinatesFile("$dir/$acc", $settings);
+  }
+
+  # Get started on the assembly file
   my $outfile = "$dir/$acc.fasta";
   # If it exists, then skip the download
   if(-e $outfile && -s $outfile > 0){
@@ -82,7 +106,8 @@ sub downloadEntry{
     return $outfile;
   }
 
-  my $command = "esearch -db nuccore -query '$acc' | efetch -format fasta > $outfile.tmp";
+  # Main query: efetch
+  my $command = "cat $esearchXml | efetch -format fasta > $outfile.tmp";
   system($command);
   if($?){
     # If there was an error, wait 3 seconds to help with any backlog in the API
@@ -131,8 +156,108 @@ sub downloadEntry{
 
   # Cleanup
   unlink("$outfile.tmp");
+  unlink($esearchXml);
 
   return $outfile;
+}
+
+sub downloadCds{
+  my($outfile, $which, $settings) = @_;
+
+  # The output file is .faa, the protein sequences,
+  # but if the type is nucleotide, then it's .ffn.
+  my $faaFile = "$outfile.faa";
+  if($which =~ /nuc/i){
+    $faaFile = "$outfile.ffn";
+  }
+  if(-e $faaFile){
+    logmsg "Not redownloading $faaFile";
+    return $faaFile;
+  }
+
+  my $esearchXml = "$outfile.esearch.xml";
+  my $command = "cat $esearchXml | efetch -format fasta_cds_aa > $faaFile.tmp";
+  if($which =~ /nuc/i){
+    $command = "cat $esearchXml | efetch -format fasta_cds_na > $faaFile.tmp";
+  }
+    
+  system($command);
+  if($?){
+    # If there was an error, wait 3 seconds to help with any backlog in the API
+    my $msgF = "%s: could not download protein for $faaFile: %s\n  Command: $command";
+    logmsg sprintf($msgF, "WARNING", $!);
+    sleep 3;
+    # after waiting 3 seconds, run again
+    system($command);
+    # If there is still an error, die
+    if($?){
+      die sprintf($msgF, "ERROR", $!);
+    }
+  }
+  if(-s "$faaFile.tmp" == 0){
+    #unlink("$outfile");
+    #unlink("$outfile.tmp");
+    return "";
+  }
+  mv("$faaFile.tmp", $faaFile) or die $!;
+
+  return $outfile;
+}
+
+sub geneCoordinatesFile{
+  my($outfile, $settings) = @_;
+
+  my $coordinatesFile = "$outfile.genes";
+  if(-e $coordinatesFile){
+    return $coordinatesFile;
+  }
+
+  open(my $genesFh, ">", "$coordinatesFile.tmp") or die "ERROR: could not write to $coordinatesFile.tmp: $!";
+  # header definitions: https://github.com/snayfach/MIDAS/blob/master/docs/build_db.md
+  print $genesFh join("\t", qw(gene_id scaffold_id start end strand gene_type))."\n";
+
+  # Read information from the CDS file
+  open(my $ffnFh, "$outfile.ffn") or die "ERROR: could not read $outfile.ffn: $!";
+  while(<$ffnFh>){
+    next if(! />(\S+)\s+(.+)/);
+
+    my($id, $desc) = ($1, $2);
+
+    # Get all the key/values in the description fields
+    my %F;
+    while($desc =~ /\[(.+?)\]/g){
+      my($key, $value) = split(/=/, $1);
+      $F{$key} = $value;
+    }
+
+    $id=~ s/^>//;
+    my $acc = basename($outfile);
+
+    # determine strandedness and get coordinates
+    my ($strand, $start, $stop) = ('+', -1, -1);
+    if($F{location} =~ /complement/){
+      $strand = '-';
+      $F{location} =~ s/[^\d\.]+//g; # remove non-numbers
+    }
+   ($start, $stop) = split(/\.\./, $F{location});
+
+    print $genesFh join("\t", 
+      $id,
+      $acc,
+      $start,
+      $stop,
+      $strand,
+      $F{gbkey},
+    )."\n";
+
+  }
+
+  close $genesFh;
+  close $ffnFh;
+
+  mv("$coordinatesFile.tmp", $coordinatesFile) or die $!;
+
+  return $coordinatesFile;
 }
 
 sub which{
@@ -152,5 +277,11 @@ sub usage{
 
   --outdir  ''  Output directory of Kalamari database
   --numcpus  1
+  --and         Download additional files. Multiple --and
+                flags are allowed.
+                Possible values: protein, nucleotide
+                where either protein or nucleotide will
+                return files with CDS entries.
+                E.g., $0 --and protein --and nucleotide
   ";
 }
