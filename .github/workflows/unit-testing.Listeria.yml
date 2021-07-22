@@ -84,6 +84,9 @@ jobs:
           cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
+          export KRAKEN_THREAD_CT=2
+          # Some super debugging here with -x
+          sed -i.bak 's/set -e/set -e; set -x/' `which kraken-build`
           kraken-build --rebuild --db kraken --threads 2
       - name: Kraken1 view results
         run:  |
