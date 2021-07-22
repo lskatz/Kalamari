@@ -25,6 +25,9 @@ jobs:
         with:
           path: Kalamari
 
+      - name: env check
+        run:  |
+          echo $PATH | tr ':' '\n' | sort
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
       - name: install jellyfish
@@ -74,7 +77,8 @@ jobs:
           chmod -v +x $a_bin/*
           export PATH=$PATH:$HOME/bin/kraken/bin:$a_bin
           echo $PATH
-          ln -svf jellyfish1 $a_bin/jellyfish
+          #ln -svf jellyfish1 $a_bin/jellyfish
+          cp -vf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
           cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
