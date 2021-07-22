@@ -40,7 +40,7 @@ jobs:
         run:  |
           grep Listeria Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
           echo "These are the Listeria genomes for downstream tests"
-          column -ts '$\t' Kalamari/src/Listeria.tsv 
+          column -ts $'\t' Kalamari/src/Listeria.tsv 
       - name: download
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir Listeria.out Kalamari/src/Listeria.tsv
       - name: check-results
