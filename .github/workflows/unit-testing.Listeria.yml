@@ -62,7 +62,7 @@ jobs:
           tar zxvf kraken-v1.1.1.tar.gz
           a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
           cd kraken-1.1.1 && bash install_kraken.sh kraken-src && cd -
-          cp -v kraken-1.1.1/kraken-src/kraken $a_bin/
+          cp -v kraken-1.1.1/kraken-src/* $a_bin/
       - name: Kraken1 database
         run:  |
           a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
