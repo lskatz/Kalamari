@@ -29,6 +29,7 @@ jobs:
         run:  sudo apt-get install ca-certificates tree
       - name: install-edirect
         run:  |
+          echo $PATH
           sudo apt-get install ncbi-entrez-direct
           echo "installed edirect the apt way"
           exit
