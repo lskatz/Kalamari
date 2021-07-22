@@ -83,6 +83,7 @@ jobs:
           mkdir -pv kraken
           cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
+          tree kraken
           kraken-build --db kraken --build
       - name: Kraken1 view results
         run:  |
