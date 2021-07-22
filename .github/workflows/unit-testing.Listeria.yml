@@ -86,7 +86,7 @@ jobs:
           tree kraken
           export KRAKEN_THREAD_CT=2
           # Some super debugging here with -x
-          sed -i.bak 's/set -e/set -e; set -x/' `which kraken-build`
+          sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
           kraken-build --rebuild --db kraken --threads 2
       - name: Kraken1 view results
         run:  |
