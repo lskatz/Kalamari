@@ -2,6 +2,10 @@
 on: [push]
 name: Listeria
 
+env:
+  TSV: "Kalamari/src/Listeria.tsv"
+  OUTDIR: "Listeria.out"
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -39,13 +43,13 @@ jobs:
         run:  echo "$PATH"
       - name: select for only Listeria
         run:  |
-          head -n 1 Kalamari/src/chromosomes.tsv > Kalamari/src/Listeria.tsv
-          grep Listeria Kalamari/src/chromosomes.tsv >> Kalamari/src/Listeria.tsv
+          head -n 1 Kalamari/src/chromosomes.tsv > ${{ env.TSV }}
+          grep Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
           echo "These are the Listeria genomes for downstream tests"
-          column -ts $'\t' Kalamari/src/Listeria.tsv 
-          hexdump -c Kalamari/src/Listeria.tsv
+          column -ts $'\t' ${{ env.TSV }}
+          hexdump -c ${{ env.TSV }}
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir Listeria.out Kalamari/src/Listeria.tsv
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
       - name: check-results
-        run:  tree kalamari.out
+        run:  tree ${{ env.OUTDIR }}
 
