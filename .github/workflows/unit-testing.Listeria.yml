@@ -30,7 +30,7 @@ jobs:
       - name: install jellyfish
         run:  |
           wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-linux -O jellyfish1
-          chmod -v +x jellyfish
+          chmod -v +x jellyfish1
       - name: install-edirect
         run:  |
           sudo apt-get install ncbi-entrez-direct
@@ -74,7 +74,7 @@ jobs:
           chmod -v +x $a_bin/*
           export PATH=$PATH:$HOME/bin/kraken/bin:$a_bin
           echo $PATH
-          ln -svf jellyfish $a_bin/
+          ln -svf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
           cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
