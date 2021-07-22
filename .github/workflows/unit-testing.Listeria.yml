@@ -60,6 +60,7 @@ jobs:
         run:  |
           wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
           tar zxvf kraken-v1.1.1.tar.gz
+          mkdir -pv $HOME/bin
           cd kraken-1.1.1 && bash install_kraken.sh $HOME/bin/kraken
       - name: Kraken1 database
         run:  |
