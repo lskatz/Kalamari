@@ -51,7 +51,7 @@ jobs:
       - name: select for only Listeria
         run:  |
           head -n 1 Kalamari/src/chromosomes.tsv > ${{ env.TSV }}
-          grep -m 5 Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
+          grep -m 2 Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
           echo "These are the Listeria genomes for downstream tests"
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
@@ -59,10 +59,10 @@ jobs:
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
-      - name: download-more
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }} --and protein --and nucleotide
-      - name: check-results
-        run:  tree ${{ env.OUTDIR }}
+      #- name: download-more
+      #  run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }} --and protein --and nucleotide
+      #- name: check-results
+      #  run:  tree ${{ env.OUTDIR }}
       - name: install kraken
         run:  |
           wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
