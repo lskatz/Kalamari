@@ -61,8 +61,10 @@ jobs:
           kraken2-build --build --db ${{ env.DB }} --threads 2
       - name: Kraken2 view results
         run:  |
+          export PATH=$PATH:kraken2-2.1.2/target
           tree ${{ env.DB }}
           ls -lhSR ${{ env.DB }}
           QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
-          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.out
+          echo "QUERY is $QUERY"
+          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.out $QUERY
 
