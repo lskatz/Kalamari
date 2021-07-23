@@ -64,8 +64,10 @@ jobs:
           export PATH=$PATH:kraken2-2.1.2/target
           tree ${{ env.DB }}
           ls -lhSR ${{ env.DB }}
-          QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
+          QUERY=$(find ${{ env.DB }} -name '*.fna' | head -n 1)
           echo "QUERY is $QUERY"
+          head -n 2 $QUERY
+          echo
           kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY
           head kraken2.report kraken2.raw
 
