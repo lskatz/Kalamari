@@ -57,7 +57,7 @@ jobs:
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db kraken2 --add-to-library {} \;
           tree kraken2
           echo ".....Building the database....."
-          kraken2-build --rebuild --db kraken2 --threads 2 --work-on-disk
+          kraken2-build --build --db kraken2 --threads 2
       - name: Kraken2 view results
         run:  |
           tree kraken2
