@@ -54,7 +54,7 @@ jobs:
           export PATH=$PATH:kraken2-2.1.2/target
           which kraken2-build
           mkdir -pv ${{ env.DB }}
-          cp -rv Kalamari/src/taxonomy_v3.9 ${{ env.DB }}/taxonomy
+          cp -rv Kalamari/src/taxonomy_v3.9.2 ${{ env.DB }}/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db ${{ env.DB }} --add-to-library {} \;
           tree ${{ env.DB }}
           echo ".....Building the database....."
