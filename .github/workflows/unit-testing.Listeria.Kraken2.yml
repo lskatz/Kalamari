@@ -66,5 +66,7 @@ jobs:
           ls -lhSR ${{ env.DB }}
           QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
           echo "QUERY is $QUERY"
-          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.out $QUERY
+          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY
+          head kraken2.report kraken2.raw
+
 
