@@ -5,6 +5,7 @@ name: Listeria-with-Kraken2
 env:
   TSV: "Kalamari/src/Listeria.tsv"
   OUTDIR: "Listeria.out"
+  DB: "kraken2"
 
 jobs:
   build:
@@ -52,14 +53,16 @@ jobs:
         run:  |
           export PATH=$PATH:kraken2-2.1.2/target
           which kraken2-build
-          mkdir -pv kraken2
-          cp -rv Kalamari/src/taxonomy_v3.9 kraken2/taxonomy
-          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db kraken2 --add-to-library {} \;
-          tree kraken2
+          mkdir -pv ${{ env.DB }}
+          cp -rv Kalamari/src/taxonomy_v3.9 ${{ env.DB }}/taxonomy
+          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db ${{ env.DB }} --add-to-library {} \;
+          tree ${{ env.DB }}
           echo ".....Building the database....."
-          kraken2-build --build --db kraken2 --threads 2
+          kraken2-build --build --db ${{ env.DB }} --threads 2
       - name: Kraken2 view results
         run:  |
-          tree kraken2
-          ls -lhSR kraken2
+          tree ${{ env.DB }}
+          ls -lhSR ${{ env.DB }}
+          QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
+          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.out
 
