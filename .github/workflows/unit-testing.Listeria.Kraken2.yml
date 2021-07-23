@@ -54,8 +54,8 @@ jobs:
           which kraken2-build
           mkdir -pv kraken2
           cp -rv Kalamari/src/taxonomy_v3.9 kraken2/taxonomy
-          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
-          tree kraken
+          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db kraken2 --add-to-library {} \;
+          tree kraken2
           echo ".....Building the database....."
           kraken2-build --rebuild --db kraken2 --threads 2 --work-on-disk
       - name: Kraken2 view results
