@@ -1,6 +1,6 @@
 # This is a subsampling unit test to get early results
 on: [push]
-name: Listeria
+name: Listeria-with-Kraken1
 
 env:
   TSV: "Kalamari/src/Listeria.tsv"
@@ -84,7 +84,6 @@ jobs:
           cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
-          export KRAKEN_THREAD_CT=2
           # Some super debugging here with -x
           sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
           grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
@@ -94,3 +93,4 @@ jobs:
         run:  |
           tree kraken
           ls -lhSR kraken
+

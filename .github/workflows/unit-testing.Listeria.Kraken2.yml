@@ -1,0 +1,65 @@
+# This is a subsampling unit test to get early results
+on: [push]
+name: Listeria-with-Kraken2
+
+env:
+  TSV: "Kalamari/src/Listeria.tsv"
+  OUTDIR: "Listeria.out"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-18.04' ]
+        perl: [ '5.32' ]
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          multi-thread: "true"
+      - name: checkout my repo
+        uses: actions/checkout@v2
+        with:
+          path: Kalamari
+
+      - name: env check
+        run:  |
+          echo $PATH | tr ':' '\n' | sort
+      - name: apt-get install
+        run:  sudo apt-get install ca-certificates tree jellyfish ncbi-entrez-direct
+      - name: select for only Listeria
+        run:  |
+          head -n 1 Kalamari/src/chromosomes.tsv > ${{ env.TSV }}
+          grep -m 2 Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
+          echo "These are the Listeria genomes for downstream tests"
+          column -ts $'\t' ${{ env.TSV }}
+          hexdump -c ${{ env.TSV }}
+      - name: download
+        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
+      - name: check-results
+        run:  tree ${{ env.OUTDIR }}
+      - name: install kraken
+        run:  |
+          wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.2.tar.gz -O kraken-v2.1.2.tar.gz
+          tar zxvf kraken-v2.1.2.tar.gz
+          cd kraken2-2.1.2 && bash install_kraken2.sh target && cd -
+          ls -lhS kraken2-2.1.2/target
+          chmod +x kraken2-2.1.2/target/*
+      - name: Kraken1 database
+        run:  |
+          export PATH=$PATH:kraken2-2.1.2/target
+          which kraken2-build
+          mkdir -pv kraken2
+          cp -rv Kalamari/src/taxonomy_v3.9 kraken2/taxonomy
+          find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
+          tree kraken
+          echo ".....Building the database....."
+          kraken2-build --rebuild --db kraken2 --threads 2 --work-on-disk
+      - name: Kraken2 view results
+        run:  |
+          tree kraken2
+          ls -lhSR kraken2
+
