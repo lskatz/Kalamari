@@ -6,6 +6,9 @@ env:
   TSV: "Kalamari/src/Listeria.tsv"
   OUTDIR: "Listeria.out"
   DB: "kraken2"
+  SRC_TAX: "Kalamari/src/taxonomy_v3.9.3"
+  SRC_CHR: "Kalamari/src/chromosomes.tsv"
+  SRC_PLD: "Kalamari/src/plasmids.tsv"
 
 jobs:
   build:
@@ -33,8 +36,9 @@ jobs:
         run:  sudo apt-get install ca-certificates tree jellyfish ncbi-entrez-direct
       - name: select for only Listeria
         run:  |
-          head -n 1 Kalamari/src/chromosomes.tsv > ${{ env.TSV }}
-          grep -m 2 Listeria Kalamari/src/chromosomes.tsv >> ${{ env.TSV }}
+          head -n 1 ${{ env.SRC_CHR }} > ${{ env.TSV }}
+          grep -m 2 Listeria ${{ env.SRC_CHR }} >> ${{ env.TSV }}
+          grep -m 2 Listeria ${{ env.SRC_PLD }} >> ${{ env.TSV }}
           echo "These are the Listeria genomes for downstream tests"
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
@@ -54,7 +58,7 @@ jobs:
           export PATH=$PATH:kraken2-2.1.2/target
           which kraken2-build
           mkdir -pv ${{ env.DB }}
-          cp -rv Kalamari/src/taxonomy_v3.9.2 ${{ env.DB }}/taxonomy
+          cp -rv ${{ env.SRC_TAX }} ${{ env.DB }}/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db ${{ env.DB }} --add-to-library {} \;
           tree ${{ env.DB }}
           echo ".....Building the database....."
