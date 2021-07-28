@@ -1,4 +1,5 @@
 on: [push]
+name: Pull-down-all-accessions
 
 jobs:
   build:
