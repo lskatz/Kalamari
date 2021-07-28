@@ -6,7 +6,7 @@ env:
   TSV: "Kalamari/src/Listeria.tsv"
   OUTDIR: "Listeria.out"
   DB: "kraken2"
-  SRC_TAX: "Kalamari/src/taxonomy_v3.9.4"
+  SRC_TAX: "Kalamari/src/taxonomy"
   SRC_CHR: "Kalamari/src/chromosomes.tsv"
   SRC_PLD: "Kalamari/src/plasmids.tsv"
 
