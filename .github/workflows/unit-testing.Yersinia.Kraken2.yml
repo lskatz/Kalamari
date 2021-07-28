@@ -1,14 +1,15 @@
 # This is a subsampling unit test to get early results
 on: [push]
-name: Listeria-with-Kraken2
+name: Yersinia-with-Kraken2
 
 env:
-  TSV: "Kalamari/src/Listeria.tsv"
-  OUTDIR: "Listeria.out"
+  TSV: "Kalamari/src/genus.tsv"
+  OUTDIR: "Yersinia.out"
   DB: "kraken2"
   SRC_TAX: "Kalamari/src/taxonomy_v3.9.4"
   SRC_CHR: "Kalamari/src/chromosomes.tsv"
   SRC_PLD: "Kalamari/src/plasmids.tsv"
+  GENUS: Yersinia
 
 jobs:
   build:
@@ -34,12 +35,12 @@ jobs:
           echo $PATH | tr ':' '\n' | sort
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree jellyfish ncbi-entrez-direct
-      - name: select for only Listeria
+      - name: select for only for this genus
         run:  |
           head -n 1 ${{ env.SRC_CHR }} > ${{ env.TSV }}
-          grep -m 2 Listeria ${{ env.SRC_CHR }} >> ${{ env.TSV }}
-          grep -m 2 Listeria ${{ env.SRC_PLD }} >> ${{ env.TSV }}
-          echo "These are the Listeria genomes for downstream tests"
+          grep -m 2 ${{ env.GENUS }} ${{ env.SRC_CHR }} >> ${{ env.TSV }}
+          grep -m 2 ${{ env.GENUS }} ${{ env.SRC_PLD }} >> ${{ env.TSV }}
+          echo "These are the ${{ env.GENUS }} genomes for downstream tests"
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
       - name: download
