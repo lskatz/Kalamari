@@ -53,7 +53,7 @@ jobs:
           cd kraken2-2.1.2 && bash install_kraken2.sh target && cd -
           ls -lhS kraken2-2.1.2/target
           chmod +x kraken2-2.1.2/target/*
-      - name: Kraken1 database
+      - name: Kraken2 database
         run:  |
           export PATH=$PATH:kraken2-2.1.2/target
           which kraken2-build
