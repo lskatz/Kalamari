@@ -88,7 +88,7 @@ jobs:
           sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
           grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
           echo ".....Building the database....."
-          kraken-build --rebuild --db kraken --threads 2 --work-on-disk
+          kraken-build --minimizer-len 9 --rebuild --db kraken --threads 2 --work-on-disk
       - name: Kraken1 view results
         run:  |
           tree kraken
