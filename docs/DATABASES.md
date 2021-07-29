@@ -80,8 +80,6 @@ Please follow the Init section before continuing. These instructions assume that
 
     blastn -query $FASTA -db Kalamari.blast/kalamari.fasta
 
-#### Build
-
 ### ANI Kalamari
 
 #### Build
