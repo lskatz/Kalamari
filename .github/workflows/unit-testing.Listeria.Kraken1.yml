@@ -92,6 +92,7 @@ jobs:
       - name: Kraken1 query
         run:  |
           QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
+          echo "Query is $QUERY"
           kraken --db kraken -output kraken.raw --fasta-input $QUERY
       - name: Kraken1 view results
         run:  |
