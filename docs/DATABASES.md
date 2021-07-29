@@ -66,6 +66,14 @@ Please follow the Init section before continuing. These instructions assume that
 
 ### Mashed Kalamari
 
+Using Mash version 2
+
+    DB=Kalamari.msh
+
+    find $SRC -name '*.fasta' -exec mash sketch {} \;
+    find $SRC -name '*.msh' > $DB.fofn
+    mash paste $DB -l $DB.fofn
+
 ### BLASTed Kalamari
 
 #### Build
