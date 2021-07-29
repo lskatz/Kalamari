@@ -38,11 +38,7 @@ where `VER` is the version of Kalamari.
 
 ## Database formatting instructions
 
-[How to format databases](docs/DATABASES.md)
-
-## Database usage
-
-After you create your Kalamari database(s), here is [how to use them](docs/USAGE.md)
+[How to format and query databases](docs/DATABASES.md)
 
 ## Citation
 
