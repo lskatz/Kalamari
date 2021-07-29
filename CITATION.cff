@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Katz"
+  given-names: "Lee S."
+  orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Griswold"
+  given-names: "Taylor"
+  orcid: "https://orcid.org/0000-0002-2533-9161"
+title: "Kraken with Kalamari: Contamination Detection"
+version: 5.0
+date-released: 2021-07-28
+url: "https://github.com/lskatz/Kalamari"
