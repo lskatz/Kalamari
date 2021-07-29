@@ -68,4 +68,29 @@ Please follow the Init section before continuing. These instructions assume that
 
 ### BLASTed Kalamari
 
+#### Build
+
+    DB=Kalamari.blast
+    mkdir $DB
+
+    find $SRC -name '*.fasta' -exec cat {} \; > $DB/kalamari.fasta
+    makeblastdb -dbtype nucl -in $DB
+
+#### Query
+
+    blastn -query $FASTA -db Kalamari.blast/kalamari.fasta
+
+#### Build
+
 ### ANI Kalamari
+
+#### Build
+
+    # Can use the same folder; just add file of filename
+    DB=$SRC/reference.fofn
+    find $SRC -name '*.fasta' > $DB
+
+#### Query
+
+    fastANI --rl $DB -q $FASTA /dev/stdout
+
