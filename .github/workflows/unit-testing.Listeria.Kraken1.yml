@@ -81,7 +81,7 @@ jobs:
           cp -vf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
-          cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
+          cp -rv Kalamari/src/taxonomy kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
