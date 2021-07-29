@@ -81,16 +81,24 @@ jobs:
           cp -vf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
-          cp -rv Kalamari/src/taxonomy_v3.9 kraken/taxonomy
+          cp -rv Kalamari/src/taxonomy kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
           sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
           grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
           echo ".....Building the database....."
-          kraken-build --rebuild --db kraken --threads 2 --work-on-disk
+          kraken-build --minimizer-len 9 --rebuild --db kraken --threads 2 --work-on-disk
+      - name: Kraken1 query
+        run:  |
+          QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
+          echo "Query is $QUERY"
+          kraken --db kraken -output kraken.raw --fasta-input $QUERY
       - name: Kraken1 view results
         run:  |
           tree kraken
           ls -lhSR kraken
+          echo
+          head kraken.raw
+
 
