@@ -27,6 +27,15 @@ The format is four columns, separated by tab:
 
 The taxonomy IDs in each line must be represented in names.dmp and nodes.dmp in the folder src/taxonomy.
 
+New nucleotide entries must be
+
+* Trusted - subject matter experts must agree that this is a representative genome for the taxon
+* Completed - no gaps
+* Nonredundant - for the most part, most taxa are not represented by multiple assemblies
+
+Note: some species such as _Vibrio cholerae_ have multiple chromosomes.
+These can be denoted with multiple lines, one per nucleotide accession.
+
 ## Other contributions
 
 Please make a new issues ticket on GitHub and describe the potential contribution.
