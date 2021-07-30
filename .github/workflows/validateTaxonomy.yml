@@ -22,4 +22,8 @@ jobs:
 
       - name: validate taxonomy
         run:  perl Kalamari/bin/validateTaxonomy.pl Kalamari/src/taxonomy
-
+      - name: matching taxids
+        run:  |
+          echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
+          tail -n +2 Kalamari/src/chromosomes.tsv Kalamari/src/plasmids.tsv -q | perl -F'\t' -lane 'BEGIN{@node=`cat Kalamari/src/taxonomy/nodes.dmp`; for $n(@node){($taxid)=split(/\t/, $n); $taxid{$taxid}++; } } for my $t($F[2], $F[3]){ if(!$taxid{$t}){ print "Could not find $t taxid";} }'
+          tail -n +2 Kalamari/src/chromosomes.tsv Kalamari/src/plasmids.tsv -q | perl -F'\t' -lane 'BEGIN{@name=`cat Kalamari/src/taxonomy/names.dmp`; for $n(@name){($taxid)=split(/\t/, $n); $taxid{$taxid}++; } } for my $t($F[2], $F[3]){ if(!$taxid{$t}){ print "Could not find $t taxid";} }'

@@ -42,6 +42,16 @@ sub validateTaxonomy{
       logmsg "ERROR: could not find node $parent which is the parent of $taxid";
       return 0;
     }
+
+    # Find matching entries in names.dmp
+    if($taxid > 1 && !$$names{$taxid}){
+      logmsg "ERROR: could not find an entry in names.dmp for $taxid";
+      return 0;
+    }
+    if($parent > 1 && !$$names{$parent} ){
+      logmsg "ERROR: could not find an entry in names.dmp for $parent";
+      return 0;
+    }
   }
 
   return 1;
