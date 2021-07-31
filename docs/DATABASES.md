@@ -105,7 +105,7 @@ Using Mash version 2
 #### Build
 
     DB=$SRC.mmseqs2
-    Kalamari]$ find $SRC -name '*.fasta' | xargs -n 100 cat | gzip -c > $SRC.cat.gz
+    Kalamari]$ find $SRC -name '*.fasta' | xargs -n 100 gzip -c > $SRC.cat.gz
     mmseqs createdb Kalamari.cat.gz $DB
 
 #### Query
