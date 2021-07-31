@@ -100,3 +100,18 @@ Using Mash version 2
 
     fastANI --rl $DB -q $FASTA /dev/stdout
 
+### mm Kalamari (mmSeqs2)
+
+#### Build
+
+    DB=$SRC.mmseqs2
+    Kalamari]$ find $SRC -name '*.fasta' | xargs -n 100 cat | gzip -c > $SRC.cat.gz
+    mmseqs createdb Kalamari.cat.gz $DB
+
+#### Query
+
+    # need to create database out of your query fasta file
+    mmseqs createdb $FASTA $FASTA.mmseqs2
+    # The actual query:
+    mmseqs search --threads 4 $FASTA.mmseqs2 $DB mmseqs2.out mmseqs2.tmp
+
