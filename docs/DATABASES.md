@@ -61,6 +61,24 @@ Please follow the Init section before continuing. These instructions assume that
     # Same command for either fasta or fastq
     kraken2 --db $DB --report kraken2.report --use-mpa-style --output kraken2.raw $FASTA
     kraken2 --db $DB --report kraken2.report --use-mpa-style --output kraken2.raw $FASTQ
+    
+### Sepia Kalamari
+
+#### Build
+
+    DB=kalamari_$VERSION.sepia
+    find $SRC -name '*.fasta' > kalamari.fofn
+    # Create a reference file for Sepia with two columns:
+    # path name
+    cat kalamari.fofn | perl -F'/' -lane 'chomp; ($genus,$species,$fasta)=(@F[-3,-2,-1]); $name=join("_", $genus, $species); print join("\t", $_, $name);' > kalamari.tsv 
+    sepia build --index $DB --refs kalamari.tsv --kmer 31 --batch 300 --gamma 5.0 --threads 12 --minimizer 15
+    ls -lhS $DB # view a directory representing the database    
+    
+#### Query
+
+    sepia classify --index $DB --prefix test_kalamari --query $FASTQ
+    sort -k2,2nr test_kalamari_summary.txt | head -n 20 | column -t
+    # First column is the classification, second read count and third average kmer similarity
 
 ### ColorID with Kalamari
 
