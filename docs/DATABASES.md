@@ -67,18 +67,20 @@ Please follow the Init section before continuing. These instructions assume that
 #### Build
 
     DB=kalamari_$VERSION.sepia
-    find $SRC -name '*.fasta' > kalamari.fofn
-    # Create a reference file for Sepia with two columns:
-    # path name
-    cat kalamari.fofn | perl -F'/' -lane 'chomp; ($genus,$species,$fasta)=(@F[-3,-2,-1]); $name=join("_", $genus, $species); print join("\t", $_, $name);' > kalamari.tsv 
-    sepia build --index $DB --refs kalamari.tsv --kmer 31 --batch 300 --gamma 5.0 --threads 12 --minimizer 15
+    # Create the Sepia references file with two columns: path, taxonomy
+    python3 bin/generate_sepia_reference.py --taxonomy src/taxonomy -o sepia.ref.tsv --fastadir ./Kalamari src/chromosomes.tsv src/plasmids.tsv
+    sepia build --index $DB --refs sepia.ref.tsv --kmer 41 --minimizer 31 --batch 300 --gamma 5.0 --threads $CPUS 
     ls -lhS $DB # view a directory representing the database    
     
 #### Query
 
     sepia classify --index $DB --prefix test_kalamari --query $FASTQ
-    sort -k2,2nr test_kalamari_summary.txt | head -n 20 | column -t
+    # View the summary:
     # First column is the classification, second read count and third average kmer similarity
+    sort -k2,2nr test_kalamari_summary.txt | head -n 20 | column -t
+
+    # View taxonomic classification results per read
+    zcat test_kalamari_classification.gz | head
 
 ### ColorID with Kalamari
 
