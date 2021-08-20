@@ -15,7 +15,7 @@ If you have not already downloaded the Kalamari fasta files, please see the main
     
     # Make a fake fastq file
     FASTQ="$FASTA.fastq.gz"
-    head -n 2 $QUERY | perl -e '$id=<>; $seq=<>; chomp($id, $seq); $qual="I" x length($seq); $id=~s/^>/@/; print "$id\n$seq\n+\n$qual\n";' | gzip -c > $FASTQ
+    head -n 2 $FASTA | perl -e '$id=<>; $seq=<>; chomp($id, $seq); $qual="I" x length($seq); $id=~s/^>/@/; print "$id\n$seq\n+\n$qual\n";' | gzip -c > $FASTQ
    
 ## Different databases
 
