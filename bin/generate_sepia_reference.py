@@ -81,7 +81,7 @@ def main(args):
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Create the references file for Sepia. This is a two-column format with file path and taxonomy string separated by semicolons.")
 
-  parser.add_argument('--version', action='version', version='%(prog)s 1.0')
+  parser.add_argument('--version', action='version', version='%(prog)s ' + __version__)
   parser.add_argument("--taxonomy", "-t", metavar="taxdir", help="The directory with names.dmp and nodes.dmp", required=True) 
   parser.add_argument("--outfile", "-o", metavar="out.tsv", help="The sepia reference file", required=True) 
   parser.add_argument("--fastadir","-f", metavar="fastadir",help="The directory containing files with extension .fasta. The directory will be iteratively parsed.", required=True)
