@@ -1,0 +1,29 @@
+on: [push]
+name: Validate taxonomy
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-18.04' ]
+        perl: [ '5.32' ]
+    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          multi-thread: "true"
+      - name: checkout my repo
+        uses: actions/checkout@v2
+        with:
+          path: Kalamari
+
+      - name: validate taxonomy
+        run:  perl Kalamari/bin/validateTaxonomy.pl Kalamari/src/taxonomy
+      - name: matching taxids
+        run:  |
+          echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
+          tail -n +2 Kalamari/src/chromosomes.tsv Kalamari/src/plasmids.tsv -q | perl -F'\t' -lane 'BEGIN{@node=`cat Kalamari/src/taxonomy/nodes.dmp`; for $n(@node){($taxid)=split(/\t/, $n); $taxid{$taxid}++; } } for my $t($F[2], $F[3]){ if(!$taxid{$t}){ print "Could not find $t taxid";} }'
+          tail -n +2 Kalamari/src/chromosomes.tsv Kalamari/src/plasmids.tsv -q | perl -F'\t' -lane 'BEGIN{@name=`cat Kalamari/src/taxonomy/names.dmp`; for $n(@name){($taxid)=split(/\t/, $n); $taxid{$taxid}++; } } for my $t($F[2], $F[3]){ if(!$taxid{$t}){ print "Could not find $t taxid";} }'

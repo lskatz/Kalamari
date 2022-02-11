@@ -50,12 +50,11 @@ sub downloadKalamari{
     chomp;
     my %F;
     my @F = split /\t/;
-    @F{@header} = splice(@F,0,2);
+    @F{@header} = @F;
     if($F{nuccoreAcc} eq 'XXXXXX'){
       logmsg "Skipping $F{scientificName}: has accession $F{nuccoreAcc}";
       next;
     }
-    $F{taxid} = \@F;
 
     my $fasta = downloadEntry(\%F, $settings);
     $download_counter++;
@@ -144,10 +143,8 @@ sub downloadEntry{
   open(my $fhOut,">", "$outfile.tmp2") or die "ERROR: could not write to $outfile.tmp2: $!";
 
   # For every taxid, write a new entry with the same sequence
-  my $taxids = $$fields{taxid} || [];
-  for my $taxid (@$taxids){
-    print $fhOut sprintf($stringf, $taxid);
-  }
+  my $taxid = $$fields{taxid} || die "ERROR: no taxid for $acc";
+  print $fhOut sprintf($stringf, $taxid);
   close $fhOut;
 
   # Create the final file
