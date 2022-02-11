@@ -1,0 +1,7 @@
+# Create a fasta file that represents the "central by ANI" plasmid for each secondary
+# clustering in mobsuite
+perl ../../../bin/mobsuiteRepresentativeFasta.pl --seqs ncbi_plasmid_full_seqs.fas --clusters clusters.txt --convergence TableS5.tsv --outdir tmp --accessions2taxid ../accession2taxid.sqlite --numcpus 12 --namesdmp ../../taxonomy-development/names.dmp
+
+# Create the plasmids file
+grep ">" secondary.tmp.fasta | perl -lane '$nucid=$F[0]; $nucid=~s/^>|\|.+$//g; $taxid=$F[0]; $taxid=~s/^.+\|//; $taxon="plasmid"; if(/taxon=(.+)/){$taxon=$1;} print join("\t",$taxon,$nucid,$taxid);' > plasmids.kalamari.tsv
+

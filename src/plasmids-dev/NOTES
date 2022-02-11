@@ -1,0 +1,58 @@
+kraken-build --db tmp --download-library plasmid # Kalamari v3.9: obtained 2020-05-05
+cd tmp
+
+# download acc => taxid mappings
+wget https://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz https://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz.md5 https://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_wgs.accession2taxid.gz https://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_wgs.accession2taxid.gz.md5
+md5sum -c *.md5
+# HUGE files. This took 3m2s: time zcat -v *.gz > /dev/null
+
+# Make a database for querying, make the taxid lookups
+# fast.
+export TMPDIR=/scratch # force a fast/large scratch drive
+zcat nucl_wgs.accession2taxid.gz nucl_gb.accession2taxid > accession2taxid.tsv
+sqlite3 accession2taxid.sqlite
+.separator "\t"
+.import accession2taxid.tsv accession2taxid /* long step */
+create index accession ON accession2taxid(accession); /* long step */
+# => accession2taxid.sqlite, about 16G
+
+# TODO find all plasmids from assemblies
+
+
+# TODO get clustering from plasmids file
+
+(set -e; echo -e "scientificName\taccession\ttaxid"; tail -n +2 ../development-plasmids-cluster.tsv | while read -r plasmid acc therest; do echo -ne "plasmid\t"; sqlite3 -separator $'\t' accession2taxid.sqlite "SELECT accession,taxid FROM accession2taxid WHERE accession='$acc';"; done) > ../development-plasmids.tsv
+# => plasmids file with headers "scientificName accession taxid"
+
+# Remove entries with redundant sequences
+# Assumes that exactly identical sequences will not have
+# different taxids between different nucleotide accessions.
+perl -MBio::Perl -e '$in=Bio::SeqIO->new(-file=>"tmp/library/plasmid/library.fna"); $out=Bio::SeqIO->new(-file=>">tmp/library/plasmid/nr.fna"); $outr=Bio::SeqIO->new(-file=>">tmp/library/plasmid/r.fna"); while($seq=$in->next_seq){if($seen{$seq->seq}++){$outr->write_seq($seq);} else { $out->write_seq($seq); }}'
+# => nr.fna (nonredundant)
+
+# Create taxids from nonredundant sequences
+perl applyTaxidsToSequences.pl --discarded discard.fasta accession2taxid.sqlite tmp/library/plasmid/nr.fna > taxids.fasta
+# => discard.fasta taxids.fasta
+
+# MANUAL STEP: cp any plasmids from local assemblies into
+# taxids.fasta. Each plasmid must have a taxid defline.
+
+# all vs all ANI, 97% cutoff
+# => blastclust (tab delimited) format file with each entry
+# in the format of nucleotide_acc|kraken:taxid|taxid
+bash plasmidBinning.sh plasmid.taxid.fixed 97 > clusters.tsv
+grep -h . fastani.9DRcEI/cluster/* > clusters.tsv
+# plasmid.taxid.fixed/*.fasta => clusters.tsv
+
+# Create a Kalamari-formatted spreadsheet for github
+# "scientific names" are accessions. This is a quick step.
+cat clusters.tsv | perl -lane 'BEGIN{print join("\t", qw(scientificName nuccoreAcc taxid));} my $ref = shift(@F); my($acc,undef,$refTaxid) = split(/\|/, $ref); $acc//="UNKNOWNPLASMID"; my %taxid = ($refTaxid=>1); for(@F){my(undef, undef, $taxid) = split /\|/; $taxid{$taxid}=1; } my @taxid = sort{$a<=>$b} keys(%taxid); print join("\t","plasmid","$acc",@taxid);' > development-plasmids-cluster.tsv
+
+# Create huge (3G) plasmids file with redundant nucleotide
+# accessions with differing taxids.
+perl makeSpuriousTaxidsSequences.pl clusters.tsv tmp/library/plasmid/nr.fna > clusters.fasta
+
+# Cleanup the temporary kraken db
+cd ..
+mv tmp/clusters.fasta tmp/clusters.tsv tmp/development-plasmids.tsv tmp/development-plasmids.tsv . && rm -rf tmp
+
