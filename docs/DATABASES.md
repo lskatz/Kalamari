@@ -11,7 +11,8 @@ If you have not already downloaded the Kalamari fasta files, please see the main
     VERSION=5.0  # or whichever version you are building
     CPUS=4       # Define how many threads to use
     SRC=Kalamari # The folder where fasta files were downloaded
-    FASTA=$(find $SRC -name '*.fasta' | head -n 1) # input fasta file for querying
+    # Find a test fasta file for querying if you don't have one already
+    FASTA=$(find $SRC -name '*.fasta' | head -n 1) 
     
     # Make a fake fastq file if you don't already have a test fastq file
     FASTQ="$FASTA.fastq.gz"
