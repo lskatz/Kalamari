@@ -13,7 +13,7 @@ If you have not already downloaded the Kalamari fasta files, please see the main
     SRC=Kalamari # The folder where fasta files were downloaded
     FASTA=$(find $SRC -name '*.fasta' | head -n 1) # input fasta file for querying
     
-    # Make a fake fastq file
+    # Make a fake fastq file if you don't already have a test fastq file
     FASTQ="$FASTA.fastq.gz"
     head -n 2 $FASTA | perl -e '$id=<>; $seq=<>; chomp($id, $seq); $qual="I" x length($seq); $id=~s/^>/@/; print "$id\n$seq\n+\n$qual\n";' | gzip -c > $FASTQ
    
