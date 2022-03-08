@@ -135,3 +135,7 @@ Using Mash version 2
     # The actual query:
     mmseqs search --threads 4 $FASTA.mmseqs2 $DB mmseqs2.out mmseqs2.tmp
 
+### MIDAS
+
+See this ongoing issue for more information.
+https://github.com/lskatz/Kalamari/issues/12
