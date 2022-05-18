@@ -85,7 +85,7 @@ jobs:
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
-          sed -i.bak 's/set -e/set -e; set -x/' $(which build_kraken_db.sh)
+          #sed -i.bak 's/set -e/set -e; set -x/' $(which build_kraken_db.sh)
           #grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
           echo ".....Building the database....."
           kraken-build --minimizer-len 9 --rebuild --db kraken --threads 2 --work-on-disk
