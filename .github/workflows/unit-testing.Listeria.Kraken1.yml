@@ -36,6 +36,7 @@ jobs:
         run:  |
           wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-linux -O jellyfish1
           chmod -v +x jellyfish1
+          ln -sv jellyfish1 jellyfish
           echo $(realpath .) >> $GITHUB_PATH
           tree $(realpath .)
       - name: install-edirect
