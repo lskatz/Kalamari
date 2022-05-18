@@ -1,5 +1,7 @@
 # This is a subsampling unit test to get early results
-on: [push]
+on: 
+push:
+  branches: [fix-CI]
 name: Listeria-with-Kraken1
 
 env:
