@@ -43,5 +43,10 @@ jobs:
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
-        run:  ls -lhR kalamari.out
+        run:  |
+          find kalamari.out -name '*.fasta' > fasta.sizes
+          echo "by size"
+          cat fasta.sizes | xargs ls -lhS
+          echo "by name"
+          cat fasta.sizes | xargs ls -lh
 
