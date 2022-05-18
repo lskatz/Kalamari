@@ -42,4 +42,6 @@ jobs:
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir kalamari.out Kalamari/src/chromosomes.tsv
       - name: check-results
         run:  tree kalamari.out
+      - name: check-file-sizes
+        run:  ls -lhR kalamari.out
 
