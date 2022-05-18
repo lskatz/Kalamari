@@ -1,5 +1,7 @@
 # This is a subsampling unit test to get early results
-on: [push]
+on: 
+  push:
+    branches: [master]
 name: Listeria-with-Kraken1
 
 env:
@@ -34,6 +36,9 @@ jobs:
         run:  |
           wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-linux -O jellyfish1
           chmod -v +x jellyfish1
+          ln -sv jellyfish1 jellyfish
+          echo $(realpath .) >> $GITHUB_PATH
+          tree $(realpath .)
       - name: install-edirect
         run:  |
           sudo apt-get install ncbi-entrez-direct
@@ -67,26 +72,21 @@ jobs:
         run:  |
           wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
           tar zxvf kraken-v1.1.1.tar.gz
-          a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
           cd kraken-1.1.1 && bash install_kraken.sh kraken-src && cd -
-          cp -v kraken-1.1.1/kraken-src/* $a_bin/
+          chmod -v +x kraken-1.1.1/kraken-src/*
+          echo $(realpath kraken-1.1.1/kraken-src) >> $GITHUB_PATH
+          tree $(realpath) kraken-1.1.1
       - name: Kraken1 database
         run:  |
-          a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
-          ls -lh $a_bin
-          chmod -v +x $a_bin/*
-          export PATH=$PATH:$HOME/bin/kraken/bin:$a_bin
           echo $PATH
-          #ln -svf jellyfish1 $a_bin/jellyfish
-          cp -vf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
           cp -rv Kalamari/src/taxonomy kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
-          sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
-          grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
+          #sed -i.bak 's/set -e/set -e; set -x/' $(which build_kraken_db.sh)
+          #grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
           echo ".....Building the database....."
           kraken-build --minimizer-len 9 --rebuild --db kraken --threads 2 --work-on-disk
       - name: Kraken1 query
