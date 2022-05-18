@@ -34,6 +34,7 @@ jobs:
         run:  |
           wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-linux -O jellyfish1
           chmod -v +x jellyfish1
+          echo $(realpath .) >> $GITHUB_PATH
       - name: install-edirect
         run:  |
           sudo apt-get install ncbi-entrez-direct
@@ -67,18 +68,12 @@ jobs:
         run:  |
           wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
           tar zxvf kraken-v1.1.1.tar.gz
-          a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
           cd kraken-1.1.1 && bash install_kraken.sh kraken-src && cd -
-          cp -v kraken-1.1.1/kraken-src/* $a_bin/
+          chmod -v +x kraken-1.1.1/kraken-src/*
+          echo $(realpath kraken-1.1.1/kraken-src) >> $GITHUB_PATH
       - name: Kraken1 database
         run:  |
-          a_bin=$(echo "$PATH" | tr ':' "\n" | head -n 1)
-          ls -lh $a_bin
-          chmod -v +x $a_bin/*
-          export PATH=$PATH:$HOME/bin/kraken/bin:$a_bin
           echo $PATH
-          #ln -svf jellyfish1 $a_bin/jellyfish
-          cp -vf jellyfish1 $a_bin/jellyfish
           which kraken-build
           mkdir -pv kraken
           cp -rv Kalamari/src/taxonomy kraken/taxonomy
