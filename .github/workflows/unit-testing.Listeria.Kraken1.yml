@@ -35,6 +35,7 @@ jobs:
           wget https://github.com/gmarcais/Jellyfish/releases/download/v1.1.12/jellyfish-linux -O jellyfish1
           chmod -v +x jellyfish1
           echo $(realpath .) >> $GITHUB_PATH
+          tree $(realpath .)
       - name: install-edirect
         run:  |
           sudo apt-get install ncbi-entrez-direct
@@ -71,6 +72,7 @@ jobs:
           cd kraken-1.1.1 && bash install_kraken.sh kraken-src && cd -
           chmod -v +x kraken-1.1.1/kraken-src/*
           echo $(realpath kraken-1.1.1/kraken-src) >> $GITHUB_PATH
+          tree $(realpath) kraken-1.1.1
       - name: Kraken1 database
         run:  |
           echo $PATH
@@ -80,7 +82,7 @@ jobs:
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
-          #sed -i.bak 's/set -e/set -e; set -x/' $a_bin/build_kraken_db.sh
+          sed -i.bak 's/set -e/set -e; set -x/' $(which build_kraken_db.sh)
           #grep -v '^#' -m 20 -C 2 $a_bin/build_kraken_db.sh
           echo ".....Building the database....."
           kraken-build --minimizer-len 9 --rebuild --db kraken --threads 2 --work-on-disk
