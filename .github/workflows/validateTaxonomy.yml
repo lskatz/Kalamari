@@ -1,6 +1,6 @@
 on: 
-push:
-  branches: [master]
+  push:
+    branches: [master]
 name: Validate taxonomy
 
 jobs:
