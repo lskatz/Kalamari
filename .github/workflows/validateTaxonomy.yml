@@ -1,4 +1,6 @@
-on: [push]
+on: 
+  push:
+    branches: [fix-CI, master]
 name: Validate taxonomy
 
 jobs:
@@ -21,7 +23,8 @@ jobs:
           path: Kalamari
 
       - name: validate taxonomy
-        run:  perl Kalamari/bin/validateTaxonomy.pl Kalamari/src/taxonomy
+        run:  |
+          perl Kalamari/bin/validateTaxonomy.pl Kalamari/src
       - name: matching taxids
         run:  |
           echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
