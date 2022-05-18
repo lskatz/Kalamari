@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master]
+    branches: [fix-CI, master]
 name: Validate taxonomy
 
 jobs:
