@@ -15,7 +15,7 @@ exit main();
 sub main{
   my $settings={};
   GetOptions($settings,qw(numcpus=i and=s@ outdir=s help)) or die $!;
-  die usage() if($$settings{help} || !@ARGV);
+  usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
   $$settings{numcpus}||= 1;
   $$settings{and}    //= [];
@@ -270,6 +270,7 @@ sub which{
 }
 
 sub usage{
+  print
   "Usage: $0 [options] spreadsheet.tsv
 
   --outdir  ''  Output directory of Kalamari database
@@ -281,4 +282,5 @@ sub usage{
                 return files with CDS entries.
                 E.g., $0 --and protein --and nucleotide
   ";
+  exit 0;
 }
