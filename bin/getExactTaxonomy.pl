@@ -90,9 +90,11 @@ sub writeDmps{
   # read the names file
   my $names = readDmp("$$settings{datadir}/names.dmp", $settings);
 
-  mkdir $outdir;
-  open(my $nodesFh, ">", "$outdir/nodes.dmp") or die $!;
-  open(my $namesFh, ">", "$outdir/names.dmp") or die $!;
+  if(!-e $outdir){
+    mkdir $outdir or die "ERROR: could not make directory $outdir: $!";
+  }
+  open(my $nodesFh, ">", "$outdir/nodes.dmp") or die "ERROR: could not write to $outdir/nodes.dmp $!";
+  open(my $namesFh, ">", "$outdir/names.dmp") or die "ERROR: could not write to $outdir/nodes.dmp $!";
 
   for my $taxid(@taxid){
     if($$nodes{$taxid}){
