@@ -79,7 +79,8 @@ sub downloadEntry{
   # Get the esearch xml in place for at least one downstream query
   my $esearchXml = "$dir/$acc.esearch.xml";
   if(! -e $esearchXml){
-    system("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
+    # -retmax 1 to help avoid refseq/INSDC conflation
+    system("esearch -db nuccore -query '$acc' -retmax 1 > $esearchXml.tmp");
     if($?){
       die "ERROR running esearch: $!";
     }
