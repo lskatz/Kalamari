@@ -79,8 +79,7 @@ sub downloadEntry{
   # Get the esearch xml in place for at least one downstream query
   my $esearchXml = "$dir/$acc.esearch.xml";
   if(! -e $esearchXml){
-    # -retmax 1 to help avoid refseq/INSDC conflation
-    system("esearch -db nuccore -query '$acc' -retmax 1 > $esearchXml.tmp");
+    system("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
     if($?){
       die "ERROR running esearch: $!";
     }
@@ -132,12 +131,22 @@ sub downloadEntry{
   # and make a string for sprintf with a placeholder for taxid.
   my $stringf="";
   open(my $fh, "$outfile.tmp") or die "ERROR: could not read $outfile.tmp: $!";
-    while(<$fh>){
-      if(/(>\S+)/){
-        $_ = $1 . "|kraken:taxid|%s\n";
+  
+  # We should only see one sequence per accession
+  my $numSequences = 0;
+
+  while(<$fh>){
+    if(/(>\S+)/){
+      $_ = $1 . "|kraken:taxid|%s\n";
+      $numSequences++;
+      # Don't accept any more sequences than just the first
+      if($numSequences > 1){
+        logmsg "WARNING: for accession $acc, more than one sequence was returned. This might be due to NCBI returning both the INSDC and refseq identifiers. I will only keep one accession.";
+        last;
       }
-      $stringf.=$_;
     }
+    $stringf.=$_;
+  }
   close $fh;
 
   # Write to a new fasta file that will nave new headers
