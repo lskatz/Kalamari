@@ -40,7 +40,7 @@ jobs:
       - name: check-env
         run:  echo "$PATH"
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out ${{ in_tsv }} 
+        run:  perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out ${{ matrix.in_tsv }} 
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
