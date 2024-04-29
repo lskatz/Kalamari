@@ -11,7 +11,7 @@ jobs:
         os: ['ubuntu-20.04' ]
         perl: [ '5.32' ]
         in_tsv: ['Kalamari/src/chromosomes.tsv', 'Kalamari/src/plasmids.tsv']  
-    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    name: tsv ${{ matrix.in_tsv }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
         uses: shogo82148/actions-setup-perl@v1
