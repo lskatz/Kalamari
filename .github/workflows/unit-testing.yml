@@ -56,7 +56,7 @@ jobs:
           echo "($runner_id) end_line: $end_line"
           cat header.tsv > chunk_${runner_id}.tsv
           sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
-          perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out chunk_${runner_id}.tsv
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out chunk_${runner_id}.tsv
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
