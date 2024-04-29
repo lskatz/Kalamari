@@ -54,7 +54,7 @@ jobs:
           tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
 
           total_lines=$(wc -l < in.tsv)
-          start_line=$(( $runner_id * $total_lines / 20 ))
+          start_line=$(( $runner_id * $total_lines / 20 + 1 ))
           end_line=$(( ($runner_id + 1) * $total_lines / 20 -1 ))
           echo "($runner_id) start_line: $start_line"
           echo "($runner_id) end_line: $end_line"
