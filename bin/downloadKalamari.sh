@@ -1,6 +1,14 @@
 #!/bin/bash
 
 set -e
+
+if [[ "$1" =~ -h ]]; then
+  echo "Usage: $0 "
+  echo "  Downloads the standard chromosomes and plasmids for Kalamari"
+  echo "  from source and formats the kraken1 and kraken2 databases"
+  exit 0
+fi
+
 set -u
 
 thisdir=$(dirname $0)
@@ -35,6 +43,8 @@ function build_kraken1(){
   kraken-build --db $DB --build --threads 1
   kraken-build --db $DB --clean
   du -shc $DB
+
+  echo "DONE. Set KRAKEN_DEFAULT_DB=$(realpath $DB)"
 }
 
 function build_kraken2(){
@@ -49,6 +59,7 @@ function build_kraken2(){
   kraken2-build --db $DB --build --threads 1
   kraken2-build --db $DB --clean
   du -shc $DB
+  echo "DONE. Set KRAKEN2_DEFAULT_DB=$(realpath $DB)"
 }
 
 perl $thisdir/downloadKalamari.pl $TSV \

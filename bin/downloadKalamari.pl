@@ -6,6 +6,9 @@ use File::Basename qw/basename/;
 use File::Path qw/make_path/;
 use File::Copy qw/mv/;
 use Data::Dumper qw/Dumper/;
+use POSIX qw/ceil/;
+
+use threads;
 
 local $0 = basename $0;
 sub logmsg{ print STDERR "$0: @_\n";}
@@ -46,6 +49,8 @@ sub downloadKalamari{
   my $header = <$fh>;
   chomp($header);
   my @header = split /\t/, $header;
+
+  my @queue;
   while(<$fh>){
     chomp;
     my %F;
@@ -56,12 +61,37 @@ sub downloadKalamari{
       next;
     }
 
-    my $fasta = downloadEntry(\%F, $settings);
-    $download_counter++;
+    push(@queue, \%F);
   }
   close $fh;
 
+  my @thr;
+  my $numPerThread = ceil(scalar(@queue)/$$settings{numcpus});
+  for(my $i=0;$i<$$settings{numcpus};$i++){
+    my @subQueue = splice(@queue, 0, $numPerThread);
+    logmsg "Sending ".scalar(@subQueue)." entries to thread $i";
+    $thr[$i] = threads->new(\&downloadEntryWorker, \@subQueue, $settings);
+  }
+
+  # Close out the threads
+  for(my $i=0;$i<@thr;$i++){
+    logmsg "Joining thread $i";
+    my $fastas = $thr[$i]->join;
+  }
+
   return $download_counter;
+}
+
+sub downloadEntryWorker{
+  my($queue, $settings) = @_;
+
+  my @fasta = ();
+  for my $fields(@$queue){
+    my $fasta = downloadEntry($fields, $settings);
+    push(@fasta, $fasta);
+  }
+
+  return \@fasta;
 }
 
 sub downloadEntry{
@@ -79,7 +109,7 @@ sub downloadEntry{
   # Get the esearch xml in place for at least one downstream query
   my $esearchXml = "$dir/$acc.esearch.xml";
   if(! -e $esearchXml){
-    system("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
+    command("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
     if($?){
       die "ERROR running esearch: $!";
     }
@@ -277,6 +307,25 @@ sub which{
       }
   }
   return "";
+}
+
+sub command{
+  my($command) = @_;
+  
+  my $maxTries = 3;
+  my $numTries = 0;
+  do{{
+    system($command);
+
+    my $exit_code = $? >> 8;
+    if($exit_code){
+      logmsg "ERROR on command (numTries: $numTries):\n  $command";
+      sleep 1;
+    } else {
+      last;
+    }
+  }} while($numTries++ < $maxTries);
+
 }
 
 sub usage{
