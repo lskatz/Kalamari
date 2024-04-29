@@ -10,6 +10,7 @@ jobs:
       matrix:
         os: ['ubuntu-20.04' ]
         perl: [ '5.32' ]
+        in_tsv: ['Kalamari/src/chromosomes.tsv', 'Kalamari/src/plasmids.tsv']  
     name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
@@ -39,7 +40,7 @@ jobs:
       - name: check-env
         run:  echo "$PATH"
       - name: download
-      run:  perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out Kalamari/src/chromosomes.tsv
+        run:  perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out ${{ in_tsv }} 
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
