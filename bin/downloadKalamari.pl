@@ -312,7 +312,7 @@ sub which{
 sub command{
   my($command) = @_;
   
-  my $maxTries = 3;
+  my $maxTries = 10;
   my $numTries = 0;
   do{{
     system($command);
