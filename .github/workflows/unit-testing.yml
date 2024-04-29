@@ -2,10 +2,6 @@ on:
   push:
     branches: [master]
 name: Pull-down-all-accessions
-env:
-  # What percent of each spreadsheet to send to each job
-  # for parallelization
-  CHUNK_PERCENT: 5 
 
 jobs:
   build:
