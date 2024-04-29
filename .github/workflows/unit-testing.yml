@@ -2,6 +2,10 @@ on:
   push:
     branches: [master]
 name: Pull-down-all-accessions
+env:
+  # What percent of each spreadsheet to send to each job
+  # for parallelization
+  CHUNK_PERCENT: 5 
 
 jobs:
   build:
@@ -10,8 +14,8 @@ jobs:
       matrix:
         os: ['ubuntu-20.04' ]
         perl: [ '5.32' ]
-        in_tsv: ['Kalamari/src/chromosomes.tsv', 'Kalamari/src/plasmids.tsv']  
-    name: tsv ${{ matrix.in_tsv }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
+        runner_id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+    name: chunk ${{ matrix.runner_id }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
         uses: shogo82148/actions-setup-perl@v1
@@ -40,7 +44,23 @@ jobs:
       - name: check-env
         run:  echo "$PATH"
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out ${{ matrix.in_tsv }} 
+        run: |
+          runner_id=${{ matrix.runner_id }}
+          echo "Runner_id is $runner_id"
+          # Make a chunk input spreadsheet by just adding
+          # each sample to chromosomes.tsv
+          head -n 1 Kalamari/src/chromosomes.tsv > header.tsv
+          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
+          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
+
+          total_lines=$(wc -l < in.tsv)
+          start_line=$(( $runner_id * $total_lines / 20 ))
+          end_line=$(( ($runner_id + 1) * $total_lines / 20 -1 ))
+          echo "($runner_id) start_line: $start_line"
+          echo "($runner_id) end_line: $end_line"
+          cat header.tsv > chunk_${runner_id}.tsv
+          sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 2 --outdir kalamari.out chunk_${runner_id}.tsv
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
