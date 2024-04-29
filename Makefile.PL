@@ -15,7 +15,7 @@ my $preop = 'true';
 
 WriteMakefile1(
   NAME         => 'Kalamari',
-  VERSION      => "5.2.1",
+  VERSION      => "5.3.0",
   #VERSION_FROM => 'lib/Kalamari.pm',
   #ABSTRACT_FROM => 'lib/Kalamari.pm',
   AUTHOR => q{Lee S. Katz <gzu2@cdc.gov>},
@@ -24,13 +24,14 @@ WriteMakefile1(
   ],
   PREREQ_PM    => {
     # Core modules
-    'File::Basename' => 0,
-    'Data::Dumper'   => 0,
-    'List::Util'     => 0,
-    'Exporter'       => 0,
-    'Data::Dumper'   => 0,
-    'File::Copy'     => 0,
-    'File::Path'     => 0,
+    'File::Basename' => 0.1,
+    'Data::Dumper'   => 0.1,
+    'List::Util'     => 0.1,
+    'Exporter'       => 0.1,
+    'Data::Dumper'   => 0.1,
+    'File::Copy'     => 0.1,
+    'File::Path'     => 0.1,
+    'threads'        => 0.1,
   },
   BUILD_REQUIRES => {
     'Test::More'     => 0.47,
