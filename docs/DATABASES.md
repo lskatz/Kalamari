@@ -2,6 +2,16 @@
 
 Some sections are not filled out yet.  Contributions in the form of pull requests are welcome for instructions.
 
+## The easy button
+
+If you don't really want to read any of this, then there is
+a script for you.
+This script downloads and formats for Kraken1 and Kraken2.
+
+    bash bin/downloadKalamari.sh
+
+If you want to know more details, move onto the next section.
+
 ## Init
 
 Start off with a few environmental variables, regardless of your target database.
