@@ -7,7 +7,6 @@ use Getopt::Long;
 use File::Basename qw/basename/;
 use File::Temp qw/tempdir/;
 use File::Copy qw/mv/;
-use Bio::Perl;
 
 local $0 = basename $0;
 sub logmsg{local $0=basename $0; print STDERR "$0: @_\n";}
@@ -124,15 +123,20 @@ sub readSeqs{
   my($file,$settings)=@_;
   my %seq;
   my $numSeqs = 0;
-  my $in=Bio::SeqIO->new(-file=>$file);
-  while(my $seq=$in->next_seq){
-    $seq{$seq->id}=$seq->seq;
+
+  # Use the lh3 method to read fasta files
+  open(my $seqFh, "<", $file) or die "ERROR: could not open $file for reading: $!";
+  my @aux = undef;
+  my ($id, $seq);
+  my ($n, $slen, $comment, $qlen) = (0, 0, 0);
+  while ( ($id, $seq, undef) = readfq($seqFh, \@aux)) {
+    $seq{$id}=$seq;
     $numSeqs++;
 
-    #if($$settings{debug} && $numSeqs > 200){
-    #  logmsg "DEBUG: only reading $numSeqs seqs";
-    #  last;
-    #}
+    if($numSeqs > 200){
+      logmsg "DEBUG: only reading $numSeqs seqs";
+      last;
+    }
   };
   return \%seq;
 }
@@ -208,8 +212,9 @@ sub clustersReps{
     if(-e $clusterRepFile){
 
       # If the sequence is more than 1kb then ok I assume it's a complete plasmid
-      my $firstSeq = Bio::SeqIO->new(-file=>$clusterRepFile)->next_seq;
-      if($firstSeq->length > 1000){
+      my $clusterSeqs = readSeqs($clusterRepFile, $settings);
+      my($firstSeqId, $firstSeq) = each(%$clusterSeqs);
+      if(length($firstSeq) > 1000){
         logmsg "SKIP: Found $clusterRepFile ($i / $numClusters)";
         next;
       }
@@ -344,6 +349,52 @@ sub accession2Taxid{
   logmsg "Found taxon from $accession ($taxid) using $db";
   return $taxid;
 }
+
+# Read fq subroutine from Andrea which was inspired by lh3
+sub readfq {
+    my ($fh, $aux) = @_;
+    @$aux = [undef, 0] if (!(@$aux)); # remove deprecated 'defined'
+    return if ($aux->[1]);
+    if (!defined($aux->[0])) {
+        while (<$fh>) {
+            chomp;
+            if (substr($_, 0, 1) eq '>' || substr($_, 0, 1) eq '@') {
+                $aux->[0] = $_;
+                last;
+            }
+        }
+        if (!defined($aux->[0])) {
+            $aux->[1] = 1;
+            return;
+        }
+    }
+    my $name = /^.(\S+)/? $1 : '';
+    my $comm = /^.\S+\s+(.*)/? $1 : ''; # retain "comment"
+    my $seq = '';
+    my $c;
+    $aux->[0] = undef;
+    while (<$fh>) {
+        chomp;
+        $c = substr($_, 0, 1);
+        last if ($c eq '>' || $c eq '@' || $c eq '+');
+        $seq .= $_;
+    }
+    $aux->[0] = $_;
+    $aux->[1] = 1 if (!defined($aux->[0]));
+    return ($name, $seq) if ($c ne '+');
+    my $qual = '';
+    while (<$fh>) {
+        chomp;
+        $qual .= $_;
+        if (length($qual) >= length($seq)) {
+            $aux->[0] = undef;
+            return ($name, $seq, $comm, $qual);
+        }
+    }
+    $aux->[1] = 1;
+    return ($name, $seq, $comm);
+}
+
 
 sub usage{
   "$0: create representative fasta file for Kraken, from mobsuite

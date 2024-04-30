@@ -15,12 +15,17 @@ my $preop = 'true';
 
 WriteMakefile1(
   NAME         => 'Kalamari',
-  VERSION      => "5.3.0",
+  VERSION      => "5.3.2",
   #VERSION_FROM => 'lib/Kalamari.pm',
   #ABSTRACT_FROM => 'lib/Kalamari.pm',
   AUTHOR => q{Lee S. Katz <gzu2@cdc.gov>},
   EXE_FILES    => [
     "bin/downloadKalamari.pl",
+    "bin/downloadKalamari.sh",
+    "bin/getExactTaxonomy.pl",
+    "bin/mobsuiteRepresentativeFasta.pl",
+    "bin/validateTaxonomy.pl",
+    "bin/generate_sepia_reference.py",
   ],
   PREREQ_PM    => {
     # Core modules
