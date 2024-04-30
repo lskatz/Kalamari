@@ -63,14 +63,14 @@ function build_kraken2(){
 }
 
 perl $thisdir/downloadKalamari.pl $TSV \
-  --outdir $tempdir/kalamari # --and protein --and nucleotide
+  --outdir $tempdir/kalamari --and protein --and nucleotide
 
-if [ -d "./kalamari" ]; then
-  rm -rf "./kalamari"
-fi
+rm -rf $thisdir/../db
+mkdir -v $thisdir/../db
+rm -rf $thisdir/../db/kalamari
 
-mv -v $tempdir/kalamari .
+mv -v $tempdir/kalamari $thisdir/../db/kalamari
 
-build_kraken1 ./kalamari ./kraken1.kalamari
-build_kraken2 ./kalamari ./kraken2.kalamari
+build_kraken1 $thisdir/../db/kalamari $thisdir/../db/kraken1.kalamari
+build_kraken2 $thisdir/../db/kalamari $thisdir/../db/kraken2.kalamari
 
