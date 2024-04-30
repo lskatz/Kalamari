@@ -5,6 +5,8 @@ use 5.010;
  
 use ExtUtils::MakeMaker;
 
+our $VERSION = "5.3.3";
+
 # Some help from
 # http://blogs.perl.org/users/michal_wojciechowski/2011/11/github-friendly-readme-files-with-extutils-makemaker-and-module-build.html
 my $preop = 'true';
@@ -15,7 +17,7 @@ my $preop = 'true';
 
 WriteMakefile1(
   NAME         => 'Kalamari',
-  VERSION      => "5.3.2",
+  VERSION      => $VERSION,
   #VERSION_FROM => 'lib/Kalamari.pm',
   #ABSTRACT_FROM => 'lib/Kalamari.pm',
   AUTHOR => q{Lee S. Katz <gzu2@cdc.gov>},
