@@ -12,10 +12,14 @@ fi
 set -u
 
 thisdir=$(dirname $0)
+VERSION=$(perl -lane 'print $1 if /our \$VERSION\s*=\s*"([^"]+)";/' $thisdir/../Makefile.PL)
+outdir_prefix="$thisdir/../share/kalamari-$VERSION"
+mkdir -pv $outdir_prefix
 
 tempdir=$(mktemp --directory KALAMARI.XXXXXX)
 trap ' { rm -rf $tempdir; } ' EXIT
 echo "TEMPDIR is $tempdir" >&2
+echo "OUTDIR  is $outdir_prefix" >&2
 
 CHR_URL=https://raw.githubusercontent.com/lskatz/Kalamari/master/src/chromosomes.tsv
 PSM_URL=https://raw.githubusercontent.com/lskatz/Kalamari/master/src/plasmids.tsv
@@ -29,7 +33,7 @@ mkdir "$tempdir/taxonomy"
 curl $NODES_URL > $tempdir/taxonomy/nodes.dmp
 curl $NAMES_URL > $tempdir/taxonomy/names.dmp
 
-#echo "DEBUG" >&2; mv $TSV $TSV.tmp && head -n 5 $TSV.tmp > $TSV
+#echo "DEBUG" >&2; mv $TSV $TSV.tmp && head -n 3 $TSV.tmp > $TSV
 
 function build_kraken1(){
   in_dir=$1
@@ -65,12 +69,11 @@ function build_kraken2(){
 perl $thisdir/downloadKalamari.pl $TSV \
   --outdir $tempdir/kalamari --and protein --and nucleotide
 
-rm -rf $thisdir/../db
-mkdir -v $thisdir/../db
-rm -rf $thisdir/../db/kalamari
+rm -rf $outdir_prefix
+mkdir -v $outdir_prefix
 
-mv -v $tempdir/kalamari $thisdir/../db/kalamari
+mv -v $tempdir/kalamari $outdir_prefix/kalamari
 
-build_kraken1 $thisdir/../db/kalamari $thisdir/../db/kraken1.kalamari
-build_kraken2 $thisdir/../db/kalamari $thisdir/../db/kraken2.kalamari
+build_kraken1 $outdir_prefix/kalamari $outdir_prefix/kraken1.kalamari
+build_kraken2 $outdir_prefix/kalamari $outdir_prefix/kraken2.kalamari
 
