@@ -23,7 +23,7 @@ Arcobacter thereius	CP035926	544718	28196
 Arcobacter trophiarum	CP031367	708186	28196
 Arripis trutta	AP006810	270544	163128
 Atlantibacter hermannii	CP042941	565	1903434
-Bacillus cereus	NC_016771	1396	86661
+Bacillus cereus	AP007209	1396	86661
 Bacillus subtilis	NC_000964	1423	653685
 Bacillus thuringiensis	NC_005957	1428	86661
 Bacteroides fragilis	NC_006347	817	816
@@ -61,7 +61,6 @@ Campylobacter ureolyticus	CP012195	827	194
 Campylobacter volucris	CP007774	1031542	194
 Candidatus Desulforudis audaxviator	CP000860	471827	471826
 Candidatus Korarchaeum cryptofilum	CP000968	374847	498846
-Caulobacter	CP000927	366602	2648921
 Caulobacter vibrioides	NC_011916	155892	75
 Chlamydia pneumoniae	NC_000922	83558	810
 Chlamydia trachomatis	NC_000117	813	810
@@ -122,20 +121,18 @@ Escherichia fergusonii	CP042945	564	561
 Exiguobacterium antarcticum	CP003063	132920	33986
 Finegoldia magna	AP008971	1260	150022
 Flavobacterium psychrophilum	NC_009613	96345	237
-Francisella philomiragia	CP000937	28110	262
 Francisella tularensis	NC_006570	263	262
-Fusobacterium nucleatum	NC_003454	851	848
 Gallus gallus	HQ857211	9031	9030
 Gardnerella vaginalis	NC_014644	2702	2701
 Geobacter sulfurreducens	NC_002939	35554	28231
 Gloeobacter violaceus	NC_005125	33072	33071
 Grimontia hollisae	CP035690	673	246861
 Grimontia hollisae	CP035691	673	246861
-Haemophilus influenzae	NC_000907	727	724
+Haemophilus influenzae	L42023	727	724
 Haemophilus somnus	CP000947	228400	731
 Halobacterium salinarum	AM774415	478009	2242
 Helianthus annuus	MG770607	4232	4231
-Helicobacter pylori	NC_000915	210	209
+Helicobacter pylori	AE000511	210	209
 Heliobacterium modesticaldum	CP000930	35701	2697
 Homo sapiens	NC_012920	9606	9605
 Ketogulonicigenium vulgare	NC_017384	92945	92944
@@ -168,7 +165,6 @@ Mesorhizobium ciceri	NC_014923	39645	68287
 Methylobacterium	CP000943	426117	2615210
 Methylobacterium radiotolerans	CP001001	31998	407
 Micrococcus luteus	CP001628	1270	1269
-Moorella thermoacetica	NC_007644	1525	44260
 Morganella morganii morganii	CP004345	180434	582
 Mycobacterium abscessus	NC_010397	36809	670516
 Mycobacterium leprae	NC_002677	1769	1763
@@ -186,11 +182,9 @@ Parabacteroides distasonis	CP000140	823	375288
 Photobacterium damselae	CP046752	38293	657
 Photobacterium damselae	CP046751	38293	657
 Pollachius virens	FR751399	8060	8059
-Polynucleobacter necessarius	CP001010	576610	44013
 Prochlorococcus marinus	NC_005042	1219	1218
 Proteus mirabilis	NC_022000	584	583
 Pseudomonas aeruginosa	NC_002516	287	136841
-Pseudomonas putida	CP000949	390235	303
 Pseudomonas syringae group genomosp. 3	NC_004578	251701	136849
 Pyrobaculum neutrophilum	CP001014	70771	2276
 Rhodobacter sphaeroides	NC_007494	1063	1060
@@ -230,7 +224,6 @@ Streptococcus pneumoniae	CP000936	487214	1313
 Streptococcus pyogenes	NC_002737	1314	1301
 Streptococcus sanguinis	NC_009009	1305	1301
 Streptococcus suis	NC_012926	1307	1301
-Streptomyces coelicolor	NC_003888	1902	1477431
 Sus scrofa	FJ236999	9823	9822
 Synechococcus	CP000951	32049	2626047
 Thermanaerovibrio acidaminovorans	NC_013522	81462	81461
@@ -282,7 +275,5 @@ Yersinia intermedia	CP009801	631	629
 Yersinia kristensenii	CP054049	631	629
 Yersinia massiliensis	CP054048	33060	629
 Yersinia mollaretii	CP054043	33060	629
-Yersinia pseudotuberculosis	CP000950	502800	633
-Yersinia pseudotuberculosis	NC_010465	502800	633
 Yersinia rochesterensis	CP032482	1604335	629
 Yersinia rohdei	CP009787	29485	629

@@ -2,9 +2,10 @@
 use strict;
 use warnings;
 use Getopt::Long qw/GetOptions/;
-use File::Basename qw/basename/;
+use File::Basename qw/basename dirname/;
 use File::Path qw/make_path/;
 use File::Copy qw/mv/;
+use File::Temp qw/tempdir/;
 use Data::Dumper qw/Dumper/;
 use POSIX qw/ceil/;
 
@@ -17,9 +18,10 @@ exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i and=s@ outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i tempdir=s and=s@ outdir=s help)) or die $!;
   usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
+  $$settings{tempdir} //= tempdir("$0.XXXXXX", CLEANUP=>1, TMPDIR=>1);
   $$settings{numcpus}||= 1;
   $$settings{and}    //= [];
   logmsg "Outdir will be $$settings{outdir}";
@@ -74,9 +76,16 @@ sub downloadKalamari{
   }
 
   # Close out the threads
+  my @errors;
   for(my $i=0;$i<@thr;$i++){
     logmsg "Joining thread $i";
-    my $fastas = $thr[$i]->join;
+    my $fastasAndErrors = $thr[$i]->join;
+    my($fastas, $errors) = @$fastasAndErrors;
+    push(@errors, @$errors);
+  }
+
+  for my $acc(@errors){
+    logmsg "ERROR downloading: $acc";
   }
 
   return $download_counter;
@@ -85,117 +94,87 @@ sub downloadKalamari{
 sub downloadEntryWorker{
   my($queue, $settings) = @_;
 
+  my $bufferSize = 30;
+
   my @fasta = ();
-  for my $fields(@$queue){
-    my $fasta = downloadEntry($fields, $settings);
-    push(@fasta, $fasta);
+  my @err;
+  while(@$queue > 0){
+    my @entries = sort {$$a{nuccoreAcc} cmp $$b{nuccoreAcc} }
+                       splice(@$queue, 0, $bufferSize);
+    my ($fasta, $err) = downloadEntries(\@entries, $settings);
+    push(@fasta, @$fasta);
+    push(@err, @$err);
   }
 
-  return \@fasta;
+  return [\@fasta, \@err];
 }
 
-sub downloadEntry{
-  my($fields,$settings) = @_;
-  logmsg "Downloading $$fields{scientificName}:$$fields{nuccoreAcc}";
-  my $dir = $$fields{scientificName};
-  $dir =~ s| +|/|g;
-  $dir =~ s/[\.\-'"\(\)]+/_/g;
-  $dir="$$settings{outdir}/$dir";
+sub downloadEntries{
+  my($entries,$settings) = @_;
+  my $numEntries = scalar(@$entries);
+  my @acc = map{$$_{nuccoreAcc}} @$entries;
+  logmsg "Downloading ".scalar(@acc)." accessions";
+  my $queryArg = join("[accession] OR ", sort(@acc))."[accession]";
+  my $dir = tempdir("download.XXXXXX", DIR=>$$settings{tempdir});
 
-  make_path($dir);
-
-  my $acc = "$$fields{nuccoreAcc}";
+  # Accessions that had errors
+  my @err;
 
   # Get the esearch xml in place for at least one downstream query
-  my $esearchXml = "$dir/$acc.esearch.xml";
-  if(! -e $esearchXml){
-    command("esearch -db nuccore -query '$acc' > $esearchXml.tmp");
-    if($?){
-      die "ERROR running esearch: $!";
-    }
-    mv("$esearchXml.tmp", $esearchXml);
-  }
-
-  # Download the accessory files
-  for my $and (@{ $$settings{and} }){
-    logmsg "Downloading $and for $acc";
-    downloadCds("$dir/$acc", $and, $settings);
-  }
-  # If the genes nucleotide file exists, define gene coordinates too
-  if(-e "$dir/$acc.ffn"){
-    logmsg "Creating genes coordinate file for $acc";
-    geneCoordinatesFile("$dir/$acc", $settings);
+  my $esearchXml = "$dir/esearch.xml";
+  my $esearchCmd = "esearch -db nuccore -query '$queryArg' > $esearchXml";
+  command($esearchCmd);
+  if($?){
+    die "ERROR running: $esearchCmd: $!";
   }
 
   # Get started on the assembly file
-  my $outfile = "$dir/$acc.fasta";
-  # If it exists, then skip the download
-  if(-e $outfile && -s $outfile > 0){
-    logmsg "  SKIP: found $outfile already";
-    return $outfile;
-  }
+  my $outfile = "$dir/all.fasta";
 
   # Main query: efetch
-  my $command = "cat $esearchXml | efetch -format fasta > $outfile.tmp";
-  system($command);
-  if($?){
-    # If there was an error, wait 3 seconds to help with any backlog in the API
-    my $msgF = "%s: could not download $acc: %s\n  Command: $command";
-    logmsg sprintf($msgF, "WARNING", $!);
-    sleep 3;
-    # after waiting 3 seconds, run again
-    system($command);
-    # If there is still an error, die
-    if($?){
-      die sprintf($msgF, "ERROR", $!);
+  my $efetchCmd = "cat $esearchXml | efetch -format fasta > $outfile";
+  system($efetchCmd);
+
+  my $seqsWithVersion = readSeqs($outfile);
+  my $seqs = {};
+  while(my($acc, $seq) = each(%$seqsWithVersion)){
+    # Remove the version from the accession
+    $acc =~ s/\..+//;
+    $$seqs{$acc} = $seq;
+  }
+
+  # List of fastas that will be generated
+  my @fasta;
+
+  for(my $i=0; $i<$numEntries; $i++){
+    my $acc            = $$entries[$i]{nuccoreAcc};
+    my $scientificName = $$entries[$i]{scientificName};
+    my $taxid          = $$entries[$i]{taxid};
+
+    my $seq = $$seqs{$acc};
+    if(!$seq){
+      logmsg "WARNING: Could not find assembly for $acc after batch downloading";
+      push(@err, $acc);
+      next;
     }
+    
+    my ($genus, $species) = split(/\s+/, $scientificName, 2);
+    $species ||= "sp";
+    $species =~ s/[^\-_0-9a-zA-Z]+/_/g;
+    my $outFasta = "$$settings{outdir}/$genus/$species/$acc.fasta";
+    my $defline  = "$acc|kraken:taxid|$taxid";
+
+    logmsg "Writing $outFasta";
+    make_path(dirname($outFasta));
+    open(my $fh, ">", $outFasta) or die "ERROR: could not write to fasta $outFasta: $!";
+    print $fh ">$defline\n$seq\n";
+    close $fh;
+
+    push(@fasta, $outFasta);
   }
-  if(-s "$outfile.tmp" == 0){
-    #unlink("$outfile");
-    #unlink("$outfile.tmp");
-    return "";
-  }
 
-  # Format with Kraken headers
-  # Open the fasta file from NCBI
-  # and make a string for sprintf with a placeholder for taxid.
-  my $stringf="";
-  open(my $fh, "$outfile.tmp") or die "ERROR: could not read $outfile.tmp: $!";
-  
-  # We should only see one sequence per accession
-  my $numSequences = 0;
-
-  while(<$fh>){
-    if(/(>\S+)/){
-      $_ = $1 . "|kraken:taxid|%s\n";
-      $numSequences++;
-      # Don't accept any more sequences than just the first
-      if($numSequences > 1){
-        logmsg "WARNING: for accession $acc, more than one sequence was returned. This might be due to NCBI returning both the INSDC and refseq identifiers. I will only keep one accession.";
-        last;
-      }
-    }
-    $stringf.=$_;
-  }
-  close $fh;
-
-  # Write to a new fasta file that will nave new headers
-  open(my $fhOut,">", "$outfile.tmp2") or die "ERROR: could not write to $outfile.tmp2: $!";
-
-  # For every taxid, write a new entry with the same sequence
-  my $taxid = $$fields{taxid} || die "ERROR: no taxid for $acc";
-  print $fhOut sprintf($stringf, $taxid);
-  close $fhOut;
-
-  # Create the final file
-  mv("$outfile.tmp2",$outfile) 
-    or die "ERROR: could not move $outfile.tmp2 to $outfile: $!";
-
-  # Cleanup
-  unlink("$outfile.tmp");
-  unlink($esearchXml);
-
-  return $outfile;
+  return (\@fasta, \@err) if(wantarray);
+  return \@fasta;
 }
 
 sub downloadCds{
@@ -328,18 +307,90 @@ sub command{
 
 }
 
+# Read all sequences in a fasta file into a hash
+# with values just being sequence and not Seq object.
+sub readSeqs{
+  my($file,$settings)=@_;
+  my %seq;
+  my $numSeqs = 0;
+
+  # Use the lh3 method to read fasta files
+  open(my $seqFh, "<", $file) or die "ERROR: could not open $file for reading: $!";
+  my @aux = undef;
+  my ($id, $seq);
+  my ($n, $slen, $comment, $qlen) = (0, 0, 0);
+  while ( ($id, $seq, undef) = readfq($seqFh, \@aux)) {
+    $seq{$id}=$seq;
+    $numSeqs++;
+
+    if($numSeqs > 200){
+      logmsg "DEBUG: only reading $numSeqs seqs";
+      last;
+    }
+  };
+  return \%seq;
+}
+
+# Read fq subroutine from Andrea which was inspired by lh3
+sub readfq {
+    my ($fh, $aux) = @_;
+    @$aux = [undef, 0] if (!(@$aux)); # remove deprecated 'defined'
+    return if ($aux->[1]);
+    if (!defined($aux->[0])) {
+        while (<$fh>) {
+            chomp;
+            if (substr($_, 0, 1) eq '>' || substr($_, 0, 1) eq '@') {
+                $aux->[0] = $_;
+                last;
+            }
+        }
+        if (!defined($aux->[0])) {
+            $aux->[1] = 1;
+            return;
+        }
+    }
+    my $name = /^.(\S+)/? $1 : '';
+    my $comm = /^.\S+\s+(.*)/? $1 : ''; # retain "comment"
+    my $seq = '';
+    my $c;
+    $aux->[0] = undef;
+    while (<$fh>) {
+        chomp;
+        $c = substr($_, 0, 1);
+        last if ($c eq '>' || $c eq '@' || $c eq '+');
+        $seq .= $_;
+    }
+    $aux->[0] = $_;
+    $aux->[1] = 1 if (!defined($aux->[0]));
+    return ($name, $seq) if ($c ne '+');
+    my $qual = '';
+    while (<$fh>) {
+        chomp;
+        $qual .= $_;
+        if (length($qual) >= length($seq)) {
+            $aux->[0] = undef;
+            return ($name, $seq, $comm, $qual);
+        }
+    }
+    $aux->[1] = 1;
+    return ($name, $seq, $comm);
+}
+
 sub usage{
   print
   "Usage: $0 [options] spreadsheet.tsv
 
   --outdir  ''  Output directory of Kalamari database
   --numcpus  1
-  --and         Download additional files. Multiple --and
+  --tempdir     Directory for temporary files, if you would
+                but default in TMPDIR
+  --and         (currently not used) 
+                Download additional files. Multiple --and
                 flags are allowed.
                 Possible values: protein, nucleotide
                 where either protein or nucleotide will
                 return files with CDS entries.
                 E.g., $0 --and protein --and nucleotide
-  ";
+";
   exit 0;
 }
