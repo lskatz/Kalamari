@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: ['ubuntu-20.04' ]
         perl: [ '5.32' ]
-        runner_id: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+        runner_id: [0, 1]
     name: chunk ${{ matrix.runner_id }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
@@ -50,8 +50,8 @@ jobs:
           tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
 
           total_lines=$(wc -l < in.tsv)
-          start_line=$(( $runner_id * $total_lines / 20 + 1 ))
-          end_line=$(( ($runner_id + 1) * $total_lines / 20 -1 ))
+          start_line=$(( $runner_id * $total_lines / 2 + 1 ))
+          end_line=$(( ($runner_id + 1) * $total_lines / 2 -1 ))
           echo "($runner_id) start_line: $start_line"
           echo "($runner_id) end_line: $end_line"
           cat header.tsv > chunk_${runner_id}.tsv
