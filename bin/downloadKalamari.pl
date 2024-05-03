@@ -8,6 +8,9 @@ use File::Copy qw/mv/;
 use File::Temp qw/tempdir/;
 use Data::Dumper qw/Dumper/;
 use POSIX qw/ceil/;
+use version 0.77;
+
+our $VERSION = version->parse("5.4.0");
 
 use threads;
 
@@ -18,12 +21,16 @@ exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i buffersize|buffer-size=i tempdir=s and=s@ outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i version buffersize|buffer-size=i tempdir=s outdir=s help)) or die $!;
+  if($$settings{version}){
+    print $VERSION."\n";
+    return 0;
+  }
   usage() if($$settings{help} || !@ARGV);
+
   $$settings{outdir} //= "Kalamari";
   $$settings{tempdir} //= tempdir("$0.XXXXXX", CLEANUP=>1, TMPDIR=>1);
   $$settings{numcpus}||= 1;
-  $$settings{and}    //= [];
   $$settings{buffersize} //= 10;
   logmsg "Outdir will be $$settings{outdir}";
 
@@ -396,13 +403,8 @@ sub usage{
                    time, per thread
   --tempdir        Directory for temporary files, if you would
                    but default in TMPDIR
-  --and            (currently not used) 
-                   Download additional files. Multiple --and
-                   flags are allowed.
-                   Possible values: protein, nucleotide
-                   where either protein or nucleotide will
-                   return files with CDS entries.
-                   E.g., $0 --and protein --and nucleotide
+  --version        Print the version of Kalamari
 ";
   exit 0;
 }
+

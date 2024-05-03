@@ -17,8 +17,8 @@ my $preop = 'true';
 
 WriteMakefile1(
   NAME         => 'Kalamari',
-  VERSION      => $VERSION,
-  #VERSION_FROM => 'lib/Kalamari.pm',
+  #VERSION      => $VERSION,
+  VERSION_FROM => 'bin/downloadKalamari.pl',
   #ABSTRACT_FROM => 'lib/Kalamari.pm',
   AUTHOR => q{Lee S. Katz <gzu2@cdc.gov>},
   EXE_FILES    => [
