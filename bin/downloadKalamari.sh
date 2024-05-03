@@ -12,7 +12,8 @@ fi
 set -u
 
 thisdir=$(dirname $0)
-VERSION=$(perl -lane 'print $1 if /our \$VERSION\s*=\s*"([^"]+)";/' $thisdir/../Makefile.PL)
+VERSION=$(downloadKalamari.pl --version)
+#VERSION=$(perl -lane 'print $1 if /our \$VERSION\s*=\s*"([^"]+)";/' $thisdir/../Makefile.PL)
 outdir_prefix="$thisdir/../share/kalamari-$VERSION"
 mkdir -pv $outdir_prefix
 
@@ -67,13 +68,13 @@ function build_kraken2(){
 }
 
 perl $thisdir/downloadKalamari.pl $TSV \
-  --outdir $tempdir/kalamari --and protein --and nucleotide
+  --outdir $tempdir/kalamari
 
 rm -rf $outdir_prefix
 mkdir -v $outdir_prefix
 
 mv -v $tempdir/kalamari $outdir_prefix/kalamari
 
-build_kraken1 $outdir_prefix/kalamari $outdir_prefix/kraken1.kalamari
-build_kraken2 $outdir_prefix/kalamari $outdir_prefix/kraken2.kalamari
+#build_kraken1 $outdir_prefix/kalamari $outdir_prefix/kraken1.kalamari
+#build_kraken2 $outdir_prefix/kalamari $outdir_prefix/kraken2.kalamari
 
