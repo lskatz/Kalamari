@@ -12,18 +12,19 @@ use POSIX qw/ceil/;
 use threads;
 
 local $0 = basename $0;
-sub logmsg{ print STDERR "$0: @_\n";}
+sub logmsg{ my $tid=threads->tid; print STDERR "$0(TID$tid): @_\n";}
 
 exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i tempdir=s and=s@ outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i buffersize|buffer-size=i tempdir=s and=s@ outdir=s help)) or die $!;
   usage() if($$settings{help} || !@ARGV);
   $$settings{outdir} //= "Kalamari";
   $$settings{tempdir} //= tempdir("$0.XXXXXX", CLEANUP=>1, TMPDIR=>1);
   $$settings{numcpus}||= 1;
   $$settings{and}    //= [];
+  $$settings{buffersize} //= 10;
   logmsg "Outdir will be $$settings{outdir}";
 
   # Check for prerequisites
@@ -37,7 +38,7 @@ sub main{
   my @spreadsheet = @ARGV;
 
   for my $s(@spreadsheet){
-    downloadKalamari($s, $$settings{outdir}, $settings);
+    my $downloadCount = downloadKalamari($s, $$settings{outdir}, $settings);
   }
 
   return 0;
@@ -66,13 +67,18 @@ sub downloadKalamari{
     push(@queue, \%F);
   }
   close $fh;
+  @queue = sort {$$a{nuccoreAcc} cmp $$b{nuccoreAcc} } @queue;
 
   my @thr;
   my $numPerThread = ceil(scalar(@queue)/$$settings{numcpus});
   for(my $i=0;$i<$$settings{numcpus};$i++){
     my @subQueue = splice(@queue, 0, $numPerThread);
-    logmsg "Sending ".scalar(@subQueue)." entries to thread $i";
     $thr[$i] = threads->new(\&downloadEntryWorker, \@subQueue, $settings);
+    logmsg "Sent ".scalar(@subQueue)." entries to thread ".$thr[$i]->tid;
+
+    # Offset the threads to help avoid exceeding the API
+    # rate limit.
+    sleep 1;
   }
 
   # Close out the threads
@@ -84,8 +90,12 @@ sub downloadKalamari{
     push(@errors, @$errors);
   }
 
+  logmsg "Done downloading for $spreadsheet";
   for my $acc(@errors){
     logmsg "ERROR downloading: $acc";
+  }
+  if(!@errors){
+    logmsg "NOTE I did not detect any missing downloads.";
   }
 
   return $download_counter;
@@ -94,7 +104,7 @@ sub downloadKalamari{
 sub downloadEntryWorker{
   my($queue, $settings) = @_;
 
-  my $bufferSize = 30;
+  my $bufferSize = $$settings{buffersize} || 10;
 
   my @fasta = ();
   my @err;
@@ -380,17 +390,19 @@ sub usage{
   print
   "Usage: $0 [options] spreadsheet.tsv
 
-  --outdir  ''  Output directory of Kalamari database
-  --numcpus  1
-  --tempdir     Directory for temporary files, if you would
-                but default in TMPDIR
-  --and         (currently not used) 
-                Download additional files. Multiple --and
-                flags are allowed.
-                Possible values: protein, nucleotide
-                where either protein or nucleotide will
-                return files with CDS entries.
-                E.g., $0 --and protein --and nucleotide
+  --outdir     ''  Output directory of Kalamari database
+  --numcpus     1  How many threads
+  --bufferSize 10  How many genomes to down at the same
+                   time, per thread
+  --tempdir        Directory for temporary files, if you would
+                   but default in TMPDIR
+  --and            (currently not used) 
+                   Download additional files. Multiple --and
+                   flags are allowed.
+                   Possible values: protein, nucleotide
+                   where either protein or nucleotide will
+                   return files with CDS entries.
+                   E.g., $0 --and protein --and nucleotide
 ";
   exit 0;
 }
