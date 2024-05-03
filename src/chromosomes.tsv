@@ -121,7 +121,9 @@ Escherichia fergusonii	CP042945	564	561
 Exiguobacterium antarcticum	CP003063	132920	33986
 Finegoldia magna	AP008971	1260	150022
 Flavobacterium psychrophilum	NC_009613	96345	237
+Francisella philomiragia	CP063138	28110	262
 Francisella tularensis	NC_006570	263	262
+Fusobacterium nucleatum	CP028101	851	848
 Gallus gallus	HQ857211	9031	9030
 Gardnerella vaginalis	NC_014644	2702	2701
 Geobacter sulfurreducens	NC_002939	35554	28231
@@ -165,6 +167,7 @@ Mesorhizobium ciceri	NC_014923	39645	68287
 Methylobacterium	CP000943	426117	2615210
 Methylobacterium radiotolerans	CP001001	31998	407
 Micrococcus luteus	CP001628	1270	1269
+Moorella thermoacetica	CP012370	1525	44260
 Morganella morganii morganii	CP004345	180434	582
 Mycobacterium abscessus	NC_010397	36809	670516
 Mycobacterium leprae	NC_002677	1769	1763
@@ -182,9 +185,11 @@ Parabacteroides distasonis	CP000140	823	375288
 Photobacterium damselae	CP046752	38293	657
 Photobacterium damselae	CP046751	38293	657
 Pollachius virens	FR751399	8060	8059
+Polynucleobacter necessarius	LT615228	576610	44013
 Prochlorococcus marinus	NC_005042	1219	1218
 Proteus mirabilis	NC_022000	584	583
 Pseudomonas aeruginosa	NC_002516	287	136841
+Pseudomonas putida	AP013070	390235	303
 Pseudomonas syringae group genomosp. 3	NC_004578	251701	136849
 Pyrobaculum neutrophilum	CP001014	70771	2276
 Rhodobacter sphaeroides	NC_007494	1063	1060
@@ -275,5 +280,6 @@ Yersinia intermedia	CP009801	631	629
 Yersinia kristensenii	CP054049	631	629
 Yersinia massiliensis	CP054048	33060	629
 Yersinia mollaretii	CP054043	33060	629
+Yersinia pseudotuberculosis	CP009712	502800	633
 Yersinia rochesterensis	CP032482	1604335	629
 Yersinia rohdei	CP009787	29485	629
