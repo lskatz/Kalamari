@@ -19,9 +19,9 @@ $ftp->quit;
 
 if(!-e "edirect.tar.gz"){
   diag "I do not see edirect.tar.gz yet. Trying with wget.";
-  system("wget ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz > wget.log 2>&1");
+  system("curl ftp://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/edirect.tar.gz > edirect.tar.gz 2>curl.log");
   if($?){
-    diag ("ERROR could not download edirect.tar.gz with either Net::FTP or wget: $!\n".`cat wget.log`);
+    diag ("ERROR could not download edirect.tar.gz with either Net::FTP or curl$!\n".`cat curl.log`);
   }
 }
 

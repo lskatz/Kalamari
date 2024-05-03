@@ -13,10 +13,11 @@ use Test::More tests => 6;
 $ENV{PATH}="$RealBin/../bin:$RealBin/../edirect:$ENV{PATH}";
 
 my $src = "Kalamari2_test";
-my $version = 3.5;
-my $db  = "Kalamari2_v$version";
+my $version = `$RealBin/../bin/downloadKalamari.pl --version`;
+chomp($version);
+my $db  = "$RealBin/Kalamari2_v$version";
 my $numcpus = 2;
-my $tsv = "$RealBin/../src/Kalamari_v$version.tsv";
+my $tsv = "$RealBin/../src/chromosomes.tsv"; # Kalamari_v$version.tsv";
 my $genus = "Cronobacter"; # For testing, just choose one genus that is not redacted
 
 my $kraken_exe = `which kraken2 2>/dev/null`;
@@ -32,9 +33,23 @@ diag("Version is $version");
 diag("database location will be $db");
 diag("Source files will be read from $src");
 diag("Reading from $tsv");
+diag("Temporary tsv in $tsv.$genus.tmp");
+
+# Make the test file
+open(my $fh, $tsv) or die "ERROR: could not read from $tsv: $!";
+open(my $outFh, ">", "$tsv.$genus.tmp") or die "ERROR: could not write to $tsv.$genus.tmp: $!";
+my $header = <$fh>;
+print $outFh $header;
+while(<$fh>){
+  next if(!/$genus/);
+  print $outFh $_;
+}
+close $outFh;
+close $fh;
+END{ unlink("$tsv.$genus.tmp"); }
 
 mkdir $src;
-system("perl $RealBin/../bin/downloadKalamari.pl -o $src $tsv");
+system("perl $RealBin/../bin/downloadKalamari.pl -o $src $tsv.$genus.tmp");
 is($?, 0, "Downloaded all fasta files");
 
 mkdir $db;
@@ -48,19 +63,16 @@ subtest "Taxonomy files" => sub{
       next;
     }
 
-    my $oldpath = "$RealBin/../src/taxonomy_v$version/".basename($file).".gz";
-    cp($oldpath, "$file.gz")
-      or BAIL_OUT("ERROR: could not copy $oldpath to $file.gz: $!");
+    my $oldpath = "$RealBin/../src/taxonomy/".basename($file);
+    cp($oldpath, "$file")
+      or BAIL_OUT("ERROR: could not copy $oldpath to $file: $!");
 
-    system("gunzip -f $file.gz");
-    is($?, 0, "Gunzipped to create $file");
+    is(-e $file, 1, "Copied $oldpath => $file");
   }
 };
 
 subtest "Add-to-library" => sub{
   plan tests => 7;
-
-  #for my $file(glob("$db/library/
 
   find({no_chdir=>1, wanted=>sub{
     my $path = $File::Find::name;
@@ -84,4 +96,7 @@ is($?, 0, "Built Kraken2 database at $db");
 
 system("kraken2-build --db $db --clean");
 is($?, 0, "Cleaned the database $db");
+
+END{ system("rm -rf $db"); }
+
 
