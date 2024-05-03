@@ -5,7 +5,6 @@ bin/validateTaxonomy.pl
 bin/getExactTaxonomy.pl
 bin/mobsuiteRepresentativeFasta.pl
 bin/downloadKalamari.sh
-bin/.downloadKalamari.pl.swp
 bin/downloadKalamari.pl
 src/plasmids.tsv
 src/Kalamari_v3.9.1.tsv
