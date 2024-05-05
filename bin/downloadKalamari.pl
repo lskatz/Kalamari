@@ -10,7 +10,7 @@ use Data::Dumper qw/Dumper/;
 use POSIX qw/ceil/;
 use version 0.77;
 
-our $VERSION = version->parse("5.4.0");
+our $VERSION = version->parse("5.4.1");
 
 use threads;
 
@@ -31,7 +31,7 @@ sub main{
   $$settings{outdir} //= "Kalamari";
   $$settings{tempdir} //= tempdir("$0.XXXXXX", CLEANUP=>1, TMPDIR=>1);
   $$settings{numcpus}||= 1;
-  $$settings{buffersize} //= 10;
+  $$settings{buffersize} //= 100;
   logmsg "Outdir will be $$settings{outdir}";
 
   # Check for prerequisites

@@ -13,7 +13,6 @@ set -u
 
 thisdir=$(dirname $0)
 VERSION=$(downloadKalamari.pl --version)
-#VERSION=$(perl -lane 'print $1 if /our \$VERSION\s*=\s*"([^"]+)";/' $thisdir/../Makefile.PL)
 outdir_prefix="$thisdir/../share/kalamari-$VERSION"
 mkdir -pv $outdir_prefix
 
@@ -22,17 +21,11 @@ trap ' { rm -rf $tempdir; } ' EXIT
 echo "TEMPDIR is $tempdir" >&2
 echo "OUTDIR  is $outdir_prefix" >&2
 
-CHR_URL=https://raw.githubusercontent.com/lskatz/Kalamari/master/src/chromosomes.tsv
-PSM_URL=https://raw.githubusercontent.com/lskatz/Kalamari/master/src/plasmids.tsv
 TSV="$tempdir/in.tsv"
-curl "$CHR_URL" >  "$TSV"
-curl "$PSM_URL" >> "$TSV"
+cat $thisdir/../src/chromosomes.tsv > $TSV
+cat $thisdir/../src/plasmids.tsv   >> $TSV
 
-NODES_URL=https://github.com/lskatz/Kalamari/raw/master/src/taxonomy/nodes.dmp
-NAMES_URL=https://github.com/lskatz/Kalamari/raw/master/src/taxonomy/names.dmp
-mkdir "$tempdir/taxonomy"
-curl $NODES_URL > $tempdir/taxonomy/nodes.dmp
-curl $NAMES_URL > $tempdir/taxonomy/names.dmp
+cp -rv $thisdir/../src/taxonomy $tempdir/taxonomy
 
 #echo "DEBUG" >&2; mv $TSV $TSV.tmp && head -n 3 $TSV.tmp > $TSV
 
