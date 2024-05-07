@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev]
+    branches: [master, dev, build-taxonomy]
 name: Validate taxonomy
 
 jobs:
@@ -18,13 +18,23 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
-
-      - name: validate taxonomy
+      - name: update PATH
         run:  |
-          perl Kalamari/bin/validateTaxonomy.pl Kalamari/src
+          echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
+          echo $PATH
+          echo ""
+          cat $GITHUB_PATH
+      - name: build taxonomy
+        run:  |
+          echo $PATH
+          bash Kalamari/bin/buildTaxonomy.sh
+          ls -lhR Kalamari/share/kalamari-*/taxonomy
+      #- name: validate taxonomy
+      #  run:  |
+      #    perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
       - name: matching taxids
         run:  |
           echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
