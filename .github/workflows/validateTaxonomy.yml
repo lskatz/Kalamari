@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, build-taxonomy]
+    branches: [master, dev, build-taxonomy]
 name: Validate taxonomy
 
 jobs:
