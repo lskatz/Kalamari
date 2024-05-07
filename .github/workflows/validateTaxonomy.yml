@@ -18,11 +18,12 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
       - name: build taxonomy
         run:  |
+          realpath Kalamari/bin >> $GITHUB_PATH
           bash Kalamari/bin/buildTaxonomy.sh
           ls -lhR Kalamari/share/taxonomy
       - name: validate taxonomy
