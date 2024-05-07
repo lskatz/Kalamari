@@ -65,11 +65,14 @@ jobs:
           tree ${{ env.DB }}
           echo ".....Building the database....."
           kraken2-build --build --db ${{ env.DB }} --threads 2
+      - name: check out the directory structure
+        run:  |
+          tree ${{ env.DB }}
+          ls -lhSR ${{ env.DB }}
+          du -shc ${{ env.DB }}/* | sort -h
       - name: Kraken2 view results
         run:  |
           export PATH=$PATH:kraken2-2.1.2/target
-          tree ${{ env.DB }}
-          ls -lhSR ${{ env.DB }}
           QUERY=$(find ${{ env.OUTDIR }} -name '*.fasta' | head -n 1)
           echo "QUERY is $QUERY"
           head -n 2 $QUERY
