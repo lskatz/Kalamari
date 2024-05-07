@@ -20,7 +20,7 @@ jobs:
         os: ['ubuntu-20.04' ]
         perl: [ '5.32' ]
         GENUS: [ 'Yersinia', 'Listeria']
-    name: Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    name: Genus ${{ matrix.GENUS }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
         uses: shogo82148/actions-setup-perl@v1
@@ -40,9 +40,9 @@ jobs:
       - name: select for only for this genus
         run:  |
           head -n 1 ${{ env.SRC_CHR }} > ${{ env.TSV }}
-          grep -m 2 ${{ strategy.GENUS }} ${{ env.SRC_CHR }} >> ${{ env.TSV }}
-          grep -m 2 ${{ strategy.GENUS }} ${{ env.SRC_PLD }} >> ${{ env.TSV }}
-          echo "These are the ${{ strategy.GENUS }} genomes for downstream tests"
+          grep -m 2 ${{ matrix.GENUS }} ${{ env.SRC_CHR }} >> ${{ env.TSV }}
+          grep -m 2 ${{ matrix.GENUS }} ${{ env.SRC_PLD }} >> ${{ env.TSV }}
+          echo "These are the ${{ matrix.GENUS }} genomes for downstream tests"
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
       - name: download
