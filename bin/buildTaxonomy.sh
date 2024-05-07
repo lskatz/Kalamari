@@ -50,4 +50,10 @@ echo "Combining NCBI taxonomy with new additions from Kalamari"
 cat $srcnodes $addnodes > $outnodes
 cat $srcnames $addnames > $outnames
 
+# Copy in the rest of the source files
+echo "Copying any remaining taxonomy files to the target"
+for i in $tempdir/*.dmp; do
+    cp -nv $i $outdir/
+done
+
 echo "Output can be found in $outdir"
