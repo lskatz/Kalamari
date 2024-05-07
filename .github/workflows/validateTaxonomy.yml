@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev]
+    branches: [master, build-taxonomy]
 name: Validate taxonomy
 
 jobs:
@@ -21,10 +21,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: Kalamari
-
+      - name: build taxonomy
+        run:  |
+          bash Kalamari/bin/buildTaxonomy.sh
+          ls -lhR Kalamari/share/taxonomy
       - name: validate taxonomy
         run:  |
-          perl Kalamari/bin/validateTaxonomy.pl Kalamari/src
+          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
       - name: matching taxids
         run:  |
           echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
