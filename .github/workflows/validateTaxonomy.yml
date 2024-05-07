@@ -24,8 +24,12 @@ jobs:
       - name: update PATH
         run:  |
           echo "export PATH=\$PATH:\$GITHUB_WORKSPACE/Kalamari/bin" >> $GITHUB_PATH
+          echo $PATH
+          echo ""
+          cat $GITHUB_PATH
       - name: build taxonomy
         run:  |
+          echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
           ls -lhR Kalamari/share/taxonomy
       - name: validate taxonomy
