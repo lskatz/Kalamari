@@ -27,7 +27,7 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
 
@@ -55,6 +55,11 @@ jobs:
           cd kraken2-2.1.2 && bash install_kraken2.sh target && cd -
           ls -lhS kraken2-2.1.2/target
           chmod +x kraken2-2.1.2/target/*
+      - name: build taxonomy
+        run: |
+          export PATH=$PATH:Kalamari/bin
+          buildTaxonomy.sh
+          ls -lh Kalamari/share
       - name: Kraken2 database
         run:  |
           export PATH=$PATH:kraken2-2.1.2/target
