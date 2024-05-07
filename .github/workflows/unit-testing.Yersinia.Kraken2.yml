@@ -1,14 +1,13 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev]
+    branches: [master, dev, build-taxonomy]
 name: Yersinia-with-Kraken2
 
 env:
   TSV: "Kalamari/src/genus.tsv"
   OUTDIR: "Yersinia.out"
   DB: "kraken2"
-  SRC_TAX: "Kalamari/src/taxonomy"
   SRC_CHR: "Kalamari/src/chromosomes.tsv"
   SRC_PLD: "Kalamari/src/plasmids.tsv"
   GENUS: Yersinia
@@ -61,7 +60,7 @@ jobs:
           export PATH=$PATH:kraken2-2.1.2/target
           which kraken2-build
           mkdir -pv ${{ env.DB }}
-          cp -rv ${{ env.SRC_TAX }} ${{ env.DB }}/taxonomy
+          cp -rv Kalamari/share/kalamari-*/taxonomy ${{ env.DB }}/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken2-build --db ${{ env.DB }} --add-to-library {} \;
           tree ${{ env.DB }}
           echo ".....Building the database....."
