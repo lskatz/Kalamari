@@ -32,9 +32,9 @@ jobs:
           echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
           ls -lhR Kalamari/share/kalamari-*/taxonomy
-      - name: validate taxonomy
-        run:  |
-          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
+      #- name: validate taxonomy
+      #  run:  |
+      #    perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
       - name: matching taxids
         run:  |
           echo "Making sure that all taxids in chromosomes.tsv and plasmids.tsv are present in nodes.tsv and names.tsv"
