@@ -23,7 +23,7 @@ jobs:
           path: Kalamari
       - name: update PATH
         run:  |
-          echo "export PATH=\$PATH:\$GITHUB_WORKSPACE/Kalamari/bin" >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
           echo $PATH
           echo ""
           cat $GITHUB_PATH
