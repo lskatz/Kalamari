@@ -23,7 +23,7 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
 
@@ -48,7 +48,9 @@ jobs:
           perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); $ftp->login; $ftp->binary; $ftp->get("/entrez/entrezdirect/edirect.tar.gz");'
           gunzip -cv edirect.tar.gz | tar xf -
           rm -v edirect.tar.gz
-          export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
+          echo $GITHUB_WORKSPACE/edirect >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
+          #export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
           yes Y | ./edirect/setup.sh
           tree edirect
       - name: check-env
@@ -64,10 +66,6 @@ jobs:
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
-      #- name: download-more
-      #  run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }} --and protein --and nucleotide
-      #- name: check-results
-      #  run:  tree ${{ env.OUTDIR }}
       - name: install kraken
         run:  |
           wget https://github.com/DerrickWood/kraken/archive/refs/tags/v1.1.1.tar.gz -O kraken-v1.1.1.tar.gz
@@ -76,12 +74,17 @@ jobs:
           chmod -v +x kraken-1.1.1/kraken-src/*
           echo $(realpath kraken-1.1.1/kraken-src) >> $GITHUB_PATH
           tree $(realpath) kraken-1.1.1
+      - name: build taxonomy
+        run: |
+          export PATH=$PATH:Kalamari/bin
+          buildTaxonomy.sh
+          ls -lh Kalamari/share
       - name: Kraken1 database
         run:  |
           echo $PATH
           which kraken-build
           mkdir -pv kraken
-          cp -rv Kalamari/src/taxonomy kraken/taxonomy
+          cp -rv Kalamari/share/kalamari-*/taxonomy kraken/taxonomy
           find ${{ env.OUTDIR }} -name '*.fasta' -exec kraken-build --db kraken --add-to-library {} \;
           tree kraken
           # Some super debugging here with -x
