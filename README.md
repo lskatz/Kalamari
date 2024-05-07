@@ -82,4 +82,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Citation
 
-Please refer to the ASM 2018 poster under docs
+Please refer to the ASM 2018 poster under docs.
