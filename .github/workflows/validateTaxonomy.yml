@@ -31,7 +31,7 @@ jobs:
         run:  |
           echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
-          ls -lhR Kalamari/share/taxonomy
+          ls -lhR Kalamari/share/kalamari-*/taxonomy
       - name: validate taxonomy
         run:  |
           perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
