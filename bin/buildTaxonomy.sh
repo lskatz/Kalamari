@@ -40,7 +40,7 @@ while read -r line; do
     # Read each 'word' as a taxid and remove it from
     # $srcnodes using sed /d
     for taxid in $line; do
-        echo "Removing $taxid from $srcnodes"
+        echo "Removing taxid $taxid from $srcnodes"
         sed -i -e "/^$taxid\t/d" $srcnodes
     done
 done < $delnodes
