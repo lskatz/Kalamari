@@ -50,7 +50,7 @@ jobs:
         run:  |
           tree ${{ matrix.GENUS }}
           echo "First two lines of each fasta file:"
-          find ${{ matrix.GENUS }} -name '*.fasta' | xargs head -n 2
+          find ${{ matrix.GENUS }} -name '*.fasta' | xargs head -n 2 | cut -c 1-60
       - name: install kraken
         run:  |
           wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.2.tar.gz -O kraken-v2.1.2.tar.gz
@@ -79,9 +79,6 @@ jobs:
           tree ${{ env.DB }}
           ls -lhSR ${{ env.DB }}
           QUERY=$(find ${{ matrix.GENUS }} -name '*.fasta' | head -n 1)
-          # If we get a randomly truncated file, we will use the second file
-          num_lines=$(wc -l < "$QUERY");
-          if [ "$num_lines" -lt 2 ]; then echo "Has less than 2 lines: $QUERY. Choosing the next."; QUERY=$(find ${{ matrix.GENUS }} -name '*.fasta' | head -n 2 | tail -n 1); fi;          
           echo "QUERY is $QUERY"
           head -n 2 $QUERY
           set -x; kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY; set +x;
