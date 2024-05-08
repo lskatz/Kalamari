@@ -47,7 +47,10 @@ jobs:
       - name: download
         run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ matrix.GENUS }} ${{ env.TSV }}
       - name: check-results
-        run:  tree ${{ matrix.GENUS }}
+        run:  |
+          tree ${{ matrix.GENUS }}
+          echo "First two lines of each fasta file:"
+          find ${{ matrix.GENUS }} -name '*.fasta' | xargs head -n 2
       - name: install kraken
         run:  |
           wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.2.tar.gz -O kraken-v2.1.2.tar.gz
