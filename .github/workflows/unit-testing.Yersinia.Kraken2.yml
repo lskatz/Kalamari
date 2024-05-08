@@ -78,7 +78,7 @@ jobs:
           QUERY=$(find ${{ matrix.GENUS }} -name '*.fasta' | head -n 1)
           echo "QUERY is $QUERY"
           head -n 2 $QUERY
-          kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY
+          set -x; kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY; set +x;
           head kraken2.report kraken2.raw
 
 
