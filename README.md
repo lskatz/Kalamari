@@ -39,20 +39,22 @@ using your own email address instead of `my@email.address`.
 
 ## Download instructions
 
-For usage, run `perl bin/downloadKalamari.pl --help`
+First, build the taxonomy.
+The script `buildTaxonomy.sh` uses the diffs in Kalamari to enhance the default NCBI taxonomy.
+Next, `filterTaxonomy.sh` reduces the taxonomy files to just those found in Kalamari.
+`filterTaxonomy.sh` uses `taxonkit` and so this needs to be in your
+environment before starting.
 
-    SRC=Kalamari
-    perl bin/downloadKalamari.pl -o $SRC src/chromosomes.tsv
+    bash bin/buildTaxonomy.sh
+    bash bin/filterTaxonomy.sh
 
-### ...with plasmids
+To download the chromosomes and plasmids, use the `.tsv` files, respectively, with `downloadKalamari.pl`.
+Run `downloadKalamari.pl --help` for usage.
+However, to download the files to a standard location,
+please simply use `downloadKalamari.sh` which uses
+`downloadKalamari.pl` internally.
 
-    SRC=Kalamari
-    perl bin/downloadKalamari.pl -o $SRC src/chromosomes.tsv src/plasmids.tsv
-
-### taxonomy
-
-The taxonomy files `nodes.dmp` and `names.dmp` are under `src/taxonomy-VER` 
-where `VER` is the version of Kalamari.
+    bash bin/downloadKalamari.pl
 
 ## Database formatting instructions
 
@@ -80,4 +82,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Citation
 
-Please refer to the ASM 2018 poster under docs
+Please refer to the ASM 2018 poster under docs.

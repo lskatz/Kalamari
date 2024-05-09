@@ -8,6 +8,8 @@ If you don't really want to read any of this, then there is
 a script for you.
 This script downloads and formats for Kraken1 and Kraken2.
 
+    bash bin/downloadTaxonomy.sh
+    bash bin/filterTaxonomy.sh # optional, reduces footprint
     bash bin/downloadKalamari.sh
 
 If you want to know more details, move onto the next section.
@@ -15,15 +17,17 @@ If you want to know more details, move onto the next section.
 ## Init
 
 Start off with a few environmental variables, regardless of your target database.
-If you have not already downloaded the Kalamari fasta files, please see the main [README](../README.md) file.
 
     # assuming source folder is "Kalamari", where you downloaded all fasta files
-    VERSION=5.0  # or whichever version you are building
+    VERSION=$(downloadKalamari.pl --version)
     CPUS=4       # Define how many threads to use
-    SRC=Kalamari # The folder where fasta files were downloaded
+    # The folder where fasta files were downloaded
+    sharedir=Kalamari/share/kalamari-$VERSION
+    SRC="$sharedir/kalamari"
+    TAXDIR="$sharedir/taxonomy/filtered"
+
     # Find a test fasta file for querying if you don't have one already
     FASTA=$(find $SRC -name '*.fasta' | head -n 1) 
-    
     # Make a fake fastq file if you don't already have a test fastq file
     FASTQ="$FASTA.fastq.gz"
     head -n 2 $FASTA | perl -e '$id=<>; $seq=<>; chomp($id, $seq); $qual="I" x length($seq); $id=~s/^>/@/; print "$id\n$seq\n+\n$qual\n";' | gzip -c > $FASTQ
@@ -36,18 +40,11 @@ Please follow the Init section before continuing. These instructions assume that
 
 #### Build
 
-    DB=kraken1.kalamari_$VERSION
-
-    mkdir -pv $DB
-    cp -rv src/taxonomy $DB/taxonomy
-    find $SRC -name '*.fasta' -exec kraken-build --db $DB --add-to-library {} \;
-    kraken-build --db $DB --build --threads $CPUS
-    # Optional: reduce the size of the database folder
-    kraken-build --db $DB --clean
-    du -shc $DB # view final size of database
+    bash bin/buildKraken1.sh
 
 #### Query
 
+    DB="$sharedir/kalamari-kraken1"
     # fasta input
     kraken --db kraken -output kraken.raw --fasta-input $FASTA
     # fastq input
@@ -57,18 +54,11 @@ Please follow the Init section before continuing. These instructions assume that
 
 #### Build
 
-    DB=kraken2.kalamari_$VERSION
-
-    mkdir -pv $DB
-    cp -rv src/taxonomy $DB/taxonomy
-    find $SRC -name '*.fasta' -exec kraken2-build --db $DB --add-to-library {} \;
-    kraken2-build --db $DB --build --threads $CPUS
-    # Optional: reduce the size of the database folder
-    kraken2-build --db $DB --clean
-    du -shc $DB # view final size of database
+    bash bin/buildKraken2.sh
 
 #### Query
 
+    DB="$sharedir/kalamari-kraken2"
     # Same command for either fasta or fastq
     kraken2 --db $DB --report kraken2.report --use-mpa-style --output kraken2.raw $FASTA
     kraken2 --db $DB --report kraken2.report --use-mpa-style --output kraken2.raw $FASTQ
@@ -77,7 +67,7 @@ Please follow the Init section before continuing. These instructions assume that
 
 #### Build
 
-    DB=kalamari_$VERSION.sepia
+    DB=$sharedir/kalamari-sepia
     # Create the Sepia references file with two columns: path, taxonomy
     python3 bin/generate_sepia_reference.py --taxonomy src/taxonomy -o sepia.ref.tsv --fastadir ./Kalamari src/chromosomes.tsv src/plasmids.tsv
     sepia build --index $DB --refs sepia.ref.tsv --kmer 41 --minimizer 31 --batch 300 --gamma 5.0 --threads $CPUS 
@@ -99,7 +89,7 @@ Please follow the Init section before continuing. These instructions assume that
 
 Using Mash version 2
 
-    DB=Kalamari.msh
+    DB=$sharedir/kalamari.msh
 
     find $SRC -name '*.fasta' -exec mash sketch {} \;
     find $SRC -name '*.msh' > $DB.fofn
@@ -109,7 +99,7 @@ Using Mash version 2
 
 #### Build
 
-    DB=Kalamari.blast
+    DB=$sharedir/Kalamari-blast
     mkdir $DB
 
     find $SRC -name '*.fasta' -exec cat {} \; > $DB/kalamari.fasta
@@ -124,7 +114,7 @@ Using Mash version 2
 #### Build
 
     # Can use the same folder; just add file of filename
-    DB=$SRC/reference.fofn
+    DB=$sharedir/reference.fofn
     find $SRC -name '*.fasta' > $DB
 
 #### Query
@@ -135,7 +125,7 @@ Using Mash version 2
 
 #### Build
 
-    DB=$SRC.mmseqs2
+    DB=$sharedir/kalamari-mmseqs2
     Kalamari]$ find $SRC -name '*.fasta' | xargs -n 100 gzip -c > $SRC.cat.gz
     mmseqs createdb Kalamari.cat.gz $DB
 
