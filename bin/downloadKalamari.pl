@@ -10,7 +10,7 @@ use Data::Dumper qw/Dumper/;
 use POSIX qw/ceil/;
 use version 0.77;
 
-our $VERSION = version->parse("5.4.1");
+our $VERSION = version->parse("5.5.0");
 
 use threads;
 
