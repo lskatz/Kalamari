@@ -9,6 +9,7 @@ KALAMARI_VER=$(downloadKalamari.pl --version)
 # Set up some directories
 tempdir=$(mktemp -d $thisfile.XXXXXX)
 trap "rm -rf $tempdir" EXIT
+echo "Temporary directory is $tempdir"
 outdir="$thisdir/../share/kalamari-$KALAMARI_VER/taxonomy"
 mkdir -pv $outdir
 
@@ -26,11 +27,13 @@ srcnodes="$tempdir/nodes.dmp"
 srcnames="$tempdir/names.dmp"
 
 # First, download the standard taxonomy dump tar.gz file
+echo "Downloading taxdump.tar.gz"
 curl ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz > $tempdir/taxonomy.tar.gz 
-tar -C $tempdir -xzf $tempdir/taxonomy.tar.gz
+tar -C $tempdir -xvzf $tempdir/taxonomy.tar.gz
 
 # Next, build the taxonomy database.
 # Remove taxids in $delnodes from the source nodes file
+echo "Reading $delnodes and removing taxids from $srcnodes"
 while read -r line; do
     # If we see a comment line, skip it
     if [[ "$line" =~ ^# ]]; then
@@ -41,7 +44,8 @@ while read -r line; do
     # $srcnodes using sed /d
     for taxid in $line; do
         echo "Removing taxid $taxid from $srcnodes"
-        sed -i -e "/^$taxid\t/d" $srcnodes
+        sed -e "/^$taxid\t/d" $srcnodes > $srcnodes.tmp && \
+          mv $srcnodes.tmp $srcnodes
     done
 done < $delnodes
 
