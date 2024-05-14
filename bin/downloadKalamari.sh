@@ -27,7 +27,12 @@ cat $thisdir/../src/plasmids.tsv   >> $TSV
 
 cp -rv $thisdir/../src/taxonomy $tempdir/taxonomy
 
-#echo "DEBUG" >&2; mv $TSV $TSV.tmp && head -n 3 $TSV.tmp > $TSV
+# Debug with `KALAMARI_DEBUG=1 downloadKalamari.sh`
+if [[ ${KALAMARI_DEBUG:+1} ]]; then
+  echo "DEBUG was set and so just downloading a few entries" >&2
+  mv $TSV $TSV.tmp && \
+    head -n 10 $TSV.tmp > $TSV
+fi
 
 function build_kraken1(){
   in_dir=$1
