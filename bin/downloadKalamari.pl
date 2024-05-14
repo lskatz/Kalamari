@@ -8,6 +8,7 @@ use File::Copy qw/mv/;
 use File::Temp qw/tempdir/;
 use Data::Dumper qw/Dumper/;
 use POSIX qw/ceil/;
+use IO::Compress::Gzip;
 use version 0.77;
 
 our $VERSION = version->parse("5.5.1");
@@ -45,17 +46,44 @@ sub main{
   my @spreadsheet = @ARGV;
 
   for my $s(@spreadsheet){
-    my $downloadCount = downloadKalamari($s, $$settings{outdir}, $settings);
+    my $errors = downloadKalamari($s, $$settings{outdir}, $settings);
+    
+    if(@$errors){
+      logmsg "Retrying the failed ". scalar(@$errors) ."downloads";
+
+      # Make "safe" settings
+      my %settingsCopy = %$settings;
+      $settingsCopy{numcpus} = 1;
+      $settingsCopy{buffersize} = 1;
+      
+      # Read the spreadsheet again to get all the accessions back into memory
+      my $entries = readKalamariTsv($s, $settings);
+
+      # Download one by one
+      for my $err_acc(@$errors){
+        logmsg "  RETRY: $err_acc";
+        # look for the one sample with this accession, but it will
+        # come out as an array just because we're using grep
+        my @samples = grep { $$_{nuccoreAcc} eq $err_acc } @$entries;
+        my ($fastas, $errors) = downloadEntries(\@samples, \%settingsCopy);
+        if(@$errors){
+          logmsg "ERROR: still could not download $err_acc";
+        }
+        if(@$fastas){
+          logmsg "SUCCESS: previously failed, but downloaded $err_acc";
+        }
+      }
+    }
   }
+
 
   return 0;
 }
 
-sub downloadKalamari{
-  my($spreadsheet, $outdir, $settings) = @_;
+sub readKalamariTsv{
+  my($tsv, $settings) = @_;
 
-  my $download_counter = 0;
-  open(my $fh, $spreadsheet) or die "ERROR: could not read $spreadsheet: $!";
+  open(my $fh, $tsv) or die "ERROR: could not read $tsv: $!";
   my $header = <$fh>;
   chomp($header);
   my @header = split /\t/, $header;
@@ -76,10 +104,18 @@ sub downloadKalamari{
   close $fh;
   @queue = sort {$$a{nuccoreAcc} cmp $$b{nuccoreAcc} } @queue;
 
+  return \@queue;
+}
+
+sub downloadKalamari{
+  my($spreadsheet, $outdir, $settings) = @_;
+
+  my $queue = readKalamariTsv($spreadsheet, $settings);
+
   my @thr;
-  my $numPerThread = ceil(scalar(@queue)/$$settings{numcpus});
+  my $numPerThread = ceil(scalar(@$queue)/$$settings{numcpus});
   for(my $i=0;$i<$$settings{numcpus};$i++){
-    my @subQueue = splice(@queue, 0, $numPerThread);
+    my @subQueue = splice(@$queue, 0, $numPerThread);
     $thr[$i] = threads->new(\&downloadEntryWorker, \@subQueue, $settings);
     logmsg "Sent ".scalar(@subQueue)." entries to thread ".$thr[$i]->tid;
 
@@ -105,7 +141,7 @@ sub downloadKalamari{
     logmsg "NOTE I did not detect any missing downloads.";
   }
 
-  return $download_counter;
+  return \@errors;
 }
 
 sub downloadEntryWorker{
@@ -178,14 +214,15 @@ sub downloadEntries{
     my ($genus, $species) = split(/\s+/, $scientificName, 2);
     $species ||= "sp";
     $species =~ s/[^\-_0-9a-zA-Z]+/_/g;
-    my $outFasta = "$$settings{outdir}/$genus/$species/$acc.fasta";
+    my $outFasta = "$$settings{outdir}/$genus/$species/$acc.fasta.gz";
     my $defline  = "$acc|kraken:taxid|$taxid";
 
-    logmsg "Writing $outFasta";
+    logmsg "Writing and compressing to $outFasta";
     make_path(dirname($outFasta));
-    open(my $fh, ">", $outFasta) or die "ERROR: could not write to fasta $outFasta: $!";
-    print $fh ">$defline\n$seq\n";
-    close $fh;
+
+    my $z = IO::Compress::Gzip->new($outFasta) 
+      or die "ERROR: could not write to $outFasta: $!";
+    print $z ">$defline\n$seq\n";
 
     push(@fasta, $outFasta);
   }
