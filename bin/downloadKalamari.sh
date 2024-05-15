@@ -6,6 +6,7 @@ if [[ "$1" =~ -h ]]; then
   echo "Usage: $0 "
   echo "  Downloads the standard chromosomes and plasmids for Kalamari"
   echo "  from source and formats the kraken1 and kraken2 databases"
+  echo "  Debug with env variable KALAMARI_DEBUG=1"
   exit 0
 fi
 
@@ -28,10 +29,14 @@ cat $thisdir/../src/plasmids.tsv   >> $TSV
 cp -rv $thisdir/../src/taxonomy $tempdir/taxonomy
 
 # Debug with `KALAMARI_DEBUG=1 downloadKalamari.sh`
-if [[ ${KALAMARI_DEBUG:+1} ]]; then
-  echo "DEBUG was set and so just downloading a few entries" >&2
-  mv $TSV $TSV.tmp && \
-    head -n 10 $TSV.tmp > $TSV
+if [[ ${KALAMARI_DEBUG:-} ]]; then
+  echo "DEBUG" >&2
+  mv $TSV $TSV.tmp
+  head -n 1 $TSV.tmp > $TSV
+  grep -m 5 Salmonella >> $TSV 
+  grep -m 5 Listeria   >> $TSV
+  grep -m 5 Escherichia>> $TSV
+  grep -m 5 Campylobacter >> $TSV
 fi
 
 function build_kraken1(){
