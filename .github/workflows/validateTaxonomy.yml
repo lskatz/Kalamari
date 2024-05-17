@@ -31,10 +31,14 @@ jobs:
         run:  |
           echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
+          bash Kalamari/bin/filterTaxonomy.sh
           ls -lhR Kalamari/share/kalamari-*/taxonomy
       - name: validate taxonomy
         run:  |
           perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy
+      - name: validate filtered taxonomy
+        run:  |
+          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/filtered
       - name: matching taxids
         run:  |
           export taxdir=$(\ls -d Kalamari/share/kalamari-*/taxonomy)
