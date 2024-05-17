@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev, build-taxonomy]
+    branches: [master, dev, validate-taxonomy]
 name: Validate taxonomy
 
 jobs:
@@ -32,9 +32,9 @@ jobs:
           echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
           ls -lhR Kalamari/share/kalamari-*/taxonomy
-      #- name: validate taxonomy
-      #  run:  |
-      #    perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
+      - name: validate taxonomy
+        run:  |
+          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
       - name: matching taxids
         run:  |
           export taxdir=$(\ls -d Kalamari/share/kalamari-*/taxonomy)

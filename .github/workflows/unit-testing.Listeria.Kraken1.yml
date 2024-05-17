@@ -1,7 +1,7 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev, build-taxonomy]
+    branches: [master, dev, validate-taxonomy]
 name: Listeria-with-Kraken1
 
 env:
@@ -63,7 +63,9 @@ jobs:
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
+        run: |
+          perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
+          find ${{ env.OUTDIR }} -name '*.fasta' | xargs gunzip -v
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
       - name: install kraken
