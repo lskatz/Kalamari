@@ -33,10 +33,12 @@ if [[ ${KALAMARI_DEBUG:-} ]]; then
   echo "DEBUG" >&2
   mv $TSV $TSV.tmp
   head -n 1 $TSV.tmp > $TSV
-  grep -m 5 Salmonella >> $TSV 
-  grep -m 5 Listeria   >> $TSV
-  grep -m 5 Escherichia>> $TSV
-  grep -m 5 Campylobacter >> $TSV
+  grep -m 5 Salmonella $TSV.tmp  >> $TSV 
+  grep -m 5 Listeria   $TSV.tmp  >> $TSV
+  grep -m 5 Escherichia $TSV.tmp >> $TSV
+  grep -m 5 Campylobacter $TSV.tmp >> $TSV
+  grep -m 5 Vibrio $TSV.tmp        >> $TSV
+  grep -m 5 Legionella $TSV.tmp    >> $TSV
 fi
 
 function build_kraken1(){
