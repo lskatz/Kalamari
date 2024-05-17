@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev]
+    branches: [master, dev, validate-taxonomy]
 name: Pull-down-all-accessions
 
 jobs:
@@ -61,6 +61,6 @@ jobs:
         run:  tree kalamari.out
       - name: check-file-sizes
         run:  |
-          find kalamari.out -name '*.fasta' > fasta.sizes
+          find kalamari.out -name '*.fasta.gz' > fasta.sizes
           #cat fasta.sizes | xargs -n 100 ls -lhS
 
