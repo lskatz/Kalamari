@@ -41,39 +41,8 @@ if [[ ${KALAMARI_DEBUG:-} ]]; then
   grep -m 5 Legionella $TSV.tmp    >> $TSV
 fi
 
-function build_kraken1(){
-  in_dir=$1
-  DB=$2
-
-  rm -rvf $DB
-  mkdir -v $DB
-  cp -rv $tempdir/taxonomy $DB/
-  find $in_dir -name '*.fasta' -exec kraken-build -db $DB \
-    --add-to-library {} \;
-  kraken-build --db $DB --build --threads 1
-  kraken-build --db $DB --clean
-  du -shc $DB
-
-  echo "DONE. Set KRAKEN_DEFAULT_DB=$(realpath $DB)"
-}
-
-function build_kraken2(){
-  in_dir=$1
-  DB=$2
-
-  rm -rvf $DB
-  mkdir -v $DB
-  cp -rv $tempdir/taxonomy $DB/
-  find $in_dir -name '*.fasta' -exec kraken2-build -db $DB \
-    --add-to-library {} \;
-  kraken2-build --db $DB --build --threads 1
-  kraken2-build --db $DB --clean
-  du -shc $DB
-  echo "DONE. Set KRAKEN2_DEFAULT_DB=$(realpath $DB)"
-}
-
 perl $thisdir/downloadKalamari.pl $TSV \
-  --outdir $tempdir/kalamari
+  --outdir $tempdir/kalamari --buffersize 100
 
 rm -rf $outdir_prefix
 mkdir -v $outdir_prefix
