@@ -65,7 +65,7 @@ jobs:
       - name: download
         run: |
           perl Kalamari/bin/downloadKalamari.pl --outdir ${{ env.OUTDIR }} ${{ env.TSV }}
-          find ${{ env.OUTDIR }} -name '*.fasta' | xargs gunzip -v
+          find ${{ env.OUTDIR }} -name '*.fasta.gz' | xargs gunzip -v
       - name: check-results
         run:  tree ${{ env.OUTDIR }}
       - name: install kraken

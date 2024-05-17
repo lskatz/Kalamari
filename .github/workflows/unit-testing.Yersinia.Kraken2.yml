@@ -47,7 +47,7 @@ jobs:
       - name: download
         run:  |
           perl Kalamari/bin/downloadKalamari.pl --outdir ${{ matrix.GENUS }} ${{ env.TSV }}
-          find ${{ matrix.GENUS }} -name '*.fasta' | xargs gunzip -v
+          find ${{ matrix.GENUS }} -name '*.fasta.gz' | xargs gunzip -v
       - name: check-results
         run:  |
           tree ${{ matrix.GENUS }}
