@@ -30,12 +30,13 @@ Bacteroides fragilis	NC_006347	817	816
 Bacteroides thetaiotaomicron	NC_004663	818	816
 Bartonella bacilliformis	CP000524	774	773
 Betacoronavirus coronavirus	MT233526	2697049	694009
+Bifidobacterium adolenscentis	CP028341	1680	1678
 Bifidobacterium bifidum	NC_014638	1681	1678
 Bifidobacterium longum	NC_004307	216816	1678
 Bordetella bronchiseptica	NC_019382	518	517
 Borreliella burgdorferi	NC_001318	139	64895
 Bos taurus	KC153975	9913	9903
-Brachybacterium faecium	NC_013172	43669	43668
+Brachybacterium faecium	CP001643	43669	43668
 Bradyrhizobium diazoefficiens	NC_004463	1355477	374
 Brassica oleracea	NC_016118	3712	3705
 Buchnera aphidicola	NC_002528	9	32199
@@ -67,7 +68,8 @@ Chlamydia trachomatis	NC_000117	813	810
 Chlamydomonas reinhardtii	AF008237	3055	3052
 Chlorobaculum tepidum	NC_002932	1097	256319
 Chloroflexus aurantiacus	NC_010175	1108	1107
-Citrobacter freundii	CP007557	1333848	546
+Citrobacter freundii	CP007557	546	544
+Citrobacter amalonaticus	CP014070	35703	544
 Clavibacter michiganensis_sepedonicus	AM849034	31964	28447
 Clostridioides difficile	NC_009089	1496	1870884
 Clostridium acetobutylicum	NC_003030	1488	1485
@@ -77,6 +79,7 @@ Clostridium botulinum groupI	NC_010723	9000005	1491
 Clostridium botulinum groupII	NC_010516	9000004	1491
 Clostridium butyricum	CP013239	1492	1485
 Clostridium perfringens	NC_008262	1502	1485
+Corynebacterium diphtheriae	CP091095	1717	1716
 Corynebacterium glutamicum	NC_003450	1718	1716
 Corynebacterium urealyticum	AM942444	43771	1716
 Coxiella burnetii	NC_002971	777	776
@@ -137,6 +140,7 @@ Helianthus annuus	MG770607	4232	4231
 Helicobacter pylori	AE000511	210	209
 Heliobacterium modesticaldum	CP000930	35701	2697
 Homo sapiens	NC_012920	9606	9605
+Humulus lupulus	NC_086845	3486	3484
 Ketogulonicigenium vulgare	NC_017384	92945	92944
 Klebsiella aerogenes	NC_015663	548	570
 Klebsiella pneumoniae	NC_016845	573	570
@@ -202,7 +206,7 @@ Salinibacter ruber	NC_007677	146919	146918
 Salmonella bongori	FR877557	54736	590
 Salmonella enterica IIa	CP053411	9000010	28901
 Salmonella enterica IIb	LR134141	9000011	28901
-Salmonella enterica IIIa	UGXG01000002	9000014	28901
+Salmonella enterica IIIa	CP000880	9000014	28901
 Salmonella enterica IIIb	CP053583	9000015	28901
 Salmonella enterica I	AE006468	59201	28901
 Salmonella enterica IV	CP053579	59205	28901
