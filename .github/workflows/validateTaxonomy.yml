@@ -34,7 +34,7 @@ jobs:
           ls -lhR Kalamari/share/kalamari-*/taxonomy
       - name: validate taxonomy
         run:  |
-          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy/nodes.dmp Kalamari/share/kalamari-*/taxonomy/names.dmp
+          perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy
       - name: matching taxids
         run:  |
           export taxdir=$(\ls -d Kalamari/share/kalamari-*/taxonomy)
