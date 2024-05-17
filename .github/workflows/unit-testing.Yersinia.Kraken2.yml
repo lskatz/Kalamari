@@ -1,7 +1,7 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev, build-taxonomy]
+    branches: [master, dev, validate-taxonomy]
 name: Genera-with-Kraken2
 
 env:
@@ -45,7 +45,9 @@ jobs:
           column -ts $'\t' ${{ env.TSV }}
           hexdump -c ${{ env.TSV }}
       - name: download
-        run:  perl Kalamari/bin/downloadKalamari.pl --outdir ${{ matrix.GENUS }} ${{ env.TSV }}
+        run:  |
+          perl Kalamari/bin/downloadKalamari.pl --outdir ${{ matrix.GENUS }} ${{ env.TSV }}
+          find ${{ matrix.GENUS }} -name '*.fasta.gz' | xargs gunzip -v
       - name: check-results
         run:  |
           tree ${{ matrix.GENUS }}

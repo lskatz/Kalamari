@@ -26,6 +26,7 @@ taxid=$(cut -f 3,4 $thisdir/../src/chromosomes.tsv $thisdir/../src/plasmids.tsv 
 
 # Getting all necessary taxids
 alltaxids=$(echo "$taxid" | taxonkit --data-dir=$srcdir lineage -t | cut -f 3 | tr ';' '\n' | grep . | sort -n | uniq)
+alltaxids=$'1\n'"$alltaxids"
 numtaxids=$(wc -c <<< $alltaxids)
 echo "found $numtaxids taxids after calculating each taxon's lineage"
 
