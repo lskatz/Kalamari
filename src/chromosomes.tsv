@@ -139,6 +139,7 @@ Helianthus annuus	MG770607	4232	4231
 Helicobacter pylori	AE000511	210	209
 Heliobacterium modesticaldum	CP000930	35701	2697
 Homo sapiens	NC_012920	9606	9605
+Humulus lupulus	NC_086845	3486	3484
 Ketogulonicigenium vulgare	NC_017384	92945	92944
 Klebsiella aerogenes	NC_015663	548	570
 Klebsiella pneumoniae	NC_016845	573	570
@@ -204,7 +205,7 @@ Salinibacter ruber	NC_007677	146919	146918
 Salmonella bongori	FR877557	54736	590
 Salmonella enterica IIa	CP053411	9000010	28901
 Salmonella enterica IIb	LR134141	9000011	28901
-Salmonella enterica IIIa	UGXG01000002	9000014	28901
+Salmonella enterica IIIa	CP000880	9000014	28901
 Salmonella enterica IIIb	CP053583	9000015	28901
 Salmonella enterica I	AE006468	59201	28901
 Salmonella enterica IV	CP053579	59205	28901
