@@ -85,7 +85,8 @@ Instead, NCBI accessions are in a file describing chromosomes, and another for p
 Each of these files follows a tab-separated values (tsv) custom format.
 The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
 Most genomes in the database are bacterial pathogens or related organisms.
-All chromosomes and plasmids must be complete, i.e., no contig breaks.
+All chromosomes and plasmids must be complete, i.e., no contig breaks,
+and they come from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or our own subject matter experts at CDC vouch for them.
 
 However, there are some pathogen exceptions such as SARS-CoV-2 and _Cryptosporidium_.
 Additionally, there are several host organisms. The animal hosts include chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
@@ -94,6 +95,13 @@ Also due to the magnitude of possible hosts for foodborne infections,
 only a relative select few are included to represent many other possibilities.
 For example, tomato chosen to represent the family of tomatoes, potatoes, eggplant, and tobacco;
 tuna was selected to represent a variety of fish species.
+
+We also obtained the list of plasmids from the MobSuite project [@robertsonMobsuite].
+We clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
+For each cluster, the taxonomy identifier was raised to the lowest common tier of taxonomy.
+For example, if a cluster of plasmids were identified by both _Escherichia coli_ and _Salmonella enterica_, then all taxonomy identifiers for the plasmids were changed to their common family, Enterobacteriaceae.
+As a result, any metagenomic signature from these plasmids
+is both specific enough to the target taxon and general enough to help avoid any misidentifications.
 
 ### taxonomy
 
