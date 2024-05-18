@@ -68,7 +68,7 @@ Additionally, there are several host organisms. The animal hosts include chicken
 Most hosts are very large in size and so only the mitochondrial genomes are included as markers.
 Also due to the magnitude of possible hosts for foodborne infections,
 only a relative select few are included to represent many other possibilities.
-For example, fava bean was chosen to represent the family of legumes;
+For example, tomato chosen to represent the family of tomatoes, potatoes, eggplant, and tobacco;
 tuna was selected to represent a variety of fish species.
 
 ### taxonomy
