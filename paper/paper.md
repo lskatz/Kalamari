@@ -152,7 +152,7 @@ A more concise example is shown
 # Set up the environment
 export PATH=$PATH:$(realpath kalamari/bin)
 # Understand where the output files are
-KALAMARI_VER=$(perl kalamari/bin/downloadKalamari.pl --version)
+KALAMARI_VER=$(downloadKalamari.pl --version)
 OUTDIR="kalamari/share/kalamari-$KALAMARI_VER"
 
 # after installing Kalamari
