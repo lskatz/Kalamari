@@ -68,17 +68,22 @@ output:
 
 ## Summary
 
-Kalamari is a comprehensive resource that represents genomes from a diversity of organisms of public health concern. It aims to provide researchers and public health professionals with easy access to important genomic data.
+Kalamari is a comprehensive resource that represents genomes from a diverse organisms of public health concern. It aims to provide researchers and public health professionals with easy access to high quality genomic references.
 
 ## Statement of Need
 
-Public Health utilizes genomics for infectious disease surveillance [@armstrong2019pathogen].
-Laboratories sequence whole genomes daily to uncover where pathogens are and who they infect.
+Public Health laboratories sequence whole genomes daily for genomic epidemiology, ie, to track pathogen spread [@armstrong2019pathogen].
 Usually, this is in the form of whole genome sequencing (WGS) from cultures,
 but it can come from reflect cultures from samples like stool,
 or could be actual metegenomics samples [@huang2017metagenomics].
-In WGS samples, one might want to perform a quality check to make sure that the sample is not contaminated and is virtually 100% the target sample.
-In metagenomics samples, one might want to classify all reads that match the sample's taxonomy.
+In isolate WGS samples, one might want to perform a quality check to make sure that the sample is not contaminated and is virtually 100% the target sample.
+In metagenomics samples, one might want to classify all reads that confidently match a reference taxonomy database.
+
+Other similar databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb].
+However ironically due to their advantages of being so comprehensive,
+they become disadvantageous for our specific purposes:
+*1 The databases become too large and slower to query
+*2 The results suffer in sensitivity to species [@nasko2018refseq] and therefore become less informative for pathogen surveillance.
 
 Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and even genomes of common contaminants.
 These genomes can be used for contamination detection and for metagenomic analysis.
@@ -95,9 +100,9 @@ Instead, NCBI accessions are in a tab-separated values (tsv) file describing chr
 The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
 Most genomes in the database are bacterial pathogens or related organisms.
 All chromosomes and plasmids must be complete, i.e., no contig breaks,
-and they come from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or our own subject matter experts at CDC vouch for them.
+and they come from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or have been provided and reviewed by a CDC subject matter expert.
 
-However, there are some viral pathogen exceptions such as SARS-CoV-2, protist exceptions such as _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
+In addition to bacterial genomes, there are some viral or protist pathogens such as SARS-CoV-2 and _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
 Most hosts are very large in size and so only the mitochondrial genomes are included as markers.
 Also due to the magnitude of possible hosts for foodborne infections,
 only a relative select few are included to represent many other possibilities.
@@ -107,8 +112,8 @@ tuna was selected to represent a variety of fish species.
 We also obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite].
 We clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
 For each cluster, the taxonomy identifier was raised to the lowest common tier of taxonomy.
-For example, if a cluster of plasmids were identified by both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, Enterobacteriaceae.
-As a result, any metagenomic signature from these plasmids
+For example, if a cluster of plasmids were identified in both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, Enterobacteriaceae.
+As a result, any taxonomic signature from these plasmids
 is both specific enough to the target taxon and general enough to help avoid any misidentifications.
 
 ### taxonomy
@@ -119,6 +124,9 @@ add taxa (`names.dmp` and `nodes.dmp`).
 `names.dmp` and `nodes.dmp` are standardized files that are described in NCBI Taxonomy [@10.1093/nar/gkr1178].
 In one special case for _Shigella_, the taxon is deleted
 and then re-added as a subspecies for _Escherichia coli_.
+Other notable additions include lineages for _Listeria_,
+groups for _Clostridium botulinum_,
+and new subspecies for _Salmonella enterica_.
 
 ### software
 
