@@ -28,6 +28,8 @@ authors:
     affiliation: 3
   - name: Zuzana Kucerova
     affiliation: 1
+  - name: Shatavia Morrison
+    affiliation: 1
   - name: Cheryl L. Tarr
     affiliation: 1
   - name: Andrew Page
@@ -38,11 +40,11 @@ authors:
     affiliation: 1
 affiliations:
   - index: 1
-    name: Enteric Diseases Laboratory Branch (EDLB), Centers for Disease Control and Prevention, Atlanta, GA, USA
+    name: Division of Foodborne Waterborne and Environmental Diseases (DFWED), Centers for Disease Control and Prevention, Atlanta, GA, USA
   - index: 2
     name: Center for Food Safety, University of Georgia, Griffin, GA, USA
   - index: 3
-    name: At the time of this work, Enteric Diseases Laboratory Branch (EDLB), Centers for Disease Control and Prevention, Atlanta, GA, USA
+    name: At the time of this work, DFWED, Centers for Disease Control and Prevention, Atlanta, GA, USA
   - index: 4
     name: At the time of this work, Quadram Institute, Norwich, UK
 date: "May 17, 2024"
@@ -147,8 +149,10 @@ For metagenomes, the database is useful as intended, to detect which taxa are pr
 A more concise example is shown
 
 ```bash
+# Set up the environment
+export PATH=$PATH:$(realpath kalamari/bin)
 # Understand where the output files are
-KALAMARI_VER=$(perl bin/downloadKalamari.pl --version)
+KALAMARI_VER=$(perl kalamari/bin/downloadKalamari.pl --version)
 OUTDIR="kalamari/share/kalamari-$KALAMARI_VER"
 
 # after installing Kalamari
