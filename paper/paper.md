@@ -15,6 +15,7 @@ authors:
   - name: Rebecca Lindsey
     affiliation: 1
   - name: Ana Lauer
+    affiliation: 3
   - name: Monica S. Im
     affiliation: 1
   - name: Grant Williams
@@ -22,12 +23,15 @@ authors:
   - name: Jessica Halpin
     affiliation: 1
   - name: Gerardo A. Gómez
+    affiliation: 3
   - name: Katie Roache
+    affiliation: 3
   - name: Zuzana Kucerova
     affiliation: 1
   - name: Cheryl L. Tarr
     affiliation: 1
   - name: Andrew Page
+    affiliation: 4
   - name: Henk C. Den Bakker
     affiliation: 2
   - name: Heather A. Carleton
@@ -37,6 +41,10 @@ affiliations:
     name: Enteric Diseases Laboratory Branch (EDLB), Centers for Disease Control and Prevention, Atlanta, GA, USA
   - index: 2
     name: Center for Food Safety, University of Georgia, Griffin, GA, USA
+  - index: 3
+    name: At the time of this work, Enteric Diseases Laboratory Branch (EDLB), Centers for Disease Control and Prevention, Atlanta, GA, USA
+  - index: 4
+    name: At the time of this work, Quadram Institute, Norwich, UK
 date: "May 17, 2024"
 bibliography: paper.bib
 output:
@@ -81,25 +89,23 @@ GenBank accessions, custom taxonomy, and software to utilize the accessions and 
 ### accessions
 
 The genomes in Kalamari are not housed in the repo itself.
-Instead, NCBI accessions are in a file describing chromosomes, and another for plasmids.
-Each of these files follows a tab-separated values (tsv) custom format.
+Instead, NCBI accessions are in a tab-separated values (tsv) file describing chromosomes, and another tsv for plasmids.
 The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
 Most genomes in the database are bacterial pathogens or related organisms.
 All chromosomes and plasmids must be complete, i.e., no contig breaks,
 and they come from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or our own subject matter experts at CDC vouch for them.
 
-However, there are some pathogen exceptions such as SARS-CoV-2 and _Cryptosporidium_.
-Additionally, there are several host organisms. The animal hosts include chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
+However, there are some viral pathogen exceptions such as SARS-CoV-2, protist exceptions such as _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
 Most hosts are very large in size and so only the mitochondrial genomes are included as markers.
 Also due to the magnitude of possible hosts for foodborne infections,
 only a relative select few are included to represent many other possibilities.
 For example, tomato chosen to represent the family of tomatoes, potatoes, eggplant, and tobacco;
 tuna was selected to represent a variety of fish species.
 
-We also obtained the list of plasmids from the MobSuite project [@robertsonMobsuite].
+We also obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite].
 We clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
 For each cluster, the taxonomy identifier was raised to the lowest common tier of taxonomy.
-For example, if a cluster of plasmids were identified by both _Escherichia coli_ and _Salmonella enterica_, then all taxonomy identifiers for the plasmids were changed to their common family, Enterobacteriaceae.
+For example, if a cluster of plasmids were identified by both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, Enterobacteriaceae.
 As a result, any metagenomic signature from these plasmids
 is both specific enough to the target taxon and general enough to help avoid any misidentifications.
 
@@ -126,16 +132,41 @@ This can result in a much smaller directory size and hypothetically faster downs
 ## Example Usage
 
 Kalamari can be used where most metagenomic analyses are used.
-Most commonly, we use Kalamari as the source data for Kraken1 [@wood2014kraken] or Kraken2 [@wood2019improved].
+Most commonly, we use Kalamari to customize databases for Kraken1 [@wood2014kraken] or Kraken2 [@wood2019improved].
 Building the Kraken database has been implemented in `buildKraken1.sh`
 and in `buildKraken2.sh`.
-However, other descriptions for building databases such as for BLAST
-or Mash can be found in the documentation [@camacho2009blast+].
+However, other descriptions for building databases such as for BLAST [@camacho2009blast+]
+or Mash [@ondov2016mash] can be found in the documentation .
 
-For genomes, a metagenomic database is useful for quality control because
+For singular genomes, a metagenomic database is useful for quality control because
 a user can have a null hypothesis that the sample is a metagenomic sample with a singular taxon.
 An alternate hypothesis of contamination can be supported when conflicting taxa are detected by the database.
+Therefore, a data scientist could use Kalamari as a way to detect contamination.
 For metagenomes, the database is useful as intended, to detect which taxa are present in a sample.
+
+A more concise example is shown
+
+```bash
+# Understand where the output files are
+KALAMARI_VER=$(perl bin/downloadKalamari.pl --version)
+OUTDIR="kalamari/share/kalamari-$KALAMARI_VER"
+
+# after installing Kalamari
+downloadKalamari.sh
+# => files are now in $OUTDIR/kalamari
+buildTaxonomy.sh
+# => files are now in $OUTDIR/taxonomy
+filterTaxonomy.sh
+# => files are now in $OUTDIR/taxonomy/filtered
+
+# Load kraken1 into the environment
+buildKraken1.sh
+# => files are now in $OUTDIR/kalamari-kraken
+
+# Unload Kraken1 and then load Kraken2 into the environment
+buildKraken2.sh
+# => files are now in $OUTDIR/kalamari-kraken2
+```
 
 ## Acknowledgements
 
