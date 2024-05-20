@@ -81,9 +81,7 @@ In metagenomics samples, one might want to classify all reads that confidently m
 
 Other similar databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb].
 However ironically due to their advantages of being so comprehensive,
-they become disadvantageous for our specific purposes:
-*1 The databases become too large and slower to query
-*2 The results suffer in sensitivity to species [@nasko2018refseq] and therefore become less informative for pathogen surveillance.
+they become disadvantageous for our specific purposes: 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq] and therefore become less informative for pathogen surveillance.
 
 Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and even genomes of common contaminants.
 These genomes can be used for contamination detection and for metagenomic analysis.
