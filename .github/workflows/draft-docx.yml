@@ -22,7 +22,7 @@ jobs:
       - name: Build draft docx
         run:  inara -o docx paper/paper.md
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: paper
           # This is the output path where Pandoc will write the compiled
