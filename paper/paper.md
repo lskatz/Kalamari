@@ -114,6 +114,15 @@ For example, if a cluster of plasmids were identified in both _Escherichia coli_
 As a result, any taxonomic signature from these plasmids
 is both specific enough to the target taxon and general enough to help avoid any misidentifications.
 
+Finally, it is important to mention that the chromosomes of three significant pathogens are not included in the list of chromosomes, but their plasmids are listed:
+_Shigella_, _Yersinia pestis_, and _Bacillus anthracis_.
+These taxa have chromosome backbones with very high identity to
+_Escherichia coli_, _Yersinia pseudotuberculosis_, and _Bacillus cereus_, respectively.
+If these chromosomes were present in a metagenomics analysis,
+then any matches against, e.g., _B. cereus_, would match against multiple species thereby giving less helpful genus-level results, e.g., _Bacillus_.
+Instead with the current design of Kalamari, a user would receive results
+for both _B. cereus_ and _B. anthracis_, giving a more informative signal.
+
 ### taxonomy
 
 Kalamari uses the NCBI Taxonomy database as a baseline.
