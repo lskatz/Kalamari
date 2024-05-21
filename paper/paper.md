@@ -46,7 +46,7 @@ affiliations:
   - index: 3
     name: At the time of this work, DFWED, Centers for Disease Control and Prevention, Atlanta, GA, USA
   - index: 4
-    name: At the time of this work, Quadram Institute, Norwich, UK
+    name: Theiagen Genomics, 1745 Shea Center Drive, Suite 400 Highlands Ranch, CO, 80129, USA
 date: "May 17, 2024"
 bibliography: paper.bib
 output:
