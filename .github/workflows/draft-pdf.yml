@@ -1,6 +1,5 @@
 on: 
   push:
-    branches: [paper]
     paths:
       - 'paper/**'
       - '.github/workflows/draft-pdf.yml'
