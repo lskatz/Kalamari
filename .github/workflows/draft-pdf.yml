@@ -1,7 +1,11 @@
 on: 
-    push:
-        branches: [paper]
-name: JOSS rendering
+  push:
+    branches: [paper]
+    paths:
+      - 'paper/**'
+      - '.github/workflows/draft-pdf.yml'
+    
+name: JOSS pdf rendering
 
 jobs:
   paper:

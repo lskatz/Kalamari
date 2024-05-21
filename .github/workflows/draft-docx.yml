@@ -5,22 +5,20 @@ on:
       - 'paper/**'
       - '.github/workflows/draft-pdf.yml'
     
-name: JOSS rendering
+name: JOSS docx rendering
 
 jobs:
   paper:
     runs-on: ubuntu-latest
     name: Paper Draft
+    container:
+      image: openjournals/inara:latest
+      env: 
+        GIT_SHA: $GITHUB_SHA
+        JOURNAL: joss
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build draft docx
-        using: docker
-        image: 'docker://openjournals/inara:latest'
-        env: 
-          GIT_SHA: $GITHUB_SHA
-          JOURNAL: joss
-        args:
-          - -o docx
-          - paper/paper.md
+        run:  inara -o docx paper/paper.md
       
