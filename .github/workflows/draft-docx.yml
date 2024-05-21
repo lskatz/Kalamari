@@ -3,7 +3,7 @@ on:
     branches: [paper]
     paths:
       - 'paper/**'
-      - '.github/workflows/draft-pdf.yml'
+      - '.github/workflows/draft-docx.yml'
     
 name: JOSS docx rendering
 
