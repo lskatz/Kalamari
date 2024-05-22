@@ -12,6 +12,7 @@ authors:
     affiliation: "1, 2"
   - name: Taylor Griswold
     affiliation: 1
+    orcid: 0000-0002-2149-7971
   - name: Rebecca Lindsey
     affiliation: 1
   - name: A.C. Lauer
@@ -23,6 +24,7 @@ authors:
     affiliation: 1
   - name: Jessica Halpin
     affiliation: 1
+    orcid: 0000-0003-4108-7010
   - name: Gerardo A. Gómez
     affiliation: 3
   - name: Katie Roache
