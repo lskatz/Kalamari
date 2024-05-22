@@ -14,7 +14,8 @@ authors:
     affiliation: 1
   - name: Rebecca Lindsey
     affiliation: 1
-  - name: Ana Lauer
+  - name: A.C. Lauer
+    orcid: 0000-0002-2924-758X
     affiliation: 3
   - name: Monica S. Im
     affiliation: 1
