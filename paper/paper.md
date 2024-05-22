@@ -38,8 +38,10 @@ authors:
     affiliation: 1
   - name: Andrew Page
     affiliation: 4
+    orcid: 0000-0001-6919-6062
   - name: Henk C. Den Bakker
     affiliation: 2
+    orcid: 0000-0002-4086-1580
   - name: Heather A. Carleton
     affiliation: 1
 affiliations:
