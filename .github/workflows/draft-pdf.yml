@@ -19,7 +19,6 @@ jobs:
           journal: joss
           # This should be the path to the paper within your repo.
           paper-path: paper/paper.md
-          format: pdf,docx
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
