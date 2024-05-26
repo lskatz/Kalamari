@@ -5,6 +5,10 @@ on:
       - '.github/workflows/draft-docx.yml'
     
 name: JOSS docx rendering
+env:
+  OPENJOURNALS_PATH: /usr/local/share/openjournals
+  format: docx
+  article_info_option: ""
 
 jobs:
   paper:
@@ -19,7 +23,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build draft docx
-        run:  inara -o docx paper/paper.md
+        # inara -o docx paper/paper.md
+        run:  | 
+            /usr/local/bin/pandoc \
+            --data-dir="${{ env.OPENJOURNALS_PATH }}/data" \
+            --defaults="${{ env.OPENJOURNALS_PATH }}/${{ env.format }}/defaults.yaml" \
+            ${{ env.article_info_option}} \
+            --resource-path=.:${{ env.OPENJOURNALS_PATH }}/scripts \
+            --variable="${{ env.JOURNAL }}" \
+            --variable=retraction:"${{ env.retraction }}" \
+            --variable=draft:"${{ env.draft }}" \
+            --metadata=draft:"${{ env.draft }}" \
+            --log="$logfile" \
+            "$input_file" \
+            "$@"
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
