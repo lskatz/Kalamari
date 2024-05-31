@@ -13,8 +13,9 @@ authors:
   - name: Taylor Griswold
     affiliation: 1
     orcid: 0000-0002-2149-7971
-  - name: Rebecca Lindsey
+  - name: Rebecca L. Lindsey
     affiliation: 1
+    orcid: 0000-0002-2149-7971
   - name: A.C. Lauer
     orcid: 0000-0002-2924-758X
     affiliation: 3
@@ -22,20 +23,21 @@ authors:
     affiliation: 1
   - name: Grant Williams
     affiliation: 1
-  - name: Jessica Halpin
+    orcid: 0000-0002-6033-485X
+  - name: Jessica L. Halpin
     affiliation: 1
     orcid: 0000-0003-4108-7010
   - name: Gerardo A. Gómez
     affiliation: 3
+    orcid: 0000-0002-1800-8321
   - name: Katie Roache
     affiliation: 3
   - name: Zuzana Kucerova
     affiliation: 1
+    orcid: 0000-0002-7080-5715
   - name: Shatavia Morrison
     affiliation: 1
     orcid: 0000-0002-4658-5951
-  - name: Cheryl L. Tarr
-    affiliation: 1
   - name: Andrew Page
     affiliation: 4
     orcid: 0000-0001-6919-6062
@@ -44,6 +46,7 @@ authors:
     orcid: 0000-0002-4086-1580
   - name: Heather A. Carleton
     affiliation: 1
+    orcid: 0000-0002-1017-8895
 affiliations:
   - index: 1
     name: Division of Foodborne Waterborne and Environmental Diseases (DFWED), Centers for Disease Control and Prevention, Atlanta, GA, USA
@@ -74,22 +77,22 @@ output:
 
 ## Summary
 
-Kalamari is a comprehensive resource that represents genomes from a diverse organisms of public health concern. It aims to provide researchers and public health professionals with easy access to high quality genomic references.
+Kalamari is a comprehensive resource that represents genomes from diverse organisms of public health concern. It aims to provide researchers and public health professionals with easy access to high quality genomic references.
 
 ## Statement of Need
 
-Public Health laboratories sequence whole genomes daily for genomic epidemiology, ie, to track pathogen spread [@armstrong2019pathogen].
-Usually, this is in the form of whole genome sequencing (WGS) from cultures,
-but it can come from reflect cultures from samples like stool,
-or could be actual metegenomics samples [@huang2017metagenomics].
-In isolate WGS samples, one might want to perform a quality check to make sure that the sample is not contaminated and is virtually 100% the target sample.
-In metagenomics samples, one might want to classify all reads that confidently match a reference taxonomy database.
+Public Health laboratories sequence microbial pathogens daily for genomic epidemiology, i.e., to track pathogen spread [@armstrong2019pathogen].
+Usually, this surveillance is in the form of whole genome sequencing (WGS) from single cultures,
+but it can come from reflex cultures from samples like stool,
+or could be from metagenomic samples [@huang2017metagenomics].
+In single isolate WGS samples, one might want to perform a quality check to ensure that the sample is not contaminated and is virtually 100% of the target organism.
+In metagenomic samples, one might want to confirm that all reads confidently match a reference taxonomy database.
 
-Other similar databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb].
-However ironically due to their advantages of being so comprehensive,
-they become disadvantageous for our specific purposes: 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq] and therefore become less informative for pathogen surveillance.
+While other databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb],
+which due to their being so comprehensive,
+they become disadvantageous for our specific purposes: 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq] and thus become less informative for pathogen surveillance.
 
-Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and even genomes of common contaminants.
+Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and genomes of common contaminants.
 These genomes can be used for contamination detection and for metagenomic analysis.
 
 ## Features
@@ -97,26 +100,26 @@ These genomes can be used for contamination detection and for metagenomic analys
 Kalamari is comprised of three major components:
 GenBank accessions, custom taxonomy, and software to utilize the accessions and taxonomy.
 
-### accessions
+### Accessions
 
 The genomes in Kalamari are not housed in the repo itself.
 Instead, NCBI accessions are in a tab-separated values (tsv) file describing chromosomes, and another tsv for plasmids.
 The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
 Most genomes in the database are bacterial pathogens or related organisms.
 All chromosomes and plasmids must be complete, i.e., no contig breaks,
-and they come from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or have been provided and reviewed by a CDC subject matter expert.
+and obtained from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or provided and reviewed by a CDC subject matter expert.
 
-In addition to bacterial genomes, there are some viral or protist pathogens such as SARS-CoV-2 and _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
-Most hosts are very large in size and so only the mitochondrial genomes are included as markers.
-Also due to the magnitude of possible hosts for foodborne infections,
+In addition to bacterial genomes, Kalamari incorporates some viral or protist pathogens such as SARS-CoV-2 and _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
+Most host genomes are very large in size and so only the mitochondrial genomes are included as markers.
+Also, due to the magnitude of possible hosts for foodborne infections,
 only a relative select few are included to represent many other possibilities.
-For example, tomato chosen to represent the family of tomatoes, potatoes, eggplant, and tobacco;
-tuna was selected to represent a variety of fish species.
+For example, tomato was chosen to represent the family _Solanaceae_ which includes tomatoes, potatoes, eggplant, and tobacco;
+tuna was selected to represent one genus of fish species, but other fish taxa are included too.
 
-We also obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite].
-We clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
+We obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite]
+and clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
 For each cluster, the taxonomy identifier was raised to the lowest common tier of taxonomy.
-For example, if a cluster of plasmids were identified in both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, Enterobacteriaceae.
+For example, if a cluster of plasmids were identified in both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, _Enterobacteriaceae_.
 As a result, any taxonomic signature from these plasmids
 is both specific enough to the target taxon and general enough to help avoid any misidentifications.
 
@@ -129,10 +132,10 @@ then any matches against, e.g., _B. cereus_, would match against multiple specie
 Instead with the current design of Kalamari, a user would receive results
 for both _B. cereus_ and _B. anthracis_, giving a more informative signal.
 
-### taxonomy
+### Taxonomy
 
 Kalamari uses the NCBI Taxonomy database as a baseline.
-Then, it has a files to either delete (`delnodes.txt`), or
+Then, it has files to either delete (`delnodes.txt`), or
 add taxa (`names.dmp` and `nodes.dmp`).
 `names.dmp` and `nodes.dmp` are standardized files that are described in NCBI Taxonomy [@10.1093/nar/gkr1178].
 In one special case for _Shigella_, the taxon is deleted
@@ -141,7 +144,7 @@ Other notable additions include lineages for _Listeria_,
 groups for _Clostridium botulinum_,
 and new subspecies for _Salmonella enterica_.
 
-### software
+### Software
 
 To download the accessions in the tsv files, there is an included script
 `downloadKalamari.pl` that accesses GenBank with its software, Entrez Direct [@kans2016entrez].
@@ -159,7 +162,7 @@ Most commonly, we use Kalamari to customize databases for Kraken1 [@wood2014krak
 Building the Kraken database has been implemented in `buildKraken1.sh`
 and in `buildKraken2.sh`.
 However, other descriptions for building databases such as for BLAST [@camacho2009blast+]
-or Mash [@ondov2016mash] can be found in the documentation .
+or Mash [@ondov2016mash] can be found in the documentation.
 
 For singular genomes, a metagenomic database is useful for quality control because
 a user can have a null hypothesis that the sample is a metagenomic sample with a singular taxon.
@@ -197,5 +200,7 @@ buildKraken2.sh
 
 This work was made possible through support from the Advanced Molecular Detection (AMD) Initiative at the Centers for Disease Control and Prevention.
 The opinions expressed by the authors do not necessarily reflect the opinions of Centers for Disease Control and Prevention.
+
+Thank you to Dr. Cheryl L. Tarr for helpfull discussions and scientific input.
 
 ## References
