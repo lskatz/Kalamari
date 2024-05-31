@@ -27,6 +27,9 @@ find $SRC -name '*.fasta.gz' | \
     for i in "$@"; do
       gzip -cd $i
     done > $tmpfile
+    echo -ne "ADDING to library:\n  "
+    zgrep "^>" $tmpfile | sed "s/^>//" | tr '\n' ' '
+    echo "^^ contents of $tmpfile ^^"
     kraken-build --db $DB --add-to-library $tmpfile
   '
 
