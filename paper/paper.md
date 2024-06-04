@@ -88,9 +88,10 @@ or could be from metagenomic samples [@huang2017metagenomics].
 In single isolate WGS samples, one might want to perform a quality check to ensure that the sample is not contaminated and is virtually 100% of the target organism.
 In metagenomic samples, one might want to confirm that all reads confidently match a reference taxonomy database.
 
-While other databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb],
-which due to their being so comprehensive,
-they become disadvantageous for our specific purposes: 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq] and thus become less informative for pathogen surveillance.
+Other databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb],
+but due to their so comprehensive nature,
+they are disadvantageous for our specific purposes.
+The disadvantages include 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq], and thus become less informative for pathogen surveillance.
 
 Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and genomes of common contaminants.
 These genomes can be used for contamination detection and for metagenomic analysis.
@@ -137,7 +138,7 @@ for both _B. cereus_ and _B. anthracis_, giving a more informative signal.
 Kalamari uses the NCBI Taxonomy database as a baseline.
 Then, it has files to either delete (`delnodes.txt`), or
 add taxa (`names.dmp` and `nodes.dmp`).
-`names.dmp` and `nodes.dmp` are standardized files that are described in NCBI Taxonomy [@10.1093/nar/gkr1178].
+The `.dmp` file format is described in NCBI Taxonomy [@10.1093/nar/gkr1178].
 In one special case for _Shigella_, the taxon is deleted
 and then re-added as a subspecies for _Escherichia coli_.
 Other notable additions include lineages for _Listeria_,
