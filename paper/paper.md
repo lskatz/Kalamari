@@ -20,6 +20,7 @@ authors:
     orcid: 0000-0002-2924-758X
     affiliation: 3
   - name: Monica S. Im
+    orcid: 0000-0002-4292-7598
     affiliation: 1
   - name: Grant Williams
     affiliation: 1
@@ -30,8 +31,6 @@ authors:
   - name: Gerardo A. Gómez
     affiliation: 3
     orcid: 0000-0002-1800-8321
-  - name: Katie Roache
-    affiliation: 3
   - name: Zuzana Kucerova
     affiliation: 1
     orcid: 0000-0002-7080-5715
@@ -202,6 +201,7 @@ buildKraken2.sh
 This work was made possible through support from the Advanced Molecular Detection (AMD) Initiative at the Centers for Disease Control and Prevention.
 The opinions expressed by the authors do not necessarily reflect the opinions of Centers for Disease Control and Prevention.
 
-Thank you to Dr. Cheryl L. Tarr for helpfull discussions and scientific input.
+Thank you to Dr. Cheryl L. Tarr for helpful discussions and scientific input.
+Thank you to Katie Roache for genome sequencing, helpful discussions, and scientific input.
 
 ## References
