@@ -42,9 +42,9 @@ jobs:
       - name: install-edirect
         run:  |
           sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
-          echo $GITHUB_WORKSPACE/edirect >> $GITHUB_PATH
+          echo $HOME/edirect >> $GITHUB_PATH
           echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
-          tree $GITHUB_WORKSPACE/edirect
+          tree $HOME/edirect
       - name: check-env
         run:  echo "$PATH"
       - name: select for only Listeria
