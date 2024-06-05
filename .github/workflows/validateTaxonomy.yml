@@ -32,7 +32,7 @@ jobs:
           echo $PATH
           bash Kalamari/bin/buildTaxonomy.sh
           bash Kalamari/bin/filterTaxonomy.sh
-          ls -lhR Kalamari/share/kalamari-*/
+          ls -lhR Kalamari/share/
       - name: validate taxonomy
         run:  |
           perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy
