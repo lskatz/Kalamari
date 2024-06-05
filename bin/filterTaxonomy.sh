@@ -2,6 +2,9 @@
 
 set -eu
 
+# Check for dependencies
+which taxonkit
+
 thisdir=$(dirname $0)
 thisfile=$(basename $0)
 KALAMARI_VER=$(downloadKalamari.pl --version)
