@@ -27,6 +27,13 @@ jobs:
           echo $PATH
           echo ""
           cat $GITHUB_PATH
+      - name: install taxonkit
+        run:  |
+          wget https://github.com/shenwei356/taxonkit/releases/download/v0.16.0/taxonkit_linux_amd64.tar.gz
+          tar -xvf taxonkit_linux_amd64.tar.gz
+          rm -v taxonkit_linux_amd64.tar.gz
+          chmod +x taxonkit
+          echo $(realpath .) >> $GITHUB_PATH
       - name: build taxonomy
         run:  |
           echo $PATH
