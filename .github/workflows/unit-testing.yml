@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev, validate-taxonomy]
+    branches: [master, dev, esearch-input]
 name: Pull-down-all-accessions
 
 jobs:
