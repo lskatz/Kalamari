@@ -1,7 +1,7 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev, esearch-input]
+    branches: [master, dev]
 name: Genera-with-Kraken2
 
 env:

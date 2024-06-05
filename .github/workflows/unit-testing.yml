@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev, esearch-input]
+    branches: [master, dev]
 name: Pull-down-all-accessions
 
 jobs:
