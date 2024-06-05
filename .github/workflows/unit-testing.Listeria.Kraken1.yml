@@ -41,15 +41,10 @@ jobs:
           tree $(realpath .)
       - name: install-edirect
         run:  |
-          cd $HOME
-          perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); $ftp->login; $ftp->binary; $ftp->get("/entrez/entrezdirect/edirect.tar.gz");'
-          gunzip -cv edirect.tar.gz | tar xf -
-          rm -v edirect.tar.gz
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
           echo $GITHUB_WORKSPACE/edirect >> $GITHUB_PATH
           echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
-          #export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
-          yes Y | ./edirect/setup.sh
-          tree edirect
+          tree $GITHUB_WORKSPACE/edirect
       - name: check-env
         run:  echo "$PATH"
       - name: select for only Listeria
