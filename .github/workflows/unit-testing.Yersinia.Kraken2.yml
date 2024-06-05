@@ -1,7 +1,7 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev, validate-taxonomy]
+    branches: [master, dev]
 name: Genera-with-Kraken2
 
 env:
@@ -34,6 +34,14 @@ jobs:
       - name: env check
         run:  |
           echo $PATH | tr ':' '\n' | sort
+
+      - name: install-edirect
+        run:  |
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+          echo $HOME/edirect >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
+          tree $HOME/edirect 
+                   
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree jellyfish ncbi-entrez-direct
       - name: select for only for this genus
