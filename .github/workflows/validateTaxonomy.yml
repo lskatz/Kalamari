@@ -30,9 +30,9 @@ jobs:
       - name: build taxonomy
         run:  |
           echo $PATH
-          bash Kalamari/bin/buildTaxonomy.sh
-          bash Kalamari/bin/filterTaxonomy.sh
-          ls -lhR Kalamari/
+          bash -x Kalamari/bin/buildTaxonomy.sh
+          bash -x Kalamari/bin/filterTaxonomy.sh
+          ls -lhR Kalamari/share/kalamari-*/taxonomy
       - name: validate taxonomy
         run:  |
           perl Kalamari/bin/validateTaxonomy.pl Kalamari/share/kalamari-*/taxonomy
