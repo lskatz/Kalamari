@@ -3,7 +3,9 @@
 set -eu
 
 # Check for dependencies
+echo "Check for dependencies"
 which taxonkit
+echo
 
 thisdir=$(dirname $0)
 thisfile=$(basename $0)
