@@ -30,6 +30,7 @@ find $SRC -name '*.fasta.gz' | \
     done > $tmpfile
     echo -ne "ADDING to library:\n  "
     zgrep "^>" $tmpfile | sed "s/^>//" | tr "$nl" " "
+    echo
     echo "^^ contents of $tmpfile ^^"
     kraken-build --db $DB --add-to-library $tmpfile
   '
