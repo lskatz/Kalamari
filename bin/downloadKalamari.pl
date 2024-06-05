@@ -11,7 +11,7 @@ use POSIX qw/ceil/;
 use IO::Compress::Gzip;
 use version 0.77;
 
-our $VERSION = version->parse("5.6.3");
+our $VERSION = version->parse("5.7.0");
 
 use threads;
 
@@ -167,26 +167,24 @@ sub downloadEntries{
   my $numEntries = scalar(@$entries);
   my @acc = map{$$_{nuccoreAcc}} @$entries;
   logmsg "Downloading ".scalar(@acc)." accessions";
-  my $queryArg = join("[accession] OR ", sort(@acc))."[accession]";
   my $dir = tempdir("download.XXXXXX", DIR=>$$settings{tempdir});
+
+  # Make the input file for efetch
+  my $inputAcc = "$dir/input.acc";
+  open(my $fh, ">", $inputAcc) or die "ERROR: could not write to $inputAcc: $!";
+  print $fh join("\n", @acc)."\n";
+  close $fh;
 
   # Accessions that had errors
   my @err;
 
-  # Get the esearch xml in place for at least one downstream query
-  my $esearchXml = "$dir/esearch.xml";
-  my $esearchCmd = "esearch -db nuccore -query '$queryArg' > $esearchXml";
-  command($esearchCmd);
-  if($?){
-    die "ERROR running: $esearchCmd: $!";
-  }
-
-  # Get started on the assembly file
+  # Get started on the comprehensive assembly file
   my $outfile = "$dir/all.fasta";
-
-  # Main query: efetch
-  my $efetchCmd = "cat $esearchXml | efetch -format fasta > $outfile";
-  system($efetchCmd);
+  logmsg "Downloading all accessions to $outfile using input accessions in $inputAcc";
+  command("efetch -db nuccore -input $inputAcc -format fasta > $dir/all.fasta");
+  if($?){
+    die "ERROR: could not download all accessions";
+  }
 
   my $seqsWithVersion = readSeqs($outfile);
   my $seqs = {};
