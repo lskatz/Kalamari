@@ -161,7 +161,7 @@ Kalamari can be used where most metagenomic analyses are used.
 Most commonly, we use Kalamari to customize databases for Kraken1 [@wood2014kraken] or Kraken2 [@wood2019improved].
 Building the Kraken database has been implemented in `buildKraken1.sh`
 and in `buildKraken2.sh`.
-However, other descriptions for building databases such as for BLAST [@camacho2009blast+]
+However, other descriptions for building databases such as for BLAST+ [@camacho2009blast]
 or Mash [@ondov2016mash] can be found in the documentation.
 
 For single genomes, a metagenomic database is useful for quality control because
