@@ -111,7 +111,7 @@ and obtained from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC
 
 In addition to bacterial genomes, Kalamari incorporates some viral or protist pathogens such as SARS-CoV-2 and _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
 Most host genomes are very large in size and so only the mitochondrial genomes are included as markers.
-Also, due to the magnitude of possible hosts for foodborne infections,
+Also, due to the magnitude of possible hosts and food vehicles,
 only a relative select few are included to represent many other possibilities.
 For example, tomato was chosen to represent the family _Solanaceae_ which includes tomatoes, potatoes, eggplant, and tobacco;
 tuna was selected to represent one genus of fish species, but other fish taxa are included too.
@@ -164,7 +164,7 @@ and in `buildKraken2.sh`.
 However, other descriptions for building databases such as for BLAST [@camacho2009blast+]
 or Mash [@ondov2016mash] can be found in the documentation.
 
-For singular genomes, a metagenomic database is useful for quality control because
+For single genomes, a metagenomic database is useful for quality control because
 a user can have a null hypothesis that the sample is a metagenomic sample with a singular taxon.
 An alternate hypothesis of contamination can be supported when conflicting taxa are detected by the database.
 Therefore, a data scientist could use Kalamari as a way to detect contamination.
