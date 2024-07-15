@@ -11,6 +11,7 @@ These assemblies can be further used in formatted databases such as Kraken or Bl
 ### Prerequisites & Recommendations
 
 Requirements:
+
 - clone this repo locally `git clone https://github.com/lskatz/Kalamari.git`
 - NCBI entrez-utilities set of tools `edirect`, `esearch`, etc.
   - install via your package manager
