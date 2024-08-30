@@ -76,15 +76,11 @@ output:
 
 ## Abstract
 
-Kalamari is a curated resource that represents genomes of organisms relevant to public health, designed to support genomic epidemiology and pathogen surveillance.
-Kalamari provides a streamlined set of representative genomes, including bacterial pathogens, viral and protist pathogens, host organisms, and common contaminants.
-The resource comprises NCBI GenBank accessions, a custom taxonomy based on the NCBI Taxonomy database, and specialized software for database construction and analysis.
-Notably, Kalamari includes curated plasmid sequences and customized taxonomic identifiers to improve the accuracy of metagenomic analysis, even in complex samples.
-The database is designed to be compatible with popular bioinformatics tools like Kraken1, Kraken2, BLAST+, and Mash, making it a versatile asset for researchers and public health professionals.
-Kalamari’s genome set is carefully selected by subject matter experts and curated datasets of complete genomes.
-This resource can be employed for quality control of single-genome samples or for comprehensive metagenomic studies, enabling the accurate detection and characterization of pathogens, hosts, and contaminants in various environmental and clinical samples.
+Kalamari is a resource that supports genomic epidemiology and pathogen surveillance.
+Kalamari consists of representative genomes, including bacterial, viral, and protist pathogens, plus host organisms, and common contaminants.
+Kalamari also contains a custom taxonomy based on the NCBI Taxonomy database and specialized software for database construction and analysis.
 
-## Introduction
+## Announcement
 
 Public Health laboratories sequence microbial pathogens daily for genomic epidemiology, i.e., to track pathogen spread [@armstrong2019pathogen].
 Usually, this surveillance is in the form of whole genome sequencing (WGS) from single cultures,
@@ -101,15 +97,14 @@ The disadvantages include 1) The databases become too large and slower to query 
 Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and genomes of common contaminants.
 These genomes can be used for contamination detection and for metagenomic analysis.
 
-## Implementation
+### Implementation
 
 Kalamari is comprised of three major components:
 GenBank accessions, custom taxonomy, and software to utilize the accessions and taxonomy.
 
-### Accessions
+#### Accessions
 
-The genomes in Kalamari are not housed in the repo itself.
-Instead, NCBI accessions are in a tab-separated values (tsv) file describing chromosomes, and another tsv for plasmids.
+NCBI accessions are in a tab-separated values (tsv) file describing chromosomes, and another tsv for plasmids.
 The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
 Most genomes in the database are bacterial pathogens or related organisms.
 All chromosomes and plasmids must be complete, i.e., no contig breaks,
@@ -138,7 +133,7 @@ then any matches against, e.g., _B. cereus_, would match against multiple specie
 Instead with the current design of Kalamari, a user would receive results
 for both _B. cereus_ and _B. anthracis_, giving a more informative signal.
 
-### Taxonomy
+#### Taxonomy
 
 Kalamari uses the NCBI Taxonomy database as a baseline.
 Then, it has files to either delete (`delnodes.txt`), or
@@ -150,7 +145,7 @@ Other notable additions include lineages for _Listeria_,
 groups for _Clostridium botulinum_,
 and new subspecies for _Salmonella enterica_.
 
-### Software
+## Data availability
 
 To download the accessions in the tsv files, there is an included script
 `downloadKalamari.pl` that accesses GenBank with its software, Entrez Direct [@kans2016entrez].
