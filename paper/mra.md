@@ -132,47 +132,6 @@ To download the accessions in the tsv files, there is an included script
 `downloadKalamari.pl` that accesses GenBank with its software, Entrez Direct [@kans2016entrez].
 Accessions reside in the GitHub repo, at <https://github.com/lskatz/kalamari>.
 
-## Example Usage
-
-Kalamari can be used where most metagenomic analyses are used.
-Most commonly, we use Kalamari to customize databases for Kraken1 [@wood2014kraken] or Kraken2 [@wood2019improved].
-Building the Kraken database has been implemented in `buildKraken1.sh`
-and in `buildKraken2.sh`.
-However, other descriptions for building databases such as for BLAST+ [@camacho2009blast]
-or Mash [@ondov2016mash] can be found in the documentation.
-
-For single genomes, a metagenomic database is useful for quality control because
-a user can have a null hypothesis that the sample is a metagenomic sample with a singular taxon.
-An alternate hypothesis of contamination can be supported when conflicting taxa are detected by the database.
-Therefore, a data scientist could use Kalamari as a way to detect contamination.
-For metagenomes, the database is useful as intended, to detect which taxa are present in a sample.
-
-A more concise example is shown
-
-```bash
-# Set up the environment
-export PATH=$PATH:$(realpath kalamari/bin)
-# Understand where the output files are
-KALAMARI_VER=$(downloadKalamari.pl --version)
-OUTDIR="kalamari/share/kalamari-$KALAMARI_VER"
-
-# after installing Kalamari
-downloadKalamari.sh
-# => files are now in $OUTDIR/kalamari
-buildTaxonomy.sh
-# => files are now in $OUTDIR/taxonomy
-filterTaxonomy.sh
-# => files are now in $OUTDIR/taxonomy/filtered
-
-# Load kraken1 into the environment
-buildKraken1.sh
-# => files are now in $OUTDIR/kalamari-kraken
-
-# Unload Kraken1 and then load Kraken2 into the environment
-buildKraken2.sh
-# => files are now in $OUTDIR/kalamari-kraken2
-```
-
 ## Acknowledgements
 
 This work was made possible through support from the Advanced Molecular Detection (AMD) Initiative at the Centers for Disease Control and Prevention.
