@@ -83,39 +83,20 @@ Kalamari also contains a custom taxonomy based on the NCBI Taxonomy database and
 ## Announcement
 
 Public Health laboratories sequence microbial pathogens daily for genomic epidemiology, i.e., to track pathogen spread [@armstrong2019pathogen].
-Usually, this surveillance is in the form of whole genome sequencing (WGS) from single cultures,
-but it can come from reflex cultures from samples like stool,
-or could be from metagenomic samples [@huang2017metagenomics].
-In single isolate WGS samples, one might want to perform a quality check to ensure that the sample is not contaminated and is virtually 100% of the target organism.
-In metagenomic samples, one might want to confirm that all reads confidently match a reference taxonomy database.
-
-Other databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb],
-but due to their so comprehensive nature,
-they are disadvantageous for our specific purposes.
-The disadvantages include 1) The databases become too large and slower to query and 2) The results suffer in sensitivity to species [@nasko2018refseq], and thus become less informative for pathogen surveillance.
+Relevant databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb].
+However, due to their so comprehensive nature,
+they are disadvantageous for our specific purposes:
+either being too large and slower to query or loss of sensitivity to species [@nasko2018refseq], and thus become less informative for pathogen surveillance.
 
 Therefore, we sought to find representative genomes of relevant pathogens, their hosts in case of a foodborne infection, and genomes of common contaminants.
-These genomes can be used for contamination detection and for metagenomic analysis.
+We have also implemented a modified taxonomy and software to utilize the accessions and taxonomy.
 
-### Implementation
+### Accessions
 
-Kalamari is comprised of three major components:
-GenBank accessions, custom taxonomy, and software to utilize the accessions and taxonomy.
-
-#### Accessions
-
-NCBI accessions are in a tab-separated values (tsv) file describing chromosomes, and another tsv for plasmids.
-The tsv files have a header line with the following columns: `scientificName` (genus and species), `nuccoreAcc` (GenBank accession), `taxid` (NCBI or Kalamari Taxonomy ID), and `parent` (the parent taxonomy ID).
+Chromosomes and plasmids are in files describing each accession, scientific name ,taxonomy ID (taxid), and the parent taxid.
 Most genomes in the database are bacterial pathogens or related organisms.
-All chromosomes and plasmids must be complete, i.e., no contig breaks,
+All chromosomes and plasmids are complete, i.e., no contig breaks,
 and obtained from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or provided and reviewed by a CDC subject matter expert.
-
-In addition to bacterial genomes, Kalamari incorporates some viral or protist pathogens such as SARS-CoV-2 and _Cryptosporidium_, and several host organisms. The animal hosts include but are not limited to chicken, human, and squid. The plant hosts include fava beans, tomato, and cabbage.
-Most host genomes are very large in size and so only the mitochondrial genomes are included as markers.
-Also, due to the magnitude of possible hosts and food vehicles,
-only a relative select few are included to represent many other possibilities.
-For example, tomato was chosen to represent the family _Solanaceae_ which includes tomatoes, potatoes, eggplant, and tobacco;
-tuna was selected to represent one genus of fish species, but other fish taxa are included too.
 
 We obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite]
 and clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
@@ -149,12 +130,7 @@ and new subspecies for _Salmonella enterica_.
 
 To download the accessions in the tsv files, there is an included script
 `downloadKalamari.pl` that accesses GenBank with its software, Entrez Direct [@kans2016entrez].
-This perl script optimizes the API calls with Entrez Direct by combining multiple accessions in each invocation and by running Entrez Direct concurrently.
-`downloadKalamari.pl` has been wrapped in `downloadKalamari.sh` to invoke the perl script with routine options such as the output location.
-
-Building the custom taxonomy is encoded in `buildTaxonomy.sh`, which 1) downloads the NCBI Taxonomy database, 2) deletes taxa (`delnodes.txt`), and then 3) adds taxa (`names.dmp`, `nodes.dmp`).
-Optionally, a user can run `filterTaxonomy.sh` to build a reduced taxonomy that only keeps taxa and their lineages in the Kalamari database.
-This can result in a much smaller directory size and hypothetically faster downstream analyses.
+Accessions reside in the GitHub repo, at <https://github.com/lskatz/kalamari>.
 
 ## Example Usage
 
