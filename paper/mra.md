@@ -77,8 +77,8 @@ output:
 ## Abstract
 
 Kalamari is a resource that supports genomic epidemiology and pathogen surveillance.
-Kalamari consists of representative genomes, including bacterial, viral, and protist pathogens, plus host organisms, and common contaminants.
-Kalamari also contains a custom taxonomy based on the NCBI Taxonomy database and specialized software for database construction and analysis.
+It consists of representative genomes and common contaminants.
+Kalamari also contains a custom taxonomy and software for downloading and formatting the data.
 
 ## Announcement
 
@@ -93,7 +93,7 @@ We have also implemented a modified taxonomy and software to utilize the accessi
 
 ### Accessions
 
-Chromosomes and plasmids are in files describing each accession, scientific name ,taxonomy ID (taxid), and the parent taxid.
+Chromosomes and plasmids are in files describing each accession, scientific name, taxonomy ID (taxid), and the parent taxid.
 Most genomes in the database are bacterial pathogens or related organisms.
 All chromosomes and plasmids are complete, i.e., no contig breaks,
 and obtained from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or provided and reviewed by a CDC subject matter expert.
@@ -114,14 +114,11 @@ then any matches against, e.g., _B. cereus_, would match against multiple specie
 Instead with the current design of Kalamari, a user would receive results
 for both _B. cereus_ and _B. anthracis_, giving a more informative signal.
 
-#### Taxonomy
+### Taxonomy
 
-Kalamari uses the NCBI Taxonomy database as a baseline.
-Then, it has files to either delete (`delnodes.txt`), or
-add taxa (`names.dmp` and `nodes.dmp`).
-The `.dmp` file format is described in NCBI Taxonomy [@10.1093/nar/gkr1178].
-In one special case for _Shigella_, the taxon is deleted
-and then re-added as a subspecies for _Escherichia coli_.
+Kalamari uses the NCBI Taxonomy database as a baseline [@10.1093/nar/gkr1178].
+There are a few crucial modifications.
+We reassign _Shigella_ as a subspecies for _Escherichia coli_.
 Other notable additions include lineages for _Listeria_,
 groups for _Clostridium botulinum_,
 and new subspecies for _Salmonella enterica_.
