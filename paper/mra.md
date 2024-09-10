@@ -6,73 +6,38 @@ tags:
   - Taxonomy
   - Public Health
   - Bioinformatics
-authors:
-  - name: Lee S. Katz
-    orcid: 0000-0002-2533-9161
-    affiliation: "1, 2"
-  - name: Taylor Griswold
-    affiliation: 1
-    orcid: 0000-0002-2149-7971
-  - name: Rebecca L. Lindsey
-    affiliation: 1
-    orcid: 0000-0002-2149-7971
-  - name: A.C. Lauer
-    orcid: 0000-0002-2924-758X
-    affiliation: 3
-  - name: Monica S. Im
-    orcid: 0000-0002-4292-7598
-    affiliation: 1
-  - name: Grant Williams
-    affiliation: 1
-    orcid: 0000-0002-6033-485X
-  - name: Jessica L. Halpin
-    affiliation: 1
-    orcid: 0000-0003-4108-7010
-  - name: Gerardo A. Gómez
-    affiliation: 3
-    orcid: 0000-0002-1800-8321
-  - name: Zuzana Kucerova
-    affiliation: 1
-    orcid: 0000-0002-7080-5715
-  - name: Shatavia Morrison
-    affiliation: 1
-    orcid: 0000-0002-4658-5951
-  - name: Andrew Page
-    affiliation: 4
-    orcid: 0000-0001-6919-6062
-  - name: Henk C. Den Bakker
-    affiliation: 2
-    orcid: 0000-0002-4086-1580
-  - name: Heather A. Carleton
-    affiliation: 1
-    orcid: 0000-0002-1017-8895
-affiliations:
-  - index: 1
-    name: Division of Foodborne Waterborne and Environmental Diseases (DFWED), Centers for Disease Control and Prevention, Atlanta, GA, USA
-  - index: 2
-    name: Center for Food Safety, University of Georgia, Griffin, GA, USA
-  - index: 3
-    name: At the time of this work, DFWED, Centers for Disease Control and Prevention, Atlanta, GA, USA
-  - index: 4
-    name: Theiagen Genomics, 1745 Shea Center Drive, Suite 400 Highlands Ranch, CO, 80129, USA
-date: "May 17, 2024"
 bibliography: paper.bib
-output:
-  html_document:
-    toc: no
-    number_sections: no
-    output:
-        html_document:
-            toc: no
-            number_sections: no
-            pandoc_args: [
-                "--filter", "pandoc-citeproc",
-                "--citeproc",
-                "--csl", "apa.csl",
-                "--bibliography", "paper.bib",
-                "--metadata", "author-meta.yaml"
-            ]
+csl: asm.csl
 ---
+
+_Running title_: Kalamari database
+
+  Lee S. Katz^A,B,#^,
+  Taylor Griswold^A^,
+  Rebecca L. Lindsey^A^,
+  A.C. Lauer^A^,
+  Monica S. Im^A^,
+  Grant Williams^A^,
+  Jessica L. Halpin^A^,
+  Gerardo A. Gómez^A^,
+  Zuzana Kucerova^A^,
+  Shatavia Morrison^A^,
+  Andrew Page^C^,
+  Henk C. Den Bakker^B^,
+  Heather A. Carleton^A^
+
+^A^Division of Foodborne Waterborne and Environmental Diseases, Centers for Disease Control and Prevention, Atlanta, GA, USA  
+^B^Center for Food Safety, University of Georgia, Griffin, GA, USA  
+^C^Theiagen Genomics, 1745 Shea Center Drive, Suite 400 Highlands Ranch, CO, 80129, USA  
+
+**Corresponding author**:  
+Lee S. Katz  
+<gzu2@cdc.gov>  
+Enteric Diseases Laboratory Branch, CDC  
+1600 Clifton Rd. MS# H23-7  
+Atlanta, GA 30333
+
+\pagebreak
 
 ## Abstract
 
@@ -127,7 +92,12 @@ and new subspecies for _S. enterica_.
 
 To download the accessions in the tsv files, there is an included script
 `downloadKalamari.pl` that accesses GenBank with its software, Entrez Direct [@kans2016entrez].
-Accessions reside in the GitHub repo, at <https://github.com/lskatz/kalamari>.
+Accessions reside in FigShare at
+10.6084/m9.figshare.26980546
+and 10.6084/m9.figshare.26980549,
+and in the GitHub repo, at <https://github.com/lskatz/kalamari>.
+Chromosome accessions are available at <https://github.com/lskatz/Kalamari/blob/master/src/chromosomes.tsv>,
+and plasmid accessions are available at <https://github.com/lskatz/Kalamari/blob/master/src/plasmids.tsv>.
 
 ## Acknowledgements
 
