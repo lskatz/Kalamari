@@ -1,0 +1,86 @@
+Bacillus_cereus	AP007209	1396	86661	UNKNOWN
+Bacillus_subtilis	AL009126	1423	653685	NCBI-REF
+Bacillus_thuringiensis	AE017355	1428	86661	UNKNOWN
+Betacoronavirus_coronavirus	MT233526	2697049	694009	UNKNOWN
+Borreliella_burgdorferi	AE000783	139	64895	UNKNOWN
+Burkholderia_pseudomallei	BX571965	28450	111527	UNKNOWN
+Burkholderia_pseudomallei	BX571966	28450	111527	UNKNOWN
+Campylobacter_coli	CP028187	195	194	UNKNOWN
+Campylobacter_concisus	CP012541	199	194	NCBI-REF
+Campylobacter_cuniculorum	CP020867	374106	194	NCBI-REF
+Campylobacter_fetus	CP006833	196	194	UNKNOWN
+Campylobacter_gracilis	CP012196	824	194	NCBI-REF
+Campylobacter_helveticus	CP020478	28898	194	NCBI-REF
+Campylobacter_hyointestinalis_hyointestinalis	CP015575	91352	198	UNKNOWN
+Campylobacter_hyointestinalis_lawsonii	CP015575	91353	198	UNKNOWN
+Campylobacter_insulaenigrae	CP007770	260714	194	UNKNOWN
+Campylobacter_lanienae	CP015578	75658	194	NCBI-REF
+Campylobacter_jejuni_jejuni	AL111168	32022	197	NCBI-REF
+Campylobacter_lari	CP000932	201	194	UNKNOWN
+Campylobacter_peloridis	CP007766	488546	194	NCBI-REF
+Campylobacter_sputorum	CP019683	202	194	UNKNOWN
+Campylobacter_subantarcticus	CP007772	497724	194	UNKNOWN
+Campylobacter_volucris	CP007774	1031542	194	UNKNOWN
+Campylobacter_ureolyticus	CP012195	827	194	UNKNOWN
+
+# We trust Segre's lab for Citrobacter
+Citrobacter_freundii	CP007557	546	544	UNKNOWN
+# We trust Parkhill's sequencing lab for Clostridioides
+Clostridioides_difficile	AM180355	1496	1870884	UNKNOWN
+
+Clostridium_acetobutylicum	AE001437	1488	1485	UNKNOWN
+Clostridium_argentinense	CP014176	29341	1485	NCBI-REF
+Clostridium_baratii	CP014204	1561	1485	NCBI-REF
+Clostridium_botulinum_groupI	CP001078	9000005	1491	UNKNOWN
+Clostridium_botulinum_groupII	CP000939	9000004	1491	UNKNOWN
+Clostridium_butyricum	CP013239	1492	1485	UNKNOWN
+Clostridium_perfringens	CP000312	1502	1485	UNKNOWN
+
+# WDPB
+Cryptosporidium_parvum	CM000430	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000429	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000431	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000432	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000433	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000434	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000435	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_parvum	CM000436	353152	5806	NCBI-GEN:University of Minnesota
+Cryptosporidium_hominis	LN877948	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877947	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877950	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877949	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877951	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877952	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877953	237895	5806	UNKNOWN
+Cryptosporidium_hominis	LN877954	237895	5806	UNKNOWN
+
+# ATCC
+Enterobacter_cloacae	CP001918	550	354276	UNKNOWN
+# Claire Fraser's lab
+Enterococcus_faecalis	AE016830	1351	1350	UNKNOWN
+# Enterococcus_faecium	CP003583	1352	1350	UNKNOWN
+
+# Rebecca Lindsey
+Escherichia_albertii	CP024282	208962	561	NCBI-GEN:CDC
+Escherichia_coli	CP027582	562	561	NCBI-GEN:CDC
+Escherichia_fergusonii	CP042945	564	561	NCBI-GEN:CDC
+
+# ATCC
+Finegoldia_magna	AP008971	1260	150022	UNKNOWN
+Fusobacterium_nucleatum	CP028101	851	848	UNKNOWN
+
+Listeria_innocua	CP045743	1642	1637	UNKNOWN
+Listeria_ivanovii	FR687253	1638	1637	UNKNOWN
+Listeria_monocytogenes_I	CP054040	9000000	1639	UNKNOWN
+Listeria_monocytogenes_II	CP054042	9000001	1639	UNKNOWN
+Listeria_monocytogenes_III	CP054039	9000002	1639	UNKNOWN
+Listeria_monocytogenes_IV	CP054041	9000003	1639	UNKNOWN
+Listeria_seeligeri	FN557490	1640	1637	UNKNOWN
+
+Yersinia_bercovieri	CP054044	634	629	UNKNOWN
+Yersinia_enterocolitica	CP002246	630	629	UNKNOWN
+Yersinia_enterocolitica	AM286415	630	629	UNKNOWN
+Yersinia_intermedia	CP009801	631	629	UNKNOWN
+Yersinia_kristensenii	CP054049	631	629	UNKNOWN
+Yersinia_massiliensis	CP054048	33060	629	UNKNOWN
+Yersinia_pseudotuberculosis	CP009712	502800	633	UNKNOWN
