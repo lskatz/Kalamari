@@ -66,4 +66,6 @@ Add a sources field to the chromosomes.tsv from entrez search.
 
 ```bash
 cat chromosomes.tsv | perl provenance.pl > sources.tsv
+# or also to keep track of unknowns
+cat chromosomes.insdc.tsv | perl provenance.pl | tee sources.tsv | grep UNKNOWN > unknown.tsv
 ```

@@ -1,4 +1,3 @@
-Acinetobacter_baumannii	CU468230	509170	470	UNKNOWN
 Acinetobacter_pittii	CP002177	48296	909768	UNKNOWN
 Aeromonas_hydrophila	CP000462	644	642	UNKNOWN
 Amycolatopsis_mediterranei	CP002000	33910	1813	UNKNOWN
@@ -22,7 +21,6 @@ Chlamydia_pneumoniae	AE001363	83558	810	UNKNOWN
 Caulobacter_vibrioides	CP001340	155892	75	UNKNOWN
 Chlamydomonas_reinhardtii	AF008237	3055	3052	UNKNOWN
 Corynebacterium_diphtheriae	CP091095	1717	1716	UNKNOWN
-Clostridium_perfringens	CP000312	1502	1485	UNKNOWN
 Corynebacterium_urealyticum	AM942444	43771	1716	UNKNOWN
 Cronobacter_condimenti	CP012264	1163710	413496	UNKNOWN
 Coxiella_burnetii	AE016828	777	776	UNKNOWN
@@ -51,8 +49,6 @@ Lactococcus_lactis	AE005176	1358	1357	UNKNOWN
 Lactobacillus_salivarius	CP000233	1624	1578	UNKNOWN
 Lactuca_sativa	MK820672	75943	4235	UNKNOWN
 Legionella_pneumophila	AE017354	446	445	UNKNOWN
-Leptospira_biflexa	CP000777	355278	145259	UNKNOWN
-Leptospira_interrogans	AE010300	173	171	UNKNOWN
 Leuconostoc_citreum	DQ489736	349519	33964	UNKNOWN
 Lysinibacillus_sphaericus	CP000817	444177	1421	UNKNOWN
 Mesorhizobium_ciceri	CP002447	39645	68287	UNKNOWN
@@ -64,8 +60,6 @@ Mycobacterium_leprae	AL450380	1769	1763	UNKNOWN
 Mycobacterium_smegmatis	CP000480	1772	1866885	UNKNOWN
 Mycoplasma_mycoides	BX293980	2102	656088	UNKNOWN
 Mycoplasma_pneumoniae	U00089	2104	2093	UNKNOWN
-Neisseria_gonorrhoeae	AE004969	485	482	UNKNOWN
-Neisseria_meningitidis	AE002098	487	482	UNKNOWN
 Neomysis_japonica	KR006340	1676841	223649	UNKNOWN
 Ochrobactrum_anthropi	CP000758	529	528	UNKNOWN
 Ochrobactrum_anthropi	CP000759	529	528	UNKNOWN

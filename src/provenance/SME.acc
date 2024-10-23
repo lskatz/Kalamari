@@ -84,3 +84,10 @@ Yersinia_intermedia	CP009801	631	629	UNKNOWN
 Yersinia_kristensenii	CP054049	631	629	UNKNOWN
 Yersinia_massiliensis	CP054048	33060	629	UNKNOWN
 Yersinia_pseudotuberculosis	CP009712	502800	633	UNKNOWN
+
+
+Neisseria_gonorrhoeae	AE004969	485	482	UNKNOWN
+Neisseria_meningitidis	AE002098	487	482	UNKNOWN
+
+# Gulvik
+Leptospira_biflexa	CP000777	355278	145259	UNKNOWN
