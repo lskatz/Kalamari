@@ -1,7 +1,7 @@
 on: 
   push:
     branches: [master, dev, validate-taxonomy]
-  pull_request: [*]
+  pull_request:
 name: Pull-down-all-accessions
 
 jobs:

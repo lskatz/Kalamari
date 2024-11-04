@@ -2,7 +2,7 @@
 on: 
   push:
     branches: [master, dev, validate-taxonomy]
-  pull_request: [*]
+  pull_request:
 name: Genera-with-Kraken2
 
 env:
