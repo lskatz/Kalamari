@@ -33,7 +33,7 @@ Bifidobacterium_longum	AP010888	216816	1678	NCBI-REF
 Bordetella_bronchiseptica	LR134326	518	517	NCTC3000
 Borreliella_burgdorferi	AE000783	139	64895	SME
 Bos_taurus	KC153975	9913	9903	SME
-Brachybacterium_faecium	CP001643	43669	43668	UNKNOWN
+Brachybacterium_faecium	CP001643	43669	43668	NCBI-REF
 Bradyrhizobium_diazoefficiens	BA000040	1355477	374	NCBI-REF
 Brassica_oleracea	JF920286	3712	3705	SME
 Buchnera_aphidicola	BA000003	9	32199	NCBI-REF
@@ -179,8 +179,8 @@ Mycoplasma_pneumoniae	U00089	2104	2093	UNKNOWN
 Neisseria_gonorrhoeae	AE004969	485	482	SME
 Neisseria_meningitidis	AE002098	487	482	SME
 Neomysis_japonica	KR006340	1676841	223649	SME
-Ochrobactrum_anthropi	CP000758	529	528	UNKNOWN
-Ochrobactrum_anthropi	CP000759	529	528	UNKNOWN
+Ochrobactrum_anthropi	CP000758	529	528	NCBI-REF
+Ochrobactrum_anthropi	CP000759	529	528	NCBI-REF
 Pantoea_ananatis	CP001875	553	53335	NCBI-REF
 Parabacteroides_distasonis	CP000140	823	375288	NCBI-REF
 Photobacterium_damselae	CP046752	38293	657	NCBI-GEN:CDC
@@ -216,7 +216,7 @@ Serratia_liquefaciens	CP006252	614	613	NCBI-REF
 Shewanella_halifaxensis	CP000931	271098	22	NCBI-REF
 Shewanella_oneidensis	AE014299	70863	22	NCBI-REF
 Shewanella_woodyi	CP000961	60961	22	NCBI-REF
-Shimwellia_blattae	CP001560	563	1335483	UNKNOWN
+Shimwellia_blattae	CP001560	563	1335483	NCBI-REF
 Sinorhizobium_fredii	CP001389	380	663276	NCBI-REF
 Sinorhizobium_medicae	CP000738	110321	28105	NCBI-REF
 Sinorhizobium_meliloti	AL591688	382	28105	NCBI-REF
