@@ -1,8 +1,6 @@
 # Kalamari
 A database of completed assemblies for metagenomics-related tasks
 
-[![Creative Commons License v4](https://licensebuttons.net/l/by-sa/4.0/88x31.png)](LICENSE.md)
-
 ## Synopsis
 
 Kalamari is a database of completed and public assemblies, backed by trusted institutions.

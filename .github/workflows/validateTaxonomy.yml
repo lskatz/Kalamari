@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev, validate-taxonomy]
+    branches: [master, dev, esearch-input]
 name: Validate taxonomy
 
 jobs:
@@ -27,11 +27,18 @@ jobs:
           echo $PATH
           echo ""
           cat $GITHUB_PATH
+      - name: install taxonkit
+        run:  |
+          wget https://github.com/shenwei356/taxonkit/releases/download/v0.16.0/taxonkit_linux_amd64.tar.gz
+          tar -xvf taxonkit_linux_amd64.tar.gz
+          rm -v taxonkit_linux_amd64.tar.gz
+          chmod +x taxonkit
+          echo $(realpath .) >> $GITHUB_PATH
       - name: build taxonomy
         run:  |
           echo $PATH
-          bash Kalamari/bin/buildTaxonomy.sh
-          bash Kalamari/bin/filterTaxonomy.sh
+          bash -x Kalamari/bin/buildTaxonomy.sh
+          bash -x Kalamari/bin/filterTaxonomy.sh
           ls -lhR Kalamari/share/kalamari-*/taxonomy
       - name: validate taxonomy
         run:  |
