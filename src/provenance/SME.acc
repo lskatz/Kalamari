@@ -5,6 +5,8 @@ Betacoronavirus_coronavirus	MT233526	2697049	694009	UNKNOWN
 Borreliella_burgdorferi	AE000783	139	64895	UNKNOWN
 Burkholderia_pseudomallei	BX571965	28450	111527	UNKNOWN
 Burkholderia_pseudomallei	BX571966	28450	111527	UNKNOWN
+
+# A ton of Campy and related genomes from Jim Bono
 Campylobacter_coli	CP028187	195	194	UNKNOWN
 Campylobacter_concisus	CP012541	199	194	NCBI-REF
 Campylobacter_cuniculorum	CP020867	374106	194	NCBI-REF
@@ -22,6 +24,9 @@ Campylobacter_sputorum	CP019683	202	194	UNKNOWN
 Campylobacter_subantarcticus	CP007772	497724	194	UNKNOWN
 Campylobacter_volucris	CP007774	1031542	194	UNKNOWN
 Campylobacter_ureolyticus	CP012195	827	194	UNKNOWN
+Arcobacter_ellisii	CP032097	913109	28196	UNKNOWN
+Arcobacter_cibarius	CP043857	255507	28196	UNKNOWN
+Helicobacter_pylori	AE000511	210	209	UNKNOWN
 
 # We trust Segre's lab for Citrobacter
 Citrobacter_freundii	CP007557	546	544	UNKNOWN
@@ -86,8 +91,31 @@ Yersinia_massiliensis	CP054048	33060	629	UNKNOWN
 Yersinia_pseudotuberculosis	CP009712	502800	633	UNKNOWN
 
 
+Salmonella_enterica_IIIa	CP000880	9000014	28901	UNKNOWN
+Salmonella_enterica_IIIb	CP053583	9000015	28901	UNKNOWN
+Salmonella_enterica_IV	CP053579	59205	28901	UNKNOWN
+Salmonella_enterica_IX	CP054715	9000016	28901	UNKNOWN
+Salmonella_enterica_VII	CP053582	59208	28901	UNKNOWN
+Salmonella_enterica_X	CP053581	9000017	28901	UNKNOWN
+
+
 Neisseria_gonorrhoeae	AE004969	485	482	UNKNOWN
 Neisseria_meningitidis	AE002098	487	482	UNKNOWN
 
 # Gulvik
 Leptospira_biflexa	CP000777	355278	145259	UNKNOWN
+Leptospira_interrogans	CP020414	173	171	UNKNOWN
+
+# Eukie hosts
+Bos_taurus	KC153975	9913	9903	UNKNOWN
+Arripis_trutta	AP006810	270544	163128	UNKNOWN
+Brassica_oleracea	JF920286	3712	3705	UNKNOWN
+Gallus_gallus	HQ857211	9031	9030	UNKNOWN
+Humulus_lupulus	NC_086845	3486	3484	UNKNOWN
+Lactuca_sativa	MK820672	75943	4235	UNKNOWN
+Neomysis_japonica	KR006340	1676841	223649	UNKNOWN
+Pollachius_virens	FR751399	8060	8059	UNKNOWN
+Solanum_lycopersicum	MF034192	4081	49274	UNKNOWN
+Sus_scrofa	FJ236999	9823	9822	UNKNOWN
+Thunnus_alalunga	AB101291	8235	8234	UNKNOWN
+Vicia_faba	KC189947	3906	3904	UNKNOWN
