@@ -1,5 +1,6 @@
 # I'll just cat these later to ncbi_ref.acc.gz later
-BA000040.2
+Bradyrhizobium_diazoefficiens	BA000040	1355477	374	NCBI-REF
+Brachybacterium_faecium	CP001643	43669	43668	UNKNOWN
 Buchnera_aphidicola	BA000003	9	32199	UNKNOWN
 Candidatus_Desulforudis_audaxviator	CP000860	471827	471826	UNKNOWN
 Chlamydia_pneumoniae	AE001363	83558	810	UNKNOWN
@@ -36,7 +37,11 @@ Methylobacterium_radiotolerans	CP001001	31998	407	UNKNOWN
 Micrococcus_luteus	CP001628	1270	1269	UNKNOWN
 Morganella_morganii_morganii	CP004345	180434	582	UNKNOWN
 Mycobacterium_leprae	AL450380	1769	1763	UNKNOWN
+Mycobacterium_smegmatis	CP080274	1772	1866885	UNKNOWN
 Mycoplasma_mycoides	BX293980	2102	656088	UNKNOWN
+Mycoplasma_pneumoniae	LR214945	2104	2093	UNKNOWN
+Ochrobactrum_anthropi	CP000758	529	528	UNKNOWN
+Ochrobactrum_anthropi	CP000759	529	528	UNKNOWN
 Pantoea_ananatis	CP001875	553	53335	UNKNOWN
 Parabacteroides_distasonis	CP000140	823	375288	UNKNOWN
 Prochlorococcus_marinus	AE017126	1219	1218	UNKNOWN
@@ -44,12 +49,14 @@ Proteus_mirabilis	CP004022	584	583	UNKNOWN
 Pseudomonas_aeruginosa	AE004091	287	136841	UNKNOWN
 Pseudomonas_putida	AP013070	390235	303	UNKNOWN
 Pyrobaculum_neutrophilum	CP001014	70771	2276	UNKNOWN
+Rhodobacter_capsulatus	CP001312    1061	1060	UNKNOWN
 Rhodospirillum_rubrum	CP000230	1085	1081	UNKNOWN
 Rickettsia_prowazekii	AJ235269	782	114292	UNKNOWN
 Salinibacter_ruber	CP000159	146919	146918	UNKNOWN
 Salmonella_bongori	FR877557	54736	590	UNKNOWN
 Shewanella_halifaxensis	CP000931	271098	22	UNKNOWN
 Shewanella_oneidensis	AE014299	70863	22	UNKNOWN
+Shimwellia_blattae	CP001560	563	1335483	UNKNOWN
 Sinorhizobium_fredii	CP001389	380	663276	UNKNOWN
 Sinorhizobium_medicae	CP000738	110321	28105	UNKNOWN
 Sinorhizobium_meliloti	AL591688	382	28105	UNKNOWN
@@ -61,6 +68,7 @@ Streptococcus_mutans	AE014133	1309	1301	UNKNOWN
 Streptococcus_pneumoniae	CP000936	487214	1313	UNKNOWN
 Streptococcus_pyogenes	AE004092	1314	1301	UNKNOWN
 Streptococcus_sanguinis	CP000387	1305	1301	UNKNOWN
+Synechococcus_elongatus	CP085785	32046	1129	UNKNOWN
 Thermotoga_maritima	AE000512	2336	2335	UNKNOWN
 Thermus_thermophilus	AP008226	274	270	UNKNOWN
 Xanthomonas_campestris	AE008922	339	338	UNKNOWN

@@ -21,5 +21,5 @@ for ((i=0; i<${#acc}; i+=chunk_size)); do
   echo "ACCESSIONS: $accs"
   datasets summary genome accession $accs --report sequence --as-json-lines | \
     dataformat tsv genome-seq --fields accession,genbank-seq-acc | \
-    grep -m 1 $expected || true
+    grep $expected || true
 done

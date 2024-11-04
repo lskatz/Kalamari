@@ -23,6 +23,7 @@ for(@line){
 # Get the list of sources from NCBI references
 #my %ncbi_ref = map{chomp; s/\.\d+$//; uc($_)=>1} `cat ncbi.acc`;
 my %ncbi_ref = map{chomp; s/\.\d+$//; uc($_)=>1} `zcat ncbi_ref.acc.gz | tr '\t' '\n'`;
+   %ncbi_ref = (%ncbi_ref, map{chomp; s/\.\d+$//; uc($_)=>1} `cat ncbi_ref.acc.more | tr '\t' '\n'`);
 # NCTC3000 list of sources
 my %nctc     = map{chomp; s/\.\d+$//; uc($_)=>1} `cat nctc3000.acc`;
 my %fda      = map{chomp; s/\.\d+$//; uc($_)=>1} `cat fda-argos.acc`;
