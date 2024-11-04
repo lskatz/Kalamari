@@ -1,0 +1,47 @@
+on: 
+  push:
+    paths:
+      - 'paper/**'
+      - '.github/workflows/draft-docx.yml'
+    
+name: JOSS docx rendering
+env:
+  OPENJOURNALS_PATH: /usr/local/share/openjournals
+  format: docx
+  article_info_option: ""
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    name: Paper Draft
+    container:
+      image: openjournals/inara:latest
+      env: 
+        GIT_SHA: $GITHUB_SHA
+        JOURNAL: joss
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build draft docx
+        # inara -o docx paper/paper.md
+        run:  | 
+            /usr/local/bin/pandoc \
+            --data-dir="${{ env.OPENJOURNALS_PATH }}/data" \
+            --defaults="${{ env.OPENJOURNALS_PATH }}/${{ env.format }}/defaults.yaml" \
+            ${{ env.article_info_option}} \
+            --resource-path=.:${{ env.OPENJOURNALS_PATH }}/scripts \
+            --variable="${{ env.JOURNAL }}" \
+            --variable=retraction:"${{ env.retraction }}" \
+            --variable=draft:"${{ env.draft }}" \
+            --metadata=draft:"${{ env.draft }}" \
+            --log="$logfile" \
+            "$input_file" \
+            "$@"
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          # This is the output path where Pandoc will write the compiled
+          # PDF. Note, this should be the same directory as the input
+          # paper.md
+          path: paper/paper.docx     

@@ -1,7 +1,8 @@
 # This is a subsampling unit test to get early results
 on: 
   push:
-    branches: [master, dev]
+    branches: [master, dev, validate-taxonomy]
+  pull_request:
 name: Listeria-with-Kraken1
 
 env:

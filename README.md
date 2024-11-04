@@ -1,4 +1,5 @@
 # Kalamari
+
 A database of completed assemblies for metagenomics-related tasks
 
 ## Synopsis
@@ -9,12 +10,14 @@ These assemblies can be further used in formatted databases such as Kraken or Bl
 ### Prerequisites & Recommendations
 
 Requirements:
+
 - clone this repo locally `git clone https://github.com/lskatz/Kalamari.git`
 - NCBI entrez-utilities set of tools `edirect`, `esearch`, etc.
   - install via your package manager
   - debian/ubuntu: `apt install ncbi-entrez-direct` 
 
 Optional, but recommended:
+
 - `NCBI_API_KEY` environmental variable
 - `EMAIL` environmental variable
 
