@@ -57,6 +57,16 @@ _NOTE_ This command probably would have saved me time if I turned it into a batc
 datasets summary genome accession GCF_000006945.2 --report sequence --as-json-lines | dataformat tsv genome-seq --fields genbank-seq-acc
 ```
 
+Check the assemblies spreadsheet on whether or not it is retrospecitively part of NCBI references
+
+```bash
+zcat assembly_summary_genbank.txt.gz | perl -F'\t' -lane 'print if($F[11] eq "Complete Genome" || $.==1);' > tmp.tsv
+mv tmp.tsv assembly-complete.tsv
+bash quick-ncbi-ref-check.sh Caulobacter vibrioides CP001340
+# If found, add to ncbi_ref.acc.more
+# If not found, see if there is different reference to add
+```
+
 ## Translate
 
 Translate certain entries into CDC, NCTC3000, FDA, or the NCBI list.

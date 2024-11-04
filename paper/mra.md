@@ -47,7 +47,9 @@ Kalamari also contains a custom taxonomy and software for downloading and format
 
 ## Announcement
 
-Public Health laboratories sequence microbial pathogens daily for genomic epidemiology, i.e., to track pathogen spread [@armstrong2019pathogen].
+Public Health laboratories sequence microbial pathogens daily for many applications including genomic epidemiology [@armstrong2019pathogen],
+species identification [@lindsey2023rapid],
+and metagenomic analysis [@huang2017metagenomics].
 Relevant databases exist such as RefSeq [@o2016reference] or The Genome Taxonomy Database (GTDB) [@parks2022gtdb].
 However, due to their so comprehensive nature,
 they are disadvantageous for our specific purposes:
@@ -64,7 +66,7 @@ All chromosomes and plasmids are complete, i.e., no contig breaks,
 and obtained from trusted sources, e.g., FDA-ARGOS [@sichtig2019fda] or the NCTC 3000 collection [@dicks2023nctc3000], or provided and reviewed by a CDC subject matter expert.
 
 We obtained the list of plasmids from the Mob-Suite project [@robertsonMobsuite]
-and clustered them at 97% average nucleotide identity (ANI) [@lindsey2023rapid].
+and clustered them at 97% average nucleotide identity using edlb_ani_mummer v1 with default options [@lindsey2023rapid].
 For each cluster, the taxonomy identifier was raised to the lowest common tier of taxonomy.
 For example, if a cluster of plasmids were identified in both _Escherichia coli_ and _Salmonella enterica_, then taxonomy identifiers for all the plasmids in the cluster were changed to their common family, _Enterobacteriaceae_.
 As a result, any taxonomic signature from these plasmids
