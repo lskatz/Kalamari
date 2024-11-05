@@ -2,6 +2,7 @@
 on: 
   push:
     branches: [master, dev, validate-taxonomy]
+  pull_request:
 name: Listeria-with-Kraken1
 
 env:
@@ -41,18 +42,10 @@ jobs:
           tree $(realpath .)
       - name: install-edirect
         run:  |
-          sudo apt-get install ncbi-entrez-direct
-          echo "installed edirect the apt way"
-          exit
-          cd $HOME
-          perl -MNet::FTP -e '$ftp = new Net::FTP("ftp.ncbi.nlm.nih.gov", Passive => 1); $ftp->login; $ftp->binary; $ftp->get("/entrez/entrezdirect/edirect.tar.gz");'
-          gunzip -cv edirect.tar.gz | tar xf -
-          rm -v edirect.tar.gz
-          echo $GITHUB_WORKSPACE/edirect >> $GITHUB_PATH
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+          echo $HOME/edirect >> $GITHUB_PATH
           echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
-          #export PATH=${PATH}:$HOME/edirect >& /dev/null || setenv PATH "${PATH}:$HOME/edirect"
-          yes Y | ./edirect/setup.sh
-          tree edirect
+          tree $HOME/edirect
       - name: check-env
         run:  echo "$PATH"
       - name: select for only Listeria
