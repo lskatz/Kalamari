@@ -26,13 +26,8 @@ _Running title_: Kalamari database
   Henk C. Den Bakker^B^,
   Heather A. Carleton^A^
 
-<<<<<<< HEAD
 ^A^Division of Foodborne Waterborne and Environmental Diseases, Centers for Disease Control and Prevention (CDC), Atlanta, GA, USA  
 ^B^Center for Food Safety, University of Georgia (UGA), Griffin, GA, USA  
-=======
-^A^Division of Foodborne Waterborne and Environmental Diseases, Centers for Disease Control and Prevention, Atlanta, GA, USA  
-^B^Center for Food Safety, University of Georgia, Griffin, GA, USA  
->>>>>>> 684bec6316c44cae334711e4b769802f61bf531f
 ^C^Theiagen Genomics, 1745 Shea Center Drive, Suite 400 Highlands Ranch, CO, 80129, USA  
 
 **Corresponding author**:  
