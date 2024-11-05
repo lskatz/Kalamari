@@ -23,8 +23,8 @@ echo "TEMPDIR is $tempdir" >&2
 echo "OUTDIR  is $outdir_prefix" >&2
 
 TSV="$tempdir/in.tsv"
-cat $thisdir/../src/chromosomes.tsv > $TSV
-cat $thisdir/../src/plasmids.tsv   >> $TSV
+cat $thisdir/../src/chromosomes.tsv       > $TSV
+tail -n +2 $thisdir/../src/plasmids.tsv  >> $TSV
 
 cp -rv $thisdir/../src/taxonomy $tempdir/taxonomy
 
