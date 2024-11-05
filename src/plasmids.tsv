@@ -1378,7 +1378,7 @@ Xanthomonas albilineans	FP340278	29447	338
 Microchaete diplosiphon	AP018245	1197	188910
 Microchaete diplosiphon	AP018242	1197	188910
 Nostoc punctiforme	CP001042	272131	1177
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026688	1261031	2593658
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026688	1261031	2593658
 Nostoc commune	AP018330	1178	1177
 Nostoc commune	AP018334	1178	1177
 Nostoc sphaeroides	CP031945	446679	1177
@@ -2354,7 +2354,7 @@ Sphingopyxis macrogoltabida	CP012701	33050	150203
 Sphingopyxis sp. FD7	AP017899	1914525	2614943
 Nostoc commune	AP018333	1178	2614943
 Nostoc sphaeroides	CP031944	446679	2614943
-Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'	CP026696	1618022	2593658
+Nostoc sp. Lobaria pulmonaria (5183) cyanobiont	CP026696	1618022	2593658
 Calothrix brevissima	AP018213	938406	1186
 Microchaete diplosiphon	AP018244	1197	1186
 Calothrix brevissima	AP018214	938406	1186
@@ -2974,16 +2974,16 @@ Periwinkle leaf yellowing phytoplasma	HQ332530	619518	85620
 Periwinkle leaf yellowing phytoplasma	HQ332527	619518	85620
 Periwinkle leaf yellowing phytoplasma	HQ332528	619518	85620
 Periwinkle leaf yellowing phytoplasma	HQ332531	619518	85620
-Aster yellows witches'-broom phytoplasma	CP000064	229545	85620
-Aster yellows witches'-broom phytoplasma	CP000062	229545	85620
-Aster yellows witches'-broom phytoplasma	CP000063	229545	85620
-Aster yellows witches'-broom phytoplasma	CP000065	229545	85620
+Aster yellows witches-broom phytoplasma	CP000064	229545	85620
+Aster yellows witches-broom phytoplasma	CP000062	229545	85620
+Aster yellows witches-broom phytoplasma	CP000063	229545	85620
+Aster yellows witches-broom phytoplasma	CP000065	229545	85620
 Wheat blue dwarf phytoplasma	JX668987	321961	85620
 Wheat blue dwarf phytoplasma	JX668988	321961	85620
 Wheat blue dwarf phytoplasma	JX668989	321961	85620
-Chinaberry witches'-broom phytoplasma	JF827298	389343	85620
-Paulownia witches'-broom phytoplasma	EF426472	39647	85620
-Paulownia witches'-broom phytoplasma	EF426473	39647	85620
+Chinaberry witches-broom phytoplasma	JF827298	389343	85620
+Paulownia witches-broom phytoplasma	EF426472	39647	85620
+Paulownia witches-broom phytoplasma	EF426473	39647	85620
 Periwinkle little leaf phytoplasma	JN835187	137854	85635
 Rice orange leaf phytoplasma	KY086101	146897	85635
 Catharanthus roseus aster yellows phytoplasma	CP035950	1193712	85620
@@ -4028,9 +4028,9 @@ Escherichia coli	CP014090	562	1716
 Corynebacterium crudilactis	CP015623	1652495	1716
 Pseudomonas aeruginosa	MH547560	287	1716
 Nostoc punctiforme	CP001038	272131	1716
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026682	1261031	1716
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026682	1261031	1716
 Nostoc punctiforme	CP001039	272131	1716
-Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'	CP026693	1618022	1716
+Nostoc sp. Lobaria pulmonaria (5183) cyanobiont	CP026693	1618022	1716
 Nostoc flagelliforme	CP024790	2038116	1306274
 Vibrio cholerae	DQ787205	666	1306274
 Borreliella valaisiana	CP001440	62088	1306274
@@ -4205,7 +4205,7 @@ Lactobacillus	AP014681	1578	1835
 Lactobacillus	CP043940	1578	1835
 Lactobacillus	CP045183	1578	1835
 Lactobacillus	CP032750	1578	1835
-Rahnella sp. 'WMR15'	AM167518	360016	2635087
+Rahnella sp. WMR15	AM167518	360016	2635087
 Serratia marcescens	CP003960	615	2635087
 Serratia marcescens	CP031315	615	2635087
 Yersinia kristensenii	CP032483	28152	2635087
@@ -6494,12 +6494,12 @@ Nostoc commune	AP018329	1178	2661849
 Nostoc sphaeroides	CP031943	446679	2661849
 Nostoc commune	AP018331	1178	2661849
 Nostoc flagelliforme	CP024786	2038116	2661849
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026689	1261031	2661849
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026689	1261031	2661849
 Nostoc commune	AP018328	1178	2661849
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026686	1261031	2661849
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026687	1261031	2661849
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026685	1261031	2661849
-Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'	CP026694	1618022	2661849
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026686	1261031	2661849
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026687	1261031	2661849
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026685	1261031	2661849
+Nostoc sp. Lobaria pulmonaria (5183) cyanobiont	CP026694	1618022	2661849
 Nostoc commune	AP018332	1178	2661849
 Streptomyces lividans	M21778	1916	2661849
 Streptomyces silaceus	KU996353	545123	1883
@@ -6558,7 +6558,7 @@ Rhodobacter sphaeroides	CP030276	1063	1578
 Rhodobacter sphaeroides	CP012967	1063	1578
 Rhodobacter sphaeroides	CP012966	1063	1578
 Nostoc sp. PCC 7524	CP003553	28072	2593658
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026690	1261031	2593658
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026690	1261031	2593658
 Trichormus variabilis	CP000120	264691	2593658
 Staphylococcus	GQ900384	1279	2593658
 Staphylococcus	CP027492	1279	2593658
@@ -7707,7 +7707,7 @@ Roseomonas gilardii	CP015587	257708	125216
 Kocuria flava	CP013255	446860	57493
 Kocuria flava	CP013256	446860	57493
 Aquabacterium olei	CP029211	1296669	92793
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026684	1261031	92793
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026684	1261031	92793
 Cylindrospermum sp. NIES-4074	AP018272	2005457	92793
 Rhodococcus sp. B264-1	AY297818	233067	192944
 Rhodococcus opacus	AP011119	37919	192944
@@ -8378,8 +8378,8 @@ Enterococcus wangshanyuanii	CP021875	2005703	1350
 Enterococcus wangshanyuanii	CP021876	2005703	1350
 Enterococcus wangshanyuanii	CP021878	2005703	1350
 Nostoc linckia	AP018226	92942	1350
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026683	1261031	1350
-Nostoc sp. 'Peltigera membranacea cyanobiont' N6	CP026691	1261031	1350
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026683	1261031	1350
+Nostoc sp. Peltigera membranacea cyanobiont N6	CP026691	1261031	1350
 Borrelia crocidurae	CP003460	29520	1350
 Borrelia crocidurae	CP003459	29520	1350
 Borrelia crocidurae	CP003455	29520	1350
@@ -8996,7 +8996,7 @@ Gammaproteobacteria	KU295136	1236	2614977
 Neisseria lactamica	DQ223898	486	2614977
 Streptomyces sp. 44414	DQ322650	364103	2593676
 Legionella adelaidensis	LR134435	45056	2593676
-endosymbiont 'TC1' of Trimyema compressum	CP014607	243899	84086
+endosymbiont TC1 of Trimyema compressum	CP014607	243899	84086
 Stanieria cyanosphaera	CP003655	102116	84086
 Lactococcus lactis	CP003136	1358	84086
 Nitrosococcus watsonii	CP002088	473531	1227
@@ -9048,7 +9048,7 @@ Streptomyces sp. CLI2509	CP021119	1984801	2593676
 Weissella cibaria	KF879106	137591	2593676
 Weissella cibaria	CP012880	137591	2593676
 Bacillus	CP018198	1386	2593676
-Nostoc sp. 'Lobaria pulmonaria (5183) cyanobiont'	CP026695	1618022	2593676
+Nostoc sp. Lobaria pulmonaria (5183) cyanobiont	CP026695	1618022	2593676
 Calothrix brevissima	AP018210	938406	2593676
 Dermacoccus abyssi	CP043032	322596	57495
 Dermacoccus nishinomiyaensis	CP008890	1274	57495
