@@ -100,6 +100,7 @@ and 10.6084/m9.figshare.26980549,
 and in the GitHub repo, at <https://github.com/lskatz/kalamari>.
 Chromosome accessions are available at <https://github.com/lskatz/Kalamari/blob/master/src/chromosomes.tsv>,
 and plasmid accessions are available at <https://github.com/lskatz/Kalamari/blob/master/src/plasmids.tsv>.
+The latest version of the software can be accessed at <https://doi.org/10.5281/zenodo.13900883>.
 
 ## Acknowledgements
 
