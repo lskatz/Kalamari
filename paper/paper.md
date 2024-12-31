@@ -12,7 +12,7 @@ authors:
     affiliation: "1, 2"
   - name: Taylor Griswold
     affiliation: 1
-    orcid: 0000-0002-2149-7971
+    orcid: 0000-0001-9084-7958
   - name: Rebecca L. Lindsey
     affiliation: 1
     orcid: 0000-0002-2149-7971
