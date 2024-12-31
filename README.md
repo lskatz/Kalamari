@@ -15,10 +15,7 @@ Requirements:
   - debian/ubuntu: `apt install ncbi-entrez-direct`
 
 Optional, but recommended:
-<<<<<<< HEAD
 
-=======
->>>>>>> 0b1cf7217a9035019276e5e2926e323d90959db9
 - `NCBI_API_KEY` environmental variable
 - `EMAIL` environmental variable
 
