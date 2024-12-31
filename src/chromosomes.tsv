@@ -1,289 +1,276 @@
-scientificName	nuccoreAcc	taxid	parent
-Acholeplasma laidlawii	CP000896	2148	2147
-Acinetobacter baumannii	CU468230	509170	470
-Acinetobacter pittii	NC_016603	48296	909768
-Aeromonas hydrophila	NC_008570	644	642
-Agrobacterium fabrum	NC_003062	1176649	1183400
-Agrobacterium fabrum	NC_003063	1176649	1183400
-Alkaliphilus transvaalensis	CP000724	208226	114627
-Aliivibrio fischeri	NC_006841	668	511678
-Aliivibrio fischeri	NC_006840	668	511678
-Amycolatopsis mediterranei	NC_014318	33910	1813
-Aquifex aeolicus	NC_000918	63363	2713
-Architeuthis dux	NC_011581	256136	34555
-Arcobacter bivalviorum	CP031217	663364	2321115
-Arcobacter cibarius	CP043857	255507	28196
-Arcobacter ellisii	CP032097	913109	28196
-Arcobacter halophilus	CP031218	197482	28196
-Arcobacter molluscorum	CP032098	1032072	28196
-Arcobacter mytili	CP031219	603050	28196
-Arcobacter skirrowii	CP032099	28200	28196
-Arcobacter suis	CP032100	1278212	28196
-Arcobacter thereius	CP035926	544718	28196
-Arcobacter trophiarum	CP031367	708186	28196
-Arripis trutta	AP006810	270544	163128
-Atlantibacter hermannii	CP042941	565	1903434
-Bacillus cereus	AP007209	1396	86661
-Bacillus subtilis	NC_000964	1423	653685
-Bacillus thuringiensis	NC_005957	1428	86661
-Bacteroides fragilis	NC_006347	817	816
-Bacteroides thetaiotaomicron	NC_004663	818	816
-Bartonella bacilliformis	CP000524	774	773
-Betacoronavirus coronavirus	MT233526	2697049	694009
-Bifidobacterium adolenscentis	CP028341	1680	1678
-Bifidobacterium bifidum	NC_014638	1681	1678
-Bifidobacterium longum	NC_004307	216816	1678
-Bordetella bronchiseptica	NC_019382	518	517
-Borreliella burgdorferi	NC_001318	139	64895
-Bos taurus	KC153975	9913	9903
-Brachybacterium faecium	CP001643	43669	43668
-Bradyrhizobium diazoefficiens	NC_004463	1355477	374
-Brassica oleracea	NC_016118	3712	3705
-Buchnera aphidicola	NC_002528	9	32199
-Burkholderia pseudomallei	NC_006350	28450	111527
-Burkholderia pseudomallei	NC_006351	28450	111527
-Campylobacter avium	CP022347	522484	522485
-Campylobacter coli	CP028187	195	194
-Campylobacter concisus	CP012541	199	194
-Campylobacter cuniculorum	CP020867	374106	194
-Campylobacter fetus	CP006833	196	194
-Campylobacter gracilis	CP012196	824	194
-Campylobacter helveticus	NZ_CP020478	28898	194
-Campylobacter hyointestinalis hyointestinalis	CP015575	91352	198
-Campylobacter hyointestinalis lawsonii	CP015575	91353	198
-Campylobacter insulaenigrae	CP007770	260714	194
-Campylobacter jejuni jejuni	NC_002163	32022	197
-Campylobacter lanienae	CP015578	75658	194
-Campylobacter lari	CP000932	201	194
-Campylobacter peloridis	CP007766	488546	194
-Campylobacter sputorum	CP019683	202	194
-Campylobacter subantarcticus	CP007772	497724	194
-Campylobacter ureolyticus	CP012195	827	194
-Campylobacter volucris	CP007774	1031542	194
-Candidatus Desulforudis audaxviator	CP000860	471827	471826
-Candidatus Korarchaeum cryptofilum	CP000968	374847	498846
-Caulobacter vibrioides	NC_011916	155892	75
-Chlamydia pneumoniae	NC_000922	83558	810
-Chlamydia trachomatis	NC_000117	813	810
-Chlamydomonas reinhardtii	AF008237	3055	3052
-Chlorobaculum tepidum	NC_002932	1097	256319
-Chloroflexus aurantiacus	NC_010175	1108	1107
-Citrobacter freundii	CP007557	546	544
-Citrobacter amalonaticus	CP014070	35703	544
-Clavibacter michiganensis_sepedonicus	AM849034	31964	28447
-Clostridioides difficile	NC_009089	1496	1870884
-Clostridium acetobutylicum	NC_003030	1488	1485
-Clostridium argentinense	CP014176	29341	1485
-Clostridium baratii	CP014204	1561	1485
-Clostridium botulinum groupI	NC_010723	9000005	1491
-Clostridium botulinum groupII	NC_010516	9000004	1491
-Clostridium butyricum	CP013239	1492	1485
-Clostridium perfringens	NC_008262	1502	1485
-Corynebacterium diphtheriae	CP091095	1717	1716
-Corynebacterium glutamicum	NC_003450	1718	1716
-Corynebacterium urealyticum	AM942444	43771	1716
-Coxiella burnetii	NC_002971	777	776
-Cronobacter condimenti	CP012264	1163710	413496
-Cronobacter dublinensis dublinensis	CP012266	413498	413497
-Cronobacter malonaticus	CP006731	413503	413496
-Cronobacter muytjensii	CP012268	413501	413496
-Cronobacter sakazakii	CP011047	28141	413496
-Cronobacter turicensis	FN543093	413502	413496
-Cronobacter universalis	CP012257	535744	413496
-Cryptosporidium parvum	CM000429	353152	5806
-Cryptosporidium parvum	CM000430	353152	5806
-Cryptosporidium parvum	CM000431	353152	5806
-Cryptosporidium parvum	CM000432	353152	5806
-Cryptosporidium parvum	CM000433	353152	5806
-Cryptosporidium parvum	CM000434	353152	5806
-Cryptosporidium parvum	CM000435	353152	5806
-Cryptosporidium parvum	CM000436	353152	5806
-Cryptosporidium hominis	LN877947	237895	5806
-Cryptosporidium hominis	LN877948	237895	5806
-Cryptosporidium hominis	LN877949	237895	5806
-Cryptosporidium hominis	LN877950	237895	5806
-Cryptosporidium hominis	LN877951	237895	5806
-Cryptosporidium hominis	LN877952	237895	5806
-Cryptosporidium hominis	LN877953	237895	5806
-Cryptosporidium hominis	LN877954	237895	5806
-Cupriavidus taiwanensis	CU633750	164546	106589
-Cupriavidus taiwanensis	CU633749	164546	106589
-Cyanothece	CP000806	43989	2546360
-Cyanothece	CP000807	43989	2546360
-Deinococcus radiodurans	NC_001263	1299	1298
-Deinococcus radiodurans	NC_001264	1299	1298
-Delftia acidovorans	CP000884	80866	80865
-Desulfovibrio vulgaris	NC_002937	881	872
-Dictyoglomus turgidum	NC_011661	513050	13
-Enterobacter cloacae	NC_014121	550	354276
-Enterococcus faecalis	NC_004668	1351	1350
-Enterococcus faecium	NC_017960	1352	1350
-Escherichia albertii	CP024282	208962	561
-Escherichia coli	CP027582	562	561
-Escherichia fergusonii	CP042945	564	561
-Exiguobacterium antarcticum	CP003063	132920	33986
-Finegoldia magna	AP008971	1260	150022
-Flavobacterium psychrophilum	NC_009613	96345	237
-Francisella philomiragia	CP063138	28110	262
-Francisella tularensis	NC_006570	263	262
-Fusobacterium nucleatum	CP028101	851	848
-Gallus gallus	HQ857211	9031	9030
-Gardnerella vaginalis	NC_014644	2702	2701
-Geobacter sulfurreducens	NC_002939	35554	28231
-Gloeobacter violaceus	NC_005125	33072	33071
-Grimontia hollisae	CP035690	673	246861
-Grimontia hollisae	CP035691	673	246861
-Haemophilus influenzae	L42023	727	724
-Haemophilus somnus	CP000947	228400	731
-Halobacterium salinarum	AM774415	478009	2242
-Helianthus annuus	MG770607	4232	4231
-Helicobacter pylori	AE000511	210	209
-Heliobacterium modesticaldum	CP000930	35701	2697
-Homo sapiens	NC_012920	9606	9605
-Humulus lupulus	NC_086845	3486	3484
-Ketogulonicigenium vulgare	NC_017384	92945	92944
-Klebsiella aerogenes	NC_015663	548	570
-Klebsiella pneumoniae	NC_016845	573	570
-Lactobacillus acidophilus	NC_006814	1579	1578
-Lactobacillus paracasei	NC_008526	1597	655183
-Lactobacillus plantarum	NC_004567	1590	1578
-Lactobacillus salivarius	NC_007929	1624	1578
-Lactococcus lactis	NC_002662	1358	1357
-Lactuca sativa	MK820672	75943	4235
-Legionella pneumophila	NC_002942	446	445
-Leptospira biflexa	CP000777	355278	145259
-Leptospira interrogans	NC_004342	173	171
-Leptothrix cholodnii	CP001013	34029	88
-Leuconostoc citreum	DQ489736	349519	33964
-Listeria grayi	LR134483	1641	1637
-Listeria innocua	CP045743	1642	1637
-Listeria ivanovii	FR687253	1638	1637
-Listeria marthii	CM001047	529731	1637
-Listeria monocytogenes I	CP054040	9000000	1639
-Listeria monocytogenes II	CP054042	9000001	1639
-Listeria monocytogenes III	CP054039	9000002	1639
-Listeria monocytogenes IV	CP054041	9000003	1639
-Listeria seeligeri	FN557490	1640	1637
-Listeria welshimeri	LT906444	1643	1637
-Lysinibacillus sphaericus	CP000817	444177	1421
-Mesoplasma florum	NC_006055	2151	46239
-Mesorhizobium ciceri	NC_014923	39645	68287
-Methylobacterium	CP000943	426117	2615210
-Methylobacterium radiotolerans	CP001001	31998	407
-Micrococcus luteus	CP001628	1270	1269
-Moorella thermoacetica	CP012370	1525	44260
-Morganella morganii morganii	CP004345	180434	582
-Mycobacterium abscessus	NC_010397	36809	670516
-Mycobacterium leprae	NC_002677	1769	1763
-Mycobacterium smegmatis	NC_008596	1772	1866885
-Mycobacterium tuberculosis	NC_000962	1773	77643
-Mycoplasma mycoides	NC_005364	2102	656088
-Mycoplasma pneumoniae	NC_000912	2104	2093
-Neisseria gonorrhoeae	NC_002946	485	482
-Neisseria meningitidis	NC_003112	487	482
-Neomysis japonica	KR006340	1676841	223649
-Ochrobactrum anthropi	CP000758	529	528
-Ochrobactrum anthropi	CP000759	529	528
-Pantoea ananatis	CP001875	553	53335
-Parabacteroides distasonis	CP000140	823	375288
-Photobacterium damselae	CP046752	38293	657
-Photobacterium damselae	CP046751	38293	657
-Pollachius virens	FR751399	8060	8059
-Polynucleobacter necessarius	LT615228	576610	44013
-Prochlorococcus marinus	NC_005042	1219	1218
-Proteus mirabilis	NC_022000	584	583
-Pseudomonas aeruginosa	NC_002516	287	136841
-Pseudomonas putida	AP013070	390235	303
-Pseudomonas syringae group genomosp. 3	NC_004578	251701	136849
-Pyrobaculum neutrophilum	CP001014	70771	2276
-Rhodobacter sphaeroides	NC_007494	1063	1060
-Rhodobacter sphaeroides	NC_007493	1063	1060
-Rhodopirellula baltica	NC_005027	265606	265488
-Rhodospirillum rubrum	NC_007643	1085	1081
-Ruminococcus sp.	CP039381	1263	541000
-Rickettsia prowazekii	NC_000963	782	114292
-Salinibacter ruber	NC_007677	146919	146918
-Salmonella bongori	FR877557	54736	590
-Salmonella enterica IIa	CP053411	9000010	28901
-Salmonella enterica IIb	LR134141	9000011	28901
-Salmonella enterica IIIa	CP000880	9000014	28901
-Salmonella enterica IIIb	CP053583	9000015	28901
-Salmonella enterica I	AE006468	59201	28901
-Salmonella enterica IV	CP053579	59205	28901
-Salmonella enterica IX	CP054715	9000016	28901
-Salmonella enterica VII	CP053582	59208	28901
-Salmonella enterica VIII	CP053318	9000009	28901
-Salmonella enterica VI	CP053406	59207	28901
-Salmonella enterica X	CP053581	9000017	28901
-Serratia liquefaciens	CP006252	614	613
-Shewanella halifaxensis	CP000931	271098	22
-Shewanella oneidensis	NC_004347	70863	22
-Shewanella woodyi	CP000961	60961	22
-Shimwellia blattae	CP001560	563	1335483
-Sinorhizobium fredii	NC_012587	380	663276
-Sinorhizobium medicae	NC_009636	110321	28105
-Sinorhizobium meliloti	NC_003047	382	28105
-Solanum lycopersicum	NC_035963	4081	49274
-Staphylococcus aureus	NZ_CP009554	46170	1280
-Staphylococcus epidermidis	NC_004461	1282	1279
-Streptococcus agalactiae	NC_004116	1311	1301
-Streptococcus mitis	NC_013853	28037	1301
-Streptococcus mutans	NC_004350	1309	1301
-Streptococcus pneumoniae	CP000936	487214	1313
-Streptococcus pyogenes	NC_002737	1314	1301
-Streptococcus sanguinis	NC_009009	1305	1301
-Streptococcus suis	NC_012926	1307	1301
-Sus scrofa	FJ236999	9823	9822
-Synechococcus	CP000951	32049	2626047
-Thermanaerovibrio acidaminovorans	NC_013522	81462	81461
-Thermoanaerobacter pseudethanolicus	CP000924	496866	1754
-Thermodesulfovibrio yellowstonii	NC_011296	28262	28261
-Thermosynechococcus elongatus	NC_004113	146786	146785
-Thermotoga maritima	NC_000853	2336	2335
-Thermus thermophilus	NC_006461	274	270
-Thunnus alalunga	AB101291	8235	8234
-Treponema denticola	NC_002967	158	157
-Ureaplasma parvum	CP000942	134821	2129
-Vibrio alginolyticus	CP035699	663	717610
-Vibrio alginolyticus	CP035700	663	717610
-Vibrio cholerae_O1	CP038178	127906	666
-Vibrio cholerae_O1	CP038179	127906	666
-Vibrio cidicii	CP046804	1763883	662
-Vibrio cidicii	CP046803	1763883	662
-Vibrio cincinnatiensis	CP035697	675	662
-Vibrio cincinnatiensis	CP035698	675	662
-Vibrio fluvialis	CP051126	676	662
-Vibrio fluvialis	CP051127	676	662
-Vibrio furnissii	CP046797	29494	662
-Vibrio furnissii	CP046798	29494	662
-Vibrio harveyi	CP035692	669	717610
-Vibrio harveyi	CP035693	669	717610
-Vibrio metoecus	CP046817	1481663	662
-Vibrio metoecus	CP046818	1481663	662
-Vibrio metschnikovii	CP035684	28172	662
-Vibrio metschnikovii	CP035685	28172	662
-Vibrio mimicus	CP035682	674	662
-Vibrio mimicus	CP035683	674	662
-Vibrio navarrensis	CP046791	29495	662
-Vibrio navarrensis	CP046792	29495	662
-Vibrio parahaemolyticus	CP046828	670	717610
-Vibrio parahaemolyticus	CP046827	670	717610
-Vibrio vulnificus	CP046832	672	662
-Vibrio vulnificus	CP046833	672	662
-Vicia faba	KC189947	3906	3904
-Xanthomonas campestris	NC_003902	339	338
-Xylella fastidiosa	CP000941	405440	2371
-Yersinia aldovae	CP009781	29483	629
-Yersinia bercovieri	CP054044	634	629
-Yersinia canariae	NZ_CP043727	2607663	629
-Yersinia enterocolitica	NC_015224	630	629
-Yersinia enterocolitica	NC_008800	630	629
-Yersinia frederiksenii	CP023962	29484	629
-Yersinia hibernica	NZ_CP032487	2339259	629
-Yersinia intermedia	CP009801	631	629
-Yersinia kristensenii	CP054049	631	629
-Yersinia massiliensis	CP054048	33060	629
-Yersinia mollaretii	CP054043	33060	629
-Yersinia pseudotuberculosis	CP009712	502800	633
-Yersinia rochesterensis	CP032482	1604335	629
-Yersinia rohdei	CP009787	29485	629
+scientificName	nuccoreAcc	taxid	parent	source
+Acholeplasma_laidlawii	CP000896	2148	2147	NCBI-REF
+Acinetobacter_baumannii	CP045110	509170	470	NCBI-REF
+Acinetobacter_pittii	CP002177	48296	909768	NCBI-REF
+Agrobacterium_fabrum	AE007869	1176649	1183400	NCBI-REF
+Agrobacterium_fabrum	AE007870	1176649	1183400	NCBI-REF
+Alkaliphilus_transvaalensis	CP000724	208226	114627	NCBI-REF
+Aliivibrio_fischeri	CP000021	668	511678	NCBI-REF
+Aliivibrio_fischeri	CP000020	668	511678	NCBI-REF
+Amycolatopsis_mediterranei	CP002896	33910	1813	NCBI-REF
+Aquifex_aeolicus	AE000657	63363	2713	NCBI-REF
+Arcobacter_bivalviorum	CP031217	663364	2321115	NCBI-REF
+Arcobacter_ellisii	CP032097	913109	28196	CDC SME
+Arcobacter_cibarius	CP043857	255507	28196	CDC SME
+Arcobacter_halophilus	CP031218	197482	28196	NCBI-REF
+Arcobacter_molluscorum	CP032098	1032072	28196	NCBI-REF
+Arcobacter_mytili	CP031219	603050	28196	NCBI-REF
+Arcobacter_skirrowii	CP032099	28200	28196	NCBI-REF
+Arcobacter_suis	CP032100	1278212	28196	NCBI-REF
+Arcobacter_thereius	CP035926	544718	28196	NCBI-REF
+Arcobacter_trophiarum	CP031367	708186	28196	NCBI-REF
+Arripis_trutta	AP006810	270544	163128	UGA SME
+Atlantibacter_hermannii	CP042941	565	1903434	CDC SME
+Bacillus_cereus	AP007209	1396	86661	CDC SME
+Bacillus_subtilis	AL009126	1423	653685	CDC SME
+Bacillus_thuringiensis	AE017355	1428	86661	CDC SME
+Bacteroides_fragilis	CR626927	817	816	NCBI-REF
+Bacteroides_thetaiotaomicron	CP040530	818	816	NCBI-REF
+Bartonella_bacilliformis	CP000524	774	773	NCBI-REF
+Betacoronavirus_coronavirus	MT233526	2697049	694009	CDC SME
+Bifidobacterium_bifidum	CP058603	1681	1678	NCBI-REF
+Bifidobacterium_longum	AP010888	216816	1678	NCBI-REF
+Bordetella_bronchiseptica	LR134326	518	517	NCTC3000
+Borreliella_burgdorferi	AE000783	139	64895	CDC SME
+Bos_taurus	KC153975	9913	9903	UGA SME
+Brachybacterium_faecium	CP001643	43669	43668	NCBI-REF
+Bradyrhizobium_diazoefficiens	BA000040	1355477	374	NCBI-REF
+Brassica_oleracea	JF920286	3712	3705	UGA SME
+Buchnera_aphidicola	BA000003	9	32199	NCBI-REF
+Burkholderia_pseudomallei	BX571965	28450	111527	CDC SME
+Burkholderia_pseudomallei	BX571966	28450	111527	CDC SME
+Campylobacter_avium	CP022347	522484	522485	NCBI-REF
+Campylobacter_coli	CP028187	195	194	CDC SME
+Campylobacter_concisus	CP012541	199	194	CDC SME
+Campylobacter_cuniculorum	CP020867	374106	194	CDC SME
+Campylobacter_fetus	CP006833	196	194	CDC SME
+Campylobacter_gracilis	CP012196	824	194	CDC SME
+Campylobacter_helveticus	CP020478	28898	194	CDC SME
+Campylobacter_hyointestinalis_hyointestinalis	CP015575	91352	198	CDC SME
+Campylobacter_hyointestinalis_lawsonii	CP015575	91353	198	CDC SME
+Campylobacter_insulaenigrae	CP007770	260714	194	CDC SME
+Campylobacter_lanienae	CP015578	75658	194	CDC SME
+Campylobacter_jejuni_jejuni	AL111168	32022	197	CDC SME
+Campylobacter_lari	CP000932	201	194	CDC SME
+Campylobacter_peloridis	CP007766	488546	194	CDC SME
+Campylobacter_sputorum	CP019683	202	194	CDC SME
+Campylobacter_subantarcticus	CP007772	497724	194	CDC SME
+Campylobacter_volucris	CP007774	1031542	194	CDC SME
+Campylobacter_ureolyticus	CP012195	827	194	CDC SME
+Candidatus_Desulforudis_audaxviator	CP000860	471827	471826	NCBI-REF
+Candidatus_Korarchaeum_cryptofilum	CP000968	374847	498846	NCBI-REF
+Chlamydia_pneumoniae	AE001363	83558	810	NCBI-REF
+Caulobacter_vibrioides	CP001340	155892	75	NCBI-REF
+Chlamydia_trachomatis	AE001273	813	810	NCBI-REF
+Chlorobaculum_tepidum	AE006470	1097	256319	NCBI-REF
+Chloroflexus_aurantiacus	CP000909	1108	1107	NCBI-REF
+Citrobacter_freundii	CP007557	546	544	CDC SME
+Citrobacter_amalonaticus	CP014070	35703	544	FDA-ARGOS
+Clavibacter_michiganensis_sepedonicus	AM849034	31964	28447	NCBI-REF
+Clostridioides_difficile	AM180355	1496	1870884	CDC SME
+Clostridium_acetobutylicum	AE001437	1488	1485	CDC SME
+Clostridium_argentinense	CP014176	29341	1485	CDC SME
+Clostridium_baratii	CP014204	1561	1485	CDC SME
+Clostridium_botulinum_groupI	CP001078	9000005	1491	CDC SME
+Clostridium_botulinum_groupII	CP000939	9000004	1491	CDC SME
+Clostridium_butyricum	CP013239	1492	1485	CDC SME
+Corynebacterium_diphtheriae	CP091095	1717	1716	NCBI-REF
+Clostridium_perfringens	CP000312	1502	1485	CDC SME
+Corynebacterium_urealyticum	AM942444	43771	1716	NCBI-REF
+Corynebacterium_glutamicum	BA000036	1718	1716	NCBI-REF
+Cronobacter_condimenti	CP012264	1163710	413496	NCBI-REF
+Coxiella_burnetii	AE016828	777	776	NCBI-REF
+Cronobacter_dublinensis_dublinensis	CP012266	413498	413497	NCBI-REF
+Cronobacter_malonaticus	CP006731	413503	413496	NCBI-REF
+Cronobacter_muytjensii	CP012268	413501	413496	NCBI-REF
+Cronobacter_sakazakii	CP011047	28141	413496	NCBI-REF
+Cronobacter_turicensis	FN543093	413502	413496	NCBI-REF
+Cronobacter_universalis	CP012257	535744	413496	NCBI-REF
+Cryptosporidium_parvum	CM000430	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000429	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000431	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000432	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000433	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000434	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000435	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000436	353152	5806	CDC SME
+Cryptosporidium_hominis	LN877948	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877947	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877950	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877949	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877951	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877952	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877953	237895	5806	CDC SME
+Cryptosporidium_hominis	LN877954	237895	5806	CDC SME
+Cupriavidus_taiwanensis	CU633750	164546	106589	NCBI-REF
+Cupriavidus_taiwanensis	CU633749	164546	106589	NCBI-REF
+Cyanothece	CP000806	43989	2546360	NCBI-REF
+Cyanothece	CP000807	43989	2546360	NCBI-REF
+Deinococcus_radiodurans	AE000513	1299	1298	NCBI-REF
+Deinococcus_radiodurans	AE001825	1299	1298	NCBI-REF
+Delftia_acidovorans	CP000884	80866	80865	NCBI-REF
+Dictyoglomus_turgidum	CP001251	513050	13	NCBI-REF
+Enterobacter_cloacae	CP001918	550	354276	NCBI-REF
+Enterococcus_faecalis	AE016830	1351	1350	NCBI-REF
+Enterococcus_faecium	CP003583	1352	1350	NCBI-REF
+Escherichia_albertii	CP024282	208962	561	CDC SME
+Escherichia_coli	CP027582	562	561	CDC SME
+Escherichia_fergusonii	CP042945	564	561	CDC SME
+Exiguobacterium_antarcticum	CP003063	132920	33986	NCBI-REF
+Finegoldia_magna	AP008971	1260	150022	NCBI-REF
+Francisella_philomiragia	CP063138	28110	262	NCBI-REF
+Flavobacterium_psychrophilum	AM398681	96345	237	NCBI-REF
+Francisella_tularensis	AJ749949	263	262	NCBI-REF
+Fusobacterium_nucleatum	CP028101	851	848	CDC SME
+Gallus_gallus	HQ857211	9031	9030	UGA SME
+Gardnerella_vaginalis	CP002104	2702	2701	NCBI-REF
+Geobacter_sulfurreducens	AE017180	35554	28231	NCBI-REF
+Gloeobacter_violaceus	BA000045	33072	33071	NCBI-REF
+Grimontia_hollisae	CP035690	673	246861	CDC SME
+Grimontia_hollisae	CP035691	673	246861	CDC SME
+Haemophilus_influenzae	L42023	727	724	NCBI-REF
+Haemophilus_somnus	CP000947	228400	731	NCBI-REF
+Halobacterium_salinarum	AM774415	478009	2242	NCBI-REF
+Helianthus_annuus	MG770607	4232	4231	NCBI-REF
+Helicobacter_pylori	AE000511	210	209	CDC SME
+Heliobacterium_modesticaldum	CP000930	35701	2697	NCBI-REF
+Humulus_lupulus	NC_086845	3486	3484	UGA SME
+Homo_sapiens	J01415	9606	9605	NCBI-REF
+Ketogulonicigenium_vulgare	CP002018	92945	92944	NCBI-REF
+Klebsiella_aerogenes	CP002824	548	570	NCBI-REF
+Klebsiella_pneumoniae	CP003200	573	570	NCBI-REF
+Lactobacillus_acidophilus	CP000033	1579	1578	NCBI-REF
+Lactococcus_lactis	AE005176	1358	1357	NCBI-REF
+Lactuca_sativa	MK820672	75943	4235	UGA SME
+Legionella_pneumophila	AE017354	446	445	NCBI-REF
+Leptospira_biflexa	CP000777	355278	145259	NCBI-REF
+Leptothrix_cholodnii	CP001013	34029	88	NCBI-REF
+Leptospira_interrogans	CP020414	173	171	NCBI-REF
+Leuconostoc_citreum	DQ489736	349519	33964	NCBI-REF
+Listeria_grayi	LR134483	1641	1637	NCTC3000
+Listeria_innocua	CP045743	1642	1637	CDC SME
+Listeria_ivanovii	FR687253	1638	1637	CDC SME
+Listeria_marthii	CM001047	529731	1637	CDC SME
+Listeria_monocytogenes_I	CP054040	9000000	1639	CDC SME
+Listeria_monocytogenes_II	CP054042	9000001	1639	CDC SME
+Listeria_monocytogenes_III	CP054039	9000002	1639	CDC SME
+Listeria_monocytogenes_IV	CP054041	9000003	1639	CDC SME
+Listeria_seeligeri	FN557490	1640	1637	CDC SME
+Listeria_welshimeri	LT906444	1643	1637	NCTC3000
+Lysinibacillus_sphaericus	CP000817	444177	1421	NCBI-REF
+Mesoplasma_florum	AE017263	2151	46239	NCBI-REF
+Mesorhizobium_ciceri	CP002447	39645	68287	NCBI-REF
+Methylobacterium	CP000943	426117	2615210	NCBI-REF
+Methylobacterium_radiotolerans	CP001001	31998	407	NCBI-REF
+Micrococcus_luteus	CP001628	1270	1269	NCBI-REF
+Moorella_thermoacetica	CP012370	1525	44260	NCBI-REF
+Morganella_morganii_morganii	CP004345	180434	582	NCBI-REF
+Mycobacterium_abscessus	CU458896	36809	670516	NCBI-REF
+Mycobacterium_leprae	AL450380	1769	1763	NCBI-REF
+Mycobacterium_tuberculosis	AL123456	1773	77643	NCBI-REF
+Mycoplasma_mycoides	BX293980	2102	656088	NCBI-REF
+Neisseria_gonorrhoeae	AE004969	485	482	CDC SME
+Neisseria_meningitidis	AE002098	487	482	CDC SME
+Neomysis_japonica	KR006340	1676841	223649	UGA SME
+Ochrobactrum_anthropi	CP000758	529	528	NCBI-REF
+Ochrobactrum_anthropi	CP000759	529	528	NCBI-REF
+Pantoea_ananatis	CP001875	553	53335	NCBI-REF
+Parabacteroides_distasonis	CP000140	823	375288	NCBI-REF
+Photobacterium_damselae	CP046752	38293	657	CDC SME
+Photobacterium_damselae	CP046751	38293	657	CDC SME
+Pollachius_virens	FR751399	8060	8059	UGA SME
+Polynucleobacter_necessarius	LT615228	576610	44013	NCBI-REF
+Prochlorococcus_marinus	AE017126	1219	1218	NCBI-REF
+Proteus_mirabilis	CP004022	584	583	NCBI-REF
+Pseudomonas_aeruginosa	AE004091	287	136841	NCBI-REF
+Pseudomonas_putida	AP013070	390235	303	NCBI-REF
+Pyrobaculum_neutrophilum	CP001014	70771	2276	NCBI-REF
+Pseudomonas_syringae_group_genomosp._3	AE016853	251701	136849	NCBI-REF
+Rhodopirellula_baltica	BX119912	265606	265488	NCBI-REF
+Rhodospirillum_rubrum	CP000230	1085	1081	NCBI-REF
+Ruminococcus_sp.	CP039381	1263	541000	NCBI-REF
+Rickettsia_prowazekii	AJ235269	782	114292	NCBI-REF
+Salinibacter_ruber	CP000159	146919	146918	NCBI-REF
+Salmonella_bongori	FR877557	54736	590	NCBI-REF
+Salmonella_enterica_IIa	CP053411	9000010	28901	CDC SME
+Salmonella_enterica_IIb	LR134141	9000011	28901	NCTC3000
+Salmonella_enterica_IIIa	CP000880	9000014	28901	CDC SME
+Salmonella_enterica_IIIb	CP053583	9000015	28901	CDC SME
+Salmonella_enterica_I	AE006468	59201	28901	NCBI-REF
+Salmonella_enterica_IV	CP053579	59205	28901	CDC SME
+Salmonella_enterica_IX	CP054715	9000016	28901	CDC SME
+Salmonella_enterica_VII	CP053582	59208	28901	CDC SME
+Salmonella_enterica_VIII	CP053318	9000009	28901	CDC SME
+Salmonella_enterica_VI	CP053406	59207	28901	CDC SME
+Salmonella_enterica_X	CP053581	9000017	28901	CDC SME
+Serratia_liquefaciens	CP006252	614	613	NCBI-REF
+Shewanella_halifaxensis	CP000931	271098	22	NCBI-REF
+Shewanella_oneidensis	AE014299	70863	22	NCBI-REF
+Shewanella_woodyi	CP000961	60961	22	NCBI-REF
+Shimwellia_blattae	CP001560	563	1335483	NCBI-REF
+Sinorhizobium_fredii	CP001389	380	663276	NCBI-REF
+Sinorhizobium_medicae	CP000738	110321	28105	NCBI-REF
+Sinorhizobium_meliloti	AL591688	382	28105	NCBI-REF
+Solanum_lycopersicum	MF034192	4081	49274	UGA SME
+Staphylococcus_aureus	CP009554	46170	1280	NCBI-REF
+Staphylococcus_epidermidis	AE015929	1282	1279	NCBI-REF
+Streptococcus_agalactiae	AE009948	1311	1301	NCBI-REF
+Streptococcus_mitis	FN568063	28037	1301	NCBI-REF
+Streptococcus_mutans	AE014133	1309	1301	NCBI-REF
+Streptococcus_pneumoniae	CP000936	487214	1313	NCBI-REF
+Streptococcus_pyogenes	AE004092	1314	1301	NCBI-REF
+Streptococcus_sanguinis	CP000387	1305	1301	NCBI-REF
+Sus_scrofa	FJ236999	9823	9822	UGA SME
+Streptococcus_suis	FM252032	1307	1301	NCBI-REF
+Thermanaerovibrio_acidaminovorans	CP001818	81462	81461	NCBI-REF
+Thermoanaerobacter_pseudethanolicus	CP000924	496866	1754	NCBI-REF
+Thermodesulfovibrio_yellowstonii	CP001147	28262	28261	NCBI-REF
+Thermosynechococcus_elongatus	BA000039	146786	146785	NCBI-REF
+Thermotoga_maritima	AE000512	2336	2335	NCBI-REF
+Thermus_thermophilus	AP008226	274	270	NCBI-REF
+Thunnus_alalunga	AB101291	8235	8234	UGA SME
+Treponema_denticola	AE017226	158	157	NCBI-REF
+Ureaplasma_parvum	CP000942	134821	2129	NCBI-REF
+Vibrio_alginolyticus	CP035699	663	717610	CDC SME
+Vibrio_alginolyticus	CP035700	663	717610	CDC SME
+Vibrio_cholerae_O1	CP038178	127906	666	CDC SME
+Vibrio_cholerae_O1	CP038179	127906	666	CDC SME
+Vibrio_cidicii	CP046804	1763883	662	CDC SME
+Vibrio_cidicii	CP046803	1763883	662	CDC SME
+Vibrio_cincinnatiensis	CP035697	675	662	CDC SME
+Vibrio_cincinnatiensis	CP035698	675	662	CDC SME
+Vibrio_fluvialis	CP051126	676	662	CDC SME
+Vibrio_fluvialis	CP051127	676	662	CDC SME
+Vibrio_furnissii	CP046797	29494	662	CDC SME
+Vibrio_furnissii	CP046798	29494	662	CDC SME
+Vibrio_harveyi	CP035692	669	717610	CDC SME
+Vibrio_harveyi	CP035693	669	717610	CDC SME
+Vibrio_metoecus	CP046817	1481663	662	CDC SME
+Vibrio_metoecus	CP046818	1481663	662	CDC SME
+Vibrio_metschnikovii	CP035684	28172	662	CDC SME
+Vibrio_metschnikovii	CP035685	28172	662	CDC SME
+Vibrio_mimicus	CP035682	674	662	CDC SME
+Vibrio_mimicus	CP035683	674	662	CDC SME
+Vibrio_navarrensis	CP046791	29495	662	CDC SME
+Vibrio_navarrensis	CP046792	29495	662	CDC SME
+Vibrio_parahaemolyticus	CP046828	670	717610	CDC SME
+Vibrio_parahaemolyticus	CP046827	670	717610	CDC SME
+Vibrio_vulnificus	CP046832	672	662	CDC SME
+Vibrio_vulnificus	CP046833	672	662	CDC SME
+Vicia_faba	KC189947	3906	3904	UGA SME
+Xanthomonas_campestris	AE008922	339	338	NCBI-REF
+Xylella_fastidiosa	CP000941	405440	2371	NCBI-REF
+Yersinia_aldovae	CP009781	29483	629	NCBI-REF
+Yersinia_bercovieri	CP054044	634	629	CDC SME
+Yersinia_enterocolitica	CP002246	630	629	CDC SME
+Yersinia_canariae	CP043727	2607663	629	NCBI-REF
+Yersinia_frederiksenii	CP023962	29484	629	FDA-ARGOS
+Yersinia_enterocolitica	AM286415	630	629	CDC SME
+Yersinia_hibernica	CP032487	2339259	629	NCBI-REF
+Yersinia_intermedia	CP009801	631	629	CDC SME
+Yersinia_kristensenii	CP054049	631	629	CDC SME
+Yersinia_massiliensis	CP054048	33060	629	CDC SME
+Yersinia_mollaretii	CP054043	33060	629	NCBI-REF
+Yersinia_pseudotuberculosis	CP009712	502800	633	CDC SME
+Yersinia_rochesterensis	CP032482	1604335	629	NCBI-REF
+Yersinia_rohdei	CP009787	29485	629	NCBI-REF

@@ -1,6 +1,7 @@
 on: 
   push:
     branches: [master, dev, esearch-input]
+  pull_request:
 name: Validate taxonomy
 
 jobs:
