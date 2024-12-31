@@ -40,7 +40,6 @@ kraken-build --db $DB --build --threads 1
 # Reduce the size of the database
 kraken-build --db $DB --clean
 
-
 if [ ! -e "$sharedir/kalamari-kraken1" ]; then
   ln -sv kalamari-kraken "$sharedir/kalamari-kraken1"
 fi

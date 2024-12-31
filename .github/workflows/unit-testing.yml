@@ -26,7 +26,6 @@ jobs:
 
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
-        
       - name: install-edirect
         run:  |
           sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
