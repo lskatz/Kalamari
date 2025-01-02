@@ -2,6 +2,8 @@
 
 ## Synopsis
 
+[![DOI](https://zenodo.org/badge/181688179.svg)](https://doi.org/10.5281/zenodo.13900883)
+
 Kalamari is a database of completed and public assemblies, backed by trusted institutions.
 These assemblies can be further used in formatted databases such as Kraken or Blast.
 
