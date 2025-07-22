@@ -83,4 +83,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Citation
 
-Please refer to the ASM 2018 poster under docs.
+Katz LS, Griswold T, Lindsey RL, Lauer AC, Im MS, Williams G, Halpin JL, Gómez GA, Kucerova Z, Morrison S, Page A, Den Bakker HC, Carleton HA. 2025. "Kalamari: a representative set of genomes of public health concern." _Microbiol Resour Announc_ 14:e00963-24. <https://doi.org/10.1128/mra.00963-24>
