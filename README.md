@@ -55,7 +55,7 @@ However, to download the files to a standard location,
 please simply use `downloadKalamari.sh` which uses
 `downloadKalamari.pl` internally.
 
-    bash bin/downloadKalamari.pl
+    perl bin/downloadKalamari.pl --help
 
 ## Database formatting instructions
 
