@@ -17,7 +17,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: ['ubuntu-20.04' ]
+        os: ['ubuntu-24.04' ]
         perl: [ '5.32' ]
         GENUS: [ 'Yersinia', 'Listeria']
     name: ${{ matrix.GENUS }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
