@@ -22,7 +22,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
-      max-parallel: ${{ env.CHUNK_TOTAL }}
       matrix:
         os: ['ubuntu-24.04' ]
         perl: [ '5.32' ]
