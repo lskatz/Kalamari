@@ -7,7 +7,27 @@
 Kalamari is a database of completed and public assemblies, backed by trusted institutions.
 These assemblies can be further used in formatted databases such as Kraken or Blast.
 
-### Prerequisites & Recommendations
+## Installation
+
+### conda
+
+The preferred method to install is with Conda.
+
+```bash
+conda install -c bioconda kalamari
+```
+
+Next, install the databases with the environment activated.
+This is a lengthy step.
+
+```bash
+bash bin/buildTaxonomy.sh
+bash bin/filterTaxonomy.sh
+```
+
+### Manual installation
+
+Manual installation is viable but less preferred.
 
 Requirements:
 
@@ -16,7 +36,26 @@ Requirements:
   - install via your package manager
   - debian/ubuntu: `apt install ncbi-entrez-direct`
 
-Optional, but recommended:
+#### Download instructions
+
+First, build the taxonomy.
+The script `buildTaxonomy.sh` uses the diffs in Kalamari to enhance the default NCBI taxonomy.
+Next, `filterTaxonomy.sh` reduces the taxonomy files to just those found in Kalamari.
+`filterTaxonomy.sh` uses `taxonkit` and so this needs to be in your
+environment before starting.
+
+    bash bin/buildTaxonomy.sh
+    bash bin/filterTaxonomy.sh
+
+To download the chromosomes and plasmids, use the `.tsv` files, respectively, with `downloadKalamari.pl`.
+Run `downloadKalamari.pl --help` for usage.
+However, to download the files to a standard location,
+please simply use `downloadKalamari.sh` which uses
+`downloadKalamari.pl` internally.
+
+    perl bin/downloadKalamari.pl --help
+
+### Optional, but recommended, for either installation type
 
 - `NCBI_API_KEY` environmental variable
 - `EMAIL` environmental variable
@@ -37,25 +76,6 @@ Add this variable to your environment with
     export EMAIL=my@email.address
 
 using your own email address instead of `my@email.address`.
-
-## Download instructions
-
-First, build the taxonomy.
-The script `buildTaxonomy.sh` uses the diffs in Kalamari to enhance the default NCBI taxonomy.
-Next, `filterTaxonomy.sh` reduces the taxonomy files to just those found in Kalamari.
-`filterTaxonomy.sh` uses `taxonkit` and so this needs to be in your
-environment before starting.
-
-    bash bin/buildTaxonomy.sh
-    bash bin/filterTaxonomy.sh
-
-To download the chromosomes and plasmids, use the `.tsv` files, respectively, with `downloadKalamari.pl`.
-Run `downloadKalamari.pl --help` for usage.
-However, to download the files to a standard location,
-please simply use `downloadKalamari.sh` which uses
-`downloadKalamari.pl` internally.
-
-    perl bin/downloadKalamari.pl --help
 
 ## Database formatting instructions
 
