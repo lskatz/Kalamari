@@ -90,8 +90,8 @@ jobs:
           # Make a chunk input spreadsheet by just adding
           # each sample to chromosomes.tsv
           head -n 1 Kalamari/src/chromosomes.tsv > header.tsv
-          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
-          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
+          tail -n +2 Kalamari/src/plasmids.tsv |    shuf >  in.tsv
+          tail -n +2 Kalamari/src/chromosomes.tsv | shuf >> in.tsv
           total_lines=$(wc -l < in.tsv)
           start_line=$(( $runner_id * $total_lines / $total_chunks + 1 ))
           end_line=$(( ($runner_id + 1) * $total_lines / $total_chunks - 1 ))
