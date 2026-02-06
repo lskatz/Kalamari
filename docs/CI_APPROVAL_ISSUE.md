@@ -76,7 +76,7 @@ gh run list --repo lskatz/Kalamari --branch <branch-name>
 
 The current PR (copilot/investigate-ci-start-issue) has workflows waiting for approval:
 - Validate taxonomy
-- Genera-with-Kraken2  
+- Genera-with-Kraken2
 - Listeria-with-Kraken1
 - Pull-down-all-accessions
 
