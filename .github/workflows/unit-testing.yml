@@ -1,6 +1,6 @@
 on: 
   push:
-    branches: [master, dev, validate-taxonomy]
+    branches: [master, dev, download-everything]
   pull_request:
 name: Pull-down-all-accessions
 env:
