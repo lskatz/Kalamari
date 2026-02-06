@@ -64,10 +64,11 @@ jobs:
           cat header.tsv > chunk_${runner_id}.tsv
           sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
           echo "total_lines=$total_lines" >> "$GITHUB_OUTPUT"
+          echo "num_records=$(( $(wc -l < chunk_${runner_id}.tsv) - 1 ))" >> "$GITHUB_OUTPUT"
           echo "chunk_file=chunk_${runner_id}.tsv" >> "$GITHUB_OUTPUT"
           echo "chunk_lines=$(wc -l < chunk_${runner_id}.tsv)" >> "$GITHUB_OUTPUT"
 
-      - name: download ${{ steps.create_input.outputs.chunk_lines }} records
+      - name: download ${{ steps.create_input.outputs.num_records }} records
         run: |
           runner_id=${{ matrix.runner_id }}
           echo "Runner_id is $runner_id"
