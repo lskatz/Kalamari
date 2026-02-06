@@ -41,8 +41,41 @@ jobs:
           path: |
             ~/edirect
           key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
+  create-chunks:
+    runs-on: ubuntu-24.04
+    needs: generate-matrix
+    steps:
+      - name: checkout my repo
+        uses: actions/checkout@v4
+        with:
+          path: Kalamari
+      - name: create-chunks
+        run: |
+          total_chunks=${{ env.CHUNK_TOTAL }}
+          # Make a chunk input spreadsheet by just adding
+          # each sample to chromosomes.tsv
+          head -n 1 Kalamari/src/chromosomes.tsv  >  header.tsv
+          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
+          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
+          shuf < in.tsv > tmp.tsv && mv tmp.tsv in.tsv
+          total_lines=$(wc -l < in.tsv)
+          echo "$total_lines" > total_lines.txt
+          for runner_id in $(seq 0 $((total_chunks-1))); do
+            start_line=$(( runner_id * total_lines / total_chunks + 1 ))
+            end_line=$(( (runner_id + 1) * total_lines / total_chunks - 1 ))
+            cat header.tsv > chunk_${runner_id}.tsv
+            sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
+          done
+      - name: upload-chunks
+        uses: actions/upload-artifact@v4
+        with:
+          name: chunk-inputs
+          path: |
+            in.tsv
+            total_lines.txt
+            chunk_*.tsv
   build:
-    needs: [generate-matrix, warm-edirect-cache]
+    needs: [generate-matrix, warm-edirect-cache, create-chunks]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -82,39 +115,25 @@ jobs:
           tree $HOME/edirect
       - name: check-env
         run:  echo "$PATH"
-      - name: create-input
-        id: create_input
-        run: |
-          runner_id=${{ matrix.runner_id }}
-          total_chunks=${{ env.CHUNK_TOTAL }}
-          # Make a chunk input spreadsheet by just adding
-          # each sample to chromosomes.tsv
-          head -n 1 Kalamari/src/chromosomes.tsv > header.tsv
-          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
-          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
-          shuf < in.tsv > tmp.tsv && mv tmp.tsv in.tsv
-          total_lines=$(wc -l < in.tsv)
-          start_line=$(( $runner_id * $total_lines / $total_chunks + 1 ))
-          end_line=$(( ($runner_id + 1) * $total_lines / $total_chunks - 1 ))
-          cat header.tsv > chunk_${runner_id}.tsv
-          sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
-          echo "total_lines=$total_lines" >> "$GITHUB_OUTPUT"
-          echo "num_records=$(( $(wc -l < chunk_${runner_id}.tsv) - 1 ))" >> "$GITHUB_OUTPUT"
-          echo "chunk_file=chunk_${runner_id}.tsv" >> "$GITHUB_OUTPUT"
-          echo "chunk_lines=$(wc -l < chunk_${runner_id}.tsv)" >> "$GITHUB_OUTPUT"
-
-      - name: download ${{ steps.create_input.outputs.num_records }} records
+      - name: download-chunks
+        uses: actions/download-artifact@v4
+        with:
+          name: chunk-inputs
+      - name: download
         run: |
           runner_id=${{ matrix.runner_id }}
           echo "Runner_id is $runner_id"
 
-          echo "Total lines in in.tsv: ${{ steps.create_input.outputs.total_lines }}"
-          echo "Chunk file: ${{ steps.create_input.outputs.chunk_file }}"
-          echo "Chunk lines: ${{ steps.create_input.outputs.chunk_lines }}"
-          chunk_lines=${{ steps.create_input.outputs.chunk_lines }}
+          total_lines=$(cat total_lines.txt)
+          chunk_file="chunk_${runner_id}.tsv"
+          chunk_lines=$(wc -l < "$chunk_file")
+          num_records=$(( chunk_lines - 1 ))
+          echo "Total lines in in.tsv: $total_lines"
+          echo "Chunk file: $chunk_file"
+          echo "Chunk lines: $chunk_lines"
           buffer_size=$(( 1 + chunk_lines / 4 ))
           echo buffer size is $buffer_size
-          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize $buffer_size "${{ steps.create_input.outputs.chunk_file }}"
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize $buffer_size "$chunk_file"
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
