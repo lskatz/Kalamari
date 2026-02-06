@@ -74,10 +74,12 @@ gh run list --repo lskatz/Kalamari --branch <branch-name>
 
 ## Impact on Current PR
 
-The current PR (copilot/investigate-ci-start-issue) has workflows waiting for approval:
+**Update (2026-02-06):** After approval, the workflows remained stuck in "queued" status for 30+ minutes. Investigation revealed that all workflows were configured to use `ubuntu-20.04`, which is **no longer available** on GitHub Actions runners. The workflows have been updated to use `ubuntu-22.04` (the current stable Ubuntu version).
+
+The current PR initially had these workflows waiting for approval:
 - Validate taxonomy
 - Genera-with-Kraken2
 - Listeria-with-Kraken1
 - Pull-down-all-accessions
 
-These workflows need manual approval to run since they were triggered by the Copilot bot.
+After approval, they queued but couldn't find runners due to the deprecated OS specification. This has been fixed by updating all workflow files to use ubuntu-22.04.
