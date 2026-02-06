@@ -4,7 +4,7 @@ There are many ways to contribute to this project and so here are a couple of wa
 Contributions will almost always result in a pull request.
 Contributions must pass the automated testing.
 
-**Note for Contributors:** GitHub Actions workflows on pull requests from first-time contributors require manual approval from repository maintainers before they can run. This is a security feature. Your workflows will show as "Awaiting approval" until a maintainer reviews and approves them. See [docs/CI_APPROVAL_ISSUE.md](docs/CI_APPROVAL_ISSUE.md) for more details.
+**Note for Contributors:** If you're a first-time contributor, your pull request workflows will require manual approval from a maintainer before they can run. This is a GitHub security feature. See [docs/CI_APPROVAL_ISSUE.md](docs/CI_APPROVAL_ISSUE.md) for details.
 
 ## Add a taxon
 
