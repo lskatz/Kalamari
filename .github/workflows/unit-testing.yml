@@ -3,15 +3,30 @@ on:
     branches: [master, dev, validate-taxonomy]
   pull_request:
 name: Pull-down-all-accessions
+env:
+  CHUNK_TOTAL: 24
 
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-24.04
+    outputs:
+      runner_ids: ${{ steps.gen.outputs.runner_ids }}
+    steps:
+      - id: gen
+        run: |
+          total=${{ env.CHUNK_TOTAL }}
+          ids=$(seq 0 $((total-1)) | paste -sd, -)
+          echo "runner_ids=[$ids]" >> "$GITHUB_OUTPUT"
   build:
+    needs: generate-matrix
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
+      max-parallel: ${{ env.CHUNK_TOTAL }}
       matrix:
         os: ['ubuntu-24.04' ]
         perl: [ '5.32' ]
-        runner_id: [0, 1]
+        runner_id: ${{ fromJson(needs.generate-matrix.outputs.runner_ids) }}
     name: chunk ${{ matrix.runner_id }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
@@ -20,7 +35,7 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
 
@@ -37,6 +52,7 @@ jobs:
       - name: download
         run: |
           runner_id=${{ matrix.runner_id }}
+          total_chunks=${{ env.CHUNK_TOTAL }}
           echo "Runner_id is $runner_id"
           # Make a chunk input spreadsheet by just adding
           # each sample to chromosomes.tsv
@@ -45,8 +61,8 @@ jobs:
           tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
 
           total_lines=$(wc -l < in.tsv)
-          start_line=$(( $runner_id * $total_lines / 2 + 1 ))
-          end_line=$(( ($runner_id + 1) * $total_lines / 2 -1 ))
+          start_line=$(( $runner_id * $total_lines / $total_chunks + 1 ))
+          end_line=$(( ($runner_id + 1) * $total_lines / $total_chunks - 1 ))
           echo "($runner_id) start_line: $start_line"
           echo "($runner_id) end_line: $end_line"
           cat header.tsv > chunk_${runner_id}.tsv
@@ -58,4 +74,3 @@ jobs:
         run:  |
           find kalamari.out -name '*.fasta.gz' > fasta.sizes
           #cat fasta.sizes | xargs -n 100 ls -lhS
-
