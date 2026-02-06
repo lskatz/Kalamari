@@ -4,7 +4,7 @@ on:
   pull_request:
 name: Pull-down-all-accessions
 env:
-  CHUNK_TOTAL: 24
+  CHUNK_TOTAL: 16
 
 jobs:
   generate-matrix:
@@ -48,25 +48,34 @@ jobs:
           tree $HOME/edirect
       - name: check-env
         run:  echo "$PATH"
-      - name: download
+      - name: create-input
+        id: create_input
         run: |
           runner_id=${{ matrix.runner_id }}
           total_chunks=${{ env.CHUNK_TOTAL }}
-          echo "Runner_id is $runner_id"
           # Make a chunk input spreadsheet by just adding
           # each sample to chromosomes.tsv
           head -n 1 Kalamari/src/chromosomes.tsv > header.tsv
           tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
           tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
-
           total_lines=$(wc -l < in.tsv)
           start_line=$(( $runner_id * $total_lines / $total_chunks + 1 ))
           end_line=$(( ($runner_id + 1) * $total_lines / $total_chunks - 1 ))
-          echo "($runner_id) start_line: $start_line"
-          echo "($runner_id) end_line: $end_line"
           cat header.tsv > chunk_${runner_id}.tsv
           sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
-          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize 100 chunk_${runner_id}.tsv
+          echo "total_lines=$total_lines" >> "$GITHUB_OUTPUT"
+          echo "chunk_file=chunk_${runner_id}.tsv" >> "$GITHUB_OUTPUT"
+          echo "chunk_lines=$(wc -l < chunk_${runner_id}.tsv)" >> "$GITHUB_OUTPUT"
+
+      - name: download ${{ steps.create_input.outputs.chunk_lines }} records
+        run: |
+          runner_id=${{ matrix.runner_id }}
+          echo "Runner_id is $runner_id"
+
+          echo "Total lines in in.tsv: ${{ steps.create_input.outputs.total_lines }}"
+          echo "Chunk file: ${{ steps.create_input.outputs.chunk_file }}"
+          echo "Chunk lines: ${{ steps.create_input.outputs.chunk_lines }}"
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize 100 "${{ steps.create_input.outputs.chunk_file }}"
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
