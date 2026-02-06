@@ -17,8 +17,32 @@ jobs:
           total=${{ env.CHUNK_TOTAL }}
           ids=$(seq 0 $((total-1)) | paste -sd, -)
           echo "runner_ids=[$ids]" >> "$GITHUB_OUTPUT"
+  warm-edirect-cache:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        perl: [ '5.32' ]
+    steps:
+      - name: restore-edirect-cache
+        id: restore_edirect
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
+      - name: install-edirect
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        run: |
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+      - name: save-edirect-cache
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
   build:
-    needs: generate-matrix
+    needs: [generate-matrix, warm-edirect-cache]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -40,17 +64,19 @@ jobs:
 
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
-      - name: cache-edirect
-        id: cache_edirect
-        uses: actions/cache@v4
+      - name: restore-edirect-cache
+        id: restore_edirect
+        uses: actions/cache/restore@v4
         with:
           path: |
             ~/edirect
-          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
       - name: install-edirect
-        if: steps.cache_edirect.outputs.cache-hit != 'true'
-        run:  |
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        run: |
           sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+      - name: add-edirect-to-path
+        run: |
           echo $HOME/edirect >> $GITHUB_PATH
           echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
           tree $HOME/edirect
