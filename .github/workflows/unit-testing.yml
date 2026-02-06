@@ -40,7 +40,15 @@ jobs:
 
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
+      - name: cache-edirect
+        id: cache_edirect
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}
       - name: install-edirect
+        if: steps.cache_edirect.outputs.cache-hit != 'true'
         run:  |
           sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
           echo $HOME/edirect >> $GITHUB_PATH
