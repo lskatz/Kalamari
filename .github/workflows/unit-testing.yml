@@ -1,17 +1,88 @@
 on: 
   push:
-    branches: [master, dev, validate-taxonomy]
+    branches: [master, dev, download-everything]
   pull_request:
 name: Pull-down-all-accessions
+env:
+  CHUNK_TOTAL: 16
 
 jobs:
+  generate-matrix:
+    runs-on: ubuntu-24.04
+    outputs:
+      runner_ids: ${{ steps.gen.outputs.runner_ids }}
+    steps:
+      - id: gen
+        run: |
+          total=${{ env.CHUNK_TOTAL }}
+          ids=$(seq 0 $((total-1)) | paste -sd, -)
+          echo "runner_ids=[$ids]" >> "$GITHUB_OUTPUT"
+  warm-edirect-cache:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        perl: [ '5.32' ]
+    steps:
+      - name: restore-edirect-cache
+        id: restore_edirect
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
+      - name: install-edirect
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        run: |
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+      - name: save-edirect-cache
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
+  create-chunks:
+    runs-on: ubuntu-24.04
+    needs: generate-matrix
+    steps:
+      - name: checkout my repo
+        uses: actions/checkout@v4
+        with:
+          path: Kalamari
+      - name: create-chunks
+        run: |
+          total_chunks=${{ env.CHUNK_TOTAL }}
+          # Make a chunk input spreadsheet by just adding
+          # each sample to chromosomes.tsv
+          head -n 1 Kalamari/src/chromosomes.tsv  >  header.tsv
+          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
+          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
+          shuf < in.tsv > tmp.tsv && mv tmp.tsv in.tsv
+          total_lines=$(wc -l < in.tsv)
+          echo "$total_lines" > total_lines.txt
+          for runner_id in $(seq 0 $((total_chunks-1))); do
+            start_line=$(( runner_id * total_lines / total_chunks + 1 ))
+            end_line=$(( (runner_id + 1) * total_lines / total_chunks - 1 ))
+            cat header.tsv > chunk_${runner_id}.tsv
+            sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
+          done
+      - name: upload-chunks
+        uses: actions/upload-artifact@v4
+        with:
+          name: chunk-inputs
+          path: |
+            in.tsv
+            total_lines.txt
+            chunk_*.tsv
   build:
+    needs: [generate-matrix, warm-edirect-cache, create-chunks]
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: ['ubuntu-24.04' ]
         perl: [ '5.32' ]
-        runner_id: [0, 1]
+        runner_id: ${{ fromJson(needs.generate-matrix.outputs.runner_ids) }}
     name: chunk ${{ matrix.runner_id }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
     steps:
       - name: Set up perl
@@ -20,42 +91,52 @@ jobs:
           perl-version: ${{ matrix.perl }}
           multi-thread: "true"
       - name: checkout my repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: Kalamari
 
       - name: apt-get install
         run:  sudo apt-get install ca-certificates tree
+      - name: restore-edirect-cache
+        id: restore_edirect
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/edirect
+          key: edirect-cache-${{ runner.os }}-${{ matrix.perl }}-v1
       - name: install-edirect
-        run:  |
+        if: steps.restore_edirect.outputs.cache-hit != 'true'
+        run: |
           sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+      - name: add-edirect-to-path
+        run: |
           echo $HOME/edirect >> $GITHUB_PATH
           echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
           tree $HOME/edirect
       - name: check-env
         run:  echo "$PATH"
+      - name: download-chunks
+        uses: actions/download-artifact@v4
+        with:
+          name: chunk-inputs
       - name: download
         run: |
           runner_id=${{ matrix.runner_id }}
           echo "Runner_id is $runner_id"
-          # Make a chunk input spreadsheet by just adding
-          # each sample to chromosomes.tsv
-          head -n 1 Kalamari/src/chromosomes.tsv > header.tsv
-          tail -n +2 Kalamari/src/plasmids.tsv    >  in.tsv
-          tail -n +2 Kalamari/src/chromosomes.tsv >> in.tsv
 
-          total_lines=$(wc -l < in.tsv)
-          start_line=$(( $runner_id * $total_lines / 2 + 1 ))
-          end_line=$(( ($runner_id + 1) * $total_lines / 2 -1 ))
-          echo "($runner_id) start_line: $start_line"
-          echo "($runner_id) end_line: $end_line"
-          cat header.tsv > chunk_${runner_id}.tsv
-          sed -n "${start_line},${end_line}p" in.tsv >> chunk_${runner_id}.tsv
-          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize 100 chunk_${runner_id}.tsv
+          total_lines=$(cat total_lines.txt)
+          chunk_file="chunk_${runner_id}.tsv"
+          chunk_lines=$(wc -l < "$chunk_file")
+          num_records=$(( chunk_lines - 1 ))
+          echo "Total lines in in.tsv: $total_lines"
+          echo "Chunk file: $chunk_file"
+          echo "Chunk lines: $chunk_lines"
+          buffer_size=$(( 1 + chunk_lines / 4 ))
+          echo buffer size is $buffer_size
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize $buffer_size "$chunk_file"
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
         run:  |
           find kalamari.out -name '*.fasta.gz' > fasta.sizes
           #cat fasta.sizes | xargs -n 100 ls -lhS
-
