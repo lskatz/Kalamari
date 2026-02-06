@@ -11,7 +11,7 @@ use POSIX qw/ceil/;
 use IO::Compress::Gzip;
 use version 0.77;
 
-our $VERSION = version->parse("5.8.0");
+our $VERSION = version->parse("5.8.2");
 
 use threads;
 
