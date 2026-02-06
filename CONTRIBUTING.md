@@ -4,6 +4,8 @@ There are many ways to contribute to this project and so here are a couple of wa
 Contributions will almost always result in a pull request.
 Contributions must pass the automated testing.
 
+**Note for Contributors:** GitHub Actions workflows on pull requests from first-time contributors require manual approval from repository maintainers before they can run. This is a security feature. Your workflows will show as "Awaiting approval" until a maintainer reviews and approves them. See [docs/CI_APPROVAL_ISSUE.md](docs/CI_APPROVAL_ISSUE.md) for more details.
+
 ## Add a taxon
 
 To add a taxon, add it to src/nodes.dmp and src/names.dmp.
