@@ -2,8 +2,8 @@ scientificName	nuccoreAcc	taxid	parent	source
 Acholeplasma_laidlawii	CP000896	2148	2147	NCBI-REF
 Acinetobacter_baumannii	CP045110	509170	470	NCBI-REF
 Acinetobacter_pittii	CP002177	48296	909768	NCBI-REF
-Actinobacillus_pleuropneumoniae CP030753	715 713 NBCI-REF
-Aggregatibacter_aphrophilus LR134327	732 416916	NCBI-REF
+Actinobacillus_pleuropneumoniae	CP030753	715 713 NBCI-REF
+Aggregatibacter_aphrophilus	LR134327	732 416916	NCBI-REF
 Agrobacterium_fabrum	AE007869	1176649	1183400	NCBI-REF
 Agrobacterium_fabrum	AE007870	1176649	1183400	NCBI-REF
 Aliivibrio_fischeri	CP000020	668	511678	NCBI-REF
@@ -197,21 +197,21 @@ Morganella_morganii_morganii	CP004345	180434	582	NCBI-REF
 Mycobacterium_abscessus	CU458896	36809	670516	NCBI-REF
 Mycobacterium_leprae	AL450380	1769	1763	NCBI-REF
 Mycobacterium_tuberculosis	AL123456	1773	77643	NCBI-REF
-Mycolicibacterium_fortuitum AP025518	144549	1766	NCBI-REF
+Mycolicibacterium_fortuitum	AP025518	144549	1766	NCBI-REF
 Mycoplasma_mycoides	BX293980	2102	656088	NCBI-REF
 Neisseria_bergeri	No_complete_genomes
 Neisseria_cinerea	CP065726	483 482 FDA-ARGOS
 Neisseria_elongata	CP031255	495 482 CDC SME* 
 Neisseria_flavescens	CP039886	484 482 NCBI-REF
 Neisseria_gonorrhoeae	AE004969	485	482	CDC SME
-Neisseria_lactamica CP031253	486 482 CDC SME*
+Neisseria_lactamica	CP031253	486 482 CDC SME*
 Neisseria_meningitidis	AE002098	487	482	CDC SME
-Neisseria_polysaccharea CP031325	489 482 CDC SME*	
-Neisseria_sicca CP059566	490 482 NCBI-REF	
+Neisseria_polysaccharea	CP031325	489 482 CDC SME*	
+Neisseria_sicca	CP059566	490 482 NCBI-REF	
 Neisseria_subflava	CP039887	28449	482 NCBI-REF**
 Neisseria_weaveri	LR134533	28091	482 NCBI-REF
 Neomysis_japonica	KR006340	1676841	223649	UGA SME
-Nocardia_asteroides CP089227	1824	1817	FDA-ARGOS
+Nocardia_asteroides	CP089227	1824	1817	FDA-ARGOS
 Nocardia_farcinica	CP031418	37329	1817	NCBI-REF(CDC)
 Ochrobactrum_anthropi	CP000758	529	528	NCBI-REF
 Ochrobactrum_anthropi	CP000759	529	528	NCBI-REF
