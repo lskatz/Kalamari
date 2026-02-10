@@ -8,9 +8,9 @@ If you don't really want to read any of this, then there is
 a script for you.
 This script downloads and formats for Kraken1 and Kraken2.
 
-    bash bin/downloadTaxonomy.sh
-    bash bin/filterTaxonomy.sh # optional, reduces footprint
     bash bin/downloadKalamari.sh
+    bash bin/buildTaxonomy.sh
+    bash bin/filterTaxonomy.sh # optional, reduces footprint
 
 If you want to know more details, move onto the next section.
 
