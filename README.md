@@ -20,79 +20,32 @@ _Shigella_ as a subspecies of _Escherichia coli_
 or defining the four lineages of _Listeria monocytogenes_.
 These changes have been backed by trusted SMEs in EDLB.
 
+---
+
 ## Installation
+To start using Kalamari, you'll need to complete the following steps:
+1. [Export variables for NCBI API](#export-variables-for-ncbi-api)
+2. Install Kalamari dependencies
+    - Chose either [Conda](#installation-with-conda) (preferred) or [manual installation](#manual-installation).
+3. [Download the databases](#download-the-databases)
+4. [Build and filter the taxonomy directory](#build-and-filter-the-taxonomy-directory)
 
-### conda
+---
 
-The preferred method to install is with Conda. 
-1. To get started, clone this repo locally:
-```bash
-git clone https://github.com/lskatz/Kalamari.git
-```
+### Export Variables for NCBI API
+NCBI edirect requests run considerably more smoothly when the following environment variables are set:
+- `NCBI_API_KEY` 
+- `EMAIL` 
 
-2. Next create a new conda environment, install Kalamari, then activate the environment.
-```bash
-conda create -n kalamari
-conda install -c bioconda kalamari
-conda activate kalamari
-```
-
-3. Installation of `taxonkit` is required to complete the next step.
-Go to [the latest release](https://github.com/shenwei356/taxonkit/releases) and 
-download the appropriate version for your system. 
-Confirm the tool is functioning in your environment before continuing.
-
-4. Navigate to the directory where you cloned the repo, then install the databases.
-This is a lengthy step.
-
-```bash
-bash bin/buildTaxonomy.sh
-bash bin/filterTaxonomy.sh
-```
-
-### Manual installation
-
-Manual installation is viable but less preferred.
-
-Requirements:
-
-- clone this repo locally `git clone https://github.com/lskatz/Kalamari.git`
-- NCBI entrez-utilities set of tools `edirect`, `esearch`, etc.
-  - install via your package manager
-  - debian/ubuntu: `apt install ncbi-entrez-direct`
-
-#### Download instructions
-
-First, build the taxonomy.
-The script `buildTaxonomy.sh` uses the diffs in Kalamari to enhance the default NCBI taxonomy.
-Next, `filterTaxonomy.sh` reduces the taxonomy files to just those found in Kalamari.
-`filterTaxonomy.sh` uses `taxonkit` and so this needs to be in your
-environment before starting.
-
-    bash bin/buildTaxonomy.sh
-    bash bin/filterTaxonomy.sh
-
-To download the chromosomes and plasmids, use the `.tsv` files, respectively, with `downloadKalamari.pl`.
-Run `downloadKalamari.pl --help` for usage.
-However, to download the files to a standard location,
-please simply use `downloadKalamari.sh` which uses
-`downloadKalamari.pl` internally.
-
-    perl bin/downloadKalamari.pl --help
-
-### Optional, but recommended, for either installation type
-
-- `NCBI_API_KEY` environmental variable
-- `EMAIL` environmental variable
-
-Ensure that you have the [NCBI API key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities).
+Follow [these instructions](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities) to 
+obtain an NCBI API key.
 This key associates your edirect requests with your username.
 Without it, edirect requests might be buggy.
 After obtaining an NCBI API key, add it to your environment with
 
-    export NCBI_API_KEY=unique_api_key_goes_here
+    export NCBI_API_KEY=unique_api_key
 
-where `unique_api_key_goes_here` is a unique hexadecimal number with characters from 0-9 and a-f.
+where `unique_api_key` is a unique hexadecimal number with characters from 0-9 and a-f.
 
 You should also set your email address in the
 `EMAIL` environment variable as edirect tries to guess it, which is an error prone process.
@@ -101,6 +54,81 @@ Add this variable to your environment with
     export EMAIL=my@email.address
 
 using your own email address instead of `my@email.address`.
+
+---
+
+### Installation with `conda`
+
+1. To get started, clone this repo locally:
+```bash
+git clone https://github.com/lskatz/Kalamari.git
+```
+
+2. Next create the Kalamari conda environment, then activate it.
+```bash
+conda create -n kalamari -c conda-forge -c bioconda kalamari
+conda activate kalamari
+```
+
+---
+
+### Manual installation
+
+Manual installation is viable but less preferred.
+
+1. Clone this repo locally:
+```bash
+git clone https://github.com/lskatz/Kalamari.git
+```
+
+2. Install dependencies:
+   - Perl (5.x)
+   - `wget` (or `curl`)
+     - Debian/Ubuntu: `apt-get install wget`
+   - [NCBI Entrez Direct](https://www.ncbi.nlm.nih.gov/books/NBK179288/) (`edirect`, `esearch`, etc.)
+     - Install via your package manager
+     - Debian/Ubuntu: `apt install ncbi-entrez-direct`
+   - [taxonkit](https://github.com/shenwei356/taxonkit/releases)
+
+---
+
+### Download the databases
+This step downloads the reference genome FASTA files for the Kalamari database.
+The databases are downloaded using the information contained in `src/chromosomes.tsv` and `src/plasmids.tsv`.
+These files represent the chromosome and plasmid databases, respectively.
+
+Navigate to the directory where you cloned the repo. Installation can be done by running either of the following two scripts, 
+based on your preferences.
+Note that this step takes a while to complete.
+
+**Option 1:** Download both the chromosome and plasmid databases with default settings:
+```bash
+bash bin/downloadKalamari.sh
+```
+
+**Option 2:** Choose which databases are downloaded and better control the process:
+```bash
+bash bin/downloadKalamari.pl [options] <database_tsv_file>
+```
+Run `perl bin/downloadKalamari.pl --help` for all options.
+
+The `<database_tsv_file>` options include `src/chromosomes.tsv` and `src/plasmids.tsv`.
+Alternatively, you can make a custom `tsv` by combining specific genomes into a file with the same 
+header as `src/chromosomes.tsv`.
+
+---
+
+## Build and Filter the Taxonomy Directory
+In this step, the script `buildTaxonomy.sh` uses the diffs in Kalamari to enhance the default NCBI taxonomy.
+Next, `filterTaxonomy.sh` reduces the taxonomy files to just those found in Kalamari.
+
+Run the following scripts:
+```bash
+bash bin/buildTaxonomy.sh
+bash bin/filterTaxonomy.sh
+```
+
+---
 
 ## Database formatting instructions
 
