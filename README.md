@@ -11,13 +11,25 @@ These assemblies can be further used in formatted databases such as Kraken or Bl
 
 ### conda
 
-The preferred method to install is with Conda.
-
+The preferred method to install is with Conda. 
+1. To get started, clone this repo locally:
 ```bash
-conda install -c bioconda kalamari
+git clone https://github.com/lskatz/Kalamari.git
 ```
 
-Next, install the databases with the environment activated.
+2. Next create a new conda environment, install Kalamari, then activate the environment.
+```bash
+conda create -n kalamari
+conda install -c bioconda kalamari
+conda activate kalamari
+```
+
+3. Installation of `taxonkit` is required to complete the next step.
+Go to [the latest release](https://github.com/shenwei356/taxonkit/releases) and 
+download the appropriate version for your system. 
+Confirm the tool is functioning in your environment before continuing.
+
+4. Navigate to the directory where you cloned the repo, then install the databases.
 This is a lengthy step.
 
 ```bash
