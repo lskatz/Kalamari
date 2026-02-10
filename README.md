@@ -7,6 +7,19 @@
 Kalamari is a database of completed and public assemblies, backed by trusted institutions.
 These assemblies can be further used in formatted databases such as Kraken or Blast.
 
+Completed assemblies means that you do not have to worry about the database itself being contaminated with "rogue" contigs.
+Additionally, most assemblies were obtained by subject matter experts (SMEs) at
+Centers for Disease Control and Prevention (CDC).
+Those not from CDC come from other trusted institutions or projects such as
+FDA-ARGOS.
+Most genomes are from species that are either studied or are common contaminants
+in the Enteric Diseases Laboratory Branch (EDLB) at CDC.
+
+Kalamari also comes with a custom taxonomy database such as defining
+_Shigella_ as a subspecies of _Escherichia coli_
+or defining the four lineages of _Listeria monocytogenes_.
+These changes have been backed by trusted SMEs in EDLB.
+
 ## Installation
 
 ### conda
@@ -93,21 +106,6 @@ using your own email address instead of `my@email.address`.
 
 [How to format and query databases](docs/DATABASES.md)
 
-## Further description
-
-Kalamari is a database of completed and public assemblies, backed by trusted institutions.
-Completed assemblies means that you do not have to worry about the database itself being contaminated with "rogue" contigs.
-Additionally, most assemblies were obtained by subject matter experts (SMEs) at
-Centers for Disease Control and Prevention (CDC).
-Those not from CDC come from other trusted institutions or projects such as
-FDA-ARGOS.
-Most genomes are from species that are either studied or are common contaminants
-in the Enteric Diseases Laboratory Branch (EDLB) at CDC.
-
-Kalamari also comes with a custom taxonomy database such as defining
-_Shigella_ as a subspecies of _Escherichia coli_
-or defining the four lineages of _Listeria monocytogenes_.
-These changes have been backed by trusted SMEs in EDLB.
 
 ## Contributing
 
