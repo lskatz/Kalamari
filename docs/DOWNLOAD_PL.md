@@ -79,17 +79,19 @@ To get the `<version>` for the full path, run:
 downloadKalamari.pl --version
 ```
 
-### Example Usages
-For either case, make sure you are in the top level of the local clone (i.e. `cd Kalamari/`).
+### Database `.tsv` files
+The databases are downloaded using the information contained in `<kalamari_cloned_repo>/src/chromosomes.tsv` and `<kalamari_cloned_repo>/src/plasmids.tsv`.
+These files represent the chromosome and plasmid databases, respectively.
 
+### Example Usages
 To download only the chromosome database with intention to use `Kraken` later:
 ```bash
-downloadKalamari.pl --outdir "share/kalamari-<version>/kalamari/" src/chromosomes.tsv
+downloadKalamari.pl --outdir "path/to/<kalamari_cloned_repo>/share/kalamari-<version>/kalamari/" "path/to/<kalamari_cloned_repo>/src/chromosomes.tsv"
 ```
 
 To download only the plasmid database with no intention to use `Kraken` later and no preference of outdir location:
 ```bash
-downloadKalamari.pl src/plasmids.tsv
+downloadKalamari.pl "path/to/<kalamari_cloned_repo>/src/plasmids.tsv"
 ```
 
 
