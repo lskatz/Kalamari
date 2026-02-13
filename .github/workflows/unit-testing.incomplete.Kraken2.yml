@@ -1,0 +1,103 @@
+# This is a subsampling unit test to get early results
+on: 
+  push:
+  pull_request:
+name: Incomplete-with-Kraken2
+
+env:
+  TSV: "Kalamari/src/genus.tsv"
+  DB: "kraken2"
+  SRC_CHR: "Kalamari/src/chromosomes.tsv"
+  SRC_PLD: "Kalamari/src/plasmids.tsv"
+  SRC_INCOMPLETE: "Kalamari/src/chromosomes-incomplete.tsv"
+  GENUS: Yersinia
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: ['ubuntu-24.04' ]
+        perl: [ '5.32' ]
+        GENUS: [ 'Yersinia', 'Listeria']
+    name: ${{ matrix.GENUS }} Perl ${{ matrix.perl }} on ${{ matrix.os }}
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          multi-thread: "true"
+      - name: checkout my repo
+        uses: actions/checkout@v4
+        with:
+          path: Kalamari
+
+      - name: env check
+        run:  |
+          echo $PATH | tr ':' '\n' | sort
+      - name: install-edirect
+        run:  |
+          sh -c "$(curl -fsSL https://ftp.ncbi.nlm.nih.gov/entrez/entrezdirect/install-edirect.sh)"
+          echo $HOME/edirect >> $GITHUB_PATH
+          echo $GITHUB_WORKSPACE/Kalamari/bin >> $GITHUB_PATH
+          tree $HOME/edirect 
+      - name: install taxonkit
+        run:  |
+          wget https://github.com/shenwei356/taxonkit/releases/download/v0.16.0/taxonkit_linux_amd64.tar.gz
+          tar -xvf taxonkit_linux_amd64.tar.gz
+          rm -v taxonkit_linux_amd64.tar.gz
+          chmod +x taxonkit
+          echo $(realpath .) >> $GITHUB_PATH
+      - name: apt-get install
+        run:  sudo apt-get install ca-certificates tree jellyfish ncbi-entrez-direct
+      - name: select for only for this genus
+        run:  |
+          head -n 1 ${{ env.SRC_CHR }} > ${{ env.TSV }}
+          grep -m 2 ${{ matrix.GENUS }} ${{ env.SRC_CHR }} >> ${{ env.TSV }}
+          grep -m 2 ${{ matrix.GENUS }} ${{ env.SRC_PLD }} >> ${{ env.TSV }}
+          grep -m 11 Purpureocillium ${{ env.SRC_INCOMPLETE }} >> ${{ env.TSV }}
+          echo "These are the ${{ matrix.GENUS }} genomes for downstream tests"
+          column -ts $'\t' ${{ env.TSV }}
+          hexdump -c ${{ env.TSV }}
+      - name: download
+        run:  |
+          perl Kalamari/bin/downloadKalamari.pl --outdir ${{ matrix.GENUS }} ${{ env.TSV }}
+          find ${{ matrix.GENUS }} -name '*.fasta.gz' | xargs gunzip -v
+      - name: check-results
+        run:  |
+          tree ${{ matrix.GENUS }}
+          echo "First two lines of each fasta file:"
+          find ${{ matrix.GENUS }} -name '*.fasta' | xargs head -n 2 | cut -c 1-60
+      - name: install kraken
+        run:  |
+          wget https://github.com/DerrickWood/kraken2/archive/refs/tags/v2.1.2.tar.gz -O kraken-v2.1.2.tar.gz
+          tar zxvf kraken-v2.1.2.tar.gz
+          cd kraken2-2.1.2 && bash install_kraken2.sh target && cd -
+          ls -lhS kraken2-2.1.2/target
+          chmod +x kraken2-2.1.2/target/*
+      - name: build taxonomy
+        run: |
+          export PATH=$PATH:Kalamari/bin
+          buildTaxonomy.sh
+          ls -lh Kalamari/share
+      - name: Kraken2 database
+        run:  |
+          export PATH=$PATH:kraken2-2.1.2/target
+          which kraken2-build
+          mkdir -pv ${{ env.DB }}
+          cp -rv Kalamari/share/kalamari-*/taxonomy ${{ env.DB }}/taxonomy
+          find ${{ matrix.GENUS }} -name '*.fasta' -exec kraken2-build --db ${{ env.DB }} --add-to-library {} \;
+          tree ${{ env.DB }}
+          echo ".....Building the database....."
+          kraken2-build --build --db ${{ env.DB }} --threads 2
+      - name: Kraken2 view results
+        run:  |
+          export PATH=$PATH:kraken2-2.1.2/target
+          tree ${{ env.DB }}
+          ls -lhSR ${{ env.DB }}
+          QUERY=$(find ${{ matrix.GENUS }} -name '*.fasta' | head -n 1)
+          echo "QUERY is $QUERY"
+          set -x; kraken2 --db ${{ env.DB }} --report kraken2.report --use-mpa-style --output kraken2.raw $QUERY; set +x;
+          head kraken2.report kraken2.raw
+
+
