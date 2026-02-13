@@ -2,7 +2,7 @@
 on: 
   push:
   pull_request:
-name: Genera-with-Kraken2
+name: Incomplete-with-Kraken2
 
 env:
   TSV: "Kalamari/src/genus.tsv"
