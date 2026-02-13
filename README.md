@@ -83,7 +83,8 @@ To download both the chromosome and plasmid databases with default settings, run
 downloadKalamari.sh
 ```
 
-To include incomplete assemblies, please see the download section under manual installation.
+To include incomplete assemblies, please see the download section under
+[manual installation](#manual-installation).
 
 Files will output to: `${CONDA_PREFIX}/share/kalamari-<version>/kalamari/`
 
