@@ -27,7 +27,8 @@ srcnodes="$srcdir/nodes.dmp"
 srcnames="$srcdir/names.dmp"
 
 # source leaf taxids
-taxid=$(cut -f 3,4 $thisdir/../src/chromosomes.tsv $thisdir/../src/plasmids.tsv | grep -v taxid | tr '\t' '\n' | sort -n | uniq)
+kalamari_tsv=$(\ls $thisdir/../src/{chromosomes,plasmids,chromosomes-incomplete}.tsv)
+taxid=$(cut -f 3,4 $kalamari_tsv | grep -v taxid | tr '\t' '\n' | sort -n | uniq)
 
 # Getting all necessary taxids
 alltaxids=$(echo "$taxid" | taxonkit --data-dir=$srcdir lineage -t | cut -f 3 | tr ';' '\n' | grep . | sort -n | uniq)

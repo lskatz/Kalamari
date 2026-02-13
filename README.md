@@ -82,6 +82,9 @@ To download both the chromosome and plasmid databases with default settings, run
 ```bash
 downloadKalamari.sh
 ```
+
+To include incomplete assemblies, please see the download section under manual installation.
+
 Files will output to: `${CONDA_PREFIX}/share/kalamari-<version>/kalamari/`
 
 For more control over database downloads when using a conda installation, such as selecting databases, specifying an output directory, or setting download parameters, see [DOWNLOAD_PL.md](docs/DOWNLOAD_PL.md).
@@ -133,12 +136,27 @@ To make this change persistent across sessions, add the `export` line to your sh
 
 This step downloads the reference genome FASTA files for the Kalamari database. Note that this step takes a while to complete.
 The databases are downloaded using the information contained in `src/chromosomes.tsv` and `src/plasmids.tsv`.
-These files represent the chromosome and plasmid databases, respectively. 
+These files represent the chromosome and plasmid databases, respectively.
+
+Optionally, you can include assemblies that are not complete (i.e., one contig per chromosome)
+by including `src/chromosomes-incomplete.tsv` by using `KALAMARI_EXPERIMENTAL` as shown below.
 
 To download both the chromosome and plasmid databases with default settings, run:
+
 ```bash
 downloadKalamari.sh
 ```
+
+To include incomplete assemblies, include `KALAMARI_EXPERIMENTAL` in the environment.
+You can either export it or include it when you execute it like so:
+
+```bash
+# either
+export KALAMARI_EXPERIMENTAL=1
+# or
+KALAMARI_EXPERIMENTAL=1 downloadKalamari.sh
+```
+
 Files will output to: `<Kalamari_cloned_repo>/share/kalamari-<version>/kalamari/`
 
 For more control over the database download such as selecting databases, specifying an output directory, or setting download parameters, see [DOWNLOAD_PL.md](docs/DOWNLOAD_PL.md).

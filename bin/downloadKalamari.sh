@@ -26,6 +26,11 @@ TSV="$tempdir/in.tsv"
 cat $thisdir/../src/chromosomes.tsv       > $TSV
 tail -n +2 $thisdir/../src/plasmids.tsv  >> $TSV
 
+# Include genomes that are not complete
+if [[ ${KALAMARI_EXPERIMENTAL:-} ]]; then
+  tail -n +2 $thisdir/../src/chromosomes-incomplete.tsv >> $TSV
+fi
+
 cp -rv $thisdir/../src/taxonomy $tempdir/taxonomy
 
 # Debug with `KALAMARI_DEBUG=1 downloadKalamari.sh`
