@@ -138,7 +138,7 @@ This step downloads the reference genome FASTA files for the Kalamari database. 
 The databases are downloaded using the information contained in `src/chromosomes.tsv` and `src/plasmids.tsv`.
 These files represent the chromosome and plasmid databases, respectively.
 
-Optionally, you can include assemblies that are not complete (i.e., one contig per chromosome)
+Optionally, you can include assemblies that are not complete (i.e., more than one contig per chromosome)
 by including `src/chromosomes-incomplete.tsv` by using `KALAMARI_EXPERIMENTAL` as shown below.
 
 To download both the chromosome and plasmid databases with default settings, run:
