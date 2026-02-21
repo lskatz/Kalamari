@@ -1,8 +1,10 @@
 on: 
   push:
+    branches:
+      - '**'
+    tags:
+      - 'v*.*.*'
   pull_request:
-  tags:
-    - 'v*.*.*'
 name: Pull-down-all-accessions
 env:
   CHUNK_TOTAL: 16
@@ -168,7 +170,7 @@ jobs:
       - name: check-sketches
         run:  ls -lh *.msh
       - name: merge sketches
-        run:  mash paste merged.msh *.msh
+        run:  mash paste merged-${{ github.ref_name }}.msh *.msh
       - name: upload-merged-sketch
         uses: actions/upload-artifact@v4
         with:
