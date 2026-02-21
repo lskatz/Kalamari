@@ -138,6 +138,7 @@ jobs:
       - name: check-file-sizes
         run:  |
           find kalamari.out -name '*.fasta.gz' > fasta.sizes
+          du -shc kalamari.out/* | sort -h
           #cat fasta.sizes | xargs -n 100 ls -lhS
       - name: make sketch
         run:  |
