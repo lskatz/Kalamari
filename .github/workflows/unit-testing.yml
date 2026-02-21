@@ -1,6 +1,5 @@
 on: 
   push:
-    branches: [master, dev, download-everything]
   pull_request:
 name: Pull-down-all-accessions
 env:
@@ -96,7 +95,7 @@ jobs:
           path: Kalamari
 
       - name: apt-get install
-        run:  sudo apt-get install ca-certificates tree
+        run:  sudo apt-get install ca-certificates tree mash
       - name: restore-edirect-cache
         id: restore_edirect
         uses: actions/cache/restore@v4
@@ -140,3 +139,28 @@ jobs:
         run:  |
           find kalamari.out -name '*.fasta.gz' > fasta.sizes
           #cat fasta.sizes | xargs -n 100 ls -lhS
+      - name: make sketch
+        run:  |
+          mash sketch -p 1 -k 21 -s 1000 -o ${{ matrix.runner_id }}.mash kalamari.out/*.fasta.gz
+      - name: upload-sketch
+        uses: actions/upload-artifact@v4
+        with:
+          name: sketch-${{ matrix.runner_id }}
+          path: ${{ matrix.runner_id }}.mash
+  build-sketch:
+    needs: build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: download-sketches
+        uses: actions/download-artifact@v4
+        with:
+          name: sketch-*
+      - name: check-sketches
+        run:  ls -lh *.mash
+      - name: merge sketches
+        run:  mash paste merged.mash *.mash
+      - name: upload-merged-sketch
+        uses: actions/upload-artifact@v4
+        with:
+          name: merged-sketch
+          path: merged.mash
