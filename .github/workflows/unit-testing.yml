@@ -155,7 +155,8 @@ jobs:
       - name: download-sketches
         uses: actions/download-artifact@v4
         with:
-          name: sketch-*.msh
+          pattern: sketch-*
+          merge-multiple: true
       - name: apt install
         run:  |
           sudo apt-get install mash
