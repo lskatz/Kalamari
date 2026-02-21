@@ -1,9 +1,14 @@
 on: 
   push:
   pull_request:
+  tags:
+    - 'v*.*.*'
 name: Pull-down-all-accessions
 env:
   CHUNK_TOTAL: 16
+
+permissions:
+  contents: write
 
 jobs:
   generate-matrix:
@@ -168,4 +173,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: merged-sketch
-          path: merged.msh
+          path: merged-${{ github.ref_name }}.msh
+      - name: Upload merged.msh to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: merged-${{ github.ref_name }}.msh
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
