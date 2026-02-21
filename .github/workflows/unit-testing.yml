@@ -137,17 +137,17 @@ jobs:
         run:  tree kalamari.out
       - name: check-file-sizes
         run:  |
-          find kalamari.out -name '*.fasta.gz' > fasta.sizes
+          find kalamari.out -name '*.fasta.gz' > fasta.fofn
           du -shc kalamari.out/* | sort -h
           #cat fasta.sizes | xargs -n 100 ls -lhS
       - name: make sketch
         run:  |
-          mash sketch -p 1 -k 21 -s 1000 -o ${{ matrix.runner_id }}.mash kalamari.out/*.fasta.gz
+          mash sketch -p 1 -k 21 -s 1000 -o ${{ matrix.runner_id }}.msh -l fasta.fofn
       - name: upload-sketch
         uses: actions/upload-artifact@v4
         with:
           name: sketch-${{ matrix.runner_id }}
-          path: ${{ matrix.runner_id }}.mash
+          path: ${{ matrix.runner_id }}.msh
   build-sketch:
     needs: build
     runs-on: ubuntu-24.04
@@ -155,13 +155,16 @@ jobs:
       - name: download-sketches
         uses: actions/download-artifact@v4
         with:
-          name: sketch-*
+          name: sketch-*.msh
+      - name: apt install
+        run:  |
+          sudo apt-get install mash
       - name: check-sketches
-        run:  ls -lh *.mash
+        run:  ls -lh *.msh
       - name: merge sketches
-        run:  mash paste merged.mash *.mash
+        run:  mash paste merged.msh *.msh
       - name: upload-merged-sketch
         uses: actions/upload-artifact@v4
         with:
           name: merged-sketch
-          path: merged.mash
+          path: merged.msh
