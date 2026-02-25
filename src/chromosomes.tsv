@@ -2,8 +2,8 @@ scientificName	nuccoreAcc	taxid	parent	source
 Acholeplasma_laidlawii	CP000896	2148	2147	NCBI-REF
 Acinetobacter_baumannii	CP045110	509170	470	NCBI-REF
 Acinetobacter_pittii	CP002177	48296	909768	NCBI-REF
-Actinobacillus_pleuropneumoniae	CP030753	715 713 NBCI-REF
-Aggregatibacter_aphrophilus	LR134327	732 416916	NCBI-REF
+Actinobacillus_pleuropneumoniae	CP030753	715	713	NBCI-REF
+Aggregatibacter_aphrophilus	LR134327	732	416916	NCBI-REF
 Agrobacterium_fabrum	AE007869	1176649	1183400	NCBI-REF
 Agrobacterium_fabrum	AE007870	1176649	1183400	NCBI-REF
 Aliivibrio_fischeri	CP000020	668	511678	NCBI-REF
@@ -34,7 +34,7 @@ Betacoronavirus_coronavirus	MT233526	2697049	694009	CDC SME
 Bifidobacterium_bifidum	CP058603	1681	1678	NCBI-REF
 Bifidobacterium_longum	AP010888	216816	1678	NCBI-REF
 Bordetella_bronchiseptica	LR134326	518	517	NCTC3000
-Bordetella_pertussis	CP010964	520 517 CDC SME
+Bordetella_pertussis	CP010964	520	517	CDC SME
 Borreliella_burgdorferi	AE000783	139	64895	CDC SME
 Bos_taurus	KC153975	9913	9903	UGA SME
 Brachybacterium_faecium	CP001643	43669	43668	NCBI-REF
