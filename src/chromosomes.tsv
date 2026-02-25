@@ -65,7 +65,7 @@ Candidatus_Desulforudis_audaxviator	CP000860	471827	471826	NCBI-REF
 Candidatus_Korarchaeum_cryptofilum	CP000968	374847	498846	NCBI-REF
 Caulobacter_vibrioides	CP001340	155892	75	NCBI-REF
 Chlamydia_pneumoniae	AE001363	83558	810	NCBI-REF
-Chlamydia_psittaci	CP002586	83554	810 NCBI-REF
+Chlamydia_psittaci	CP002586	83554	810	NCBI-REF
 Chlamydia_trachomatis	AE001273	813	810	NCBI-REF
 Chlorobaculum_tepidum	AE006470	1097	256319	NCBI-REF
 Chloroflexus_aurantiacus	CP000909	1108	1107	NCBI-REF
@@ -92,21 +92,21 @@ Cronobacter_muytjensii	CP012268	413501	413496	NCBI-REF
 Cronobacter_sakazakii	CP011047	28141	413496	NCBI-REF
 Cronobacter_turicensis	FN543093	413502	413496	NCBI-REF
 Cronobacter_universalis	CP012257	535744	413496	NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003820	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003821	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003822	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003823	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003824	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003825	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003826	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003827	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003828	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003829	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003830	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003831	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003832	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003833	5207	1897064 NCBI-REF
-Cryptococcus_neoformans_var_grubii	CP003834	5207	1897064 NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003820	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003821	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003822	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003823	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003824	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003825	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003826	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003827	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003828	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003829	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003830	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003831	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003832	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003833	5207	1897064	NCBI-REF
+Cryptococcus_neoformans_var_grubii	CP003834	5207	1897064	NCBI-REF
 Cryptosporidium_hominis	LN877947	237895	5806	CDC SME
 Cryptosporidium_hominis	LN877948	237895	5806	CDC SME
 Cryptosporidium_hominis	LN877949	237895	5806	CDC SME
@@ -150,11 +150,11 @@ Geobacter_sulfurreducens	AE017180	35554	28231	NCBI-REF
 Gloeobacter_violaceus	BA000045	33072	33071	NCBI-REF
 Grimontia_hollisae	CP035690	673	246861	CDC SME
 Grimontia_hollisae	CP035691	673	246861	CDC SME
-Haemophilus_aegyptius	CP082857	197575	724 FDA-ARGOS 
-Haemophilus_haemolyticus	LS483458	726 724 NCBI-REF
+Haemophilus_aegyptius	CP082857	197575	724	FDA-ARGOS
+Haemophilus_haemolyticus	LS483458	726	724	NCBI-REF
 Haemophilus_influenzae	L42023	727	724	NCBI-REF
 Haemophilus_parahaemolyticus	CP069510	735	724	FDA-ARGOS
-Haemophilus_parainfluenzae	CP065991	729 724 FDA-ARGOS
+Haemophilus_parainfluenzae	CP065991	729	724	FDA-ARGOS
 Haemophilus_somnus	CP000947	228400	731	NCBI-REF
 Halobacterium_salinarum	AM774415	478009	2242	NCBI-REF
 Helianthus_annuus	MG770607	4232	4231	NCBI-REF
@@ -163,7 +163,7 @@ Heliobacterium_modesticaldum	CP000930	35701	2697	NCBI-REF
 Homo_sapiens	J01415	9606	9605	NCBI-REF
 Humulus_lupulus	NC_086845	3486	3484	UGA SME
 Ketogulonicigenium_vulgare	CP002018	92945	92944	NCBI-REF
-Kingella_denitrificans	CP065999	502 32257	FDA-ARGOS
+Kingella_denitrificans	CP065999	502	32257	FDA-ARGOS
 Klebsiella_aerogenes	CP002824	548	570	NCBI-REF
 Klebsiella_pneumoniae	CP003200	573	570	NCBI-REF
 Lactobacillus_acidophilus	CP000033	1579	1578	NCBI-REF
@@ -192,23 +192,23 @@ Methylobacterium	CP000943	426117	2615210	NCBI-REF
 Methylobacterium_radiotolerans	CP001001	31998	407	NCBI-REF
 Micrococcus_luteus	CP001628	1270	1269	NCBI-REF
 Moorella_thermoacetica	CP012370	1525	44260	NCBI-REF
-Moraxella_catarrhalis	LS483445	480 475 NCBI-REF
+Moraxella_catarrhalis	LS483445	480	475	NCBI-REF
 Morganella_morganii_morganii	CP004345	180434	582	NCBI-REF
 Mycobacterium_abscessus	CU458896	36809	670516	NCBI-REF
 Mycobacterium_leprae	AL450380	1769	1763	NCBI-REF
 Mycobacterium_tuberculosis	AL123456	1773	77643	NCBI-REF
 Mycolicibacterium_fortuitum	AP025518	144549	1766	NCBI-REF
 Mycoplasma_mycoides	BX293980	2102	656088	NCBI-REF
-Neisseria_cinerea	CP065726	483 482 FDA-ARGOS
-Neisseria_elongata	CP031255	495 482 CDC SME
-Neisseria_flavescens	CP039886	484 482 NCBI-REF
+Neisseria_cinerea	CP065726	483	482	FDA-ARGOS
+Neisseria_elongata	CP031255	495	482	CDC SME
+Neisseria_flavescens	CP039886	484	482	NCBI-REF
 Neisseria_gonorrhoeae	AE004969	485	482	CDC SME
-Neisseria_lactamica	CP031253	486 482 CDC SME
+Neisseria_lactamica	CP031253	486	482	CDC SME
 Neisseria_meningitidis	AE002098	487	482	CDC SME
-Neisseria_polysaccharea	CP031325	489 482 CDC SME
-Neisseria_sicca	CP059566	490 482 NCBI-REF	
-Neisseria_subflava	CP039887	28449	482 NCBI-REF
-Neisseria_weaveri	LR134533	28091	482 NCBI-REF
+Neisseria_polysaccharea	CP031325	489	482	CDC SME
+Neisseria_sicca	CP059566	490	482	NCBI-REF
+Neisseria_subflava	CP039887	28449	482	NCBI-REF
+Neisseria_weaveri	LR134533	28091	482	NCBI-REF
 Neomysis_japonica	KR006340	1676841	223649	UGA SME
 Nocardia_asteroides	CP089227	1824	1817	FDA-ARGOS
 Nocardia_farcinica	CP031418	37329	1817	NCBI-REF
@@ -216,7 +216,7 @@ Ochrobactrum_anthropi	CP000758	529	528	NCBI-REF
 Ochrobactrum_anthropi	CP000759	529	528	NCBI-REF
 Pantoea_ananatis	CP001875	553	53335	NCBI-REF
 Parabacteroides_distasonis	CP000140	823	375288	NCBI-REF
-Pasteurella_multocida	CP020405	747 745 FDA-ARGOS
+Pasteurella_multocida	CP020405	747	745	FDA-ARGOS
 Photobacterium_damselae	CP046751	38293	657	CDC SME
 Photobacterium_damselae	CP046752	38293	657	CDC SME
 Pollachius_virens	FR751399	8060	8059	UGA SME
