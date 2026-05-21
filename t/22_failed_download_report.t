@@ -34,8 +34,8 @@ make_path($outdir);
 
 open(my $tsvFh, ">", $tsv) or die "ERROR: could not write test tsv: $!";
 print $tsvFh join("\t", qw(scientificName nuccoreAcc taxid parent source))."\n";
-print $tsvFh "Purpureocillium lilacinum\tFAKE111111.1\t33203\t1052105\tUGA SME\n";
-print $tsvFh "Madeupus species\tFAKE999999.1\t12345\t1\tTEST\n";
+print $tsvFh "Purpureocillium lilacinum\tFAKE111111.1\t33203\t28196\tUGA SME\n";
+print $tsvFh "Madeupus species\tFAKE999999.1\t12345\t470\tTEST\n";
 close $tsvFh;
 
 my $cmd = "perl $RealBin/../bin/downloadKalamari.pl --numcpus 1 --buffersize 1 --outdir $outdir --require-all-downloads $tsv";
@@ -50,7 +50,9 @@ ok(-e $failedTsv, "failed-downloads.tsv is written");
 open(my $failedFh, "<", $failedTsv) or die "ERROR: could not read $failedTsv: $!";
 my $failedContent = do { local $/; <$failedFh> };
 close $failedFh;
+my @failedLines = grep { length($_) } split(/\n/, $failedContent);
 
-like($failedContent, qr/^scientificName\tnuccoreAcc\ttaxid\tparent\tsource/m, "report has expected header");
-like($failedContent, qr/\tFAKE111111\.1\t/, "report includes first made-up accession");
-like($failedContent, qr/\tFAKE999999\.1\t/, "report includes made-up accession");
+is(scalar(@failedLines), 3, "report has header plus two failed rows");
+is($failedLines[0], "scientificName\tnuccoreAcc\ttaxid\tparent\tsource", "report has expected header");
+my @failedAccessions = sort map { (split(/\t/, $_))[1] } @failedLines[1 .. $#failedLines];
+is_deeply(\@failedAccessions, [qw(FAKE111111.1 FAKE999999.1)], "report includes both made-up accessions");
