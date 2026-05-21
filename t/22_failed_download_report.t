@@ -12,13 +12,13 @@ sub inPath {
   my ($exe) = @_;
   for my $dir (split(/:/, $ENV{PATH} // "")) {
     my $candidate = "$dir/$exe";
-    return 1 if(-x $candidate);
+    return 1 if (-x $candidate);
   }
   return 0;
 }
 
 for my $exe (qw(esearch efetch)) {
-  if(!inPath($exe)){
+  if (!inPath($exe)){
     plan skip_all => "$exe is required in PATH for this test";
   }
 }
