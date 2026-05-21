@@ -2,15 +2,17 @@
 
 use strict;
 use warnings;
+use Config qw(%Config);
 use FindBin qw/$RealBin/;
 use File::Path qw/make_path/;
 use File::Temp qw/tempdir/;
 
 use Test::More;
 
-sub inPath {
+sub in_path {
   my ($exe) = @_;
-  for my $dir (split(/:/, $ENV{PATH} // "")) {
+  my $pathSeparator = $Config{path_sep} || ":";
+  for my $dir (split(/\Q$pathSeparator\E/, $ENV{PATH} // "")) {
     my $candidate = "$dir/$exe";
     return 1 if (-x $candidate);
   }
@@ -18,7 +20,7 @@ sub inPath {
 }
 
 for my $exe (qw(esearch efetch)) {
-  if (!inPath($exe)){
+  if (!in_path($exe)){
     plan skip_all => "$exe is required in PATH for this test";
   }
 }
