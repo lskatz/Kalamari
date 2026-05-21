@@ -54,5 +54,6 @@ my @failedLines = grep { length($_) } split(/\n/, $failedContent);
 
 is(scalar(@failedLines), 3, "report has header plus two failed rows");
 is($failedLines[0], "scientificName\tnuccoreAcc\ttaxid\tparent\tsource", "report has expected header");
-my @failedAccessions = sort map { (split(/\t/, $_))[1] } @failedLines[1 .. $#failedLines];
+my @failedDataLines = @failedLines > 1 ? @failedLines[1 .. $#failedLines] : ();
+my @failedAccessions = sort map { (split(/\t/, $_))[1] } @failedDataLines;
 is_deeply(\@failedAccessions, [qw(FAKE111111.1 FAKE999999.1)], "report includes both made-up accessions");
