@@ -139,7 +139,7 @@ jobs:
           echo "Chunk lines: $chunk_lines"
           buffer_size=$(( 1 + chunk_lines / 4 ))
           echo buffer size is $buffer_size
-          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize $buffer_size "$chunk_file"
+          perl Kalamari/bin/downloadKalamari.pl --numcpus 1 --outdir kalamari.out --buffersize $buffer_size --require-all-downloads "$chunk_file"
       - name: check-results
         run:  tree kalamari.out
       - name: check-file-sizes
