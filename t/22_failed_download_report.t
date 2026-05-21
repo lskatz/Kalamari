@@ -26,7 +26,7 @@ chmod(0755, "$fakeBin/esearch", "$fakeBin/efetch") or die "ERROR: could not chmo
 
 open(my $tsvFh, ">", $tsv) or die "ERROR: could not write test tsv: $!";
 print $tsvFh join("\t", qw(scientificName nuccoreAcc taxid parent source))."\n";
-print $tsvFh "Purpureocillium_lilacinum\tLC716767.1\t33203\t1052105\tUGA SME\n";
+print $tsvFh "Purpureocillium lilacinum\tLC716767.1\t33203\t1052105\tUGA SME\n";
 print $tsvFh "Madeupus species\tFAKE999999.1\t12345\t1\tTEST\n";
 close $tsvFh;
 
@@ -36,7 +36,8 @@ close $tsvFh;
   system($cmd);
 }
 
-isnt($?, 0, "downloadKalamari exits non-zero when required genomes are missing");
+my $exitCode = $? >> 8;
+is($exitCode, 1, "downloadKalamari exits with code 1 when required genomes are missing");
 
 my $failedTsv = "$outdir/failed-downloads.tsv";
 ok(-e $failedTsv, "failed-downloads.tsv is written");
