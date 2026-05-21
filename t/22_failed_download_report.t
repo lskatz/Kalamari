@@ -26,7 +26,7 @@ chmod(0755, "$fakeBin/esearch", "$fakeBin/efetch") or die "ERROR: could not chmo
 
 open(my $tsvFh, ">", $tsv) or die "ERROR: could not write test tsv: $!";
 print $tsvFh join("\t", qw(scientificName nuccoreAcc taxid parent source))."\n";
-print $tsvFh "Purpureocillium lilacinum\tLC716767.1\t33203\t1052105\tUGA SME\n";
+print $tsvFh "Purpureocillium lilacinum\tFAKE111111.1\t33203\t1052105\tUGA SME\n";
 print $tsvFh "Madeupus species\tFAKE999999.1\t12345\t1\tTEST\n";
 close $tsvFh;
 
@@ -47,5 +47,5 @@ my $failedContent = do { local $/; <$failedFh> };
 close $failedFh;
 
 like($failedContent, qr/^scientificName\tnuccoreAcc\ttaxid\tparent\tsource/m, "report has expected header");
-like($failedContent, qr/\tLC716767\.1\t/, "report includes accession that previously failed in GitHub Actions");
+like($failedContent, qr/\tFAKE111111\.1\t/, "report includes first made-up accession");
 like($failedContent, qr/\tFAKE999999\.1\t/, "report includes made-up accession");
