@@ -1,0 +1,67 @@
+name: Failed-download-report test
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  failed-download-report:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.32'
+          multi-thread: "true"
+
+      - name: checkout my repo
+        uses: actions/checkout@v4
+
+      - name: apt-get install
+        run: sudo apt-get install ncbi-entrez-direct
+
+      - name: run failed-download-report test
+        env:
+          KALAMARI_SHOW_FAILED_DOWNLOAD_TABLE: "1"
+        run: |
+          prove -v t/22_failed_download_report.t | tee failed-download-report.log
+
+      - name: add failed-downloads inline table to job summary
+        if: always()
+        run: |
+          perl -ne '
+            BEGIN {
+              $capture = 0;
+              $rows = 0;
+              print "## failed-downloads.tsv\n";
+            }
+            if(/^# failed-downloads\.md:/){
+              $capture = 1;
+              next;
+            }
+            next if(!$capture);
+            next if(!/^# /);
+            s/^# //;
+            chomp;
+            next if($_ eq "");
+            if($_ !~ /^\|(?:[^|]*\|)+$/){
+              $capture = 0;
+              next;
+            }
+            print "$_\n";
+            $rows++;
+            END {
+              if($rows == 0){
+                print "_No markdown failed-download table found in test output (test may have skipped)._\n";
+              }
+            }
+          ' failed-download-report.log >> "$GITHUB_STEP_SUMMARY"
+
+      - name: upload failed-download-report test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-download-report-test-log
+          path: failed-download-report.log
