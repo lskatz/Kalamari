@@ -11,16 +11,22 @@ use Test::More;
 
 sub tsv_to_markdown {
   my ($tsv) = @_;
-  my @lines = grep { length($_) } split(/\n/, $tsv);
+  my @lines = grep { /\S/ } split(/\n/, $tsv);
   return "" if !@lines;
 
   my @header = split(/\t/, shift @lines);
+  my $num_cols = scalar(@header);
   my @markdown = (
     "| " . join(" | ", @header) . " |",
     "| " . join(" | ", map { "---" } @header) . " |",
   );
   for my $line (@lines) {
-    my @cols = split(/\t/, $line);
+    my @cols = split(/\t/, $line, -1);
+    if (@cols < $num_cols) {
+      push(@cols, ("") x ($num_cols - @cols));
+    } elsif (@cols > $num_cols) {
+      @cols = @cols[0 .. $num_cols - 1];
+    }
     push(@markdown, "| " . join(" | ", @cols) . " |");
   }
   return join("\n", @markdown) . "\n";
@@ -72,7 +78,7 @@ if ($ENV{KALAMARI_SHOW_FAILED_DOWNLOAD_TABLE}) {
   my $failedMarkdown = tsv_to_markdown($failedContent);
   diag("failed-downloads.md:\n$failedMarkdown");
 }
-my @failedLines = grep { length($_) } split(/\n/, $failedContent);
+my @failedLines = grep { /\S/ } split(/\n/, $failedContent);
 
 is(scalar(@failedLines), 3, "report has header plus two failed rows");
 is($failedLines[0], "scientificName\tnuccoreAcc\ttaxid\tparent\tsource", "report has expected header");

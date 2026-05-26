@@ -46,7 +46,10 @@ jobs:
             s/^# //;
             chomp;
             next if($_ eq "");
-            next if($_ !~ /^\|/);
+            if($_ !~ /^\|(?:[^|]*\|){1,}$/){
+              $capture = 0 if($rows > 0);
+              next;
+            }
             print "$_\n";
             $rows++;
             END {
