@@ -9,6 +9,23 @@ use File::Temp qw/tempdir/;
 
 use Test::More;
 
+sub tsv_to_markdown {
+  my ($tsv) = @_;
+  my @lines = grep { length($_) } split(/\n/, $tsv);
+  return "" if !@lines;
+
+  my @header = split(/\t/, shift @lines);
+  my @markdown = (
+    "| " . join(" | ", @header) . " |",
+    "| " . join(" | ", map { "---" } @header) . " |",
+  );
+  for my $line (@lines) {
+    my @cols = split(/\t/, $line);
+    push(@markdown, "| " . join(" | ", @cols) . " |");
+  }
+  return join("\n", @markdown) . "\n";
+}
+
 sub in_path {
   my ($exe) = @_;
   my $pathSeparator = $Config{path_sep} || ":";
@@ -52,6 +69,8 @@ my $failedContent = do { local $/; <$failedFh> };
 close $failedFh;
 if ($ENV{KALAMARI_SHOW_FAILED_DOWNLOAD_TABLE}) {
   diag("failed-downloads.tsv:\n$failedContent");
+  my $failedMarkdown = tsv_to_markdown($failedContent);
+  diag("failed-downloads.md:\n$failedMarkdown");
 }
 my @failedLines = grep { length($_) } split(/\n/, $failedContent);
 

@@ -37,7 +37,7 @@ jobs:
               $rows = 0;
               print "## failed-downloads.tsv\n";
             }
-            if(/^# failed-downloads\.tsv:/){
+            if(/^# failed-downloads\.md:/){
               $capture = 1;
               next;
             }
@@ -46,17 +46,12 @@ jobs:
             s/^# //;
             chomp;
             next if($_ eq "");
-            my @cols = split(/\t|\\t/);
-            if($rows == 0){
-              print "| " . join(" | ", @cols) . " |\n";
-              print "| " . join(" | ", map { "---" } @cols) . " |\n";
-            } else {
-              print "| " . join(" | ", @cols) . " |\n";
-            }
+            next if($_ !~ /^\|/);
+            print "$_\n";
             $rows++;
             END {
               if($rows == 0){
-                print "_No failed-download table found in test output (test may have skipped)._\n";
+                print "_No markdown failed-download table found in test output (test may have skipped)._\n";
               }
             }
           ' failed-download-report.log >> "$GITHUB_STEP_SUMMARY"
