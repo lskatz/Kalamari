@@ -1,0 +1,33 @@
+name: Failed-download-report test
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  failed-download-report:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Set up perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: '5.32'
+          multi-thread: "true"
+
+      - name: checkout my repo
+        uses: actions/checkout@v4
+
+      - name: apt-get install
+        run: sudo apt-get install ncbi-entrez-direct
+
+      - name: run failed-download-report test
+        env:
+          KALAMARI_SHOW_FAILED_DOWNLOAD_TABLE: "1"
+        run: |
+          prove -v t/22_failed_download_report.t | tee failed-download-report.log
+
+      - name: upload failed-download-report test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: failed-download-report-test-log
+          path: failed-download-report.log

@@ -50,6 +50,9 @@ ok(-e $failedTsv, "failed-downloads.tsv is written");
 open(my $failedFh, "<", $failedTsv) or die "ERROR: could not read $failedTsv: $!";
 my $failedContent = do { local $/; <$failedFh> };
 close $failedFh;
+if ($ENV{KALAMARI_SHOW_FAILED_DOWNLOAD_TABLE}) {
+  diag("failed-downloads.tsv:\n$failedContent");
+}
 my @failedLines = grep { length($_) } split(/\n/, $failedContent);
 
 is(scalar(@failedLines), 3, "report has header plus two failed rows");
