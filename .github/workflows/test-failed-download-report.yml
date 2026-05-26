@@ -28,6 +28,39 @@ jobs:
         run: |
           prove -v t/22_failed_download_report.t | tee failed-download-report.log
 
+      - name: add failed-downloads inline table to job summary
+        if: always()
+        run: |
+          perl -ne '
+            BEGIN {
+              $capture = 0;
+              $rows = 0;
+              print "## failed-downloads.tsv\n";
+            }
+            if(/^# failed-downloads\.tsv:/){
+              $capture = 1;
+              next;
+            }
+            next if(!$capture);
+            next if(!/^# /);
+            s/^# //;
+            chomp;
+            next if($_ eq "");
+            my @cols = split(/\t|\\t/);
+            if($rows == 0){
+              print "| " . join(" | ", @cols) . " |\n";
+              print "| " . join(" | ", map { "---" } @cols) . " |\n";
+            } else {
+              print "| " . join(" | ", @cols) . " |\n";
+            }
+            $rows++;
+            END {
+              if($rows == 0){
+                print "_No failed-download table found in test output (test may have skipped)._\n";
+              }
+            }
+          ' failed-download-report.log >> "$GITHUB_STEP_SUMMARY"
+
       - name: upload failed-download-report test log
         if: always()
         uses: actions/upload-artifact@v4
