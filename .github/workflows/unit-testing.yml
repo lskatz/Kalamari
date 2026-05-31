@@ -219,7 +219,7 @@ jobs:
           KALAMARI_VER=$(perl Kalamari/bin/downloadKalamari.pl --version)
           taxdir="Kalamari/share/kalamari-${KALAMARI_VER}/taxonomy/filtered"
           perl Kalamari/bin/validateTaxonomy.pl "$taxdir" 2>&1 | tee validateTaxonomy.log
-          grep -Eq "Valid .*\\? 1" validateTaxonomy.log
+          grep -Eq "Valid .*\\? 1" validateTaxonomy.log || { echo "Taxonomy validation failed. See validateTaxonomy.log for details."; exit 1; }
           tar -C "$taxdir" -czvf "taxonomy-${KALAMARI_VER}.tar.gz" nodes.dmp names.dmp
           echo "TAXONOMY_TGZ=taxonomy-${KALAMARI_VER}.tar.gz" >> $GITHUB_ENV
       - name: upload-merged-sketch
