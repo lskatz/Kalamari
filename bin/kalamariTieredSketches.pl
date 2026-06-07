@@ -26,6 +26,8 @@ sub main{
   # E.g., we usually do not care about the infraclass level.
   # Note: should we expose this as a command line option? Or is it ok to keep this hard coded?
   my @sortedRank = qw(domain kingdom phylum class order family genus species);
+  $$settings{sortedRank} = \@sortedRank;
+  $$settings{taxdir} = $taxdir;
 
   # TODO
   # Mask all mobile elements 
@@ -40,16 +42,19 @@ sub main{
   my @taxids = sort {$a<=>$b} keys %$assemblies;
   # Read the taxonomy, and figure out which taxids belong to which taxonomic levels.
   my $taxonomy   = readTaxonomy(\@taxids, $taxdir, $settings);
-  die Dumper $taxonomy;
+  
   # Designate which genomes are going to go into which clusters.
   # E.g., 
   #           'kingdom' => {
   #                      'Metazoa' => '33208',
   #                      'Bacillati' => '1783272',
   #                      'Pseudomonadati' => '3379134'
-  # And so one cluster at the top would have at least three genomes eachwith a lineage that includes one of these taxids.
+  # And so one cluster at the top would have at least three genomes each with a lineage that includes one of these taxids.
   # And then one cluster each for Metazoa, Bacillati, and Pseudomonadati to dive deeper into the taxonomy into phylum.
   # TODO: I do not seem to havea  metazoa, Bacillati, or a Pseudomonadati in the taxonomy hash. Need to debug.
+  my $clusters = designateClusters($taxonomy, $assemblies, $settings);
+
+  my $sketches = clustersToSketches($clusters, \@sortedRank, $outdir, $settings);
 
   return 0;
 }
@@ -69,7 +74,11 @@ sub readAssemblies{
       chomp $line;
       if($line =~ /^>([^|]+)\|kraken:taxid\|(\d+)/){
         my($accession, $taxid) = ($1, $2);
-        push @{$assemblies{$taxid}}, "$File::Find::name";
+        my $taxids = taxonLineage($taxid, $$settings{taxdir}, $settings);
+        #die Dumper $accession, $taxid, $taxids;
+        for my $tid (@$taxids){
+          push @{$assemblies{$tid}}, "$File::Find::name";
+        }
       }
     }
   }}, $assembliesdir);
@@ -80,9 +89,14 @@ sub readAssemblies{
 sub readTaxonomy{
   my($taxids, $taxdir, $settings) = @_;
   my %taxonomy;
+  my %parent;
+  $$settings{sortedRank} //= die "ERROR: missing sortedRank in settings";
 
-  my $taxidsFile = "$$settings{tempdir}/taxids.txt";
+  my $taxidsFile  = "$$settings{tempdir}/taxids.txt";
   my $lineageFile = "$$settings{tempdir}/lineage.txt";
+  my @sortedRank = @{ $$settings{sortedRank} };
+  my $numWantedRanks    = scalar(@sortedRank);
+  my %wantedRanks = map {$_ => 1} @sortedRank;
 
   # Write the taxids to a temporary file to play safe with taxonkit.
   open(my $fh, ">", $taxidsFile) or die "ERROR: could not write to $taxidsFile: $!";
@@ -104,14 +118,78 @@ sub readTaxonomy{
     my @lineageTaxid = split(";", $lineageTaxids);
     my @rankKey = split(";", $rankKeys);
 
+    # Get a map of taxid => rank
     my $numTiers = scalar(@rankKey);
+    my %rankTaxid = ();
+    my %taxidRank = ();
     for(my $i=0; $i<$numTiers; $i++){
-      #push(@{ $taxonomy{$rankKey[$i]}{$rankValue[$i]} }, $lineageTaxid[$i]);
-      $taxonomy{$rankKey[$i]}{$rankValue[$i]} = $lineageTaxid[$i];
+      $rankTaxid{$rankKey[$i]} = $lineageTaxid[$i];
+      if($i==0){
+        $parent{$lineageTaxid[$i]} = 0;
+      } else {
+        $parent{$lineageTaxid[$i]} = $lineageTaxid[$i-1];
+      }
     }
-    
+    # Filter to just the wanted ranks
+    map { delete $rankTaxid{$_} } grep { !$wantedRanks{$_} } keys %rankTaxid;
+    # die Dumper \%rankTaxid, \%taxidRank;
+
+    for my $rank (keys %rankTaxid){
+      my $taxid = $rankTaxid{$rank};
+      if(!grep {$_ == $taxid} @{$taxonomy{$rank}}){
+        push(@{$taxonomy{$rank}}, $taxid);
+      }
+    }
   }
+
   return \%taxonomy;
+}
+
+sub designateClusters{
+  my($taxonomy, $assemblies, $settings) = @_;
+  my %clusters;
+  my @sortedRank = @{ $$settings{sortedRank} };
+
+  # For each taxonomic level, designate which taxids belong to which clusters.
+  for(my $i=0; $i<@sortedRank; $i++){
+    my $rank = $sortedRank[$i];
+    my $taxidsAtRank = $$taxonomy{$rank};
+
+    # Capture the assemblies that belong to these taxids.
+    for my $taxid (@$taxidsAtRank){
+      my @assembliesForTaxid = @{$assemblies->{$taxid} // []};
+      if(@assembliesForTaxid){
+        push @{$clusters{$rank}->{$taxid}}, @assembliesForTaxid;
+      }
+    }
+  }
+  return \%clusters;
+}
+
+sub clustersToSketches{
+  my($clusters, $sortedRank, $outdir, $settings) = @_;
+  my %sketches;
+
+  for(my $i=0; $i<@$sortedRank; $i++){
+    my $rank = $$sortedRank[$i];
+    my $taxidsAtRank = $$clusters{$rank};
+    die Dumper $taxidsAtRank, $rank;
+  }
+}
+
+# Get a single taxid's lineage, which is an array of taxids from child to parent to ancestor.
+sub taxonLineage{
+  my($taxid, $taxdir, $settings) = @_;
+  my @lineage;
+
+  my $line = `echo $taxid | taxonkit lineage --data-dir $taxdir --show-lineage-ranks --show-lineage-taxids`;
+  chomp($line);
+  my(undef, $rankValues, $lineageTaxids, $rankKeys) = split("\t", $line);
+  my @rankValue = split(";", $rankValues);
+  my @lineageTaxid = split(";", $lineageTaxids);
+  my @rankKey = split(";", $rankKeys);
+
+  return [reverse @lineageTaxid];
 }
 
 sub usage{
