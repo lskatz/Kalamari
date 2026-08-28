@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use FindBin qw/$RealBin/;
 use File::Temp qw/tempdir/;
-use Test::More tests => 5;
+use Test::More tests => 4;
 
 my $tmp = tempdir(CLEANUP => 1);
 my $mock = "$tmp/bin";
@@ -44,8 +44,7 @@ my $output = `perl '$RealBin/../bin/ictvToKalamari.pl' < '$input_file'`;
 is($? >> 8, 0, "ICTV conversion succeeds");
 my @line = grep { length } split /\n/, $output;
 is($line[0], "scientificName\tnuccoreAcc\ttaxid\tparent\tsource", "writes Kalamari header");
-is($line[1], "Test_virus\tNC_012345.1\t12345\t10509\tICTV", "writes resolved genome and provenance");
-like($output, qr/NC_012345\.1/, "uses INSDC accession");
+is($line[1], "Test_virus\tNC_012345.1\t12345\t10509\tICTV", "writes resolved INSDC genome and provenance");
 is(scalar(@line), 2, "writes one catalog row");
 
 sub write_mock {
