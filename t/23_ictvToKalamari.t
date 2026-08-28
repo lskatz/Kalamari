@@ -36,7 +36,11 @@ my $input = join("\n",
   ""
 );
 local $ENV{PATH} = "$mock:$ENV{PATH}";
-my $output = `printf '%s' '$input' | perl '$RealBin/../bin/ictvToKalamari.pl'`;
+my $input_file = "$tmp/ictv.tsv";
+open my $input_fh, ">", $input_file or die $!;
+print $input_fh $input;
+close $input_fh;
+my $output = `perl '$RealBin/../bin/ictvToKalamari.pl' < '$input_file'`;
 is($? >> 8, 0, "ICTV conversion succeeds");
 my @line = grep { length } split /\n/, $output;
 is($line[0], "scientificName\tnuccoreAcc\ttaxid\tparent\tsource", "writes Kalamari header");

@@ -69,7 +69,7 @@ set to `ICTV`, identifying the expert-curated source.
 ictvToKalamari.pl < ictv.tsv > viral-genomes.tsv
 ```
 
-Check the assemblies spreadsheet on whether or not it is retrospecitively part of NCBI references
+Check the assemblies spreadsheet on whether or not it is retrospectively part of NCBI references
 
 ```bash
 zcat assembly_summary_genbank.txt.gz | perl -F'\t' -lane 'print if($F[11] eq "Complete Genome" || $.==1);' > tmp.tsv
