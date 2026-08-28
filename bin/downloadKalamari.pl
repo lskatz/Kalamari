@@ -22,7 +22,7 @@ exit main();
 
 sub main{
   my $settings={};
-  GetOptions($settings,qw(numcpus=i version buffersize|buffer-size=i tempdir=s outdir=s help)) or die $!;
+  GetOptions($settings,qw(numcpus=i version buffersize|buffer-size=i tempdir=s outdir=s require-all-downloads help)) or die $!;
   if($$settings{version}){
     print $VERSION."\n";
     return 0;
@@ -44,6 +44,8 @@ sub main{
   }
 
   my @spreadsheet = @ARGV;
+  my @remainingErrors;
+  my @failedReports;
 
   for my $s(@spreadsheet){
     my $errors = downloadKalamari($s, $$settings{outdir}, $settings);
@@ -58,6 +60,7 @@ sub main{
       
       # Read the spreadsheet again to get all the accessions back into memory
       my $entries = readKalamariTsv($s, $settings);
+      my %stillFailed = map { $_ => 1 } @$errors;
 
       # Download one by one
       for my $err_acc(@$errors){
@@ -65,19 +68,66 @@ sub main{
         # look for the one sample with this accession, but it will
         # come out as an array just because we're using grep
         my @samples = grep { $$_{nuccoreAcc} eq $err_acc } @$entries;
-        my ($fastas, $errors) = downloadEntries(\@samples, \%settingsCopy);
-        if(@$errors){
+        my ($fastas, $retryErrors) = downloadEntries(\@samples, \%settingsCopy);
+        if(@$retryErrors){
           logmsg "ERROR: still could not download $err_acc";
         }
         if(@$fastas){
           logmsg "SUCCESS: previously failed, but downloaded $err_acc";
+          delete($stillFailed{$err_acc});
         }
+      }
+
+      # Final list of still-failed accessions after retries
+      my @stillFailed = sort keys(%stillFailed);
+
+      if(@stillFailed){
+        my $failedReport = writeFailedDownloadReport($s, \@stillFailed, $settings);
+        push(@failedReports, $failedReport);
+        push(@remainingErrors, @stillFailed);
       }
     }
   }
 
+  if(@remainingErrors){
+    logmsg "ERROR: ".scalar(@remainingErrors)." accessions still failed to download.";
+    logmsg "Failed download reports:";
+    for my $report(@failedReports){
+      logmsg "  $report";
+    }
+    return 1 if($$settings{'require-all-downloads'});
+  }
 
   return 0;
+}
+
+sub writeFailedDownloadReport{
+  my($tsv, $failedAcc, $settings) = @_;
+  my %failed = map { $_ => 1 } @$failedAcc;
+  my $reportTsv = "$$settings{outdir}/failed-downloads.tsv";
+
+  open(my $inFh, "<", $tsv) or die "ERROR: could not read from $tsv for report generation: $!";
+  open(my $outFh, ">", $reportTsv) or die "ERROR: could not write to $reportTsv: $!";
+
+  my $header = <$inFh>;
+  chomp($header);
+  print $outFh "$header\n";
+  my @header = split(/\t/, $header);
+
+  while(<$inFh>){
+    chomp;
+    next if(!$_);
+    my @F = split(/\t/);
+    my %F;
+    @F{@header} = @F;
+    next if(!$failed{$F{nuccoreAcc}});
+    print $outFh join("\t", @F)."\n";
+  }
+
+  close $outFh;
+  close $inFh;
+
+  return $reportTsv;
 }
 
 sub readKalamariTsv{
@@ -438,8 +488,8 @@ sub usage{
                    time, per thread
   --tempdir        Directory for temporary files, if you would
                    but default in TMPDIR
+  --require-all-downloads  Exit non-zero if any accessions fail to download
   --version        Print the version of Kalamari
 ";
   exit 0;
 }
-
