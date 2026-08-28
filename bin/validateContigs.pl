@@ -5,6 +5,7 @@ use Getopt::Long qw/GetOptions/;
 use File::Basename qw/basename/;
 use File::Path qw/make_path/;
 use File::Find qw/find/;
+use File::Temp qw/tempdir/;
 use Data::Dumper qw/Dumper/;
 
 local $0 = basename $0;
@@ -17,6 +18,7 @@ sub main{
     GetOptions($settings,qw(help datadir=s)) or die $!;
     die usage() if($$settings{help} || !@ARGV);
     $$settings{datadir}||= "$ENV{HOME}/.taxonkit";
+    $$settings{tempdir}||= tempdir("$0.XXXXXX", CLEANUP => 1, TMPDIR => 1);
 
     logmsg "Using taxonomy files in $$settings{datadir}";
     
@@ -69,6 +71,34 @@ sub checkContigFile{
         }
       }
       close $taxFh;
+
+      # Assess completeness and genbank accession
+      # First, get the NCBI xml
+      my $query = $F{nuccoreAcc}."[accn]";
+      system("esearch -db nuccore -query '$query' | efetch -format docsum > $$settings{tempdir}/$F{nuccoreAcc}.xml");
+      die "ERROR: efetch returned no results for $F{nuccoreAcc}" if($?);
+      #die system("cat $$settings{tempdir}/$F{nuccoreAcc}.xml");
+
+      # Next, parse for each field
+      my $ncbiTaxid = `cat $$settings{tempdir}/$F{nuccoreAcc}.xml | xtract -pattern DocumentSummary -element TaxId`;
+      chomp $ncbiTaxid;
+      
+      if($ncbiTaxid ne $F{taxid}){
+        # print "ERROR: taxid $F{taxid} does not match NCBI taxid $ncbiTaxid for $F{nuccoreAcc}\n$kalamariLine\n";
+        # Use edirect to figure out the parent taxid for $ncbiTaxid and compare to $ncbiTaxid
+        my $ncbiParentTaxids = `efetch -db taxonomy -id $ncbiTaxid -format xml | xtract -pattern Taxon -block "**/Taxon" -element TaxId`;
+        chomp $ncbiParentTaxids;
+        my @ncbiLineage = split(/\s+/,$ncbiParentTaxids);
+        if(!grep{$F{taxid} eq $_ || $F{parent} eq $_} (@ncbiLineage, $ncbiTaxid)){
+          print "ERROR: taxid $F{taxid} nor parentTaxid $F{parent} does not match NCBI taxid ($ncbiTaxid) nor any NCBI parent taxids (@ncbiLineage) for $F{nuccoreAcc}\n$kalamariLine\n";
+        }
+      }
+
+      my $completeness = `cat $$settings{tempdir}/$F{nuccoreAcc}.xml | xtract -pattern DocumentSummary -element Completeness`;
+      chomp $completeness;
+      if(lc($completeness) ne "complete"){
+        print "ERROR: $F{nuccoreAcc} is not a complete genome according to NCBI (Completeness: $completeness)\n$kalamariLine\n";
+      }
       
       #die Dumper \@lineage;
       #@G=`esearch -db nuccore -query "$query" | elink -target taxonomy | efetch -format xml | xtract -pattern Taxon -element TaxId ScientificName -block LineageEx/Taxon -tab "\n" -element TaxId ScientificName Rank`;

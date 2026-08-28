@@ -1,12 +1,12 @@
 scientificName	nuccoreAcc	taxid	parent	source
-Acholeplasma_laidlawii	CP000896	2148	2147	NCBI-REF
-Acinetobacter_baumannii	CP045110	509170	470	NCBI-REF
-Acinetobacter_pittii	CP002177	48296	909768	NCBI-REF
+Acholeplasma_laidlawii	CP000896	441768	2148	NCBI-REF
+Acinetobacter_baumannii	CP045110	470	909768	NCBI-REF
+Acinetobacter_pittii	CP002177	871585	48296	NCBI-REF
 Actinobacillus_pleuropneumoniae	CP030753	715	713	NCBI-REF
-Aeromonas_hydrophila	CP000462	644	642	NCBI-REF
-Aggregatibacter_aphrophilus	LR134327	732	416916	NCBI-REF
-Agrobacterium_fabrum	AE007869	1176649	1183400	NCBI-REF
-Agrobacterium_fabrum	AE007870	1176649	1183400	NCBI-REF
+Aeromonas_hydrophila	CP000462	380703	196023	NCBI-REF
+Aggregatibacter_aphrophilus	LR134327	985008	732	NCBI-REF
+Agrobacterium_fabrum	AE007869	176299	1176649	NCBI-REF
+Agrobacterium_fabrum	AE007870	176299	1176649	NCBI-REF
 Aliivibrio_fischeri	CP000020	668	511678	NCBI-REF
 Aliivibrio_fischeri	CP000021	668	511678	NCBI-REF
 Alkaliphilus_transvaalensis	CP000724	208226	114627	NCBI-REF
@@ -156,7 +156,6 @@ Dolosigranulum_pigrum	CP040424	29394	29393	NCBI-REF
 Enterobacter_cloacae	CP001918	550	354276	NCBI-REF
 Enterococcus_faecalis	AE016830	1351	1350	NCBI-REF
 Enterococcus_faecium	CP003583	1352	1350	NCBI-REF
-Enterovirus_A71	AF081485	39054	138948	NCBI-REF
 Escherichia_albertii	CP024282	208962	561	CDC SME
 Escherichia_coli	CP027582	562	561	CDC SME
 Escherichia_fergusonii	CP042945	564	561	CDC SME
