@@ -99,8 +99,15 @@ sub checkContigFile{
       if(lc($completeness) ne "complete"){
         print "ERROR: $F{nuccoreAcc} is not a complete genome according to NCBI (Completeness: $completeness)\n$kalamariLine\n";
       }
-      
-      #die Dumper \@lineage;
-      #@G=`esearch -db nuccore -query "$query" | elink -target taxonomy | efetch -format xml | xtract -pattern Taxon -element TaxId ScientificName -block LineageEx/Taxon -tab "\n" -element TaxId ScientificName Rank`;
     }
+}
+
+sub usage{
+    "$0: Verify that each contig in a contigs file exists, has a valid taxonomy ID, and is a complete genome.
+    Usage: $0 [options] <kalamari contigs tsv file...>
+    Options:
+      --help          Show this message
+      --datadir       Path to taxonomy files (default: \$HOME/.taxonkit)
+      --tempdir       Path to temporary directory (default: system temp dir)
+    ";
 }
