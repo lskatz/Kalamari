@@ -5,3 +5,9 @@ paper/paper.doc
 # pixi environments
 .pixi
 *.egg-info
+pixi.toml
+pixi.lock
+paper/*.pdf
+paper/*.html
+paper/*.docx
+
