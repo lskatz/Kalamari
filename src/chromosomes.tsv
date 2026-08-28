@@ -35,8 +35,8 @@ Betacoronavirus_pandemicum_sars2	MT233526	2697049	3418604	CDC SME
 Bifidobacterium_bifidum	CP058603	1681	1678	NCBI-REF
 Bifidobacterium_longum	AP010888	216816	1678	NCBI-REF
 Bordetella_bronchiseptica	LR134326	518	517	NCTC3000
-Bordetella_holmesii	CP009751	35814	517	NCBI-REF
-Bordetella_parapertussis	AE017198	519	517	NCBI-REF
+Bordetella_holmesii	CP085973	35814	517	NCBI-REF
+Bordetella_parapertussis	CP085971	519	517	NCBI-REF
 Bordetella_pertussis	CP010964	520	517	CDC SME
 Borreliella_burgdorferi	AE000783	139	64895	CDC SME
 Bos_taurus	KC153975	9913	9903	UGA SME
@@ -79,9 +79,6 @@ Candida_albicans	CP017630	5476	5475	NCBI-REF
 Candidatus_Desulforudis_audaxviator	CP000860	471827	471826	NCBI-REF
 Candidatus_Korarchaeum_cryptofilum	CP000968	374847	498846	NCBI-REF
 Caulobacter_vibrioides	CP001340	155892	75	NCBI-REF
-#Orthonairovirus_haemorrhagiae	AF467768	3052518	1980517	NCBI-REF
-#Orthonairovirus_haemorrhagiae	AF467769	3052518	1980517	NCBI-REF
-#Orthonairovirus_haemorrhagiae	AF467770	3052518	1980517	NCBI-REF
 Chikungunya_virus	AF369024	37124	3426298	NCBI-REF
 Chlamydia_pneumoniae	AE001363	83558	810	NCBI-REF
 Chlamydia_psittaci	CP002586	83554	810	NCBI-REF
@@ -102,7 +99,7 @@ Clostridium_perfringens	CP000312	1502	1485	CDC SME
 Corynebacterium_diphtheriae	CP091095	1717	1716	NCBI-REF
 Corynebacterium_glutamicum	BA000036	1718	1716	NCBI-REF
 Corynebacterium_pseudotuberculosis	CP021251	1719	1716	NCBI-REF
-Corynebacterium_ulcerans	CP006933	1714	1716	NCBI-REF
+Corynebacterium_ulcerans	CP002790	65058	1716	NCBI-REF
 Corynebacterium_urealyticum	AM942444	43771	1716	NCBI-REF
 Coxiella_burnetii	AE016828	777	776	NCBI-REF
 Cronobacter_condimenti	CP012264	1163710	413496	NCBI-REF
@@ -135,14 +132,14 @@ Cryptosporidium_hominis	LN877951	237895	5806	CDC SME
 Cryptosporidium_hominis	LN877952	237895	5806	CDC SME
 Cryptosporidium_hominis	LN877953	237895	5806	CDC SME
 Cryptosporidium_hominis	LN877954	237895	5806	CDC SME
-Cryptosporidium_parvum	CM000429	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000430	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000431	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000432	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000433	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000434	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000435	353152	5806	CDC SME
-Cryptosporidium_parvum	CM000436	353152	5806	CDC SME
+Cryptosporidium_parvum	CM000429	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000430	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000431	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000432	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000433	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000434	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000435	5807	5806	CDC SME
+Cryptosporidium_parvum	CM000436	5807	5806	CDC SME
 Cupriavidus_taiwanensis	CU633749	164546	106589	NCBI-REF
 Cupriavidus_taiwanensis	CU633750	164546	106589	NCBI-REF
 Cyanothece	CP000806	43989	2546360	NCBI-REF
@@ -181,49 +178,19 @@ Haemophilus_influenzae	L42023	727	724	NCBI-REF
 Haemophilus_parahaemolyticus	CP069510	735	724	FDA-ARGOS
 Haemophilus_parainfluenzae	CP065991	729	724	FDA-ARGOS
 Haemophilus_somnus	CP000947	228400	731	NCBI-REF
-Halobacterium_salinarum	AM774415	478009	2242	NCBI-REF
+Halobacterium_salinarum	AM774415	2242	2239	NCBI-REF
 Helianthus_annuus	MG770607	4232	4231	NCBI-REF
 Helicobacter_pylori	AE000511	210	209	CDC SME
-Heliobacterium_modesticaldum	CP000930	35701	2697	NCBI-REF
-Hepatitis_E_virus	M73218	12461	35267	NCBI-REF
-Herpes_simplex_virus_1	JQ673480	10298	10294	NCBI-REF
-Herpes_simplex_virus_2	Z86099	10310	10294	NCBI-REF
+Heliomicrobium_modesticaldum	CP000930	35701	2831443	NCBI-REF
 Homo_sapiens	J01415	9606	9605	NCBI-REF
-Human_adenovirus_2	AJ293905	10515	129951	NCBI-REF
-Human_adenovirus_40	L19443	130308	129953	NCBI-REF
-Human_adenovirus_41	DQ315364	10546	129953	NCBI-REF
-Human_astrovirus_1	L23513	492300	38780	NCBI-REF
-Human_betaherpesvirus_5	AY446894	10359	10358	NCBI-REF
-Human_coronavirus_229E	AF304460	11137	11118	NCBI-REF
-Human_coronavirus_HKU1	AY884001	290028	694009	NCBI-REF
-Human_coronavirus_NL63	AY567487	277944	11118	NCBI-REF
-Human_coronavirus_OC43	AY391777	31631	694002	NCBI-REF
-Human_metapneumovirus	AF371337	162145	11244	NCBI-REF
-Human_parainfluenzavirus_1	AF457102	12730	12729	NCBI-REF
-Human_parainfluenzavirus_2	AY278865	1223581	11228	NCBI-REF
-Human_parainfluenzavirus_3	Z11575	11216	12729	NCBI-REF
-Human_parainfluenzavirus_4	AB543887	11231	11228	NCBI-REF
-Human_parechovirus_1	AJ005695	145773	12101	NCBI-REF
-Human_rhinovirus_A	L24917	147711	12110	NCBI-REF
 Humulus_lupulus	NC_086845	3486	3484	UGA SME
-Influenza_A_virus_H1N1	CY121680	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121679	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121678	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121677	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121675	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121676	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121674	641501	11520	NCBI-REF
-Influenza_A_virus_H1N1	CY121673	641501	11520	NCBI-REF
-Japanese_encephalitis_virus	AF217620	11072	12637	NCBI-REF
 Ketogulonicigenium_vulgare	CP002018	92945	92944	NCBI-REF
 Kingella_denitrificans	CP065999	502	32257	FDA-ARGOS
 Klebsiella_aerogenes	CP002824	548	570	NCBI-REF
-Klebsiella_pneumoniae	CP003200	573	570	NCBI-REF
+Klebsiella_pneumoniae	CP003200	573	3390273	NCBI-REF
 Lactobacillus_acidophilus	CP000033	1579	1578	NCBI-REF
 Lactococcus_lactis	AE005176	1358	1357	NCBI-REF
 Lactuca_sativa	MK820672	75943	4235	UGA SME
-Lassa_virus	AY628203	11620	11619	NCBI-REF
-Lassa_virus	AY628204	11620	11619	NCBI-REF
 Legionella_pneumophila	AE017354	446	445	NCBI-REF
 Leptospira_biflexa	CP000777	355278	145259	NCBI-REF
 Leptospira_interrogans	CP020414	173	171	NCBI-REF
@@ -241,7 +208,6 @@ Listeria_seeligeri	FN557490	1640	1637	CDC SME
 Listeria_welshimeri	LT906444	1643	1637	NCTC3000
 Lysinibacillus_sphaericus	CP000817	444177	1421	NCBI-REF
 Measles_morbillivirus_D8	PV870339	170528	351680	StaPH-B SME
-MERS_coronavirus	JX869059	1335626	694009	NCBI-REF
 Mesoplasma_florum	AE017263	2151	46239	NCBI-REF
 Mesorhizobium_ciceri	CP002447	39645	68287	NCBI-REF
 Methylobacterium	CP000943	426117	2615210	NCBI-REF
@@ -250,13 +216,12 @@ Micrococcus_luteus	CP001628	1270	1269	NCBI-REF
 Moorella_thermoacetica	CP012370	1525	44260	NCBI-REF
 Moraxella_catarrhalis	LS483445	480	475	NCBI-REF
 Morganella_morganii_morganii	CP004345	180434	582	NCBI-REF
-Mumps_virus	L25826	11161	11159	NCBI-REF
 Mycobacterium_abscessus	CU458896	36809	670516	NCBI-REF
 Mycobacterium_leprae	AL450380	1769	1763	NCBI-REF
 Mycobacterium_tuberculosis	AL123456	1773	77643	NCBI-REF
 Mycolicibacterium_fortuitum	AP025518	144549	1766	NCBI-REF
 Mycoplasma_mycoides	BX293980	2102	656088	NCBI-REF
-Mycoplasma_pneumoniae	U00089	2104	2093	NCBI-REF
+Mycoplasmoides_pneumoniae	U00089	2104	2995234	NCBI-REF
 Neisseria_cinerea	CP065726	483	482	FDA-ARGOS
 Neisseria_elongata	CP031255	495	482	CDC SME
 Neisseria_flavescens	CP039886	484	482	NCBI-REF
@@ -268,17 +233,12 @@ Neisseria_sicca	CP059566	490	482	NCBI-REF
 Neisseria_subflava	CP039887	28449	482	NCBI-REF
 Neisseria_weaveri	LR134533	28091	482	NCBI-REF
 Neomysis_japonica	KR006340	1676841	223649	UGA SME
-Nipah_virus	AF212302	121791	692177	NCBI-REF
 Nocardia_asteroides	CP089227	1824	1817	FDA-ARGOS
 Nocardia_farcinica	CP031418	37329	1817	NCBI-REF
-Norovirus_GI	M87661	11983	122928	NCBI-REF
-Norovirus_GII	X86557	95341	122928	NCBI-REF
-Ochrobactrum_anthropi	CP000758	529	528	NCBI-REF
-Ochrobactrum_anthropi	CP000759	529	528	NCBI-REF
-Orientia_tsutsugamushi	CP000766	459	33958	NCBI-REF
+Brucella_anthropi	CP000758	529	234	NCBI-REF
+Brucella_anthropi	CP000759	529	234	NCBI-REF
 Pantoea_ananatis	CP001875	553	53335	NCBI-REF
 Parabacteroides_distasonis	CP000140	823	375288	NCBI-REF
-Parvovirus_B19	AY386330	10798	10802	NCBI-REF
 Pasteurella_multocida	CP020405	747	745	FDA-ARGOS
 Photobacterium_damselae	CP046751	38293	657	CDC SME
 Photobacterium_damselae	CP046752	38293	657	CDC SME
@@ -294,22 +254,7 @@ Respiratory_syncytial_virus_A	AF013254	208893	11250	NCBI-REF
 Rhodopirellula_baltica	BX119912	265606	265488	NCBI-REF
 Rhodospirillum_rubrum	CP000230	1085	1081	NCBI-REF
 Rickettsia_prowazekii	AJ235269	782	114292	NCBI-REF
-Rift_Valley_fever_virus	DQ375402	11588	11587	NCBI-REF
-Rift_Valley_fever_virus	DQ375403	11588	11587	NCBI-REF
-Rift_Valley_fever_virus	DQ375404	11588	11587	NCBI-REF
-Rotavirus_A	EF672557	28875	10912	NCBI-REF
-Rotavirus_A	EF672558	28875	10912	NCBI-REF
-Rotavirus_A	EF672559	28875	10912	NCBI-REF
-Rotavirus_A	EF672560	28875	10912	NCBI-REF
-Rotavirus_A	EF672561	28875	10912	NCBI-REF
-Rotavirus_A	EF672562	28875	10912	NCBI-REF
-Rotavirus_A	EF672563	28875	10912	NCBI-REF
-Rotavirus_A	EF672564	28875	10912	NCBI-REF
-Rotavirus_A	EF672565	28875	10912	NCBI-REF
-Rotavirus_A	EF672566	28875	10912	NCBI-REF
-Rotavirus_A	EF672567	28875	10912	NCBI-REF
-Rubella_virus	M15240	11041	11040	NCBI-REF
-Ruminococcus_sp.	CP039381	1263	541000	NCBI-REF
+Ruminococcus_sp.	CP039381	1263	216572	NCBI-REF
 Salinibacter_ruber	CP000159	146919	146918	NCBI-REF
 Salmonella_bongori	FR877557	54736	590	NCBI-REF
 Salmonella_enterica_I	AE006468	59201	28901	NCBI-REF
@@ -319,14 +264,12 @@ Salmonella_enterica_IIIa	CP000880	9000014	28901	CDC SME
 Salmonella_enterica_IIIb	CP053583	9000015	28901	CDC SME
 Salmonella_enterica_IV	CP053579	59205	28901	CDC SME
 Salmonella_enterica_IX	CP054715	9000016	28901	CDC SME
-Salmonella_enterica_Paratyphi_A	CP000026	54388	59201	NCBI-REF
+Salmonella_enterica_Paratyphi_A	CP000026	90370	59201	NCBI-REF
 Salmonella_enterica_Typhi	AL513382	90370	59201	NCBI-REF
 Salmonella_enterica_VI	CP053406	59207	28901	CDC SME
 Salmonella_enterica_VII	CP053582	59208	28901	CDC SME
 Salmonella_enterica_VIII	CP053318	9000009	28901	CDC SME
 Salmonella_enterica_X	CP053581	9000017	28901	CDC SME
-Sapovirus_GI	AY237422	95342	95340	NCBI-REF
-SARS_coronavirus	AY274119	227859	694009	NCBI-REF
 Serratia_liquefaciens	CP006252	614	613	NCBI-REF
 Shewanella_halifaxensis	CP000931	271098	22	NCBI-REF
 Shewanella_oneidensis	AE014299	70863	22	NCBI-REF
@@ -336,11 +279,11 @@ Sinorhizobium_fredii	CP001389	380	663276	NCBI-REF
 Sinorhizobium_medicae	CP000738	110321	28105	NCBI-REF
 Sinorhizobium_meliloti	AL591688	382	28105	NCBI-REF
 Solanum_lycopersicum	MF034192	4081	49274	UGA SME
-Staphylococcus_aureus	CP009554	46170	1280	NCBI-REF
+Staphylococcus_aureus	CP009554	1280	1279	NCBI-REF
 Staphylococcus_epidermidis	AE015929	1282	1279	NCBI-REF
 Staphylococcus_warneri	CP032159	1292	1279	NCBI-REF
 Streptococcus_agalactiae	AE009948	1311	1301	NCBI-REF
-Streptococcus_mitis	FN568063	28037	1301	NCBI-REF
+Streptococcus_mitis	FN568063	28037	3409772	NCBI-REF
 Streptococcus_mutans	AE014133	1309	1301	NCBI-REF
 Streptococcus_oralis	CP066021	1303	1301	FDA-ARGOS
 Streptococcus_pneumoniae	CP000936	487214	1313	NCBI-REF
@@ -359,8 +302,6 @@ Thunnus_alalunga	AB101291	8235	8234	UGA SME
 Treponema_denticola	AE017226	158	157	NCBI-REF
 Treponema_pallidum	AE000520	160	157	NCBI-REF
 Ureaplasma_parvum	CP000942	134821	2129	NCBI-REF
-Ureaplasma_urealyticum	CP001184	2130	2129	NCBI-REF
-Varicella_zoster_virus	X04370	10335	10334	NCBI-REF
 Vibrio_alginolyticus	CP035699	663	717610	CDC SME
 Vibrio_alginolyticus	CP035700	663	717610	CDC SME
 Vibrio_cholerae_O1	CP038178	127906	666	CDC SME
@@ -388,10 +329,8 @@ Vibrio_parahaemolyticus	CP046828	670	717610	CDC SME
 Vibrio_vulnificus	CP046832	672	662	CDC SME
 Vibrio_vulnificus	CP046833	672	662	CDC SME
 Vicia_faba	KC189947	3906	3904	UGA SME
-West_Nile_virus	AF196835	11082	12637	NCBI-REF
 Xanthomonas_campestris	AE008922	339	338	NCBI-REF
 Xylella_fastidiosa	CP000941	405440	2371	NCBI-REF
-Yellow_fever_virus	X03700	11089	12637	NCBI-REF
 Yersinia_aldovae	CP009781	29483	629	NCBI-REF
 Yersinia_bercovieri	CP054044	634	629	CDC SME
 Yersinia_canariae	CP043727	2607663	629	NCBI-REF
@@ -406,4 +345,3 @@ Yersinia_mollaretii	CP054043	33060	629	NCBI-REF
 Yersinia_pseudotuberculosis	CP009712	502800	633	CDC SME
 Yersinia_rochesterensis	CP032482	1604335	629	NCBI-REF
 Yersinia_rohdei	CP009787	29485	629	NCBI-REF
-Zika_virus	KX369547	64320	12637	NCBI-REF
