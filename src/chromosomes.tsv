@@ -13,15 +13,15 @@ Alkaliphilus_transvaalensis	CP000724	208226	114627	NCBI-REF
 Amycolatopsis_mediterranei	CP002896	33910	1813	NCBI-REF
 Aquifex_aeolicus	AE000657	63363	2713	NCBI-REF
 Arcobacter_bivalviorum	CP031217	663364	2321115	NCBI-REF
-Arcobacter_cibarius	CP043857	255507	28196	CDC SME
+Aliarcobacter_cibarius	CP043857	255507	2321111	CDC SME
 Arcobacter_ellisii	CP032097	913109	28196	CDC SME
-Arcobacter_halophilus	CP031218	197482	28196	NCBI-REF
-Arcobacter_molluscorum	CP032098	1032072	28196	NCBI-REF
-Arcobacter_mytili	CP031219	603050	28196	NCBI-REF
-Arcobacter_skirrowii	CP032099	28200	28196	NCBI-REF
+Malaciobacter_halophilus	CP031218	197482	2321114	NCBI-REF
+Malaciobacter_molluscorum	CP032098	1032072	2321114	NCBI-REF
+Malaciobacter_mytili	CP031219	603050	2321114	NCBI-REF
+Aliarcobacter_skirrowii	CP032099	28200	2321111	NCBI-REF
 Arcobacter_suis	CP032100	1278212	28196	NCBI-REF
-Arcobacter_thereius	CP035926	544718	28196	NCBI-REF
-Arcobacter_trophiarum	CP031367	708186	28196	NCBI-REF
+Aliarcobacter_thereius	CP035926	544718	2321111	NCBI-REF
+Aliarcobacter_trophiarum	CP031367	708186	2321111	NCBI-REF
 Arripis_trutta	AP006810	270544	163128	UGA SME
 Atlantibacter_hermannii	CP042941	565	1903434	CDC SME
 Bacillus_cereus	AP007209	1396	86661	CDC SME
@@ -31,7 +31,7 @@ Bacillus_thuringiensis	AE017355	1428	86661	CDC SME
 Bacteroides_fragilis	CR626927	817	816	NCBI-REF
 Bacteroides_thetaiotaomicron	CP040530	818	816	NCBI-REF
 Bartonella_bacilliformis	CP000524	774	773	NCBI-REF
-Betacoronavirus_coronavirus	MT233526	2697049	694009	CDC SME
+Betacoronavirus_pandemicum_sars2	MT233526	2697049	3418604	CDC SME
 Bifidobacterium_bifidum	CP058603	1681	1678	NCBI-REF
 Bifidobacterium_longum	AP010888	216816	1678	NCBI-REF
 Bordetella_bronchiseptica	LR134326	518	517	NCTC3000
@@ -43,10 +43,10 @@ Bos_taurus	KC153975	9913	9903	UGA SME
 Brachybacterium_faecium	CP001643	43669	43668	NCBI-REF
 Bradyrhizobium_diazoefficiens	BA000040	1355477	374	NCBI-REF
 Brassica_oleracea	JF920286	3712	3705	UGA SME
-Brucella_abortus	AE017223	235	234	NCBI-REF
-Brucella_abortus	AE017224	235	234	NCBI-REF
-Brucella_melitensis	AE008917	29459	234	NCBI-REF
-Brucella_melitensis	AE008918	29459	234	NCBI-REF
+Brucella_abortus	AE017223	235	3703990	NCBI-REF
+Brucella_abortus	AE017224	235	3703990	NCBI-REF
+Brucella_melitensis	AE008917	29459	3703990	NCBI-REF
+Brucella_melitensis	AE008918	29459	3703990	NCBI-REF
 Buchnera_aphidicola	BA000003	9	32199	NCBI-REF
 Burkholderia_pseudomallei	BX571965	28450	111527	CDC SME
 Burkholderia_pseudomallei	BX571966	28450	111527	CDC SME
@@ -68,29 +68,29 @@ Campylobacter_sputorum	CP019683	202	194	CDC SME
 Campylobacter_subantarcticus	CP007772	497724	194	CDC SME
 Campylobacter_ureolyticus	CP012195	827	194	CDC SME
 Campylobacter_volucris	CP007774	1031542	194	CDC SME
-Candida_albicans	CP017623	5476	1535326	NCBI-REF
-Candida_albicans	CP017624	5476	1535326	NCBI-REF
-Candida_albicans	CP017625	5476	1535326	NCBI-REF
-Candida_albicans	CP017626	5476	1535326	NCBI-REF
-Candida_albicans	CP017627	5476	1535326	NCBI-REF
-Candida_albicans	CP017628	5476	1535326	NCBI-REF
-Candida_albicans	CP017629	5476	1535326	NCBI-REF
-Candida_albicans	CP017630	5476	1535326	NCBI-REF
+Candida_albicans	CP017623	5476	5475	NCBI-REF
+Candida_albicans	CP017624	5476	5475	NCBI-REF
+Candida_albicans	CP017625	5476	5475	NCBI-REF
+Candida_albicans	CP017626	5476	5475	NCBI-REF
+Candida_albicans	CP017627	5476	5475	NCBI-REF
+Candida_albicans	CP017628	5476	5475	NCBI-REF
+Candida_albicans	CP017629	5476	5475	NCBI-REF
+Candida_albicans	CP017630	5476	5475	NCBI-REF
 Candidatus_Desulforudis_audaxviator	CP000860	471827	471826	NCBI-REF
 Candidatus_Korarchaeum_cryptofilum	CP000968	374847	498846	NCBI-REF
 Caulobacter_vibrioides	CP001340	155892	75	NCBI-REF
-CCHF_virus	AF467768	1980519	204669	NCBI-REF
-CCHF_virus	AF467769	1980519	204669	NCBI-REF
-CCHF_virus	AF467770	1980519	204669	NCBI-REF
-Chikungunya_virus	AF369024	37124	64286	NCBI-REF
+#Orthonairovirus_haemorrhagiae	AF467768	3052518	1980517	NCBI-REF
+#Orthonairovirus_haemorrhagiae	AF467769	3052518	1980517	NCBI-REF
+#Orthonairovirus_haemorrhagiae	AF467770	3052518	1980517	NCBI-REF
+Chikungunya_virus	AF369024	37124	3426298	NCBI-REF
 Chlamydia_pneumoniae	AE001363	83558	810	NCBI-REF
 Chlamydia_psittaci	CP002586	83554	810	NCBI-REF
 Chlamydia_trachomatis	AE001273	813	810	NCBI-REF
 Chlorobaculum_tepidum	AE006470	1097	256319	NCBI-REF
 Chloroflexus_aurantiacus	CP000909	1108	1107	NCBI-REF
 Citrobacter_amalonaticus	CP014070	35703	544	FDA-ARGOS
-Citrobacter_freundii	CP007557	546	544	CDC SME
-Clavibacter_michiganensis_sepedonicus	AM849034	31964	28447	NCBI-REF
+Citrobacter_freundii	CP007557	546	1344959	CDC SME
+Clavibacter_michiganensis_sepedonicus	AM849034	31964	1573	NCBI-REF
 Clostridioides_difficile	AM180355	1496	1870884	CDC SME
 Clostridium_acetobutylicum	AE001437	1488	1485	CDC SME
 Clostridium_argentinense	CP014176	29341	1485	CDC SME
