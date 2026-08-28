@@ -2,6 +2,7 @@ MANIFEST
 Makefile.PL
 bin/generate_sepia_reference.py
 bin/validateTaxonomy.pl
+bin/validateContigs.pl
 bin/getExactTaxonomy.pl
 bin/ictvToKalamari.pl
 bin/mobsuiteRepresentativeFasta.pl
