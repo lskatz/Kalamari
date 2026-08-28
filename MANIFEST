@@ -3,6 +3,7 @@ Makefile.PL
 bin/generate_sepia_reference.py
 bin/validateTaxonomy.pl
 bin/getExactTaxonomy.pl
+bin/ictvToKalamari.pl
 bin/mobsuiteRepresentativeFasta.pl
 bin/downloadKalamari.sh
 bin/downloadKalamari.pl
