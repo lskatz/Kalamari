@@ -1,0 +1,67 @@
+species (conventional)	speciesICTV	species_id	genus	genus_id	assemblyAcc	ICTV VMR identifier
+Human mastadenovirus A	Mastadenovirus adami	3241402	Mastadenovirus	10509	GCF_000846805.1	VMR1004774
+Human mastadenovirus C	Mastadenovirus caesari	3703201	Mastadenovirus	10509	GCF_000845085.1	VMR1004776
+Human mastadenovirus D	Mastadenovirus dominans	3241420	Mastadenovirus	10509	GCF_000845985.1	VMR1004777
+Human mastadenovirus E	Mastadenovirus exoticum	3241425	Mastadenovirus	10509	GCF_000859665.1	VMR1004778
+Human mastadenovirus B	Mastadenovirus blackbeardi	3241406	Mastadenovirus	10509	GCF_000880515.1	VMR1004775
+Human mastadenovirus F	Mastadenovirus faecale	3241426	Mastadenovirus	10509	GCF_000846685.1	VMR1004779
+Mammarenavirus lassaense	Mammarenavirus lassaense	3052310	Mammarenavirus	1653394	GCF_000851705.1	VMR1011064
+Human coronavirus 229E	Alphacoronavirus chicagoense	3433756	Alphacoronavirus	693996	GCF_000853505.1	VMR1001257
+Human coronavirus NL63	Alphacoronavirus amsterdamense	3433809	Alphacoronavirus	693996	GCF_000853865.1	VMR1001272
+Human coronavirus HKU1	Betacoronavirus hongkongense	3433758	Betacoronavirus	694002	GCF_000858765.1	VMR1001279
+Betacoronavirus 1	Betacoronavirus gravedinis	3433757	Betacoronavirus	694002	GCF_003972325.1	VMR1001277
+Severe acute respiratory syndrome-related coronavirus	Betacoronavirus pandemicum	3418604	Betacoronavirus	694002	GCF_000864885.1	VMR1001290
+Middle East respiratory syndrome-related coronavirus	Betacoronavirus cameli	3433633	Betacoronavirus	694002	GCF_000901155.1	VMR1001284
+Coronavirus HKU15	Deltacoronavirus suis	3433742	Deltacoronavirus	1159901	GCF_002816235.1	VMR1001294
+Orthomarburgvirus marburgense	Orthomarburgvirus marburgense	3052505	Orthomarburgvirus	3044783	GCF_000857325.3	VMR1010498
+Orthoflavivirus denguei	Orthoflavivirus denguei	3052464	Orthoflavivirus	3044782	GCF_000871845.1	VMR1009067
+Norwalk virus	Norovirus norwalkense	3431196	Norovirus	142786	GCF_000864005.1	VMR1001725
+Sapporo virus	Sapovirus sapporoense	3432266	Sapovirus	95341	GCF_008792745.1	VMR1001728
+Pegivirus hominis	Pegivirus hominis	3052608	Pegivirus	1307799	GCF_000862005.1	VMR1009113
+Orthohantavirus hantanense	Orthohantavirus hantanense	3052480	Orthohantavirus	1980442	GCF_000856085.1	VMR1011154
+Variola virus	Orthopoxvirus variola	3431487	Orthopoxvirus	10242	GCF_000859885.1	VMR1004289
+Monkeypox virus	Orthopoxvirus monkeypox	3431483	Orthopoxvirus	10242	GCF_000857045.1	VMR1004284
+Vaccinia virus	Orthopoxvirus vaccinia	10245	Orthopoxvirus	10242	GCF_000860085.1	VMR1004288
+Molluscum contagiosum virus	Molluscipoxvirus molluscum	3430922	Molluscipoxvirus	10278	GCF_000843325.1	VMR1004277
+Hepatitis B virus	Orthohepadnavirus hominoidei	3431302	Orthohepadnavirus	10405	GCF_000861825.2	VMR1003513
+Orthonairovirus nairobiense	Orthonairovirus nairobiense	3052529	Orthonairovirus	1980517	GCF_002117695.1	VMR1011214
+Alphainfluenzavirus influenzae	Alphainfluenzavirus influenzae	2955291	Alphainfluenzavirus	197911	GCF_000865725.1	VMR1001046
+Betainfluenzavirus influenzae	Betainfluenzavirus influenzae	2955465	Betainfluenzavirus	197912	GCF_000820495.2	VMR1001047
+Deltainfluenzavirus influenzae	Deltainfluenzavirus influenzae	2955744	Deltainfluenzavirus	1511083	GCF_002867775.1	VMR1001048
+Gammainfluenzavirus influenzae	Gammainfluenzavirus influenzae	2955935	Gammainfluenzavirus	197913	GCF_000856665.10	VMR1001049
+Alphapapillomavirus 9	Alphapapillomavirus 9	337041	Alphapapillomavirus	333750	GCA_000863945.2	VMR1006985
+Gammapapillomavirus 13	Gammapapillomavirus 13	1513258	Gammapapillomavirus	325455	GCF_000889675.1	VMR1007036
+Morbillivirus hominis	Morbillivirus hominis	3052345	Morbillivirus	11229	GCF_000854845.1	VMR1010656
+Orthorubulavirus laryngotracheitidis	Orthorubulavirus laryngotracheitidis	3052557	Orthorubulavirus	2560195	GCF_000863525.1	VMR1010673
+Orthorubulavirus hominis	Orthorubulavirus hominis	3052556	Orthorubulavirus	2560195	GCF_000910675.1	VMR1010672
+Orthorubulavirus parotitidis	Orthorubulavirus parotitidis	3052560	Orthorubulavirus	2560195	GCF_000856685.1	VMR1010676
+Respirovirus laryngotracheitidis	Respirovirus laryngotracheitidis	3049952	Respirovirus	186938	GCF_000848705.1	VMR1010665
+Respirovirus pneumoniae	Respirovirus pneumoniae	3049953	Respirovirus	186938	GCF_006298365.1	VMR1010667
+Bocaparvovirus primate1	Bocaparvovirus primate1	3052040	Bocaparvovirus	1507401	GCF_003033285.1	VMR1007207
+Bocaparvovirus primate2	Bocaparvovirus primate2	3052041	Bocaparvovirus	1507401	GCF_000882675.1	VMR1007208
+Erythroparvovirus primate1	Erythroparvovirus primate1	3052189	Erythroparvovirus	40121	GCF_000839645.1	VMR1007245
+Orthobunyavirus bunyamweraense	Orthobunyavirus bunyamweraense	3052381	Orthobunyavirus	11572	GCF_000849925.1	VMR1011268
+Enterovirus A	Enterovirus alphacoxsackie	3428500	Enterovirus	12059	GCF_002816655.1	VMR1001827
+Enterovirus B	Enterovirus betacoxsackie	3428502	Enterovirus	12059	GCF_002816685.1	VMR1001828
+Enterovirus C	Enterovirus coxsackiepol	3428505	Enterovirus	12059	GCF_000861165.1	VMR1001829
+Enterovirus D	Enterovirus deconjuncti	3428506	Enterovirus	12059	GCF_002816725.1	VMR1001830
+Rhinovirus A	Enterovirus alpharhino	3428501	Enterovirus	12059	GCF_002816835.1	VMR1002182
+Rhinovirus B	Enterovirus betarhino	3428503	Enterovirus	12059	GCF_002816855.1	VMR1002183
+Rhinovirus C	Enterovirus cerhino	3428504	Enterovirus	12059	GCF_002816885.1	VMR1002184
+Hepatovirus A	Hepatovirus fejalco	3429217	Hepatovirus	12091	GCF_002817005.1	VMR1002209
+Seadornavirus bannaense	Seadornavirus bannaense	3240447	Seadornavirus	208294	GCF_000858185.1	VMR1008458
+Metapneumovirus hominis	Metapneumovirus hominis	3048148	Metapneumovirus	162387	GCF_002815375.1	VMR1010693
+Orthopneumovirus hominis	Orthopneumovirus hominis	3049954	Orthopneumovirus	1868215	GCF_002815475.1	VMR1010695
+Betapolyomavirus hominis	Betapolyomavirus hominis	1891762	Betapolyomavirus	1891714	GCF_000837865.1	VMR1006916
+Roseolovirus humanbeta6b	Roseolovirus humanbeta6b	3050297	Roseolovirus	40272	GCF_000846365.1	VMR1000119
+Simplexvirus humanalpha1	Simplexvirus humanalpha1	3050292	Simplexvirus	10294	GCF_000859985.2	VMR1000063
+Varicellovirus felidalpha1	Varicellovirus felidalpha1	3050284	Varicellovirus	10319	GCF_000885455.1	VMR1000092
+Human immunodeficiency virus 1	Lentivirus humimdef1	3418650	Lentivirus	11646	GCF_000864765.1	VMR1004107
+Lyssavirus rabies	Lyssavirus rabies	11292	Lyssavirus	11286	GCF_000859625.1	VMR1010798
+Rotavirus A	Rotavirus alphagastroenteritidis	3432193	Rotavirus	10912	GCF_000880735.1	VMR1008449
+Rotavirus B	Rotavirus betagastroenteritidis	3432195	Rotavirus	10912	GCF_000907835.1	VMR1008450
+Rotavirus C	Rotavirus tritogastroenteritidis	3432203	Rotavirus	10912	GCF_000864225.1	VMR1008451
+Nelson Bay orthoreovirus	Orthoreovirus nelsonense	3431496	Orthoreovirus	10882	GCF_002829605.1	VMR1008512
+Venezuelan equine encephalitis virus	Alphavirus venezuelan	3426322	Alphavirus	11019	GCF_002889695.1	VMR1008723
+Rubivirus rubellae	Rubivirus rubellae	2846071	Rubivirus	11040	GCF_024749945.1	VMR1008550
+

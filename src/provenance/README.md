@@ -57,7 +57,19 @@ _NOTE_ This command probably would have saved me time if I turned it into a batc
 datasets summary genome accession GCF_000006945.2 --report sequence --as-json-lines | dataformat tsv genome-seq --fields genbank-seq-acc
 ```
 
-Check the assemblies spreadsheet on whether or not it is retrospecitively part of NCBI references
+## Convert an ICTV VMR export
+
+The public-health ICTV species list can be converted to Kalamari's standard
+five-column catalog with `ictvToKalamari.pl`.  The script resolves assembly
+records to INSDC/GenBank accessions and obtains each species' parent taxid
+(normally its genus) from the NCBI taxonomy record.  The provenance column is
+set to `ICTV`, identifying the expert-curated source.
+
+```bash
+ictvToKalamari.pl < ictv.tsv > viral-genomes.tsv
+```
+
+Check the assemblies spreadsheet on whether or not it is retrospectively part of NCBI references
 
 ```bash
 zcat assembly_summary_genbank.txt.gz | perl -F'\t' -lane 'print if($F[11] eq "Complete Genome" || $.==1);' > tmp.tsv
